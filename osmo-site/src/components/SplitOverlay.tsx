@@ -3,16 +3,36 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-const textStyle: React.CSSProperties = {
+const headlineStyle: React.CSSProperties = {
   fontFamily: "var(--font-barlow), var(--display)",
   fontWeight: 900,
-  fontSize: "8vw",
-  lineHeight: 1,
+  fontSize: "5.5vw",
+  lineHeight: 0.95,
   letterSpacing: "-0.04em",
-  whiteSpace: "nowrap",
-  position: "absolute",
-  top: "50%",
 };
+
+const statStyle: React.CSSProperties = {
+  fontFamily: "var(--font-mono), var(--mono)",
+  fontSize: 11,
+  letterSpacing: "0.22em",
+  textTransform: "uppercase",
+  marginTop: 28,
+};
+
+function OverlayContent({ color }: { color: "light" | "dark" }) {
+  const textColor = color === "light" ? "#FFFFFF" : "#111111";
+  return (
+    <div style={{ textAlign: "center" }}>
+      <div style={{ ...headlineStyle, color: textColor }}>
+        Parce que demain matin,
+        <br />
+        tu n&apos;as{" "}
+        <span style={{ color: "#C8963E" }}>pas le choix.</span>
+      </div>
+      <div style={{ ...statStyle, color: textColor }}>300 places</div>
+    </div>
+  );
+}
 
 export default function SplitOverlay({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,8 +81,15 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
         className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
         style={{ background: "#111111" }}
       >
-        <div style={{ ...textStyle, color: "#FFFFFF", left: "100%", transform: "translate(-50%, -50%)" }}>
-          Le lendemain matin.
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "100%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <OverlayContent color="light" />
         </div>
       </div>
       {/* Right panel */}
@@ -71,8 +98,15 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
         className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
         style={{ background: "#FFFFFF" }}
       >
-        <div style={{ ...textStyle, color: "#111111", left: "0%", transform: "translate(-50%, -50%)" }}>
-          Le lendemain matin.
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "0%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <OverlayContent color="dark" />
         </div>
       </div>
     </div>
