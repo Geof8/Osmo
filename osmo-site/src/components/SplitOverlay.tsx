@@ -11,7 +11,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
         style={{
           fontFamily: "var(--font-barlow), var(--display)",
           fontWeight: 900,
-          fontSize: "clamp(28px, 3.8vw, 72px)",
+          fontSize: "clamp(36px, 5.5vw, 100px)",
           lineHeight: 1,
           letterSpacing: "-0.04em",
           color: textColor,
