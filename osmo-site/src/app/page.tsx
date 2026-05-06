@@ -9,6 +9,7 @@ import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/Marquee";
 import Empathy from "@/components/sections/Empathy";
 import HowItWorks from "@/components/sections/HowItWorks";
+import Formula from "@/components/sections/Formula";
 import Ingredients from "@/components/sections/Ingredients";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import FAQ from "@/components/sections/FAQ";
@@ -38,6 +39,7 @@ export default function Home() {
         <Marquee />
         <Empathy />
         <HowItWorks />
+        <Formula />
         <Ingredients />
         <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
         <FAQ />
