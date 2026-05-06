@@ -24,11 +24,11 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&q=80&auto=format&fit=crop"
-              alt="OSMO Recovery — pot poudre studio fond blanc"
+              src="/osmo-product.jpeg"
+              alt="OSMO Recovery — complexe d'électrolyte, goût citron, 120g"
               width={700}
               height={780}
-              className="border border-[var(--rule)] bg-white"
+              className="bg-white"
               style={{ width: "108%", marginLeft: -40, aspectRatio: "0.9", objectFit: "cover" }}
               priority
             />
