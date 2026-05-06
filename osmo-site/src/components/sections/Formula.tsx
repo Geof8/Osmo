@@ -72,18 +72,17 @@ const pictograms = [
   },
 ];
 
-export default function Formula() {
-  const sectionRef = useRef<HTMLElement>(null);
+function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
-  const [orbitalStarted, setOrbitalStarted] = useState(false);
+  const isInView = useInView(diagramRef, { once: true });
+  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    if (!isInView || orbitalStarted) return;
+    if (!isInView || started) return;
     const diagram = diagramRef.current;
     if (!diagram) return;
 
-    setOrbitalStarted(true);
+    setStarted(true);
     const cx = 200;
     const cy = 200;
     const tweens: gsap.core.Tween[] = [];
@@ -127,19 +126,91 @@ export default function Formula() {
     return () => {
       tweens.forEach((t) => t.kill());
     };
-  }, [isInView, orbitalStarted]);
+  }, [isInView, started]);
 
   return (
-    <motion.section
-      ref={sectionRef}
+    <div
+      ref={diagramRef}
+      className="diagram-container"
+      style={{ width: 400, height: 400, position: "relative" }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 180,
+          height: 180,
+          borderRadius: "50%",
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src="/osmo-product.jpeg"
+          alt="OSMO"
+          width={180}
+          height={180}
+          style={{ objectFit: "cover", width: "100%", height: "100%" }}
+        />
+      </div>
+
+      <svg
+        viewBox="0 0 400 400"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      >
+        {pictograms.map((p) => (
+          <line
+            key={`line-${p.id}`}
+            className={`connect-line-${p.id}`}
+            x1="200"
+            y1="200"
+            x2="200"
+            y2="200"
+            stroke="#C8963E"
+            strokeWidth={1}
+            opacity={0.5}
+            strokeDasharray="200"
+            strokeDashoffset="200"
+          />
+        ))}
+      </svg>
+
+      {pictograms.map((p, i) => {
+        const angle = (i / pictograms.length) * Math.PI * 2;
+        const x = 200 + Math.cos(angle) * p.radius - 14;
+        const y = 200 + Math.sin(angle) * p.radius - 14;
+        return (
+          <div
+            key={p.id}
+            className={`picto-${p.id}`}
+            style={{
+              position: "absolute",
+              left: x,
+              top: y,
+              width: 28,
+              height: 28,
+            }}
+          >
+            {p.svg}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default function Formula() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
       style={{ background: "#111111", padding: "140px 0" }}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="max-w-[1380px] mx-auto px-10">
+      <div ref={ref} className="max-w-[1380px] mx-auto px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
             <div
@@ -164,24 +235,24 @@ export default function Formula() {
                 color: "#FFFFFF",
               }}
             >
-              {["Cinq ", "actifs."].map((word, i) => (
+              {["Cinq ", "actifs."].map((word, i) => (
                 <motion.span
                   key={i}
                   style={{ display: "inline-block" }}
                   initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
                 >
                   {word}
                 </motion.span>
               ))}
               <br />
-              {["Une ", "équation."].map((word, i) => (
+              {["Une ", "équation."].map((word, i) => (
                 <motion.span
                   key={i + 2}
                   style={{ display: "inline-block" }}
                   initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
                 >
                   {word}
@@ -197,7 +268,7 @@ export default function Formula() {
                 maxWidth: 380,
               }}
               initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               Chaque ingrédient a été sélectionné pour un rôle précis.
@@ -207,78 +278,10 @@ export default function Formula() {
           </div>
 
           <div className="flex justify-center">
-            <div
-              ref={diagramRef}
-              className="diagram-container"
-              style={{ width: 400, height: 400, position: "relative" }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: 180,
-                  height: 180,
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src="/osmo-product.jpeg"
-                  alt="OSMO"
-                  width={180}
-                  height={180}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
-                />
-              </div>
-
-              <svg
-                className="lines-svg"
-                viewBox="0 0 400 400"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-              >
-                {pictograms.map((p) => (
-                  <line
-                    key={`line-${p.id}`}
-                    className={`connect-line-${p.id}`}
-                    x1="200"
-                    y1="200"
-                    x2="200"
-                    y2="200"
-                    stroke="#C8963E"
-                    strokeWidth={1}
-                    opacity={0.5}
-                    strokeDasharray="200"
-                    strokeDashoffset="200"
-                  />
-                ))}
-              </svg>
-
-              {pictograms.map((p, i) => {
-                const angle = (i / pictograms.length) * Math.PI * 2;
-                const x = 200 + Math.cos(angle) * p.radius - 14;
-                const y = 200 + Math.sin(angle) * p.radius - 14;
-                return (
-                  <div
-                    key={p.id}
-                    className={`picto-${p.id}`}
-                    style={{
-                      position: "absolute",
-                      left: x,
-                      top: y,
-                      width: 28,
-                      height: 28,
-                    }}
-                  >
-                    {p.svg}
-                  </div>
-                );
-              })}
-            </div>
+            <MolecularDiagram />
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
