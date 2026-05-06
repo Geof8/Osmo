@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 
 const steps = [
@@ -53,6 +54,78 @@ const steps = [
   },
 ];
 
+function StepCard({ step, index }: { step: typeof steps[number]; index: number }) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={{ duration: 0.5, delay: index * 0.3 }}
+      className="p-8 min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+    >
+      <div>
+        <div
+          style={{
+            fontFamily: "var(--font-barlow), var(--display)",
+            fontWeight: 800,
+            fontSize: 96,
+            lineHeight: 0.85,
+            letterSpacing: "-0.04em",
+            color: "var(--ink)",
+          }}
+        >
+          {step.num}
+        </div>
+        <div
+          className="text-[var(--ink-2)] mt-2"
+          style={{
+            fontFamily: "var(--font-barlow), var(--display)",
+            fontWeight: 500,
+            fontStyle: "normal",
+            fontSize: 20,
+            letterSpacing: 0,
+          }}
+        >
+          {step.sub}
+        </div>
+      </div>
+      <div className="w-14 h-14 text-[var(--ink)]">{step.svg}</div>
+      <h3
+        style={{
+          fontFamily: "var(--font-barlow), var(--display)",
+          fontWeight: 700,
+          fontSize: 30,
+          lineHeight: 1.05,
+          letterSpacing: "-0.02em",
+        }}
+      >
+        {step.labelEm ? (
+          <>
+            {step.label.split(" ")[0]}{" "}
+            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              {step.label.split(" ").slice(1).join(" ")}
+            </em>
+          </>
+        ) : (
+          step.label
+        )}
+      </h3>
+      <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55, maxWidth: 240 }}>
+        {step.desc}
+      </p>
+      <div
+        className="mt-auto pt-4 border-t border-[var(--soft)] text-[var(--ink)]"
+        style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
+      >
+        {step.timing}
+      </div>
+    </motion.article>
+  );
+}
+
 export default function HowItWorks() {
   return (
     <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
@@ -94,71 +167,7 @@ export default function HowItWorks() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {steps.map((step, i) => (
-            <motion.article
-              key={step.num}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="p-8 min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-7 relative transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
-            >
-              <div>
-                <div
-                  style={{
-                    fontFamily: "var(--font-barlow), var(--display)",
-                    fontWeight: 800,
-                    fontSize: 96,
-                    lineHeight: 0.85,
-                    letterSpacing: "-0.04em",
-                    color: "var(--ink)",
-                  }}
-                >
-                  {step.num}
-                </div>
-                <div
-                  className="text-[var(--ink-2)] mt-2"
-                  style={{
-                    fontFamily: "var(--font-barlow), var(--display)",
-                    fontWeight: 500,
-                    fontStyle: "normal",
-                    fontSize: 20,
-                    letterSpacing: 0,
-                  }}
-                >
-                  {step.sub}
-                </div>
-              </div>
-              <div className="w-14 h-14 text-[var(--ink)]">{step.svg}</div>
-              <h3
-                style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
-                  fontWeight: 700,
-                  fontSize: 30,
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {step.labelEm ? (
-                  <>
-                    {step.label.split(" ")[0]}{" "}
-                    <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-                      {step.label.split(" ").slice(1).join(" ")}
-                    </em>
-                  </>
-                ) : (
-                  step.label
-                )}
-              </h3>
-              <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55, maxWidth: 240 }}>
-                {step.desc}
-              </p>
-              <div
-                className="mt-auto pt-4 border-t border-[var(--soft)] text-[var(--ink)]"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
-              >
-                {step.timing}
-              </div>
-            </motion.article>
+            <StepCard key={step.num} step={step} index={i} />
           ))}
         </div>
       </div>

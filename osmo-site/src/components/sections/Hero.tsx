@@ -6,16 +6,22 @@ import CountUp from "@/components/CountUp";
 
 const words = ["Osmo", "Recovery."];
 
-export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
+export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => void; revealed: boolean }) {
   return (
-    <section className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "56px 0 96px" }}>
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: revealed ? 1 : 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
+      style={{ padding: "56px 0 96px" }}
+    >
       <div className="max-w-[1380px] mx-auto px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-[72px] items-center min-h-[70vh]">
           {/* LEFT: Product image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
           >
             <Image
               src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&q=80&auto=format&fit=crop"
@@ -44,8 +50,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
                 <motion.span
                   key={word}
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
                   className="inline-block"
                   style={i === 1 ? { fontStyle: "normal", display: "block" } : undefined}
                 >
@@ -56,8 +62,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="text-[var(--ink)]"
               style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 480 }}
             >
@@ -77,8 +83,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="flex gap-3 flex-wrap items-center"
             >
               <button
@@ -125,8 +131,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
         {/* Hero meta strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {[
@@ -163,6 +169,6 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

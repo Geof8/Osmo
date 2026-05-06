@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 
 const actifs = [
@@ -74,6 +75,78 @@ const actifs = [
 
 const stamps = ["Sans sucre ajouté", "Sans colorant", "Vegan", "Made in France"];
 
+function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number }) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 15 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="bg-[var(--paper)] border-r border-b border-[var(--rule)] hover:bg-white transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-col gap-[14px]"
+      style={{ padding: "36px 24px 32px" }}
+    >
+      <div
+        className="text-[var(--ink-2)] pb-3 border-b border-[var(--soft)]"
+        style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
+      >
+        {a.ord}
+      </div>
+      <div className="w-11 h-11 text-[var(--ink)]">{a.svg}</div>
+      <div
+        className="text-[var(--ink-2)]"
+        style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11 }}
+      >
+        {a.mol}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-barlow), var(--display)",
+          fontWeight: 700,
+          fontSize: 22,
+          letterSpacing: "-0.02em",
+          lineHeight: 1.15,
+          alignSelf: "end",
+        }}
+      >
+        {a.name}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-barlow), var(--display)",
+          fontWeight: 800,
+          fontSize: 36,
+          letterSpacing: "-0.025em",
+          lineHeight: 1,
+          color: "var(--ink)",
+        }}
+      >
+        {a.dose}
+        <span
+          className="text-[var(--ink-2)]"
+          style={{
+            fontFamily: "var(--font-barlow), var(--display)",
+            fontWeight: 500,
+            fontStyle: "normal",
+            fontSize: 16,
+            letterSpacing: 0,
+          }}
+        >
+          {" "}mg
+        </span>
+      </div>
+      <div
+        className="text-[var(--ink-2)] border-t border-dashed border-[var(--soft)] pt-3"
+        style={{ fontSize: 13, lineHeight: 1.5 }}
+      >
+        {a.role}
+      </div>
+    </motion.article>
+  );
+}
+
 export default function Ingredients() {
   return (
     <section id="actifs" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
@@ -115,71 +188,7 @@ export default function Ingredients() {
 
         <div className="grid grid-cols-2 lg:grid-cols-5 border-t border-l border-[var(--rule)]">
           {actifs.map((a, i) => (
-            <motion.article
-              key={i}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-[var(--paper)] border-r border-b border-[var(--rule)] hover:bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-col gap-[14px]"
-              style={{ padding: "36px 24px 32px" }}
-            >
-              <div
-                className="text-[var(--ink-2)] pb-3 border-b border-[var(--soft)]"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
-              >
-                {a.ord}
-              </div>
-              <div className="w-11 h-11 text-[var(--ink)]">{a.svg}</div>
-              <div
-                className="text-[var(--ink-2)]"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11 }}
-              >
-                {a.mol}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
-                  fontWeight: 700,
-                  fontSize: 22,
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.15,
-                  alignSelf: "end",
-                }}
-              >
-                {a.name}
-              </div>
-              <div
-                style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
-                  fontWeight: 800,
-                  fontSize: 36,
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1,
-                  color: "var(--ink)",
-                }}
-              >
-                {a.dose}
-                <span
-                  className="text-[var(--ink-2)]"
-                  style={{
-                    fontFamily: "var(--font-barlow), var(--display)",
-                    fontWeight: 500,
-                    fontStyle: "normal",
-                    fontSize: 16,
-                    letterSpacing: 0,
-                  }}
-                >
-                  {" "}mg
-                </span>
-              </div>
-              <div
-                className="text-[var(--ink-2)] border-t border-dashed border-[var(--soft)] pt-3"
-                style={{ fontSize: 13, lineHeight: 1.5 }}
-              >
-                {a.role}
-              </div>
-            </motion.article>
+            <IngredientCard key={i} a={a} index={i} />
           ))}
         </div>
 
