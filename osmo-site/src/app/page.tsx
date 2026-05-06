@@ -5,6 +5,7 @@ import Strip from "@/components/Strip";
 import Navbar from "@/components/Navbar";
 import CaptureModal from "@/components/CaptureModal";
 import Hero from "@/components/sections/Hero";
+import Marquee from "@/components/Marquee";
 import Empathy from "@/components/sections/Empathy";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Ingredients from "@/components/sections/Ingredients";
@@ -27,6 +28,7 @@ export default function Home() {
       <Navbar onOpenModal={() => openModal("navbar")} />
       <main>
         <Hero onOpenModal={() => openModal("homepage_hero")} />
+        <Marquee />
         <Empathy />
         <HowItWorks />
         <Ingredients />

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
 
 const actifs = [
   {
@@ -75,48 +76,43 @@ const stamps = ["Sans sucre ajouté", "Sans colorant", "Vegan", "Made in France"
 
 export default function Ingredients() {
   return (
-    <section id="actifs" className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+    <section id="actifs" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
       <div className="max-w-[1380px] mx-auto px-10">
-        {/* Section head */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24"
-        >
-          <div>
-            <div
-              className="text-[var(--ink-2)] mb-7"
-              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
-            >
-              La Formule · Lot 001
+        <FadeUp>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24">
+            <div>
+              <div
+                className="text-[var(--ink-2)] mb-7"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+              >
+                La Formule · Lot 001
+              </div>
+              <h2
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 800,
+                  fontSize: "clamp(56px, 7vw, 112px)",
+                  lineHeight: 0.92,
+                  letterSpacing: "-0.035em",
+                }}
+              >
+                Cinq{" "}
+                <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                  actifs.
+                </span>
+                <br />
+                Aucun remplissage.
+              </h2>
             </div>
-            <h2
-              style={{
-                fontFamily: "var(--font-barlow), var(--display)",
-                fontWeight: 800,
-                fontSize: "clamp(56px, 7vw, 112px)",
-                lineHeight: 0.92,
-                letterSpacing: "-0.035em",
-              }}
-            >
-              Cinq{" "}
-              <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
-                actifs.
-              </span>
-              <br />
-              Aucun remplissage.
-            </h2>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
+              Pour 1 dose de 8g.{" "}
+              <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+                Apports conformes ANSES.
+              </em>
+            </p>
           </div>
-          <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
-            Pour 1 dose de 8g.{" "}
-            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-              Apports conformes ANSES.
-            </em>
-          </p>
-        </motion.div>
+        </FadeUp>
 
-        {/* Formula grid */}
         <div className="grid grid-cols-2 lg:grid-cols-5 border-t border-l border-[var(--rule)]">
           {actifs.map((a, i) => (
             <motion.article
@@ -124,8 +120,8 @@ export default function Ingredients() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-[var(--paper)] border-r border-b border-[var(--rule)] hover:bg-white transition-colors duration-200 flex flex-col gap-[14px]"
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="bg-[var(--paper)] border-r border-b border-[var(--rule)] hover:bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] flex flex-col gap-[14px]"
               style={{ padding: "36px 24px 32px" }}
             >
               <div
@@ -187,31 +183,27 @@ export default function Ingredients() {
           ))}
         </div>
 
-        {/* Footer stamps */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-14 pt-7 border-t border-[var(--rule)] flex justify-between gap-8 flex-wrap items-center"
-        >
-          <div
-            className="flex gap-7 flex-wrap text-[var(--ink)]"
-            style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
-          >
-            {stamps.map((s) => (
-              <span key={s} className="inline-flex items-center gap-2">
-                <span className="w-[6px] h-[6px] bg-[var(--ink)] rounded-full" />
-                {s}
-              </span>
-            ))}
+        <FadeUp delay={0.3}>
+          <div className="mt-14 pt-7 border-t border-[var(--rule)] flex justify-between gap-8 flex-wrap items-center">
+            <div
+              className="flex gap-7 flex-wrap text-[var(--ink)]"
+              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
+            >
+              {stamps.map((s) => (
+                <span key={s} className="inline-flex items-center gap-2">
+                  <span className="w-[6px] h-[6px] bg-[var(--ink)] rounded-full" />
+                  {s}
+                </span>
+              ))}
+            </div>
+            <div
+              className="text-[var(--ink-2)]"
+              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
+            >
+              LOT 001 · FAB 04—2026 · DLUO 04—2028
+            </div>
           </div>
-          <div
-            className="text-[var(--ink-2)]"
-            style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
-          >
-            LOT 001 · FAB 04—2026 · DLUO 04—2028
-          </div>
-        </motion.div>
+        </FadeUp>
       </div>
     </section>
   );

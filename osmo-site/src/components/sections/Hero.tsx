@@ -2,10 +2,13 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import CountUp from "@/components/CountUp";
+
+const words = ["Osmo", "Recovery."];
 
 export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section className="border-b border-[var(--rule)] relative z-[5]" style={{ padding: "56px 0 96px" }}>
+    <section className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "56px 0 96px" }}>
       <div className="max-w-[1380px] mx-auto px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-[72px] items-center min-h-[70vh]">
           {/* LEFT: Product image */}
@@ -15,7 +18,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
             transition={{ duration: 0.7 }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=1200&q=80&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=1200&q=80&auto=format&fit=crop"
               alt="OSMO Recovery — pot poudre studio fond blanc"
               width={700}
               height={780}
@@ -26,12 +29,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           </motion.div>
 
           {/* RIGHT: Editorial text */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col gap-9"
-          >
+          <div className="flex flex-col gap-9">
             <h1
               style={{
                 fontFamily: "var(--font-barlow), var(--display)",
@@ -42,12 +40,24 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
                 textWrap: "balance" as never,
               }}
             >
-              Osmo
-              <br />
-              <span style={{ fontWeight: 800, fontStyle: "normal" }}>Recovery.</span>
+              {words.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                  className="inline-block"
+                  style={i === 1 ? { fontStyle: "normal", display: "block" } : undefined}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </h1>
 
-            <p
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="text-[var(--ink)]"
               style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 480 }}
             >
@@ -63,12 +73,17 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
                 pendant le sommeil
               </em>{" "}
               — après une soirée alcoolisée, une semaine chargée, ou les deux. À prendre le soir. Pas le matin.
-            </p>
+            </motion.p>
 
-            <div className="flex gap-3 flex-wrap items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex gap-3 flex-wrap items-center"
+            >
               <button
                 onClick={onOpenModal}
-                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200"
+                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 hover:scale-[1.02]"
                 style={{
                   fontFamily: "var(--font-mono), var(--mono)",
                   fontSize: 11,
@@ -81,7 +96,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
               </button>
               <a
                 href="#actifs"
-                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 hover:scale-[1.02]"
                 style={{
                   fontFamily: "var(--font-mono), var(--mono)",
                   fontSize: 11,
@@ -103,8 +118,8 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
               >
                 ⌁ Aucun paiement maintenant
               </span>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Hero meta strip */}
@@ -115,10 +130,10 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
           className="mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {[
-            { k: "5", v: "Actifs cliniques" },
-            { k: "15", v: "Doses · 120g" },
-            { k: "25 €", v: "Tarif fondateur", amber: true },
-            { k: "300", v: "Places · Mai 2026" },
+            { k: 5, label: "5", v: "Actifs cliniques", count: true },
+            { k: 15, label: "15", v: "Doses · 120g", count: true },
+            { k: 25, label: "25 €", v: "Tarif fondateur", amber: true, count: false },
+            { k: 300, label: "300", v: "Places · Mai 2026", count: true },
           ].map((item, i) => (
             <div key={i}>
               <div
@@ -131,7 +146,7 @@ export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
                   color: item.amber ? "var(--amber)" : "var(--ink)",
                 }}
               >
-                {item.k}
+                {item.count ? <CountUp target={item.k} /> : item.label}
               </div>
               <div
                 className="text-[var(--ink-2)] mt-2"

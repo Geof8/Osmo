@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
 
 const steps = [
   {
@@ -43,7 +44,7 @@ const steps = [
     desc: "Avant le coucher — pas le matin. C'est ici que tout se joue.",
     timing: "⌁ avant 23h",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2}>
         <path d="M40 8 A22 22 0 1 0 48 38 A18 18 0 0 1 40 8 Z" />
         <circle cx="46" cy="16" r="0.9" fill="currentColor" />
         <circle cx="50" cy="26" r="0.7" fill="currentColor" />
@@ -54,57 +55,52 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="protocole" className="border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
       <div className="max-w-[1380px] mx-auto px-10">
-        {/* Section head */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24"
-        >
-          <div>
-            <div
-              className="text-[var(--ink-2)] mb-7"
-              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
-            >
-              Le protocole
+        <FadeUp>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24">
+            <div>
+              <div
+                className="text-[var(--ink-2)] mb-7"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+              >
+                Le protocole
+              </div>
+              <h2
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 800,
+                  fontSize: "clamp(56px, 7vw, 112px)",
+                  lineHeight: 0.92,
+                  letterSpacing: "-0.035em",
+                }}
+              >
+                Simple. Le soir.
+                <br />
+                <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                  Pas le matin.
+                </span>
+              </h2>
             </div>
-            <h2
-              style={{
-                fontFamily: "var(--font-barlow), var(--display)",
-                fontWeight: 800,
-                fontSize: "clamp(56px, 7vw, 112px)",
-                lineHeight: 0.92,
-                letterSpacing: "-0.035em",
-              }}
-            >
-              Simple. Le soir.
-              <br />
-              <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
-                Pas le matin.
-              </span>
-            </h2>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
+              C&apos;est{" "}
+              <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+                là
+              </em>{" "}
+              toute la différence. Les électrolytes, le NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
+            </p>
           </div>
-          <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
-            C&apos;est{" "}
-            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-              là
-            </em>{" "}
-            toute la différence. Les électrolytes, le NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
-          </p>
-        </motion.div>
+        </FadeUp>
 
-        {/* Step cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {steps.map((step, i) => (
             <motion.article
               key={step.num}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="p-8 min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-7 relative"
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="p-8 min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-7 relative transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
             >
               <div>
                 <div

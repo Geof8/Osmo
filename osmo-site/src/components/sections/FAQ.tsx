@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import FadeUp from "@/components/FadeUp";
 
 const faqItems = [
   {
@@ -34,14 +34,10 @@ export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+    <section id="faq" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
       <div className="max-w-[1380px] mx-auto px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-20 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+          <FadeUp>
             <div
               className="text-[var(--ink-2)] mb-7"
               style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
@@ -63,58 +59,60 @@ export default function FAQ() {
                 fréquentes.
               </span>
             </h2>
-          </motion.div>
+          </FadeUp>
 
-          <div className="border-t border-[var(--rule)]">
-            {faqItems.map((item, i) => (
-              <details
-                key={i}
-                open={openIdx === i}
-                className="border-b border-[var(--rule)]"
-                onToggle={(e) => {
-                  if ((e.target as HTMLDetailsElement).open) {
-                    setOpenIdx(i);
-                  } else if (openIdx === i) {
-                    setOpenIdx(null);
-                  }
-                }}
-              >
-                <summary
-                  className="w-full text-left cursor-pointer list-none flex justify-between items-center gap-6"
-                  style={{ padding: "28px 0" }}
+          <FadeUp delay={0.15}>
+            <div className="border-t border-[var(--rule)]">
+              {faqItems.map((item, i) => (
+                <details
+                  key={i}
+                  open={openIdx === i}
+                  className="border-b border-[var(--rule)]"
+                  onToggle={(e) => {
+                    if ((e.target as HTMLDetailsElement).open) {
+                      setOpenIdx(i);
+                    } else if (openIdx === i) {
+                      setOpenIdx(null);
+                    }
+                  }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-barlow), var(--display)",
-                      fontWeight: 600,
-                      fontSize: 22,
-                      letterSpacing: "-0.02em",
-                      color: "var(--ink)",
-                    }}
+                  <summary
+                    className="w-full text-left cursor-pointer list-none flex justify-between items-center gap-6"
+                    style={{ padding: "28px 0" }}
                   >
-                    {item.q}
-                  </span>
-                  <span
-                    className="flex-shrink-0 text-[var(--ink-2)] transition-transform duration-200"
-                    style={{
-                      fontFamily: "var(--font-mono), var(--mono)",
-                      fontSize: 14,
-                      transform: openIdx === i ? "rotate(45deg)" : "rotate(0deg)",
-                      color: openIdx === i ? "var(--ink)" : "var(--ink-2)",
-                    }}
+                    <span
+                      style={{
+                        fontFamily: "var(--font-barlow), var(--display)",
+                        fontWeight: 600,
+                        fontSize: 22,
+                        letterSpacing: "-0.02em",
+                        color: "var(--ink)",
+                      }}
+                    >
+                      {item.q}
+                    </span>
+                    <span
+                      className="flex-shrink-0 text-[var(--ink-2)] transition-transform duration-200"
+                      style={{
+                        fontFamily: "var(--font-mono), var(--mono)",
+                        fontSize: 14,
+                        transform: openIdx === i ? "rotate(45deg)" : "rotate(0deg)",
+                        color: openIdx === i ? "var(--ink)" : "var(--ink-2)",
+                      }}
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <div
+                    className="text-[var(--ink-2)]"
+                    style={{ padding: "0 0 28px", maxWidth: 620, fontSize: 15, lineHeight: 1.65 }}
                   >
-                    +
-                  </span>
-                </summary>
-                <div
-                  className="text-[var(--ink-2)]"
-                  style={{ padding: "0 0 28px", maxWidth: 620, fontSize: 15, lineHeight: 1.65 }}
-                >
-                  {item.a}
-                </div>
-              </details>
-            ))}
-          </div>
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </FadeUp>
         </div>
       </div>
     </section>

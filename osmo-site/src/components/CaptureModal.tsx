@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { getSupabase } from "@/lib/supabase";
 
@@ -55,120 +55,138 @@ export default function CaptureModal({
     setLoading(false);
   };
 
-  const handleClose = (open: boolean) => {
-    if (!open) {
-      setTimeout(() => {
-        setSuccess(false);
-        setEmail("");
-        setPhone("");
-        setError("");
-      }, 300);
-    }
-    onOpenChange(open);
+  const handleClose = () => {
+    onOpenChange(false);
+    setTimeout(() => {
+      setSuccess(false);
+      setEmail("");
+      setPhone("");
+      setError("");
+    }, 300);
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md p-10 border-[var(--rule)]">
-        {/* Close button */}
-        <button
-          onClick={() => handleClose(false)}
-          className="absolute top-5 right-5 text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
-          aria-label="Fermer"
-        >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M4 4l10 10M14 4L4 14" />
-          </svg>
-        </button>
-
-        {success ? (
-          <div className="text-center py-6">
-            <div
-              className="text-[var(--ink)] mb-2"
-              style={{
-                fontFamily: "var(--font-barlow), var(--display)",
-                fontWeight: 800,
-                fontSize: 28,
-                letterSpacing: "-0.02em",
-              }}
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={handleClose}
+          />
+          <div className="fixed inset-0 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+              className="relative z-50 w-full sm:max-w-md bg-white border border-[var(--rule)] p-10 shadow-lg"
+              onClick={(e) => e.stopPropagation()}
             >
-              Place réservée.
-            </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55 }}>
-              Vous serez contacté en priorité dès que le stock est disponible.
-            </p>
-          </div>
-        ) : (
-          <>
-            <div className="mb-8">
-              <div
-                className="text-[var(--ink-2)] mb-5"
-                style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                }}
-              >
-                Accès prioritaire · Lot 001
-              </div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
-                  fontWeight: 800,
-                  fontSize: 32,
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1,
-                }}
-              >
-                Réserver mon accès
-              </h2>
-              <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.55 }}>
-                Aucun paiement maintenant. Vous serez contacté en priorité dès que le stock est disponible.
-              </p>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="email"
-                placeholder="votre@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="h-12 border-[var(--rule)]"
-              />
-              <Input
-                type="tel"
-                placeholder="06 XX XX XX XX — optionnel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="h-12 border-[var(--soft)]"
-              />
-              {error && <p className="text-red-600 text-sm">{error}</p>}
               <button
-                type="submit"
-                disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-3 py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 disabled:opacity-50"
-                style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase" as const,
-                }}
+                onClick={handleClose}
+                className="absolute top-5 right-5 text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
+                aria-label="Fermer"
               >
-                {loading ? "Envoi..." : "Réserver — 25 €"}
-                {!loading && <span>→</span>}
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M4 4l10 10M14 4L4 14" />
+                </svg>
               </button>
-              <p
-                className="text-[var(--ink-3)] text-center"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" as const }}
-              >
-                Prix fondateur garanti · 0 € maintenant
-              </p>
-            </form>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
+
+              {success ? (
+                <div className="text-center py-6">
+                  <div
+                    className="text-[var(--ink)] mb-2"
+                    style={{
+                      fontFamily: "var(--font-barlow), var(--display)",
+                      fontWeight: 800,
+                      fontSize: 28,
+                      letterSpacing: "-0.02em",
+                    }}
+                  >
+                    Place réservée.
+                  </div>
+                  <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                    Vous serez contacté en priorité dès que le stock est disponible.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-8">
+                    <div
+                      className="text-[var(--ink-2)] mb-5"
+                      style={{
+                        fontFamily: "var(--font-mono), var(--mono)",
+                        fontSize: 10,
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase" as const,
+                      }}
+                    >
+                      Accès prioritaire · Lot 001
+                    </div>
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-barlow), var(--display)",
+                        fontWeight: 800,
+                        fontSize: 32,
+                        letterSpacing: "-0.03em",
+                        lineHeight: 1,
+                      }}
+                    >
+                      Réserver mon accès
+                    </h2>
+                    <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                      Aucun paiement maintenant. Vous serez contacté en priorité dès que le stock est disponible.
+                    </p>
+                  </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <Input
+                      type="email"
+                      placeholder="votre@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="h-12 border-[var(--rule)]"
+                    />
+                    <Input
+                      type="tel"
+                      placeholder="06 XX XX XX XX — optionnel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="h-12 border-[var(--soft)]"
+                    />
+                    {error && <p className="text-red-600 text-sm">{error}</p>}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full inline-flex items-center justify-center gap-3 py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 hover:scale-[1.02] disabled:opacity-50"
+                      style={{
+                        fontFamily: "var(--font-mono), var(--mono)",
+                        fontSize: 11,
+                        fontWeight: 500,
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase" as const,
+                      }}
+                    >
+                      {loading ? "Envoi..." : "Réserver — 25 €"}
+                      {!loading && <span>→</span>}
+                    </button>
+                    <p
+                      className="text-[var(--ink-3)] text-center"
+                      style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" as const }}
+                    >
+                      Prix fondateur garanti · 0 € maintenant
+                    </p>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
