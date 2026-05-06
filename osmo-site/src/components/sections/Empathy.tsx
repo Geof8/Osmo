@@ -55,7 +55,7 @@ export default function Empathy() {
               >
                 Tu connais
                 <br />
-                <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
                   ce matin-là.
                 </span>
               </h2>
@@ -177,17 +177,16 @@ export default function Empathy() {
             >
               OSMO n&apos;est pas un remède miracle.
               <br />
-              <em
+              <span className="text-[#C8963E]"
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
                   fontStyle: "normal",
                   fontWeight: 700,
-                  color: "var(--ink)",
                   letterSpacing: "-0.02em",
                 }}
               >
                 C&apos;est de la biochimie.
-              </em>
+              </span>
             </div>
             <div
               className="text-[var(--ink-2)] text-right"

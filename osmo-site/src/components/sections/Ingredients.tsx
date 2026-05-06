@@ -174,7 +174,7 @@ export default function Ingredients() {
                   actifs.
                 </span>
                 <br />
-                Aucun remplissage.
+                <span className="text-[#C8963E]">Aucun remplissage.</span>
               </h2>
             </div>
             <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>

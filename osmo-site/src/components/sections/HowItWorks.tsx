@@ -105,9 +105,9 @@ function StepCard({ step, index }: { step: typeof steps[number]; index: number }
         {step.labelEm ? (
           <>
             {step.label.split(" ")[0]}{" "}
-            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+            <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, letterSpacing: "-0.02em" }}>
               {step.label.split(" ").slice(1).join(" ")}
-            </em>
+            </span>
           </>
         ) : (
           step.label
@@ -150,7 +150,7 @@ export default function HowItWorks() {
               >
                 Simple. Le soir.
                 <br />
-                <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
                   Pas le matin.
                 </span>
               </h2>
