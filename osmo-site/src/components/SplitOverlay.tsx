@@ -14,7 +14,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
         style={{
           fontFamily: "var(--font-barlow), var(--display)",
           fontWeight: 900,
-          fontSize: "clamp(36px, 5.5vw, 100px)",
+          fontSize: "clamp(42px, 7vw, 130px)",
           lineHeight: 1,
           letterSpacing: "-0.04em",
           color: textColor,
@@ -62,8 +62,9 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
           onLeave: () => {
             if (!doneRef.current) {
               doneRef.current = true;
-              if (containerRef.current) containerRef.current.style.display = "none";
-              if (spacerRef.current) spacerRef.current.style.display = "none";
+              if (containerRef.current) containerRef.current.remove();
+              if (spacerRef.current) spacerRef.current.remove();
+              window.scrollTo(0, 0);
               onComplete();
             }
           },
