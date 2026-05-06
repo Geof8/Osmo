@@ -57,7 +57,8 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
           start: "top top",
           end: "bottom top",
           scrub: 0.6,
-          pin: false,
+          pin: true,
+          pinSpacing: false,
           onLeave: () => {
             if (!doneRef.current) {
               doneRef.current = true;
