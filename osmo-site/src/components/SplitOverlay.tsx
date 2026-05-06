@@ -62,8 +62,16 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
           onLeave: () => {
             if (!doneRef.current) {
               doneRef.current = true;
+              ctx.revert();
               if (containerRef.current) containerRef.current.remove();
-              if (spacerRef.current) spacerRef.current.remove();
+              if (spacerRef.current) {
+                const pinWrapper = spacerRef.current.parentElement;
+                if (pinWrapper?.classList.contains("pin-spacer")) {
+                  pinWrapper.remove();
+                } else {
+                  spacerRef.current.remove();
+                }
+              }
               window.scrollTo(0, 0);
               onComplete();
             }
