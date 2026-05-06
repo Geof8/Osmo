@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Barlow, DM_Sans } from "next/font/google";
+import { Barlow_Condensed, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const barlow = Barlow({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["700", "800", "900"],
   variable: "--font-barlow",
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${barlow.variable} ${dmSans.variable}`}>
+    <html lang="fr" className={`${barlowCondensed.variable} ${dmSans.variable}`}>
       <body>{children}</body>
     </html>
   );

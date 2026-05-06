@@ -8,7 +8,7 @@ export default function ClosingCTA({
   onOpenModal: () => void;
 }) {
   return (
-    <section className="py-24 bg-osmo-dark">
+    <section id="cta" className="py-24 bg-osmo-dark">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -17,7 +17,7 @@ export default function ClosingCTA({
           transition={{ duration: 0.6 }}
           className="font-display font-black text-4xl sm:text-5xl lg:text-6xl tracking-tighter text-white mb-6"
         >
-          Prêt pour ton prochain lendemain ?
+          Parce que demain matin, tu n&apos;as pas le choix.
         </motion.h2>
 
         <motion.p

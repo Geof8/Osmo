@@ -22,7 +22,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-white">
+    <section id="protocole" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -31,7 +31,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="font-display font-black text-4xl sm:text-5xl tracking-tighter text-osmo-text mb-16"
         >
-          Comment ça marche.
+          Le protocole. Le soir. Pas le matin.
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">

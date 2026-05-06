@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Footer() {
   return (
     <footer className="border-t border-osmo-border py-12 px-6">
@@ -12,17 +10,6 @@ export default function Footer() {
             Complément alimentaire. Ne se substitue pas à une alimentation
             variée et équilibrée.
           </p>
-        </div>
-        <div className="flex gap-8 text-sm text-osmo-muted font-body">
-          <Link
-            href="/produit"
-            className="hover:text-osmo-text transition-colors"
-          >
-            Produit
-          </Link>
-          <Link href="/faq" className="hover:text-osmo-text transition-colors">
-            FAQ
-          </Link>
         </div>
         <p className="text-xs text-osmo-muted">
           © {new Date().getFullYear()} Osmo Lab. Tous droits réservés.

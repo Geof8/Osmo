@@ -7,8 +7,8 @@ import Hero from "@/components/sections/Hero";
 import Empathy from "@/components/sections/Empathy";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Ingredients from "@/components/sections/Ingredients";
-import Founders from "@/components/sections/Founders";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -28,8 +28,8 @@ export default function Home() {
         <Empathy />
         <HowItWorks />
         <Ingredients />
-        <Founders onOpenModal={() => openModal("founders_section")} />
         <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
+        <FAQ />
       </main>
       <Footer />
       <CaptureModal

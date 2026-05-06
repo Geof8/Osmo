@@ -10,7 +10,7 @@ const cards = [
 
 export default function Empathy() {
   return (
-    <section className="py-24 bg-osmo-surface grain">
+    <section id="empathy" className="py-24 bg-osmo-surface grain">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -32,8 +32,8 @@ export default function Empathy() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               className="bg-white p-8 border border-osmo-border"
             >
-              <p className="font-body text-osmo-text text-base leading-relaxed italic">
-                &ldquo;{text}&rdquo;
+              <p className="font-body text-osmo-text text-base leading-relaxed">
+                {text}
               </p>
             </motion.div>
           ))}
