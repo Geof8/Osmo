@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Strip from "@/components/Strip";
 import Navbar from "@/components/Navbar";
 import CaptureModal from "@/components/CaptureModal";
 import Hero from "@/components/sections/Hero";
@@ -22,6 +23,7 @@ export default function Home() {
 
   return (
     <>
+      <Strip />
       <Navbar onOpenModal={() => openModal("navbar")} />
       <main>
         <Hero onOpenModal={() => openModal("homepage_hero")} />

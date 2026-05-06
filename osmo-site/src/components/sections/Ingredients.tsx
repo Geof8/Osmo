@@ -2,94 +2,216 @@
 
 import { motion } from "framer-motion";
 
-const ingredients = [
+const actifs = [
   {
+    ord: "N° 01 · Minéral",
+    mol: "NaHCO₃",
     name: "Bicarbonate de sodium",
-    dosage: "1700mg",
-    role: "Équilibre acido-basique",
+    dose: "1700",
+    role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
+        <line x1="28" y1="6" x2="28" y2="46" />
+        <line x1="12" y1="20" x2="44" y2="20" />
+      </svg>
+    ),
   },
   {
+    ord: "N° 02 · Minéral",
+    mol: "K₃C₆H₅O₇",
     name: "Citrate de potassium",
-    dosage: "2000mg",
-    role: "Fonction musculaire, crampes",
+    dose: "2000",
+    role: "Fonction musculaire. Contraction cardiaque normale.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
+      </svg>
+    ),
   },
   {
+    ord: "N° 03 · Minéral",
+    mol: "Mg(C₂H₄NO₂)₂",
     name: "Bisglycinate de magnésium",
-    dosage: "1350mg",
-    role: "Récupération & sommeil",
+    dose: "1350",
+    role: "Récupération nerveuse. Sommeil profond.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2}>
+        <path d="M6 22 Q14 14 22 22 T36 22 T50 22" />
+        <path d="M6 32 Q14 24 22 32 T36 32 T50 32" />
+        <path d="M6 42 Q14 34 22 42 T36 42 T50 42" />
+      </svg>
+    ),
   },
   {
-    name: "NAC (N-Acétyl-Cystéine)",
-    dosage: "600mg",
-    role: "Soutien hépatique — particulièrement actif après une consommation d'alcool",
-  },
-  {
+    ord: "N° 04 · Minéral",
+    mol: "NaCl",
     name: "Chlorure de sodium",
-    dosage: "150mg",
-    role: "Hydratation cellulaire",
+    dose: "150",
+    role: "Hydratation cellulaire ciblée.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
+        <path d="M21 34 Q21 41 28 44" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 05 · Acide aminé",
+    mol: "C₅H₉NO₃S",
+    name: "N-Acétyl-Cystéine",
+    dose: "600",
+    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
+        <path d="M19 28 L25 34 L37 22" />
+      </svg>
+    ),
   },
 ];
 
+const stamps = ["Sans sucre ajouté", "Sans colorant", "Vegan", "Made in France"];
+
 export default function Ingredients() {
   return (
-    <section id="ingredients" className="py-24 bg-osmo-surface grain">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <motion.h2
+    <section id="actifs" className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+      <div className="max-w-[1380px] mx-auto px-10">
+        {/* Section head */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-display font-black text-4xl sm:text-5xl tracking-tighter text-osmo-text mb-4"
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24"
         >
-          Cinq actifs. Aucun remplissage.
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-osmo-muted font-body mb-12"
-        >
-          Pas de remplissage. Juste les actifs qui font le travail.
-        </motion.p>
-
-        <div className="border border-osmo-border">
-          <div className="grid grid-cols-12 gap-0 bg-osmo-text text-white p-4 text-sm font-display font-bold">
-            <div className="col-span-4">Ingrédient</div>
-            <div className="col-span-2">Dosage</div>
-            <div className="col-span-6">Rôle</div>
-          </div>
-          {ingredients.map((ing, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className={`grid grid-cols-12 gap-0 p-4 text-sm font-body bg-white ${
-                i < ingredients.length - 1 ? "border-b border-osmo-border" : ""
-              }`}
+          <div>
+            <div
+              className="text-[var(--ink-2)] mb-7"
+              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
             >
-              <div className="col-span-4 font-medium text-osmo-text">
-                {ing.name}
+              La Formule · Lot 001
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-barlow), var(--display)",
+                fontWeight: 800,
+                fontSize: "clamp(56px, 7vw, 112px)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.035em",
+              }}
+            >
+              Cinq{" "}
+              <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                actifs.
+              </span>
+              <br />
+              Aucun remplissage.
+            </h2>
+          </div>
+          <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
+            Pour 1 dose de 8g.{" "}
+            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              Apports conformes ANSES.
+            </em>
+          </p>
+        </motion.div>
+
+        {/* Formula grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 border-t border-l border-[var(--rule)]">
+          {actifs.map((a, i) => (
+            <motion.article
+              key={i}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="bg-[var(--paper)] border-r border-b border-[var(--rule)] hover:bg-white transition-colors duration-200 flex flex-col gap-[14px]"
+              style={{ padding: "36px 24px 32px" }}
+            >
+              <div
+                className="text-[var(--ink-2)] pb-3 border-b border-[var(--soft)]"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
+              >
+                {a.ord}
               </div>
-              <div className="col-span-2 text-osmo-accent font-bold">
-                {ing.dosage}
+              <div className="w-11 h-11 text-[var(--ink)]">{a.svg}</div>
+              <div
+                className="text-[var(--ink-2)]"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11 }}
+              >
+                {a.mol}
               </div>
-              <div className="col-span-6 text-osmo-muted">{ing.role}</div>
-            </motion.div>
+              <div
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 700,
+                  fontSize: 22,
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.15,
+                  alignSelf: "end",
+                }}
+              >
+                {a.name}
+              </div>
+              <div
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 800,
+                  fontSize: 36,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1,
+                  color: "var(--ink)",
+                }}
+              >
+                {a.dose}
+                <span
+                  className="text-[var(--ink-2)]"
+                  style={{
+                    fontFamily: "var(--font-barlow), var(--display)",
+                    fontWeight: 500,
+                    fontStyle: "normal",
+                    fontSize: 16,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {" "}mg
+                </span>
+              </div>
+              <div
+                className="text-[var(--ink-2)] border-t border-dashed border-[var(--soft)] pt-3"
+                style={{ fontSize: 13, lineHeight: 1.5 }}
+              >
+                {a.role}
+              </div>
+            </motion.article>
           ))}
         </div>
 
-        <motion.p
+        {/* Footer stamps */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-6 text-sm text-osmo-muted font-body"
+          className="mt-14 pt-7 border-t border-[var(--rule)] flex justify-between gap-8 flex-wrap items-center"
         >
-          Sans sucre ajouté · Sans édulcorant · Sans colorant artificiel
-        </motion.p>
+          <div
+            className="flex gap-7 flex-wrap text-[var(--ink)]"
+            style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
+          >
+            {stamps.map((s) => (
+              <span key={s} className="inline-flex items-center gap-2">
+                <span className="w-[6px] h-[6px] bg-[var(--ink)] rounded-full" />
+                {s}
+              </span>
+            ))}
+          </div>
+          <div
+            className="text-[var(--ink-2)]"
+            style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
+          >
+            LOT 001 · FAB 04—2026 · DLUO 04—2028
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -5,68 +5,147 @@ import Image from "next/image";
 
 export default function Hero({ onOpenModal }: { onOpenModal: () => void }) {
   return (
-    <section id="hero" className="min-h-screen flex items-center pt-16">
-      <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className="lg:col-span-7">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display font-black tracking-tighter leading-[0.92] text-osmo-text"
-            style={{ fontSize: "clamp(80px, 10vw, 130px)", fontWeight: 900 }}
+    <section className="border-b border-[var(--rule)] relative z-[5]" style={{ padding: "56px 0 96px" }}>
+      <div className="max-w-[1380px] mx-auto px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-[72px] items-center min-h-[70vh]">
+          {/* LEFT: Product image */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            Le lendemain
-            <br />
-            matin, tu assures.
-          </motion.h1>
+            <Image
+              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=1200&q=80&auto=format&fit=crop"
+              alt="OSMO Recovery — pot poudre studio fond blanc"
+              width={700}
+              height={780}
+              className="border border-[var(--rule)] bg-white"
+              style={{ width: "108%", marginLeft: -40, aspectRatio: "0.9", objectFit: "cover" }}
+              priority
+            />
+          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 text-lg text-osmo-muted font-body max-w-xl leading-relaxed"
-          >
-            OSMO Recovery — complexe d&apos;électrolytes formulé pour récupérer
-            vite après une soirée alcoolisée, une semaine chargée, ou les deux.
-          </motion.p>
-
+          {/* RIGHT: Editorial text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col gap-9"
           >
-            <button
-              onClick={onOpenModal}
-              className="bg-osmo-accent hover:bg-osmo-accent-hover text-white font-medium px-8 py-4 text-sm transition-colors"
+            <h1
+              style={{
+                fontFamily: "var(--font-barlow), var(--display)",
+                fontWeight: 800,
+                fontSize: "clamp(80px, 9vw, 160px)",
+                lineHeight: 0.9,
+                letterSpacing: "-0.04em",
+                textWrap: "balance" as never,
+              }}
             >
-              Pré-commander — 25€
-            </button>
-            <button
-              onClick={onOpenModal}
-              className="border border-osmo-text text-osmo-text font-medium px-8 py-4 text-sm hover:bg-osmo-text hover:text-white transition-colors"
+              Osmo
+              <br />
+              <span style={{ fontWeight: 800, fontStyle: "normal" }}>Recovery.</span>
+            </h1>
+
+            <p
+              className="text-[var(--ink)]"
+              style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 480 }}
             >
-              Rejoindre la liste d&apos;attente
-            </button>
+              Un complexe d&apos;électrolytes formulé pour la récupération{" "}
+              <em
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  fontSize: 19,
+                }}
+              >
+                pendant le sommeil
+              </em>{" "}
+              — après une soirée alcoolisée, une semaine chargée, ou les deux. À prendre le soir. Pas le matin.
+            </p>
+
+            <div className="flex gap-3 flex-wrap items-center">
+              <button
+                onClick={onOpenModal}
+                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Réserver — 25 € <span>→</span>
+              </button>
+              <a
+                href="#actifs"
+                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Voir la formule
+              </a>
+              <span
+                className="text-[var(--ink-2)]"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 10,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                }}
+              >
+                ⌁ Aucun paiement maintenant
+              </span>
+            </div>
           </motion.div>
         </div>
 
+        {/* Hero meta strip */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-5 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-8"
         >
-          <div className="relative w-full aspect-[3/4] lg:translate-x-8">
-            <Image
-              src="https://images.unsplash.com/photo-1631390573381-734a5b2cf498?w=800&q=80"
-              alt="Pot OSMO Recovery — complexe d'électrolytes goût citron"
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-          </div>
+          {[
+            { k: "5", v: "Actifs cliniques" },
+            { k: "15", v: "Doses · 120g" },
+            { k: "25 €", v: "Tarif fondateur", amber: true },
+            { k: "300", v: "Places · Mai 2026" },
+          ].map((item, i) => (
+            <div key={i}>
+              <div
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 800,
+                  fontSize: 36,
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1,
+                  color: item.amber ? "var(--amber)" : "var(--ink)",
+                }}
+              >
+                {item.k}
+              </div>
+              <div
+                className="text-[var(--ink-2)] mt-2"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {item.v}
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

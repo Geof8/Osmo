@@ -1,0 +1,30 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function Strip() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="bg-[var(--ink)] text-white relative z-10"
+      style={{
+        padding: "9px 0",
+        fontFamily: "var(--font-mono), var(--mono)",
+        fontSize: 10,
+        letterSpacing: "0.2em",
+        textTransform: "uppercase" as const,
+      }}
+    >
+      <div className="max-w-[1380px] mx-auto px-10 flex justify-between gap-6 flex-wrap">
+        <div className="flex items-center gap-2">
+          <span className="w-[6px] h-[6px] bg-white rounded-full animate-pulse" />
+          Pré-lancement · Lot N°001 · 300 places
+        </div>
+        <div className="hidden md:block">OSMO Lab — Paris, France</div>
+        <div className="hidden sm:block">Tarif fondateur · 25 € · Aucun paiement maintenant</div>
+      </div>
+    </motion.div>
+  );
+}

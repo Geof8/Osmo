@@ -4,63 +4,65 @@
 
 @layer base {
   :root {
+    --paper: #FFFFFF;
+    --paper-2: #F4F4F4;
+    --paper-3: #EAEAEA;
+    --ink: #111111;
+    --ink-2: #555555;
+    --ink-3: #999999;
+    --rule: #111111;
+    --soft: #DDDDDD;
+    --amber: #C8963E;
+    --display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
     --background: #FFFFFF;
     --foreground: #111111;
-    --card: #FFFFFF;
-    --card-foreground: #111111;
-    --popover: #FFFFFF;
-    --popover-foreground: #111111;
-    --primary: #C8963E;
-    --primary-foreground: #FFFFFF;
-    --secondary: #F4F4F4;
-    --secondary-foreground: #111111;
-    --muted: #F4F4F4;
-    --muted-foreground: #666666;
-    --accent: #C8963E;
-    --accent-foreground: #FFFFFF;
-    --destructive: #ef4444;
-    --destructive-foreground: #FFFFFF;
-    --border: #E0E0E0;
-    --input: #E0E0E0;
+    --border: #DDDDDD;
+    --input: #DDDDDD;
     --ring: #C8963E;
     --radius: 0px;
   }
 
   * {
-    border-color: var(--border);
-  }
-
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-dm-sans), system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-color: var(--soft);
   }
 
   html {
     scroll-behavior: smooth;
   }
-}
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
   }
 }
 
-.grain {
-  position: relative;
-}
-
-.grain::before {
-  content: "";
-  position: absolute;
+/* Paper grain overlay */
+body::before {
+  content: '';
+  position: fixed;
   inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
   pointer-events: none;
   z-index: 1;
+  background-image:
+    radial-gradient(circle at 17% 33%, rgba(31,27,20,0.025) 0.5px, transparent 1px),
+    radial-gradient(circle at 73% 19%, rgba(31,27,20,0.02) 0.5px, transparent 1px),
+    radial-gradient(circle at 43% 81%, rgba(31,27,20,0.022) 0.5px, transparent 1px);
+  background-size: 9px 9px, 13px 13px, 11px 11px;
+  mix-blend-mode: multiply;
 }

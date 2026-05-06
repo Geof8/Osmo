@@ -69,49 +69,62 @@ export default function CaptureModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md p-8">
+      <DialogContent className="sm:max-w-md p-10 border-[var(--rule)]">
         {/* Close button */}
         <button
           onClick={() => handleClose(false)}
-          className="absolute top-4 right-4 text-osmo-muted hover:text-osmo-text transition-colors"
+          className="absolute top-5 right-5 text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
           aria-label="Fermer"
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M5 5l10 10M15 5L5 15" />
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M4 4l10 10M14 4L4 14" />
           </svg>
         </button>
 
         {success ? (
           <div className="text-center py-6">
-            <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-osmo-accent/10">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#C8963E"
-                strokeWidth="2"
-              >
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
+            <div
+              className="text-[var(--ink)] mb-2"
+              style={{
+                fontFamily: "var(--font-barlow), var(--display)",
+                fontWeight: 800,
+                fontSize: 28,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Place réservée.
             </div>
-            <p className="font-display text-xl font-bold text-osmo-text mb-2">
-              C&apos;est noté.
-            </p>
-            <p className="text-osmo-muted text-sm font-body">
-              Tu fais partie des premiers. On te contacte dès que c&apos;est
-              prêt.
+            <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55 }}>
+              Vous serez contacté en priorité dès que le stock est disponible.
             </p>
           </div>
         ) : (
           <>
-            <div className="flex flex-col gap-2 mb-6">
-              <h2 className="font-display text-2xl font-bold text-osmo-text">
-                Réserver mon accès prioritaire
+            <div className="mb-8">
+              <div
+                className="text-[var(--ink-2)] mb-5"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 10,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                }}
+              >
+                Accès prioritaire · Lot 001
+              </div>
+              <h2
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 800,
+                  fontSize: 32,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                }}
+              >
+                Réserver mon accès
               </h2>
-              <p className="text-osmo-muted text-sm font-body">
-                Aucun paiement maintenant. Vous serez contacté en priorité dès
-                que le stock est disponible.
+              <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                Aucun paiement maintenant. Vous serez contacté en priorité dès que le stock est disponible.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -121,28 +134,36 @@ export default function CaptureModal({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="h-12"
+                className="h-12 border-[var(--rule)]"
               />
               <Input
                 type="tel"
                 placeholder="06 XX XX XX XX — optionnel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="h-12"
+                className="h-12 border-[var(--soft)]"
               />
-              {error && <p className="text-red-500 text-sm">{error}</p>}
+              {error && <p className="text-red-600 text-sm">{error}</p>}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-osmo-accent hover:bg-osmo-accent-hover text-white font-medium py-3 text-sm transition-colors disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-3 py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 disabled:opacity-50"
+                style={{
+                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontSize: 11,
+                  fontWeight: 500,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase" as const,
+                }}
               >
-                {loading
-                  ? "Envoi en cours..."
-                  : "Réserver mon accès prioritaire"}
+                {loading ? "Envoi..." : "Réserver — 25 €"}
+                {!loading && <span>→</span>}
               </button>
-              <p className="text-xs text-osmo-muted text-center">
-                Prix fondateur garanti : 25€. Vous serez contacté avant la mise
-                en vente publique.
+              <p
+                className="text-[var(--ink-3)] text-center"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" as const }}
+              >
+                Prix fondateur garanti · 0 € maintenant
               </p>
             </form>
           </>

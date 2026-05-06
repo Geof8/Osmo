@@ -5,69 +5,166 @@ import { motion } from "framer-motion";
 const steps = [
   {
     num: "01",
-    title: "Le soir, avant de dormir",
-    desc: "Dissoudre une dose dans un grand verre d'eau. Boire avant de se coucher.",
+    sub: "Préparation",
+    label: "Versez une dose",
+    labelEm: true,
+    desc: "8g rasés dans 400ml d'eau froide. Pas chaude.",
+    timing: "⌁ 30 sec",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="16" cy="16" rx="9" ry="6.5" transform="rotate(-30 16 16)" />
+        <line x1="22" y1="22" x2="44" y2="44" />
+        <path d="M34 8 Q42 14 38 24 L30 20 Q26 14 34 8 Z" />
+      </svg>
+    ),
   },
   {
     num: "02",
-    title: "La formule agit pendant votre sommeil",
-    desc: "Les électrolytes restaurent l'hydratation cellulaire pendant que vous dormez — pas le lendemain matin quand il est trop tard.",
+    sub: "Dissolution",
+    label: "Mélangez",
+    labelEm: false,
+    desc: "Jusqu'à dissolution complète. Goût citron franc, légèrement salin.",
+    timing: "⌁ 20 sec",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 10 L42 10 L38 50 L18 50 Z" />
+        <path d="M16 24 Q28 20 40 24" />
+        <circle cx="22" cy="32" r="1.4" fill="currentColor" />
+        <circle cx="32" cy="38" r="1.1" fill="currentColor" />
+        <circle cx="28" cy="42" r="0.9" fill="currentColor" />
+      </svg>
+    ),
   },
   {
     num: "03",
-    title: "Le matin, vous êtes prêt",
-    desc: "Réveil fonctionnel. Tête claire. Journée possible.",
+    sub: "Administration",
+    label: "Buvez le soir",
+    labelEm: true,
+    desc: "Avant le coucher — pas le matin. C'est ici que tout se joue.",
+    timing: "⌁ avant 23h",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M40 8 A22 22 0 1 0 48 38 A18 18 0 0 1 40 8 Z" />
+        <circle cx="46" cy="16" r="0.9" fill="currentColor" />
+        <circle cx="50" cy="26" r="0.7" fill="currentColor" />
+      </svg>
+    ),
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="protocole" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="font-display font-black text-4xl sm:text-5xl tracking-tighter text-osmo-text mb-16"
-        >
-          Le protocole. Le soir. Pas le matin.
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {steps.map((step, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-            >
-              <span className="font-display text-5xl font-black text-osmo-accent">
-                {step.num}
-              </span>
-              <h3 className="font-display text-xl font-bold text-osmo-text mt-4 mb-3">
-                {step.title}
-              </h3>
-              <p className="text-osmo-muted font-body leading-relaxed">
-                {step.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
+    <section id="protocole" className="border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+      <div className="max-w-[1380px] mx-auto px-10">
+        {/* Section head */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 border-l-4 border-osmo-accent bg-osmo-surface p-6"
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24"
         >
-          <p className="text-osmo-text font-body italic leading-relaxed">
-            Pourquoi le soir ? Parce que la déshydratation commence pendant la
-            nuit. Agir avant, c&apos;est agir au bon moment.
+          <div>
+            <div
+              className="text-[var(--ink-2)] mb-7"
+              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+            >
+              Le protocole
+            </div>
+            <h2
+              style={{
+                fontFamily: "var(--font-barlow), var(--display)",
+                fontWeight: 800,
+                fontSize: "clamp(56px, 7vw, 112px)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.035em",
+              }}
+            >
+              Simple. Le soir.
+              <br />
+              <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                Pas le matin.
+              </span>
+            </h2>
+          </div>
+          <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
+            C&apos;est{" "}
+            <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              là
+            </em>{" "}
+            toute la différence. Les électrolytes, le NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
           </p>
         </motion.div>
+
+        {/* Step cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+          {steps.map((step, i) => (
+            <motion.article
+              key={step.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              className="p-8 min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-7 relative"
+            >
+              <div>
+                <div
+                  style={{
+                    fontFamily: "var(--font-barlow), var(--display)",
+                    fontWeight: 800,
+                    fontSize: 96,
+                    lineHeight: 0.85,
+                    letterSpacing: "-0.04em",
+                    color: "var(--ink)",
+                  }}
+                >
+                  {step.num}
+                </div>
+                <div
+                  className="text-[var(--ink-2)] mt-2"
+                  style={{
+                    fontFamily: "var(--font-barlow), var(--display)",
+                    fontWeight: 500,
+                    fontStyle: "normal",
+                    fontSize: 20,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {step.sub}
+                </div>
+              </div>
+              <div className="w-14 h-14 text-[var(--ink)]">{step.svg}</div>
+              <h3
+                style={{
+                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontWeight: 700,
+                  fontSize: 30,
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {step.labelEm ? (
+                  <>
+                    {step.label.split(" ")[0]}{" "}
+                    <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+                      {step.label.split(" ").slice(1).join(" ")}
+                    </em>
+                  </>
+                ) : (
+                  step.label
+                )}
+              </h3>
+              <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55, maxWidth: 240 }}>
+                {step.desc}
+              </p>
+              <div
+                className="mt-auto pt-4 border-t border-[var(--soft)] text-[var(--ink)]"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
+              >
+                {step.timing}
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
