@@ -19,7 +19,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
       >
         Parce que demain matin,
         <br />
-        tu n&apos;as <span className="text-[#C8963E]">pas le choix.</span>
+        tu n&apos;as pas le choix.
       </div>
       <div
         style={{
@@ -50,7 +50,7 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
     document.body.style.overflow = "hidden";
 
     const tl = gsap.timeline({
-      delay: 1.5,
+      delay: 2.8,
       onComplete: () => {
         document.body.style.overflow = "";
         if (containerRef.current) {
