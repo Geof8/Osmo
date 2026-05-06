@@ -2,9 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const textStyle: React.CSSProperties = {
   fontFamily: "var(--font-barlow), var(--display)",
@@ -25,45 +22,40 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
 
   useEffect(() => {
     if (doneRef.current) return;
+    doneRef.current = true;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: document.body,
-        start: "top top",
-        onUpdate: (self) => {
-          if (self.direction === 1 && !doneRef.current) {
-            doneRef.current = true;
-            self.kill();
+    document.body.style.overflow = "hidden";
 
-            const tl = gsap.timeline({
-              onComplete: () => {
-                if (containerRef.current) {
-                  containerRef.current.style.display = "none";
-                }
-                onComplete();
-              },
-            });
-
-            tl.to(
-              leftRef.current,
-              { x: "-100%", duration: 1.2, ease: "power3.inOut" },
-              0
-            ).to(
-              rightRef.current,
-              { x: "100%", duration: 1.2, ease: "power3.inOut" },
-              0
-            );
-          }
-        },
-      });
+    const tl = gsap.timeline({
+      delay: 1.5,
+      onComplete: () => {
+        document.body.style.overflow = "";
+        if (containerRef.current) {
+          containerRef.current.style.display = "none";
+        }
+        onComplete();
+      },
     });
 
-    return () => ctx.revert();
+    tl.to(
+      leftRef.current,
+      { x: "-100%", duration: 1.4, ease: "power3.inOut" },
+      0
+    ).to(
+      rightRef.current,
+      { x: "100%", duration: 1.4, ease: "power3.inOut" },
+      0
+    );
+
+    return () => {
+      tl.kill();
+      document.body.style.overflow = "";
+    };
   }, [onComplete]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[100] pointer-events-none">
-      {/* Left panel — dark, shows left half of white text */}
+    <div ref={containerRef} className="fixed inset-0 z-[100]">
+      {/* Left panel */}
       <div
         ref={leftRef}
         className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
@@ -73,7 +65,7 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
           Le lendemain matin.
         </div>
       </div>
-      {/* Right panel — white, shows right half of black text */}
+      {/* Right panel */}
       <div
         ref={rightRef}
         className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
