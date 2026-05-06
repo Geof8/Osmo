@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #FFFFFF;
+    --foreground: #111111;
+    --card: #FFFFFF;
+    --card-foreground: #111111;
+    --popover: #FFFFFF;
+    --popover-foreground: #111111;
+    --primary: #C8963E;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F4F4F4;
+    --secondary-foreground: #111111;
+    --muted: #F4F4F4;
+    --muted-foreground: #666666;
+    --accent: #C8963E;
+    --accent-foreground: #FFFFFF;
+    --destructive: #ef4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #E0E0E0;
+    --input: #E0E0E0;
+    --ring: #C8963E;
+    --radius: 0px;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.grain {
+  position: relative;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 1;
+}
