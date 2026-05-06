@@ -1,11 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const pictograms = [
   {
@@ -77,48 +75,72 @@ const pictograms = [
 export default function Formula() {
   const sectionRef = useRef<HTMLElement>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const [orbitalStarted, setOrbitalStarted] = useState(false);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    if (!isInView || orbitalStarted) return;
     const diagram = diagramRef.current;
-    const headline = headlineRef.current;
-    if (!section || !diagram || !headline) return;
+    if (!diagram) return;
 
-    const ctx = gsap.context(() => {
-      gsap.set(section, { opacity: 0, y: 40 });
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 80%",
-        once: true,
-        onEnter: () => {
-          gsap.to(section, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" });
+    setOrbitalStarted(true);
+    const cx = 200;
+    const cy = 200;
+    const tweens: gsap.core.Tween[] = [];
 
-          const words = headline.querySelectorAll(".word");
-          gsap.fromTo(
-            words,
-            { opacity: 0, y: 12 },
-            { opacity: 1, y: 0, duration: 0.4, stagger: 0.1, ease: "power2.out", delay: 0.2 }
-          );
+    pictograms.forEach((p, i) => {
+      const pictoEl = diagram.querySelector<HTMLElement>(`.picto-${p.id}`);
+      const lineEl = diagram.querySelector<SVGLineElement>(`.connect-line-${p.id}`);
+      if (!pictoEl || !lineEl) return;
 
-          startOrbitalAnimations(diagram);
-        },
-      });
-    }, section);
+      const startAngle = (i / pictograms.length) * Math.PI * 2;
+      const proxy = { angle: startAngle };
 
-    return () => ctx.revert();
-  }, []);
+      tweens.push(
+        gsap.to(proxy, {
+          angle: startAngle + Math.PI * 2 * p.direction,
+          duration: p.speed,
+          ease: "none",
+          repeat: -1,
+          onUpdate: () => {
+            const x = cx + Math.cos(proxy.angle) * p.radius;
+            const y = cy + Math.sin(proxy.angle) * p.radius;
+            pictoEl.style.left = `${x - 14}px`;
+            pictoEl.style.top = `${y - 14}px`;
+            lineEl.setAttribute("x2", String(x));
+            lineEl.setAttribute("y2", String(y));
+          },
+        })
+      );
+
+      tweens.push(
+        gsap.to(lineEl, {
+          strokeDashoffset: 0,
+          duration: p.lineSpeed,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        })
+      );
+    });
+
+    return () => {
+      tweens.forEach((t) => t.kill());
+    };
+  }, [isInView, orbitalStarted]);
 
   return (
-    <section
+    <motion.section
       ref={sectionRef}
       id="formule"
       className="scroll-mt-20 relative z-[5]"
       style={{ background: "#111111", padding: "140px 0" }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="max-w-[1380px] mx-auto px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          {/* Left side — text */}
           <div>
             <div
               className="mb-7"
@@ -133,7 +155,6 @@ export default function Formula() {
               La formule
             </div>
             <h2
-              ref={headlineRef}
               style={{
                 fontFamily: "var(--font-barlow), var(--display)",
                 fontWeight: 900,
@@ -143,13 +164,31 @@ export default function Formula() {
                 color: "#FFFFFF",
               }}
             >
-              <span className="word" style={{ display: "inline-block" }}>Cinq&nbsp;</span>
-              <span className="word" style={{ display: "inline-block" }}>actifs.</span>
+              {["Cinq ", "actifs."].map((word, i) => (
+                <motion.span
+                  key={i}
+                  style={{ display: "inline-block" }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+                >
+                  {word}
+                </motion.span>
+              ))}
               <br />
-              <span className="word" style={{ display: "inline-block" }}>Une&nbsp;</span>
-              <span className="word" style={{ display: "inline-block" }}>équation.</span>
+              {["Une ", "équation."].map((word, i) => (
+                <motion.span
+                  key={i + 2}
+                  style={{ display: "inline-block" }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </h2>
-            <p
+            <motion.p
               className="mt-8"
               style={{
                 fontSize: 15,
@@ -157,21 +196,22 @@ export default function Formula() {
                 color: "#666666",
                 maxWidth: 380,
               }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
             >
               Chaque ingrédient a été sélectionné pour un rôle précis.
               <br />
               Rien de superflu. Tout est dosé.
-            </p>
+            </motion.p>
           </div>
 
-          {/* Right side — molecular diagram */}
           <div className="flex justify-center">
             <div
               ref={diagramRef}
               className="diagram-container"
               style={{ width: 400, height: 400, position: "relative" }}
             >
-              {/* Center pot image */}
               <div
                 style={{
                   position: "absolute",
@@ -193,7 +233,6 @@ export default function Formula() {
                 />
               </div>
 
-              {/* SVG layer for connecting lines */}
               <svg
                 className="lines-svg"
                 viewBox="0 0 400 400"
@@ -216,7 +255,6 @@ export default function Formula() {
                 ))}
               </svg>
 
-              {/* Orbital pictograms */}
               {pictograms.map((p, i) => {
                 const angle = (i / pictograms.length) * Math.PI * 2;
                 const x = 200 + Math.cos(angle) * p.radius - 14;
@@ -241,43 +279,6 @@ export default function Formula() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
-}
-
-function startOrbitalAnimations(container: HTMLDivElement) {
-  const cx = 200;
-  const cy = 200;
-
-  pictograms.forEach((p, i) => {
-    const pictoEl = container.querySelector<HTMLElement>(`.picto-${p.id}`);
-    const lineEl = container.querySelector<SVGLineElement>(`.connect-line-${p.id}`);
-    if (!pictoEl || !lineEl) return;
-
-    const startAngle = (i / pictograms.length) * Math.PI * 2;
-    const proxy = { angle: startAngle };
-
-    gsap.to(proxy, {
-      angle: startAngle + Math.PI * 2 * p.direction,
-      duration: p.speed,
-      ease: "none",
-      repeat: -1,
-      onUpdate: () => {
-        const x = cx + Math.cos(proxy.angle) * p.radius;
-        const y = cy + Math.sin(proxy.angle) * p.radius;
-        pictoEl.style.left = `${x - 14}px`;
-        pictoEl.style.top = `${y - 14}px`;
-        lineEl.setAttribute("x2", String(x));
-        lineEl.setAttribute("y2", String(y));
-      },
-    });
-
-    gsap.to(lineEl, {
-      strokeDashoffset: 0,
-      duration: p.lineSpeed,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-    });
-  });
 }
