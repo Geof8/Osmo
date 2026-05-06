@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function OverlayContent({ color }: { color: "light" | "dark" }) {
   const textColor = color === "light" ? "#FFFFFF" : "#111111";
@@ -39,65 +42,68 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
 
 export default function SplitOverlay({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const spacerRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const doneRef = useRef(false);
 
   useEffect(() => {
     if (doneRef.current) return;
-    doneRef.current = true;
 
-    document.body.style.overflow = "hidden";
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: spacerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+          pin: false,
+          onLeave: () => {
+            if (!doneRef.current) {
+              doneRef.current = true;
+              if (containerRef.current) containerRef.current.style.display = "none";
+              if (spacerRef.current) spacerRef.current.style.display = "none";
+              onComplete();
+            }
+          },
+        },
+      });
 
-    const tl = gsap.timeline({
-      delay: 2.8,
-      onComplete: () => {
-        document.body.style.overflow = "";
-        if (containerRef.current) {
-          containerRef.current.style.display = "none";
-        }
-        onComplete();
-      },
+      tl.to(leftRef.current, { x: "-100%", ease: "none" }, 0)
+        .to(rightRef.current, { x: "100%", ease: "none" }, 0);
     });
 
-    tl.to(
-      leftRef.current,
-      { x: "-100%", duration: 1.4, ease: "power3.inOut" },
-      0
-    ).to(
-      rightRef.current,
-      { x: "100%", duration: 1.4, ease: "power3.inOut" },
-      0
-    );
-
-    return () => {
-      tl.kill();
-      document.body.style.overflow = "";
-    };
+    return () => ctx.revert();
   }, [onComplete]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[100]">
-      {/* Left panel */}
-      <div
-        ref={leftRef}
-        className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
-        style={{ background: "#111111" }}
-      >
-        <div style={{ position: "absolute", top: "50%", left: "100%", transform: "translate(-50%, -50%)" }}>
-          <OverlayContent color="light" />
+    <>
+      {/* Spacer — scroll through this to open the panels */}
+      <div ref={spacerRef} style={{ height: "100vh", position: "relative", zIndex: 0 }} />
+
+      {/* Fixed overlay */}
+      <div ref={containerRef} className="fixed inset-0 z-[100]">
+        {/* Left panel */}
+        <div
+          ref={leftRef}
+          className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
+          style={{ background: "#111111" }}
+        >
+          <div style={{ position: "absolute", top: "50%", left: "100%", transform: "translate(-50%, -50%)" }}>
+            <OverlayContent color="light" />
+          </div>
+        </div>
+        {/* Right panel */}
+        <div
+          ref={rightRef}
+          className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
+          style={{ background: "#FFFFFF" }}
+        >
+          <div style={{ position: "absolute", top: "50%", left: "0%", transform: "translate(-50%, -50%)" }}>
+            <OverlayContent color="dark" />
+          </div>
         </div>
       </div>
-      {/* Right panel */}
-      <div
-        ref={rightRef}
-        className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
-        style={{ background: "#FFFFFF" }}
-      >
-        <div style={{ position: "absolute", top: "50%", left: "0%", transform: "translate(-50%, -50%)" }}>
-          <OverlayContent color="dark" />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
