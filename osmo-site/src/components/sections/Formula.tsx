@@ -550,23 +550,7 @@ export default function Formula() {
         </div>
 
         {/* Ingredients grid — merged into same dark section */}
-        <div className="mt-32">
-          <FadeUp>
-            <div className="mb-16 flex items-end justify-between gap-12 flex-wrap">
-              <p style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420, color: "#888888" }}>
-                Pour 1 dose de 8g.{" "}
-                <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "#FFFFFF", letterSpacing: "-0.02em" }}>
-                  Apports conformes ANSES.
-                </em>
-              </p>
-              <div
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#666666" }}
-              >
-                LOT 001 · FAB 04—2026 · DLUO 04—2028
-              </div>
-            </div>
-          </FadeUp>
-
+        <div className="mt-16">
           <div
             className="grid grid-cols-2 lg:grid-cols-5"
             style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
