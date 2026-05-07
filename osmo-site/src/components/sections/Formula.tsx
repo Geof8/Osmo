@@ -258,21 +258,10 @@ function MolecularDiagram() {
 
     tweens.push(
       gsap.to(pot, {
-        y: -10,
-        duration: 3,
-        ease: "sine.inOut",
+        rotateY: 360,
+        duration: 12,
+        ease: "none",
         repeat: -1,
-        yoyo: true,
-      })
-    );
-
-    tweens.push(
-      gsap.to(pot, {
-        rotateY: 8,
-        duration: 6,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
       })
     );
 
