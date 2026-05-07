@@ -63,7 +63,20 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
             if (!doneRef.current) {
               doneRef.current = true;
               ctx.revert();
-              if (containerRef.current) containerRef.current.remove();
+
+              window.scrollTo(0, 0);
+              onComplete();
+
+              if (containerRef.current) {
+                gsap.to(containerRef.current, {
+                  opacity: 0,
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                  onComplete: () => {
+                    containerRef.current?.remove();
+                  },
+                });
+              }
               if (spacerRef.current) {
                 const pinWrapper = spacerRef.current.parentElement;
                 if (pinWrapper?.classList.contains("pin-spacer")) {
@@ -72,8 +85,6 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
                   spacerRef.current.remove();
                 }
               }
-              window.scrollTo(0, 0);
-              onComplete();
             }
           },
         },
