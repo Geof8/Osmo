@@ -10,7 +10,6 @@ import Marquee from "@/components/Marquee";
 import Empathy from "@/components/sections/Empathy";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Formula from "@/components/sections/Formula";
-import Ingredients from "@/components/sections/Ingredients";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/Footer";
@@ -40,7 +39,6 @@ export default function Home() {
         <Empathy />
         <HowItWorks />
         <Formula />
-        <Ingredients />
         <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
         <FAQ />
       </main>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
 import FadeUp from "@/components/FadeUp";
 
 const observations = [
@@ -12,26 +11,6 @@ const observations = [
 ];
 
 export default function Empathy() {
-  const [idx, setIdx] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [cardWidth, setCardWidth] = useState(0);
-
-  const measure = useCallback(() => {
-    if (trackRef.current?.firstElementChild) {
-      setCardWidth(trackRef.current.firstElementChild.getBoundingClientRect().width + 28);
-    }
-  }, []);
-
-  useEffect(() => {
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [measure]);
-
-  const perView = typeof window !== "undefined" ? (window.innerWidth <= 720 ? 1 : window.innerWidth <= 1100 ? 2 : 3) : 3;
-  const maxIdx = Math.max(0, observations.length - perView);
-  const progress = ((idx + perView) / observations.length) * 100;
-
   return (
     <section id="observations" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
       <div className="max-w-[1380px] mx-auto px-10">
@@ -79,87 +58,69 @@ export default function Empathy() {
 
         <FadeUp delay={0.15}>
           <div className="border-t border-[var(--rule)] pt-8">
-            <div className="flex justify-between items-center mb-7">
+            <div className="mb-7">
               <div
                 className="text-[var(--ink-2)]"
                 style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}
               >
-                <strong className="text-[var(--ink)] font-medium">{String(idx + 1).padStart(2, "0")}</strong> / 05 · Observations
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setIdx(Math.max(0, idx - 1))}
-                  disabled={idx === 0}
-                  className="w-12 h-12 border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)] inline-flex items-center justify-center text-lg hover:bg-[var(--ink)] hover:text-white transition-colors disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-[var(--paper)] disabled:hover:text-[var(--ink)]"
-                >
-                  ←
-                </button>
-                <button
-                  onClick={() => setIdx(Math.min(maxIdx, idx + 1))}
-                  disabled={idx >= maxIdx}
-                  className="w-12 h-12 border border-[var(--ink)] bg-[var(--paper)] text-[var(--ink)] inline-flex items-center justify-center text-lg hover:bg-[var(--ink)] hover:text-white transition-colors disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-[var(--paper)] disabled:hover:text-[var(--ink)]"
-                >
-                  →
-                </button>
+                05 · Observations
               </div>
             </div>
 
-            <div className="overflow-hidden">
-              <div
-                ref={trackRef}
-                className="flex gap-7 transition-transform duration-500"
-                style={{
-                  transform: `translateX(-${idx * cardWidth}px)`,
-                  transitionTimingFunction: "cubic-bezier(0.6, 0.05, 0.2, 1)",
-                }}
-              >
-                {observations.map((obs) => (
-                  <article
-                    key={obs.num}
-                    className="flex-shrink-0 flex flex-col gap-6 p-8 min-h-[360px] bg-white border border-[var(--rule)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
-                    style={{ flex: "0 0 calc((100% - 56px) / 3)" }}
+            <div
+              className="empathy-track flex gap-7 pb-4"
+              style={{
+                overflowX: "auto",
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+              }}
+            >
+              <style>{`.empathy-track::-webkit-scrollbar { display: none; }`}</style>
+              {observations.map((obs) => (
+                <article
+                  key={obs.num}
+                  className="flex-shrink-0 flex flex-col gap-6 p-8 min-h-[360px] bg-white border border-[var(--rule)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                  style={{
+                    flex: "0 0 calc((100% - 56px) / 3)",
+                    scrollSnapAlign: "start",
+                    minWidth: 280,
+                  }}
+                >
+                  <div
+                    className="flex justify-between w-full pb-4 border-b border-[var(--rule)] text-[var(--ink-2)]"
+                    style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
                   >
-                    <div
-                      className="flex justify-between w-full pb-4 border-b border-[var(--rule)] text-[var(--ink-2)]"
-                      style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
+                    <span>Obs. {obs.num}</span>
+                    <span>{obs.time}</span>
+                  </div>
+                  <div className="flex-1 flex items-center">
+                    <p
+                      style={{
+                        fontFamily: "var(--font-barlow), var(--display)",
+                        fontWeight: 700,
+                        fontSize: 30,
+                        lineHeight: 1.05,
+                        letterSpacing: "-0.025em",
+                      }}
                     >
-                      <span>Obs. {obs.num}</span>
-                      <span>{obs.time}</span>
-                    </div>
-                    <div className="flex-1 flex items-center">
-                      <p
+                      {obs.quote}{" "}
+                      <em
                         style={{
                           fontFamily: "var(--font-barlow), var(--display)",
+                          fontStyle: "normal",
                           fontWeight: 700,
-                          fontSize: 30,
-                          lineHeight: 1.05,
-                          letterSpacing: "-0.025em",
+                          color: "var(--ink)",
+                          letterSpacing: "-0.02em",
                         }}
                       >
-                        {obs.quote}{" "}
-                        <em
-                          style={{
-                            fontFamily: "var(--font-barlow), var(--display)",
-                            fontStyle: "normal",
-                            fontWeight: 700,
-                            color: "var(--ink)",
-                            letterSpacing: "-0.02em",
-                          }}
-                        >
-                          {obs.em}
-                        </em>
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-7 h-px bg-[var(--soft)] relative overflow-hidden">
-              <div
-                className="absolute top-0 bottom-0 left-0 bg-[var(--ink)] transition-all duration-500"
-                style={{ width: `${Math.min(100, progress)}%`, transitionTimingFunction: "cubic-bezier(0.6, 0.05, 0.2, 1)" }}
-              />
+                        {obs.em}
+                      </em>
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </FadeUp>

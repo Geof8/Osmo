@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
+import FadeUp from "@/components/FadeUp";
 
 const SIZE = 500;
 const CENTER = SIZE / 2;
@@ -12,11 +13,11 @@ const pictograms = [
   {
     id: "lemon",
     radius: 145,
-    speed: 10,
+    speed: 6,
     direction: 1,
     lineSpeed: 2,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <circle cx="18" cy="18" r="15" />
         <line x1="18" y1="3" x2="18" y2="33" />
         <line x1="3" y1="18" x2="33" y2="18" />
@@ -28,11 +29,11 @@ const pictograms = [
   {
     id: "hexagon",
     radius: 180,
-    speed: 14,
+    speed: 8.4,
     direction: -1,
     lineSpeed: 2.5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
@@ -40,11 +41,11 @@ const pictograms = [
   {
     id: "teardrop",
     radius: 160,
-    speed: 12,
+    speed: 7.2,
     direction: 1,
     lineSpeed: 3,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
@@ -52,11 +53,11 @@ const pictograms = [
   {
     id: "shield",
     radius: 190,
-    speed: 16,
+    speed: 9.6,
     direction: -1,
     lineSpeed: 2.8,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
@@ -64,11 +65,11 @@ const pictograms = [
   {
     id: "bolt",
     radius: 155,
-    speed: 11,
+    speed: 6.6,
     direction: 1,
     lineSpeed: 3.2,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
@@ -77,6 +78,170 @@ const pictograms = [
 
 const PICTO_SIZE = 36;
 const PICTO_HALF = PICTO_SIZE / 2;
+
+const actifs = [
+  {
+    ord: "N° 01 · Minéral",
+    mol: "NaHCO₃",
+    name: "Bicarbonate de sodium",
+    dose: "1700",
+    role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
+        <line x1="28" y1="6" x2="28" y2="46" />
+        <line x1="12" y1="20" x2="44" y2="20" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 02 · Minéral",
+    mol: "K₃C₆H₅O₇",
+    name: "Citrate de potassium",
+    dose: "2000",
+    role: "Fonction musculaire. Contraction cardiaque normale.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 03 · Minéral",
+    mol: "Mg(C₂H₄NO₂)₂",
+    name: "Bisglycinate de magnésium",
+    dose: "1350",
+    role: "Récupération nerveuse. Sommeil profond.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2}>
+        <path d="M6 22 Q14 14 22 22 T36 22 T50 22" />
+        <path d="M6 32 Q14 24 22 32 T36 32 T50 32" />
+        <path d="M6 42 Q14 34 22 42 T36 42 T50 42" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 04 · Minéral",
+    mol: "NaCl",
+    name: "Chlorure de sodium",
+    dose: "150",
+    role: "Hydratation cellulaire ciblée.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
+        <path d="M21 34 Q21 41 28 44" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 05 · Acide aminé",
+    mol: "C₅H₉NO₃S",
+    name: "N-Acétyl-Cystéine",
+    dose: "600",
+    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
+        <path d="M19 28 L25 34 L37 22" />
+      </svg>
+    ),
+  },
+];
+
+const stamps = ["Sans sucre ajouté", "Sans colorant", "Vegan", "Made in France"];
+
+function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number }) {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 15 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="hover:-translate-y-1 transition-[transform,box-shadow] duration-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] flex flex-col gap-[14px]"
+      style={{
+        padding: "36px 24px 32px",
+        background: "#1A1A1A",
+        borderRight: "1px solid #333333",
+        borderBottom: "1px solid #333333",
+      }}
+    >
+      <div
+        className="pb-3"
+        style={{
+          fontFamily: "var(--font-mono), var(--mono)",
+          fontSize: 10,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          color: "#888888",
+          borderBottom: "1px solid #333333",
+        }}
+      >
+        {a.ord}
+      </div>
+      <div className="w-11 h-11" style={{ color: "#C8963E" }}>{a.svg}</div>
+      <div
+        style={{
+          fontFamily: "var(--font-mono), var(--mono)",
+          fontSize: 11,
+          color: "#888888",
+        }}
+      >
+        {a.mol}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-barlow), var(--display)",
+          fontWeight: 700,
+          fontSize: 22,
+          letterSpacing: "-0.02em",
+          lineHeight: 1.15,
+          alignSelf: "end",
+          color: "#FFFFFF",
+        }}
+      >
+        {a.name}
+      </div>
+      <div
+        style={{
+          fontFamily: "var(--font-barlow), var(--display)",
+          fontWeight: 800,
+          fontSize: 36,
+          letterSpacing: "-0.025em",
+          lineHeight: 1,
+          color: "#FFFFFF",
+        }}
+      >
+        {a.dose}
+        <span
+          style={{
+            fontFamily: "var(--font-barlow), var(--display)",
+            fontWeight: 500,
+            fontStyle: "normal",
+            fontSize: 16,
+            letterSpacing: 0,
+            color: "#888888",
+          }}
+        >
+          {" "}mg
+        </span>
+      </div>
+      <div
+        className="pt-3"
+        style={{
+          fontSize: 13,
+          lineHeight: 1.5,
+          color: "#888888",
+          borderTop: "1px dashed #333333",
+        }}
+      >
+        {a.role}
+      </div>
+    </motion.article>
+  );
+}
 
 function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
@@ -91,7 +256,6 @@ function MolecularDiagram() {
 
     const tweens: gsap.core.Tween[] = [];
 
-    // Pot floating animation
     tweens.push(
       gsap.to(pot, {
         y: -10,
@@ -102,7 +266,6 @@ function MolecularDiagram() {
       })
     );
 
-    // Pot slow rotation
     tweens.push(
       gsap.to(pot, {
         rotateY: 8,
@@ -113,7 +276,6 @@ function MolecularDiagram() {
       })
     );
 
-    // Glow pulse
     tweens.push(
       gsap.fromTo(
         glow,
@@ -129,7 +291,6 @@ function MolecularDiagram() {
       )
     );
 
-    // Orbital animations
     pictograms.forEach((p, i) => {
       const pictoEl = diagram.querySelector<HTMLElement>(`.picto-${p.id}`);
       const lineEl = diagram.querySelector<SVGLineElement>(`.connect-line-${p.id}`);
@@ -155,12 +316,28 @@ function MolecularDiagram() {
         })
       );
 
+      // Scale pulse on each pictogram
+      tweens.push(
+        gsap.fromTo(
+          pictoEl,
+          { scale: 0.8 },
+          {
+            scale: 1.2,
+            duration: 2,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+          }
+        )
+      );
+
+      // Line opacity animation (0.3 to 0.8)
       tweens.push(
         gsap.fromTo(
           lineEl,
-          { opacity: 0.1 },
+          { opacity: 0.3 },
           {
-            opacity: 0.5,
+            opacity: 0.8,
             duration: p.lineSpeed,
             ease: "sine.inOut",
             repeat: -1,
@@ -180,7 +357,6 @@ function MolecularDiagram() {
       ref={diagramRef}
       style={{ width: SIZE, height: SIZE, position: "relative" }}
     >
-      {/* Ambient glow under the pot */}
       <div
         ref={glowRef}
         style={{
@@ -197,7 +373,6 @@ function MolecularDiagram() {
         }}
       />
 
-      {/* Center pot — floating + rotating */}
       <div
         ref={potRef}
         style={{
@@ -224,7 +399,6 @@ function MolecularDiagram() {
         />
       </div>
 
-      {/* Glow ring */}
       <div
         style={{
           position: "absolute",
@@ -239,7 +413,6 @@ function MolecularDiagram() {
         }}
       />
 
-      {/* SVG connecting lines */}
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
@@ -258,13 +431,12 @@ function MolecularDiagram() {
               y2={y2}
               stroke="#C8963E"
               strokeWidth={1}
-              opacity={0.2}
+              opacity={0.3}
             />
           );
         })}
       </svg>
 
-      {/* Orbital pictograms with circular backdrop */}
       {pictograms.map((p, i) => {
         const angle = (i / pictograms.length) * Math.PI * 2;
         const x = CENTER + Math.cos(angle) * p.radius - PICTO_HALF;
@@ -283,8 +455,8 @@ function MolecularDiagram() {
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "50%",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(200, 150, 62, 0.08)",
+              border: "1px solid rgba(200, 150, 62, 0.2)",
             }}
           >
             {p.svg}
@@ -375,6 +547,50 @@ export default function Formula() {
           <div className="flex justify-center">
             <MolecularDiagram />
           </div>
+        </div>
+
+        {/* Ingredients grid — merged into same dark section */}
+        <div className="mt-32">
+          <FadeUp>
+            <div className="mb-16 flex items-end justify-between gap-12 flex-wrap">
+              <p style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420, color: "#888888" }}>
+                Pour 1 dose de 8g.{" "}
+                <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "#FFFFFF", letterSpacing: "-0.02em" }}>
+                  Apports conformes ANSES.
+                </em>
+              </p>
+              <div
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#666666" }}
+              >
+                LOT 001 · FAB 04—2026 · DLUO 04—2028
+              </div>
+            </div>
+          </FadeUp>
+
+          <div
+            className="grid grid-cols-2 lg:grid-cols-5"
+            style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
+          >
+            {actifs.map((a, i) => (
+              <IngredientCard key={i} a={a} index={i} />
+            ))}
+          </div>
+
+          <FadeUp delay={0.3}>
+            <div className="mt-14 pt-7 flex justify-between gap-8 flex-wrap items-center" style={{ borderTop: "1px solid #333333" }}>
+              <div
+                className="flex gap-7 flex-wrap"
+                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#FFFFFF" }}
+              >
+                {stamps.map((s) => (
+                  <span key={s} className="inline-flex items-center gap-2">
+                    <span className="w-[6px] h-[6px] bg-[#C8963E] rounded-full" />
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
         </div>
       </div>
     </section>

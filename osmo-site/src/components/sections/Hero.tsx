@@ -25,7 +25,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
               alt="OSMO Recovery — complexe d'électrolyte, goût citron, 150g"
               width={1024}
               height={1024}
-              style={{ width: "108%", marginLeft: -40, objectFit: "contain" }}
+              style={{ width: "108%", maxHeight: "65vh", marginLeft: -40, objectFit: "contain" }}
               priority
             />
           </motion.div>

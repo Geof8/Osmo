@@ -13,17 +13,29 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
       <div className="max-w-[1380px] mx-auto px-10 flex items-center justify-between h-[78px]">
         <div className="flex items-baseline gap-4">
           <span
-            className="relative pr-[14px]"
+            className="relative"
             style={{
-              fontFamily: "var(--font-barlow), var(--display)",
-              fontWeight: 900,
-              fontSize: 32,
+              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+              fontWeight: 600,
+              fontSize: 30,
               lineHeight: 1,
-              letterSpacing: "-0.045em",
+              letterSpacing: "-0.02em",
             }}
           >
-            Osmo
-            <span className="absolute bottom-[6px] right-0 w-[7px] h-[7px] bg-[var(--ink)] rounded-full" />
+            <span className="relative inline-block">
+              <span
+                className="absolute left-1/2 -translate-x-1/2"
+                style={{
+                  top: -10,
+                  width: 6,
+                  height: 8,
+                  background: "var(--ink)",
+                  borderRadius: "50% 50% 50% 50% / 30% 30% 70% 70%",
+                }}
+              />
+              O
+            </span>
+            smo
           </span>
           <span
             className="hidden md:inline text-[var(--ink-2)]"
