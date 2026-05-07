@@ -8,10 +8,7 @@ const words = ["Osmo", "Recovery."];
 
 export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => void; revealed: boolean }) {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: revealed ? 1 : 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
       style={{ padding: "56px 0 96px" }}
     >
@@ -169,6 +166,6 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

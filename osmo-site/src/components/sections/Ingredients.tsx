@@ -149,40 +149,22 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
 
 export default function Ingredients() {
   return (
-    <section id="actifs" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
+    <section id="actifs" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "80px 0 140px" }}>
       <div className="max-w-[1380px] mx-auto px-10">
         <FadeUp>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24">
-            <div>
-              <div
-                className="text-[var(--ink-2)] mb-7"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
-              >
-                La Formule · Lot 001
-              </div>
-              <h2
-                style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
-                  fontWeight: 800,
-                  fontSize: "clamp(56px, 7vw, 112px)",
-                  lineHeight: 0.92,
-                  letterSpacing: "-0.035em",
-                }}
-              >
-                Cinq{" "}
-                <span style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
-                  actifs.
-                </span>
-                <br />
-                <span className="text-[#C8963E]">Aucun remplissage.</span>
-              </h2>
-            </div>
+          <div className="mb-16 flex items-end justify-between gap-12 flex-wrap">
             <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
               Pour 1 dose de 8g.{" "}
               <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 Apports conformes ANSES.
               </em>
             </p>
+            <div
+              className="text-[var(--ink-2)]"
+              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
+            >
+              LOT 001 · FAB 04—2026 · DLUO 04—2028
+            </div>
           </div>
         </FadeUp>
 
@@ -204,12 +186,6 @@ export default function Ingredients() {
                   {s}
                 </span>
               ))}
-            </div>
-            <div
-              className="text-[var(--ink-2)]"
-              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase" }}
-            >
-              LOT 001 · FAB 04—2026 · DLUO 04—2028
             </div>
           </div>
         </FadeUp>
