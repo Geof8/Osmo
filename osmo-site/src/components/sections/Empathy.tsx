@@ -27,7 +27,7 @@ export default function Empathy() {
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
                   fontWeight: 800,
-                  fontSize: "clamp(56px, 7vw, 112px)",
+                  fontSize: "clamp(48px, 5.5vw, 88px)",
                   lineHeight: 0.92,
                   letterSpacing: "-0.035em",
                 }}
@@ -39,7 +39,7 @@ export default function Empathy() {
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: 17, lineHeight: 1.55, maxWidth: 420 }}>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: 20, lineHeight: 1.55, maxWidth: 460 }}>
               <em
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
