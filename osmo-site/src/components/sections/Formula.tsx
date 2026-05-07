@@ -5,84 +5,131 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 
+const SIZE = 500;
+const CENTER = SIZE / 2;
+
 const pictograms = [
   {
     id: "lemon",
-    radius: 110,
+    radius: 145,
     speed: 10,
     direction: 1,
     lineSpeed: 2,
     svg: (
-      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" strokeWidth={1.5} width={28} height={28}>
-        <circle cx="14" cy="14" r="12" />
-        <line x1="14" y1="2" x2="14" y2="26" />
-        <line x1="2" y1="14" x2="26" y2="14" />
-        <line x1="5.5" y1="5.5" x2="22.5" y2="22.5" />
-        <line x1="22.5" y1="5.5" x2="5.5" y2="22.5" />
+      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+        <circle cx="18" cy="18" r="15" />
+        <line x1="18" y1="3" x2="18" y2="33" />
+        <line x1="3" y1="18" x2="33" y2="18" />
+        <line x1="7" y1="7" x2="29" y2="29" />
+        <line x1="29" y1="7" x2="7" y2="29" />
       </svg>
     ),
   },
   {
     id: "hexagon",
-    radius: 140,
+    radius: 180,
     speed: 14,
     direction: -1,
     lineSpeed: 2.5,
     svg: (
-      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" strokeWidth={1.5} width={28} height={28}>
-        <polygon points="14,1 26,7.5 26,20.5 14,27 2,20.5 2,7.5" />
+      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+        <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
   },
   {
     id: "teardrop",
-    radius: 125,
+    radius: 160,
     speed: 12,
     direction: 1,
     lineSpeed: 3,
     svg: (
-      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" strokeWidth={1.5} width={28} height={28}>
-        <path d="M14 2 Q6 14 6 18 A8 8 0 0 0 22 18 Q22 14 14 2 Z" />
+      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+        <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
   },
   {
     id: "shield",
-    radius: 150,
+    radius: 190,
     speed: 16,
     direction: -1,
     lineSpeed: 2.8,
     svg: (
-      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" strokeWidth={1.5} width={28} height={28}>
-        <path d="M14 2 L25 7 V16 Q25 24 14 27 Q3 24 3 16 V7 Z" />
+      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+        <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
   },
   {
     id: "bolt",
-    radius: 120,
+    radius: 155,
     speed: 11,
     direction: 1,
     lineSpeed: 3.2,
     svg: (
-      <svg viewBox="0 0 28 28" fill="none" stroke="#FFFFFF" strokeWidth={1.5} width={28} height={28}>
-        <path d="M16 2 L6 16 L13 16 L11 26 L22 12 L15 12 Z" />
+      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+        <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
   },
 ];
 
+const PICTO_SIZE = 36;
+const PICTO_HALF = PICTO_SIZE / 2;
+
 function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
+  const potRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const diagram = diagramRef.current;
-    if (!diagram) return;
+    const pot = potRef.current;
+    const glow = glowRef.current;
+    if (!diagram || !pot || !glow) return;
 
-    const cx = 200;
-    const cy = 200;
     const tweens: gsap.core.Tween[] = [];
 
+    // Pot floating animation
+    tweens.push(
+      gsap.to(pot, {
+        y: -10,
+        duration: 3,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      })
+    );
+
+    // Pot slow rotation
+    tweens.push(
+      gsap.to(pot, {
+        rotateY: 8,
+        duration: 6,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      })
+    );
+
+    // Glow pulse
+    tweens.push(
+      gsap.fromTo(
+        glow,
+        { opacity: 0.3, scale: 0.95 },
+        {
+          opacity: 0.7,
+          scale: 1.05,
+          duration: 3,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        }
+      )
+    );
+
+    // Orbital animations
     pictograms.forEach((p, i) => {
       const pictoEl = diagram.querySelector<HTMLElement>(`.picto-${p.id}`);
       const lineEl = diagram.querySelector<SVGLineElement>(`.connect-line-${p.id}`);
@@ -98,10 +145,10 @@ function MolecularDiagram() {
           ease: "none",
           repeat: -1,
           onUpdate: () => {
-            const x = cx + Math.cos(proxy.angle) * p.radius;
-            const y = cy + Math.sin(proxy.angle) * p.radius;
-            pictoEl.style.left = `${x - 14}px`;
-            pictoEl.style.top = `${y - 14}px`;
+            const x = CENTER + Math.cos(proxy.angle) * p.radius;
+            const y = CENTER + Math.sin(proxy.angle) * p.radius;
+            pictoEl.style.left = `${x - PICTO_HALF}px`;
+            pictoEl.style.top = `${y - PICTO_HALF}px`;
             lineEl.setAttribute("x2", String(x));
             lineEl.setAttribute("y2", String(y));
           },
@@ -111,9 +158,9 @@ function MolecularDiagram() {
       tweens.push(
         gsap.fromTo(
           lineEl,
-          { opacity: 0.15 },
+          { opacity: 0.1 },
           {
-            opacity: 0.6,
+            opacity: 0.5,
             duration: p.lineSpeed,
             ease: "sine.inOut",
             repeat: -1,
@@ -131,25 +178,44 @@ function MolecularDiagram() {
   return (
     <div
       ref={diagramRef}
-      style={{ width: 400, height: 400, position: "relative" }}
+      style={{ width: SIZE, height: SIZE, position: "relative" }}
     >
-      {/* Center pot — cutout PNG with 3D treatment */}
+      {/* Ambient glow under the pot */}
       <div
+        ref={glowRef}
+        style={{
+          position: "absolute",
+          top: "55%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 220,
+          height: 120,
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse, rgba(200, 150, 62, 0.25) 0%, transparent 70%)",
+          filter: "blur(20px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Center pot — floating + rotating */}
+      <div
+        ref={potRef}
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -52%)",
-          width: 180,
-          height: 200,
-          filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(200, 150, 62, 0.2))",
+          transform: "translate(-50%, -52%) perspective(800px)",
+          width: 220,
+          height: 240,
+          filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.5)) drop-shadow(0 0 80px rgba(200, 150, 62, 0.15))",
+          transformStyle: "preserve-3d",
         }}
       >
         <Image
           src="/osmo-pot.png"
           alt="OSMO"
-          width={180}
-          height={200}
+          width={220}
+          height={240}
           style={{
             objectFit: "contain",
             width: "100%",
@@ -158,51 +224,51 @@ function MolecularDiagram() {
         />
       </div>
 
-      {/* Subtle glow ring */}
+      {/* Glow ring */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 200,
-          height: 200,
+          width: 260,
+          height: 260,
           borderRadius: "50%",
-          border: "1px solid rgba(200, 150, 62, 0.15)",
+          border: "1px solid rgba(200, 150, 62, 0.12)",
           pointerEvents: "none",
         }}
       />
 
-      {/* SVG layer for connecting lines */}
+      {/* SVG connecting lines */}
       <svg
-        viewBox="0 0 400 400"
+        viewBox={`0 0 ${SIZE} ${SIZE}`}
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       >
         {pictograms.map((p, i) => {
           const angle = (i / pictograms.length) * Math.PI * 2;
-          const x2 = 200 + Math.cos(angle) * p.radius;
-          const y2 = 200 + Math.sin(angle) * p.radius;
+          const x2 = CENTER + Math.cos(angle) * p.radius;
+          const y2 = CENTER + Math.sin(angle) * p.radius;
           return (
             <line
               key={`line-${p.id}`}
               className={`connect-line-${p.id}`}
-              x1="200"
-              y1="200"
+              x1={CENTER}
+              y1={CENTER}
               x2={x2}
               y2={y2}
               stroke="#C8963E"
               strokeWidth={1}
-              opacity={0.3}
+              opacity={0.2}
             />
           );
         })}
       </svg>
 
-      {/* Orbital pictograms */}
+      {/* Orbital pictograms with circular backdrop */}
       {pictograms.map((p, i) => {
         const angle = (i / pictograms.length) * Math.PI * 2;
-        const x = 200 + Math.cos(angle) * p.radius - 14;
-        const y = 200 + Math.sin(angle) * p.radius - 14;
+        const x = CENTER + Math.cos(angle) * p.radius - PICTO_HALF;
+        const y = CENTER + Math.sin(angle) * p.radius - PICTO_HALF;
         return (
           <div
             key={p.id}
@@ -211,8 +277,14 @@ function MolecularDiagram() {
               position: "absolute",
               left: x,
               top: y,
-              width: 28,
-              height: 28,
+              width: PICTO_SIZE,
+              height: PICTO_SIZE,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.06)",
+              border: "1px solid rgba(255,255,255,0.1)",
             }}
           >
             {p.svg}
@@ -234,7 +306,7 @@ export default function Formula() {
       style={{ background: "#111111", padding: "140px 0" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div
               className="mb-7"
