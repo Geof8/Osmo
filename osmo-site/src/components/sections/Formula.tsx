@@ -13,7 +13,7 @@ const pictograms = [
   {
     id: "lemon",
     radius: 175,
-    speed: 6,
+    speed: 18,
     direction: 1,
     lineSpeed: 2,
     svg: (
@@ -29,7 +29,7 @@ const pictograms = [
   {
     id: "hexagon",
     radius: 220,
-    speed: 8.4,
+    speed: 24,
     direction: -1,
     lineSpeed: 2.5,
     svg: (
@@ -41,7 +41,7 @@ const pictograms = [
   {
     id: "teardrop",
     radius: 195,
-    speed: 7.2,
+    speed: 20,
     direction: 1,
     lineSpeed: 3,
     svg: (
@@ -53,7 +53,7 @@ const pictograms = [
   {
     id: "shield",
     radius: 235,
-    speed: 9.6,
+    speed: 28,
     direction: -1,
     lineSpeed: 2.8,
     svg: (
@@ -65,7 +65,7 @@ const pictograms = [
   {
     id: "bolt",
     radius: 185,
-    speed: 6.6,
+    speed: 22,
     direction: 1,
     lineSpeed: 3.2,
     svg: (
@@ -258,10 +258,22 @@ function MolecularDiagram() {
 
     tweens.push(
       gsap.to(pot, {
-        rotateY: 360,
-        duration: 12,
-        ease: "none",
+        y: -6,
+        duration: 4,
+        ease: "sine.inOut",
         repeat: -1,
+        yoyo: true,
+      })
+    );
+
+    tweens.push(
+      gsap.to(pot, {
+        rotateY: 3,
+        rotateX: 1.5,
+        duration: 5,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
       })
     );
 
@@ -309,10 +321,10 @@ function MolecularDiagram() {
       tweens.push(
         gsap.fromTo(
           pictoEl,
-          { scale: 0.8 },
+          { scale: 0.9 },
           {
-            scale: 1.2,
-            duration: 2,
+            scale: 1.1,
+            duration: 3,
             ease: "sine.inOut",
             repeat: -1,
             yoyo: true,
