@@ -133,38 +133,27 @@ function MolecularDiagram() {
       ref={diagramRef}
       style={{ width: 400, height: 400, position: "relative" }}
     >
-      {/* Center pot — full image with gradient mask */}
+      {/* Center pot — cutout PNG with 3D treatment */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%) perspective(800px) rotateY(-5deg) rotateX(3deg)",
+          transform: "translate(-50%, -52%)",
           width: 180,
-          height: 180,
-          borderRadius: "50%",
-          overflow: "hidden",
-          boxShadow:
-            "0 0 60px rgba(200, 150, 62, 0.25), 0 0 120px rgba(200, 150, 62, 0.1), 0 8px 32px rgba(0,0,0,0.6)",
-          WebkitMaskImage:
-            "radial-gradient(circle, black 55%, transparent 75%)",
-          maskImage:
-            "radial-gradient(circle, black 55%, transparent 75%)",
+          height: 200,
+          filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(200, 150, 62, 0.2))",
         }}
       >
         <Image
-          src="/osmo-product.jpeg"
+          src="/osmo-pot.png"
           alt="OSMO"
-          width={360}
-          height={360}
+          width={180}
+          height={200}
           style={{
-            objectFit: "cover",
-            objectPosition: "center 20%",
-            width: "150%",
-            height: "150%",
-            marginLeft: "-25%",
-            marginTop: "-10%",
-            filter: "brightness(0.9) contrast(1.1)",
+            objectFit: "contain",
+            width: "100%",
+            height: "100%",
           }}
         />
       </div>
