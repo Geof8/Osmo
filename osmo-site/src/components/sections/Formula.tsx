@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
@@ -74,15 +74,11 @@ const pictograms = [
 
 function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(diagramRef, { once: true });
-  const [started, setStarted] = useState(false);
 
   useEffect(() => {
-    if (!isInView || started) return;
     const diagram = diagramRef.current;
     if (!diagram) return;
 
-    setStarted(true);
     const cx = 200;
     const cy = 200;
     const tweens: gsap.core.Tween[] = [];
@@ -126,35 +122,71 @@ function MolecularDiagram() {
     return () => {
       tweens.forEach((t) => t.kill());
     };
-  }, [isInView, started]);
+  }, []);
 
   return (
     <div
       ref={diagramRef}
-      className="diagram-container"
       style={{ width: 400, height: 400, position: "relative" }}
     >
+      {/* Center pot — 3D treatment */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%) perspective(800px) rotateY(-5deg) rotateX(3deg)",
+          width: 180,
+          height: 180,
+          borderRadius: "50%",
+          overflow: "hidden",
+          boxShadow: "0 0 60px rgba(200, 150, 62, 0.25), 0 0 120px rgba(200, 150, 62, 0.1), 0 8px 32px rgba(0,0,0,0.6)",
+          border: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <Image
+          src="/osmo-product.jpeg"
+          alt="OSMO"
+          width={360}
+          height={360}
+          style={{
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            width: "200%",
+            height: "200%",
+            marginLeft: "-50%",
+            marginTop: "-20%",
+            filter: "brightness(0.95) contrast(1.05)",
+          }}
+        />
+        {/* Dark vignette overlay to blend edges */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, transparent 50%, rgba(17,17,17,0.7) 100%)",
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+
+      {/* Subtle glow ring */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 180,
-          height: 180,
+          width: 200,
+          height: 200,
           borderRadius: "50%",
-          overflow: "hidden",
+          border: "1px solid rgba(200, 150, 62, 0.15)",
+          pointerEvents: "none",
         }}
-      >
-        <Image
-          src="/osmo-product.jpeg"
-          alt="OSMO"
-          width={180}
-          height={180}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        />
-      </div>
+      />
 
+      {/* SVG layer for connecting lines */}
       <svg
         viewBox="0 0 400 400"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
@@ -176,6 +208,7 @@ function MolecularDiagram() {
         ))}
       </svg>
 
+      {/* Orbital pictograms */}
       {pictograms.map((p, i) => {
         const angle = (i / pictograms.length) * Math.PI * 2;
         const x = 200 + Math.cos(angle) * p.radius - 14;
@@ -235,10 +268,10 @@ export default function Formula() {
                 color: "#FFFFFF",
               }}
             >
-              {["Cinq ", "actifs."].map((word, i) => (
+              {["Cinq", "actifs."].map((word, i) => (
                 <motion.span
                   key={i}
-                  style={{ display: "inline-block" }}
+                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
@@ -247,10 +280,10 @@ export default function Formula() {
                 </motion.span>
               ))}
               <br />
-              {["Une ", "équation."].map((word, i) => (
+              {["Une", "équation."].map((word, i) => (
                 <motion.span
                   key={i + 2}
-                  style={{ display: "inline-block" }}
+                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
