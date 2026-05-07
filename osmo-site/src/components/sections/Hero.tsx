@@ -21,12 +21,11 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <Image
-              src="/osmo-product.jpeg"
-              alt="OSMO Recovery — complexe d'électrolyte, goût citron, 120g"
-              width={700}
-              height={780}
-              className="bg-white"
-              style={{ width: "108%", marginLeft: -40, aspectRatio: "0.9", objectFit: "cover" }}
+              src="/osmo-hero.png"
+              alt="OSMO Recovery — complexe d'électrolyte, goût citron, 150g"
+              width={1024}
+              height={1024}
+              style={{ width: "108%", marginLeft: -40, objectFit: "contain" }}
               priority
             />
           </motion.div>
