@@ -17,7 +17,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 2,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <circle cx="18" cy="18" r="15" />
         <line x1="18" y1="3" x2="18" y2="33" />
         <line x1="3" y1="18" x2="33" y2="18" />
@@ -33,7 +33,7 @@ const pictograms = [
     direction: -1,
     lineSpeed: 2.5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
@@ -45,7 +45,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 3,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
@@ -57,7 +57,7 @@ const pictograms = [
     direction: -1,
     lineSpeed: 2.8,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
@@ -69,7 +69,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 3.2,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
@@ -550,7 +550,7 @@ export default function Formula() {
         </div>
 
         {/* Ingredients grid — merged into same dark section */}
-        <div className="mt-16">
+        <div className="mt-8">
           <div
             className="grid grid-cols-2 lg:grid-cols-5"
             style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
