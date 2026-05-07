@@ -34,11 +34,11 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
           <div className="flex flex-col gap-9">
             <h1
               style={{
-                fontFamily: "var(--font-barlow), var(--display)",
-                fontWeight: 800,
-                fontSize: "clamp(80px, 9vw, 160px)",
+                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+                fontWeight: 700,
+                fontSize: "clamp(72px, 8vw, 140px)",
                 lineHeight: 0.9,
-                letterSpacing: "-0.04em",
+                letterSpacing: "-0.02em",
                 textWrap: "balance" as never,
               }}
             >

@@ -6,13 +6,13 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import FadeUp from "@/components/FadeUp";
 
-const SIZE = 500;
+const SIZE = 600;
 const CENTER = SIZE / 2;
 
 const pictograms = [
   {
     id: "lemon",
-    radius: 145,
+    radius: 175,
     speed: 6,
     direction: 1,
     lineSpeed: 2,
@@ -28,7 +28,7 @@ const pictograms = [
   },
   {
     id: "hexagon",
-    radius: 180,
+    radius: 220,
     speed: 8.4,
     direction: -1,
     lineSpeed: 2.5,
@@ -40,7 +40,7 @@ const pictograms = [
   },
   {
     id: "teardrop",
-    radius: 160,
+    radius: 195,
     speed: 7.2,
     direction: 1,
     lineSpeed: 3,
@@ -52,7 +52,7 @@ const pictograms = [
   },
   {
     id: "shield",
-    radius: 190,
+    radius: 235,
     speed: 9.6,
     direction: -1,
     lineSpeed: 2.8,
@@ -64,7 +64,7 @@ const pictograms = [
   },
   {
     id: "bolt",
-    radius: 155,
+    radius: 185,
     speed: 6.6,
     direction: 1,
     lineSpeed: 3.2,
@@ -76,7 +76,7 @@ const pictograms = [
   },
 ];
 
-const PICTO_SIZE = 36;
+const PICTO_SIZE = 48;
 const PICTO_HALF = PICTO_SIZE / 2;
 
 const actifs = [
@@ -405,8 +405,8 @@ function MolecularDiagram() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 260,
-          height: 260,
+          width: 320,
+          height: 320,
           borderRadius: "50%",
           border: "1px solid rgba(200, 150, 62, 0.12)",
           pointerEvents: "none",

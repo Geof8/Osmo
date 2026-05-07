@@ -81,7 +81,7 @@ export default function Empathy() {
               {observations.map((obs) => (
                 <article
                   key={obs.num}
-                  className="flex-shrink-0 flex flex-col gap-6 p-8 min-h-[360px] bg-white border border-[var(--rule)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                  className="flex-shrink-0 flex flex-col gap-6 p-8 min-h-[360px] bg-white border border-[var(--rule)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
                   style={{
                     flex: "0 0 calc((100% - 56px) / 3)",
                     scrollSnapAlign: "start",
@@ -121,6 +121,19 @@ export default function Empathy() {
                   </div>
                 </article>
               ))}
+            </div>
+
+            <div
+              className="mt-4 flex items-center justify-end gap-2 text-[var(--ink-2)]"
+              style={{
+                fontFamily: "var(--font-mono), var(--mono)",
+                fontSize: 10,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+              }}
+            >
+              <span>Swipe</span>
+              <span style={{ fontSize: 14 }}>→</span>
             </div>
           </div>
         </FadeUp>
