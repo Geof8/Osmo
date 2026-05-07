@@ -109,13 +109,17 @@ function MolecularDiagram() {
       );
 
       tweens.push(
-        gsap.to(lineEl, {
-          strokeDashoffset: 0,
-          duration: p.lineSpeed,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        })
+        gsap.fromTo(
+          lineEl,
+          { opacity: 0.15 },
+          {
+            opacity: 0.6,
+            duration: p.lineSpeed,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+          }
+        )
       );
     });
 
@@ -129,7 +133,7 @@ function MolecularDiagram() {
       ref={diagramRef}
       style={{ width: 400, height: 400, position: "relative" }}
     >
-      {/* Center pot — 3D treatment */}
+      {/* Center pot — full image with gradient mask */}
       <div
         style={{
           position: "absolute",
@@ -140,8 +144,12 @@ function MolecularDiagram() {
           height: 180,
           borderRadius: "50%",
           overflow: "hidden",
-          boxShadow: "0 0 60px rgba(200, 150, 62, 0.25), 0 0 120px rgba(200, 150, 62, 0.1), 0 8px 32px rgba(0,0,0,0.6)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          boxShadow:
+            "0 0 60px rgba(200, 150, 62, 0.25), 0 0 120px rgba(200, 150, 62, 0.1), 0 8px 32px rgba(0,0,0,0.6)",
+          WebkitMaskImage:
+            "radial-gradient(circle, black 55%, transparent 75%)",
+          maskImage:
+            "radial-gradient(circle, black 55%, transparent 75%)",
         }}
       >
         <Image
@@ -151,22 +159,12 @@ function MolecularDiagram() {
           height={360}
           style={{
             objectFit: "cover",
-            objectPosition: "center 30%",
-            width: "200%",
-            height: "200%",
-            marginLeft: "-50%",
-            marginTop: "-20%",
-            filter: "brightness(0.95) contrast(1.05)",
-          }}
-        />
-        {/* Dark vignette overlay to blend edges */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, transparent 50%, rgba(17,17,17,0.7) 100%)",
-            pointerEvents: "none",
+            objectPosition: "center 20%",
+            width: "150%",
+            height: "150%",
+            marginLeft: "-25%",
+            marginTop: "-10%",
+            filter: "brightness(0.9) contrast(1.1)",
           }}
         />
       </div>
@@ -191,21 +189,24 @@ function MolecularDiagram() {
         viewBox="0 0 400 400"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       >
-        {pictograms.map((p) => (
-          <line
-            key={`line-${p.id}`}
-            className={`connect-line-${p.id}`}
-            x1="200"
-            y1="200"
-            x2="200"
-            y2="200"
-            stroke="#C8963E"
-            strokeWidth={1}
-            opacity={0.5}
-            strokeDasharray="200"
-            strokeDashoffset="200"
-          />
-        ))}
+        {pictograms.map((p, i) => {
+          const angle = (i / pictograms.length) * Math.PI * 2;
+          const x2 = 200 + Math.cos(angle) * p.radius;
+          const y2 = 200 + Math.sin(angle) * p.radius;
+          return (
+            <line
+              key={`line-${p.id}`}
+              className={`connect-line-${p.id}`}
+              x1="200"
+              y1="200"
+              x2={x2}
+              y2={y2}
+              stroke="#C8963E"
+              strokeWidth={1}
+              opacity={0.3}
+            />
+          );
+        })}
       </svg>
 
       {/* Orbital pictograms */}
@@ -304,9 +305,9 @@ export default function Formula() {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              Chaque ingrédient a été sélectionné pour un rôle précis.
+              Chaque ingr&eacute;dient a &eacute;t&eacute; s&eacute;lectionn&eacute; pour un r&ocirc;le pr&eacute;cis.
               <br />
-              Rien de superflu. Tout est dosé.
+              Rien de superflu. Tout est dos&eacute;.
             </motion.p>
           </div>
 
