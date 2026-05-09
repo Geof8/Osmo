@@ -1,22 +1,24 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 
-const SIZE = 500;
-const CENTER = SIZE / 2;
+/* ─── Responsive sizes ─── */
+const DESKTOP_SIZE = 500;
+const MOBILE_SIZE = 300;
 
 const pictograms = [
   {
     id: "lemon",
-    radius: 145,
-    speed: 10,
+    rx: 160,
+    ry: 120,
+    speed: 14,
     direction: 1,
-    lineSpeed: 2,
+    startAngle: 0,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <circle cx="18" cy="18" r="15" />
         <line x1="18" y1="3" x2="18" y2="33" />
         <line x1="3" y1="18" x2="33" y2="18" />
@@ -27,85 +29,158 @@ const pictograms = [
   },
   {
     id: "hexagon",
-    radius: 180,
-    speed: 14,
+    rx: 190,
+    ry: 140,
+    speed: 18,
     direction: -1,
-    lineSpeed: 2.5,
+    startAngle: (Math.PI * 2) / 5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
   },
   {
     id: "teardrop",
-    radius: 160,
-    speed: 12,
+    rx: 170,
+    ry: 130,
+    speed: 16,
     direction: 1,
-    lineSpeed: 3,
+    startAngle: (Math.PI * 2 * 2) / 5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
   },
   {
     id: "shield",
-    radius: 190,
-    speed: 16,
+    rx: 200,
+    ry: 150,
+    speed: 20,
     direction: -1,
-    lineSpeed: 2.8,
+    startAngle: (Math.PI * 2 * 3) / 5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
   },
   {
     id: "bolt",
-    radius: 155,
-    speed: 11,
+    rx: 175,
+    ry: 125,
+    speed: 15,
     direction: 1,
-    lineSpeed: 3.2,
+    startAngle: (Math.PI * 2 * 4) / 5,
     svg: (
-      <svg viewBox="0 0 36 36" fill="none" stroke="#FFFFFF" strokeWidth={1.5}>
+      <svg viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
         <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
   },
 ];
 
-const PICTO_SIZE = 36;
+const PICTO_SIZE = 20;
 const PICTO_HALF = PICTO_SIZE / 2;
 
 function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
   const potRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const shadowRef = useRef<HTMLDivElement>(null);
+  const sectionInView = useRef(false);
+  const tweensRef = useRef<gsap.core.Tween[]>([]);
+  const [containerSize, setContainerSize] = useState(DESKTOP_SIZE);
 
+  /* ─── Responsive ─── */
+  useEffect(() => {
+    function updateSize() {
+      setContainerSize(window.innerWidth < 768 ? MOBILE_SIZE : DESKTOP_SIZE);
+    }
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  /* ─── Document visibility pause ─── */
+  useEffect(() => {
+    function handleVisibility() {
+      const tweens = tweensRef.current;
+      if (document.hidden) {
+        tweens.forEach((t) => t.pause());
+      } else if (sectionInView.current) {
+        tweens.forEach((t) => t.resume());
+      }
+    }
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  /* ─── IntersectionObserver to start/pause ─── */
+  useEffect(() => {
+    const diagram = diagramRef.current;
+    if (!diagram) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        sectionInView.current = entry.isIntersecting;
+        const tweens = tweensRef.current;
+        if (entry.isIntersecting && !document.hidden) {
+          tweens.forEach((t) => t.resume());
+        } else {
+          tweens.forEach((t) => t.pause());
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(diagram);
+    return () => observer.disconnect();
+  }, []);
+
+  /* ─── Main GSAP animations ─── */
   useEffect(() => {
     const diagram = diagramRef.current;
     const pot = potRef.current;
     const glow = glowRef.current;
-    if (!diagram || !pot || !glow) return;
+    const shadow = shadowRef.current;
+    if (!diagram || !pot || !glow || !shadow) return;
 
+    const SIZE = containerSize;
+    const CENTER = SIZE / 2;
+    const scale = SIZE / DESKTOP_SIZE;
     const tweens: gsap.core.Tween[] = [];
 
-    // Pot floating animation
+    /* Pot float ±8px over 4s */
+    const floatProxy = { y: 0 };
     tweens.push(
-      gsap.to(pot, {
-        y: -10,
-        duration: 3,
+      gsap.to(floatProxy, {
+        y: -8,
+        duration: 4,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
+        onUpdate: () => {
+          if (pot) {
+            pot.style.transform = `translate(-50%, -52%) perspective(800px) translateY(${floatProxy.y}px) rotateZ(${rotProxy.deg}deg)`;
+          }
+          /* Dynamic shadow: bigger/lighter when pot is high, smaller/darker when low */
+          if (shadow) {
+            const progress = (floatProxy.y + 8) / 16; // 0 = highest, 1 = lowest
+            const scaleS = 1 + progress * 0.15;
+            const opacity = 0.15 + progress * 0.2;
+            shadow.style.transform = `translate(-50%, -50%) scaleX(${scaleS}) scaleY(${scaleS * 0.7})`;
+            shadow.style.opacity = String(opacity);
+          }
+        },
       })
     );
 
-    // Pot slow rotation
+    /* Pot z-rotation ±2deg over 6s */
+    const rotProxy = { deg: 0 };
     tweens.push(
-      gsap.to(pot, {
-        rotateY: 8,
+      gsap.to(rotProxy, {
+        deg: 2,
         duration: 6,
         ease: "sine.inOut",
         repeat: -1,
@@ -113,15 +188,15 @@ function MolecularDiagram() {
       })
     );
 
-    // Glow pulse
+    /* Glow pulse */
     tweens.push(
       gsap.fromTo(
         glow,
-        { opacity: 0.3, scale: 0.95 },
+        { opacity: 0.25, scale: 0.95 },
         {
-          opacity: 0.7,
-          scale: 1.05,
-          duration: 3,
+          opacity: 0.6,
+          scale: 1.08,
+          duration: 3.5,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true,
@@ -129,75 +204,119 @@ function MolecularDiagram() {
       )
     );
 
-    // Orbital animations
-    pictograms.forEach((p, i) => {
+    /* ─── Elliptical orbits with 3D depth ─── */
+    pictograms.forEach((p) => {
       const pictoEl = diagram.querySelector<HTMLElement>(`.picto-${p.id}`);
       const lineEl = diagram.querySelector<SVGLineElement>(`.connect-line-${p.id}`);
       if (!pictoEl || !lineEl) return;
 
-      const startAngle = (i / pictograms.length) * Math.PI * 2;
-      const proxy = { angle: startAngle };
+      const rx = p.rx * scale;
+      const ry = p.ry * scale;
+      const proxy = { angle: p.startAngle };
 
       tweens.push(
         gsap.to(proxy, {
-          angle: startAngle + Math.PI * 2 * p.direction,
+          angle: p.startAngle + Math.PI * 2 * p.direction,
           duration: p.speed,
           ease: "none",
           repeat: -1,
           onUpdate: () => {
-            const x = CENTER + Math.cos(proxy.angle) * p.radius;
-            const y = CENTER + Math.sin(proxy.angle) * p.radius;
+            const x = CENTER + Math.cos(proxy.angle) * rx;
+            const y = CENTER + Math.sin(proxy.angle) * ry;
+
+            /* 3D depth: sin determines "front/back" position
+               Behind (sin < 0) → scale 0.7, opacity 0.5
+               In front (sin > 0) → scale 1.0, opacity 1.0 */
+            const depthFactor = Math.sin(proxy.angle);
+            const pictoScale = 0.7 + (depthFactor + 1) * 0.15; // 0.7 → 1.0
+            const pictoOpacity = 0.5 + (depthFactor + 1) * 0.25; // 0.5 → 1.0
+            const zIndex = depthFactor > 0 ? 10 : 1;
+
             pictoEl.style.left = `${x - PICTO_HALF}px`;
             pictoEl.style.top = `${y - PICTO_HALF}px`;
+            pictoEl.style.transform = `scale(${pictoScale})`;
+            pictoEl.style.opacity = String(pictoOpacity);
+            pictoEl.style.zIndex = String(zIndex);
+
             lineEl.setAttribute("x2", String(x));
             lineEl.setAttribute("y2", String(y));
+
+            /* Dynamic line opacity: far = brighter, near = dimmer */
+            const dist = Math.sqrt((x - CENTER) ** 2 + (y - CENTER) ** 2);
+            const maxDist = Math.max(rx, ry);
+            const lineOpacity = 0.3 + (dist / maxDist) * 0.3; // 0.3 → 0.6
+            lineEl.setAttribute("opacity", String(lineOpacity));
           },
         })
       );
-
-      tweens.push(
-        gsap.fromTo(
-          lineEl,
-          { opacity: 0.1 },
-          {
-            opacity: 0.5,
-            duration: p.lineSpeed,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true,
-          }
-        )
-      );
     });
+
+    tweensRef.current = tweens;
+
+    /* Start paused — IntersectionObserver will resume */
+    tweens.forEach((t) => t.pause());
+    /* Force-resume if already in view */
+    if (sectionInView.current && !document.hidden) {
+      tweens.forEach((t) => t.resume());
+    }
 
     return () => {
       tweens.forEach((t) => t.kill());
+      tweensRef.current = [];
     };
-  }, []);
+  }, [containerSize]);
+
+  const SIZE = containerSize;
+  const CENTER = SIZE / 2;
+  const scale = SIZE / DESKTOP_SIZE;
 
   return (
     <div
       ref={diagramRef}
-      style={{ width: SIZE, height: SIZE, position: "relative" }}
+      style={{
+        width: SIZE,
+        height: SIZE,
+        position: "relative",
+        perspective: "800px",
+      }}
     >
+      {/* Dynamic shadow under pot */}
+      <div
+        ref={shadowRef}
+        style={{
+          position: "absolute",
+          top: "62%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 160 * scale,
+          height: 40 * scale,
+          borderRadius: "50%",
+          background: "radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 70%)",
+          filter: `blur(${12 * scale}px)`,
+          pointerEvents: "none",
+          opacity: 0.2,
+        }}
+      />
+
       {/* Ambient glow under the pot */}
       <div
         ref={glowRef}
         style={{
           position: "absolute",
-          top: "55%",
+          top: "52%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 220,
-          height: 120,
+          width: 240 * scale,
+          height: 140 * scale,
           borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(200, 150, 62, 0.25) 0%, transparent 70%)",
-          filter: "blur(20px)",
+          background:
+            "radial-gradient(ellipse, rgba(200, 150, 62, 0.2) 0%, transparent 70%)",
+          filter: `blur(${24 * scale}px)`,
           pointerEvents: "none",
         }}
       />
 
-      {/* Center pot — floating + rotating */}
+      {/* Center pot */}
       <div
         ref={potRef}
         style={{
@@ -205,10 +324,11 @@ function MolecularDiagram() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -52%) perspective(800px)",
-          width: 220,
-          height: 240,
-          filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.5)) drop-shadow(0 0 80px rgba(200, 150, 62, 0.15))",
+          width: 220 * scale,
+          height: 240 * scale,
+          filter: `drop-shadow(0 12px 32px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(200, 150, 62, 0.12))`,
           transformStyle: "preserve-3d",
+          zIndex: 5,
         }}
       >
         <Image
@@ -224,17 +344,17 @@ function MolecularDiagram() {
         />
       </div>
 
-      {/* Glow ring */}
+      {/* Subtle orbit ring hint */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 260,
-          height: 260,
+          width: 280 * scale,
+          height: 280 * scale,
           borderRadius: "50%",
-          border: "1px solid rgba(200, 150, 62, 0.12)",
+          border: "1px solid rgba(200, 150, 62, 0.08)",
           pointerEvents: "none",
         }}
       />
@@ -242,12 +362,18 @@ function MolecularDiagram() {
       {/* SVG connecting lines */}
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+        }}
       >
-        {pictograms.map((p, i) => {
-          const angle = (i / pictograms.length) * Math.PI * 2;
-          const x2 = CENTER + Math.cos(angle) * p.radius;
-          const y2 = CENTER + Math.sin(angle) * p.radius;
+        {pictograms.map((p) => {
+          const rx = p.rx * scale;
+          const ry = p.ry * scale;
+          const x2 = CENTER + Math.cos(p.startAngle) * rx;
+          const y2 = CENTER + Math.sin(p.startAngle) * ry;
           return (
             <line
               key={`line-${p.id}`}
@@ -257,18 +383,19 @@ function MolecularDiagram() {
               x2={x2}
               y2={y2}
               stroke="#C8963E"
-              strokeWidth={1}
-              opacity={0.2}
+              strokeWidth={0.8}
+              opacity={0.3}
             />
           );
         })}
       </svg>
 
-      {/* Orbital pictograms with circular backdrop */}
-      {pictograms.map((p, i) => {
-        const angle = (i / pictograms.length) * Math.PI * 2;
-        const x = CENTER + Math.cos(angle) * p.radius - PICTO_HALF;
-        const y = CENTER + Math.sin(angle) * p.radius - PICTO_HALF;
+      {/* Orbital pictograms */}
+      {pictograms.map((p) => {
+        const rx = p.rx * scale;
+        const ry = p.ry * scale;
+        const x = CENTER + Math.cos(p.startAngle) * rx - PICTO_HALF;
+        const y = CENTER + Math.sin(p.startAngle) * ry - PICTO_HALF;
         return (
           <div
             key={p.id}
@@ -283,8 +410,9 @@ function MolecularDiagram() {
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "50%",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "rgba(200, 150, 62, 0.08)",
+              border: "1px solid rgba(200, 150, 62, 0.15)",
+              transition: "transform 0.1s ease-out",
             }}
           >
             {p.svg}
@@ -333,10 +461,17 @@ export default function Formula() {
               {["Cinq", "actifs."].map((word, i) => (
                 <motion.span
                   key={i}
-                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
+                  style={{
+                    display: "inline-block",
+                    marginRight: i === 0 ? "0.3em" : 0,
+                  }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.2 + i * 0.1,
+                    ease: "easeOut",
+                  }}
                 >
                   {word}
                 </motion.span>
@@ -345,10 +480,17 @@ export default function Formula() {
               {["Une", "équation."].map((word, i) => (
                 <motion.span
                   key={i + 2}
-                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
+                  style={{
+                    display: "inline-block",
+                    marginRight: i === 0 ? "0.3em" : 0,
+                  }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.4 + i * 0.1,
+                    ease: "easeOut",
+                  }}
                 >
                   {word}
                 </motion.span>
