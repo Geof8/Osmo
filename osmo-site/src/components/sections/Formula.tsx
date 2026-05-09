@@ -418,11 +418,8 @@ function MolecularDiagram() {
 
     tweensRef.current = tweens;
 
-    /* Start paused — IntersectionObserver will resume */
-    tweens.forEach((t) => t.pause());
-    if (sectionInView.current && !document.hidden) {
-      tweens.forEach((t) => t.resume());
-    }
+    /* Animations run immediately — IntersectionObserver will pause/resume */
+    sectionInView.current = true;
 
     return () => {
       tweens.forEach((t) => t.kill());
