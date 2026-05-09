@@ -24,11 +24,31 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-barlow)", "sans-serif"],
-        body: ["var(--font-dm-sans)", "sans-serif"],
+        body: ["var(--font-inter)", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        playfair: ["var(--font-playfair)", "serif"],
       },
       letterSpacing: {
         tighter: "-0.04em",
         tight: "-0.02em",
+      },
+      spacing: {
+        18: "4.5rem",
+        22: "5.5rem",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.3s cubic-bezier(0.32,0.72,0,1)",
+        "accordion-up": "accordion-up 0.3s cubic-bezier(0.32,0.72,0,1)",
       },
     },
   },

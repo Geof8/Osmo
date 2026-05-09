@@ -19,12 +19,15 @@ export default function Marquee() {
     <div
       className="relative z-[5] overflow-hidden border-b border-[var(--rule)]"
       style={{ background: "var(--ink)", padding: "14px 0" }}
+      role="marquee"
+      aria-label="Composition et informations produit"
     >
       <div className="marquee-track whitespace-nowrap">
         {[0, 1].map((i) => (
           <span
             key={i}
             className="inline-block text-white"
+            aria-hidden={i === 1 ? "true" : undefined}
             style={{
               fontFamily: "var(--font-mono), var(--mono)",
               fontSize: 11,
@@ -45,6 +48,11 @@ export default function Marquee() {
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track {
+            animation: none;
+          }
         }
       `}</style>
     </div>

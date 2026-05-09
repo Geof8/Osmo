@@ -1,14 +1,14 @@
 export default function Footer() {
   const cols = [
-    { title: "Produit", links: ["Recovery", "Composition", "Protocole"] },
-    { title: "Atelier", links: ["Notre approche", "Lot 001", "Analyses"] },
-    { title: "Légal", links: ["Mentions légales", "CGV", "Contact"] },
+    { title: "Produit", links: [{ label: "Recovery", href: "#formule" }, { label: "Composition", href: "#formule" }, { label: "Protocole", href: "#protocole" }] },
+    { title: "Atelier", links: [{ label: "Notre approche", href: "#observations" }, { label: "Lot 001", href: "#reserve" }, { label: "Analyses", href: "#formule" }] },
+    { title: "Légal", links: [{ label: "Mentions légales", href: "#" }, { label: "CGV", href: "#" }, { label: "Contact", href: "#" }] },
   ];
 
   return (
     <footer className="bg-[var(--paper)] border-t border-[var(--rule)] relative z-[5]" style={{ padding: "64px 0 36px" }}>
-      <div className="max-w-[1380px] mx-auto px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-14">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 lg:gap-14">
           <div>
             <span
               className="relative pr-[14px] inline-block"
@@ -21,7 +21,7 @@ export default function Footer() {
               }}
             >
               Osmo
-              <span className="absolute bottom-[6px] right-0 w-[7px] h-[7px] bg-[var(--ink)] rounded-full" />
+              <span className="absolute bottom-[6px] right-0 w-[7px] h-[7px] bg-[var(--ink)] rounded-full" aria-hidden="true" />
             </span>
             <div
               className="text-[var(--ink-2)] mt-[14px]"
@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
           </div>
           {cols.map((col) => (
-            <div key={col.title}>
+            <nav key={col.title} aria-label={col.title}>
               <h4
                 className="text-[var(--ink-2)] mb-[18px]"
                 style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500 }}
@@ -49,14 +49,19 @@ export default function Footer() {
               <ul className="list-none">
                 {col.links.map((link) => (
                   <li
-                    key={link}
+                    key={link.label}
                     style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 12, lineHeight: 2.1 }}
                   >
-                    <span className="cursor-pointer hover:text-[var(--ink)] transition-colors">{link}</span>
+                    <a
+                      href={link.href}
+                      className="hover:text-[var(--ink)] transition-colors inline-flex items-center min-h-[32px]"
+                    >
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 
@@ -65,7 +70,7 @@ export default function Footer() {
           style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase" }}
         >
           <div>© 2026 Osmo Lab · osmolab.fr</div>
-          <div>Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
+          <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
           <div>Made in France · 300 ex.</div>
         </div>
       </div>

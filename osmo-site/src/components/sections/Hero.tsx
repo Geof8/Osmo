@@ -4,56 +4,71 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import CountUp from "@/components/CountUp";
 
-const words = ["Osmo", "Recovery."];
+const headlineWords = ["Le", "lendemain", "matin,"];
+const headlineWords2 = ["tu", "assures."];
 
 export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => void; revealed: boolean }) {
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "56px 0 96px" }}
+      style={{ padding: "40px 0 64px" }}
     >
-      <div className="max-w-[1380px] mx-auto px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-[72px] items-center min-h-[70vh]">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
           {/* LEFT: Product image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.7, delay: 0.1 }}
+            className="order-2 lg:order-1"
           >
             <Image
               src="/osmo-hero.png"
               alt="OSMO Recovery — complexe d'électrolyte, goût citron, 150g"
               width={1024}
               height={1024}
-              style={{ width: "108%", maxHeight: "65vh", marginLeft: -40, objectFit: "contain" }}
+              className="w-full lg:w-[108%] max-h-[50vh] lg:max-h-[65vh] object-contain lg:ml-[-40px]"
               priority
             />
           </motion.div>
 
           {/* RIGHT: Editorial text */}
-          <div className="flex flex-col gap-9">
+          <div className="flex flex-col gap-7 sm:gap-9 order-1 lg:order-2">
             <h1
               style={{
-                fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-                fontWeight: 700,
-                fontSize: "clamp(72px, 8vw, 140px)",
-                lineHeight: 0.9,
-                letterSpacing: "-0.02em",
-                textWrap: "balance" as never,
+                fontFamily: "var(--font-barlow), var(--display)",
+                fontWeight: 800,
+                fontSize: "clamp(48px, 7vw, 110px)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.035em",
               }}
             >
-              {words.map((word, i) => (
-                <motion.span
-                  key={word}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.15 + i * 0.12 }}
-                  className="inline-block"
-                  style={i === 1 ? { fontStyle: "normal", display: "block" } : undefined}
-                >
-                  {word}
-                </motion.span>
-              ))}
+              <span className="block">
+                {headlineWords.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="block text-[#C8963E]" style={{ fontStyle: "normal" }}>
+                {headlineWords2.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                    transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </span>
             </h1>
 
             <motion.p
@@ -61,7 +76,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-[var(--ink)]"
-              style={{ fontSize: 19, lineHeight: 1.55, maxWidth: 480 }}
+              style={{ fontSize: "clamp(16px, 1.2vw, 19px)", lineHeight: 1.6, maxWidth: 480 }}
             >
               Un complexe d&apos;électrolytes formulé pour la récupération{" "}
               <em
@@ -69,7 +84,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                   fontFamily: "var(--font-barlow), var(--display)",
                   fontStyle: "normal",
                   fontWeight: 600,
-                  fontSize: 19,
+                  fontSize: "inherit",
                 }}
               >
                 pendant le sommeil
@@ -85,7 +100,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
             >
               <button
                 onClick={onOpenModal}
-                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
                 style={{
                   fontFamily: "var(--font-mono), var(--mono)",
                   fontSize: 11,
@@ -94,11 +109,11 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                   textTransform: "uppercase",
                 }}
               >
-                Réserver — 25 € <span>→</span>
+                Réserver — 25 € <span aria-hidden="true">→</span>
               </button>
               <a
                 href="#actifs"
-                className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 hover:scale-[1.02]"
+                className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 active:scale-[0.97]"
                 style={{
                   fontFamily: "var(--font-mono), var(--mono)",
                   fontSize: 11,
@@ -118,7 +133,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                   textTransform: "uppercase",
                 }}
               >
-                ⌁ Aucun paiement maintenant
+                <span aria-hidden="true">⌁</span> Aucun paiement maintenant
               </span>
             </motion.div>
           </div>
@@ -129,7 +144,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-8"
+          className="mt-16 lg:mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
         >
           {[
             { k: 5, label: "5", v: "Actifs cliniques", count: true },
@@ -142,7 +157,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
                   fontWeight: 800,
-                  fontSize: 36,
+                  fontSize: "clamp(28px, 3vw, 36px)",
                   letterSpacing: "-0.025em",
                   lineHeight: 1,
                   color: item.amber ? "var(--amber)" : "var(--ink)",

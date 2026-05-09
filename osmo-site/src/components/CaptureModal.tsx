@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { getSupabase } from "@/lib/supabase";
@@ -21,6 +21,25 @@ export default function CaptureModal({
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const timer = setTimeout(() => {
+      emailRef.current?.focus();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onOpenChange(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, onOpenChange]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -29,6 +48,7 @@ export default function CaptureModal({
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Veuillez entrer une adresse email valide.");
+      emailRef.current?.focus();
       return;
     }
 
@@ -68,13 +88,18 @@ export default function CaptureModal({
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-50">
+        <div
+          className="fixed inset-0 z-50"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Réserver mon accès prioritaire"
+        >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={handleClose}
           />
           <div className="fixed inset-0 flex items-center justify-center p-4">
@@ -83,15 +108,16 @@ export default function CaptureModal({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-              className="relative z-50 w-full sm:max-w-md bg-white border border-[var(--rule)] p-10 shadow-lg"
+              className="relative z-50 w-full sm:max-w-md bg-white border border-[var(--rule)] p-8 sm:p-10 shadow-lg"
               onClick={(e) => e.stopPropagation()}
             >
               <button
+                ref={closeRef}
                 onClick={handleClose}
-                className="absolute top-5 right-5 text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
+                className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
                 aria-label="Fermer"
               >
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                   <path d="M4 4l10 10M14 4L4 14" />
                 </svg>
               </button>
@@ -109,7 +135,7 @@ export default function CaptureModal({
                   >
                     Place réservée.
                   </div>
-                  <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                  <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.6 }}>
                     Vous serez contacté en priorité dès que le stock est disponible.
                   </p>
                 </div>
@@ -122,7 +148,7 @@ export default function CaptureModal({
                         fontFamily: "var(--font-mono), var(--mono)",
                         fontSize: 10,
                         letterSpacing: "0.18em",
-                        textTransform: "uppercase" as const,
+                        textTransform: "uppercase",
                       }}
                     >
                       Accès prioritaire · Lot 001
@@ -138,45 +164,84 @@ export default function CaptureModal({
                     >
                       Réserver mon accès
                     </h2>
-                    <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.55 }}>
+                    <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.6 }}>
                       Aucun paiement maintenant. Vous serez contacté en priorité dès que le stock est disponible.
                     </p>
                   </div>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <Input
-                      type="email"
-                      placeholder="votre@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="h-12 border-[var(--rule)]"
-                    />
-                    <Input
-                      type="tel"
-                      placeholder="06 XX XX XX XX — optionnel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="h-12 border-[var(--soft)]"
-                    />
-                    {error && <p className="text-red-600 text-sm">{error}</p>}
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                    <div>
+                      <label
+                        htmlFor="capture-email"
+                        className="block mb-1.5 text-[var(--ink)]"
+                        style={{
+                          fontFamily: "var(--font-mono), var(--mono)",
+                          fontSize: 10,
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        Email <span className="text-[var(--amber)]">*</span>
+                      </label>
+                      <Input
+                        ref={emailRef}
+                        id="capture-email"
+                        type="email"
+                        placeholder="votre@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoComplete="email"
+                        aria-invalid={error && error.includes("email") ? "true" : undefined}
+                        aria-describedby={error ? "capture-error" : undefined}
+                        className="h-12 border-[var(--rule)]"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="capture-phone"
+                        className="block mb-1.5 text-[var(--ink-2)]"
+                        style={{
+                          fontFamily: "var(--font-mono), var(--mono)",
+                          fontSize: 10,
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        Téléphone — optionnel
+                      </label>
+                      <Input
+                        id="capture-phone"
+                        type="tel"
+                        placeholder="06 XX XX XX XX"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        autoComplete="tel"
+                        className="h-12 border-[var(--soft)]"
+                      />
+                    </div>
+                    {error && (
+                      <p id="capture-error" className="text-red-600 text-sm" role="alert">
+                        {error}
+                      </p>
+                    )}
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full inline-flex items-center justify-center gap-3 py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 hover:scale-[1.02] disabled:opacity-50"
+                      className="w-full inline-flex items-center justify-center gap-3 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none"
                       style={{
                         fontFamily: "var(--font-mono), var(--mono)",
                         fontSize: 11,
                         fontWeight: 500,
                         letterSpacing: "0.18em",
-                        textTransform: "uppercase" as const,
+                        textTransform: "uppercase",
                       }}
                     >
                       {loading ? "Envoi..." : "Réserver — 25 €"}
-                      {!loading && <span>→</span>}
+                      {!loading && <span aria-hidden="true">→</span>}
                     </button>
                     <p
                       className="text-[var(--ink-3)] text-center"
-                      style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" as const }}
+                      style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
                     >
                       Prix fondateur garanti · 0 € maintenant
                     </p>

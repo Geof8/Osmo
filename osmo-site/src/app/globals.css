@@ -13,6 +13,7 @@
     --rule: #111111;
     --soft: #DDDDDD;
     --amber: #C8963E;
+    --amber-hover: #A8762E;
     --display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
     --body: 'Inter', sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, monospace;
@@ -23,6 +24,7 @@
     --input: #DDDDDD;
     --ring: #C8963E;
     --radius: 0px;
+    --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--amber);
   }
 
   * {
@@ -36,6 +38,18 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     background: var(--paper);
     color: var(--ink);
@@ -44,11 +58,35 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100dvh;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  button, a, summary, [tabindex] {
+    cursor: pointer;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
   }
 
   ::selection {
     background: var(--ink);
     color: var(--paper);
+  }
+
+  img, video, svg {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -65,4 +103,10 @@ body::before {
     radial-gradient(circle at 43% 81%, rgba(31,27,20,0.022) 0.5px, transparent 1px);
   background-size: 9px 9px, 13px 13px, 11px 11px;
   mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    display: none;
+  }
 }

@@ -9,10 +9,13 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
       className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--rule)]"
+      aria-label="Navigation principale"
     >
-      <div className="max-w-[1380px] mx-auto px-10 flex items-center justify-between h-[78px]">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-10 flex items-center justify-between h-[64px] sm:h-[78px]">
         <div className="flex items-baseline gap-4">
-          <span
+          <a
+            href="#"
+            aria-label="OSMO — retour en haut"
             className="relative"
             style={{
               fontFamily: "var(--font-playfair), 'Playfair Display', serif",
@@ -25,6 +28,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
             <span className="relative inline-block">
               <span
                 className="absolute left-1/2 -translate-x-1/2"
+                aria-hidden="true"
                 style={{
                   top: -10,
                   width: 6,
@@ -36,7 +40,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
               O
             </span>
             smo
-          </span>
+          </a>
           <span
             className="hidden md:inline text-[var(--ink-2)]"
             style={{
@@ -58,24 +62,24 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
               fontFamily: "var(--font-mono), var(--mono)",
               fontSize: 10,
               letterSpacing: "0.16em",
-              textTransform: "uppercase" as const,
+              textTransform: "uppercase",
             }}
           >
             300 / 300 places
           </span>
           <button
             onClick={onOpenModal}
-            className="inline-flex items-center gap-3 px-[22px] py-[14px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200"
+            className="inline-flex items-center gap-3 px-5 min-h-[44px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
             style={{
               fontFamily: "var(--font-mono), var(--mono)",
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: "0.18em",
-              textTransform: "uppercase" as const,
+              textTransform: "uppercase",
             }}
           >
             Réserver
-            <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+            <span aria-hidden="true" className="inline-block">→</span>
           </button>
         </div>
       </div>

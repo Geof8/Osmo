@@ -14,7 +14,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
         style={{
           fontFamily: "var(--font-barlow), var(--display)",
           fontWeight: 900,
-          fontSize: "clamp(42px, 7vw, 130px)",
+          fontSize: "clamp(32px, 7vw, 130px)",
           lineHeight: 1,
           letterSpacing: "-0.04em",
           color: textColor,
@@ -49,6 +49,15 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
 
   useEffect(() => {
     if (doneRef.current) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      doneRef.current = true;
+      onComplete();
+      containerRef.current?.remove();
+      spacerRef.current?.remove();
+      return;
+    }
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
@@ -99,12 +108,8 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
 
   return (
     <>
-      {/* Spacer — scroll through this to open the panels */}
       <div ref={spacerRef} style={{ height: "100vh", position: "relative", zIndex: 0 }} />
-
-      {/* Fixed overlay */}
-      <div ref={containerRef} className="fixed inset-0 z-[100]">
-        {/* Left panel */}
+      <div ref={containerRef} className="fixed inset-0 z-[100]" aria-hidden="true">
         <div
           ref={leftRef}
           className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
@@ -114,7 +119,6 @@ export default function SplitOverlay({ onComplete }: { onComplete: () => void })
             <OverlayContent color="light" />
           </div>
         </div>
-        {/* Right panel */}
         <div
           ref={rightRef}
           className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"

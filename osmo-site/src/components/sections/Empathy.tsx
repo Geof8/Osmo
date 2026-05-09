@@ -12,13 +12,13 @@ const observations = [
 
 export default function Empathy() {
   return (
-    <section id="observations" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "140px 0" }}>
-      <div className="max-w-[1380px] mx-auto px-10">
+    <section id="observations" className="scroll-mt-20 bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(80px, 10vw, 140px) 0" }}>
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <FadeUp>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-20 items-end mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">
             <div>
               <div
-                className="text-[var(--ink-2)] mb-7"
+                className="text-[var(--ink-2)] mb-5 lg:mb-7"
                 style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
               >
                 Pourquoi OSMO
@@ -27,7 +27,7 @@ export default function Empathy() {
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
                   fontWeight: 800,
-                  fontSize: "clamp(48px, 5.5vw, 88px)",
+                  fontSize: "clamp(40px, 5.5vw, 88px)",
                   lineHeight: 0.92,
                   letterSpacing: "-0.035em",
                 }}
@@ -39,7 +39,7 @@ export default function Empathy() {
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: 20, lineHeight: 1.55, maxWidth: 460 }}>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.6, maxWidth: 460 }}>
               <em
                 style={{
                   fontFamily: "var(--font-barlow), var(--display)",
@@ -68,7 +68,10 @@ export default function Empathy() {
             </div>
 
             <div
-              className="empathy-track flex gap-7 pb-4"
+              className="empathy-track flex gap-5 sm:gap-7 pb-4"
+              role="region"
+              aria-label="Témoignages d'utilisation"
+              tabIndex={0}
               style={{
                 overflowX: "auto",
                 scrollSnapType: "x mandatory",
@@ -81,11 +84,10 @@ export default function Empathy() {
               {observations.map((obs) => (
                 <article
                   key={obs.num}
-                  className="flex-shrink-0 flex flex-col gap-6 p-8 min-h-[360px] bg-white border border-[var(--rule)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+                  className="flex-shrink-0 flex flex-col gap-6 p-6 sm:p-8 min-h-[320px] sm:min-h-[360px] bg-white border border-[var(--rule)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] basis-[85%] sm:basis-[45%] lg:basis-[calc((100%-56px)/3)]"
                   style={{
-                    flex: "0 0 calc((100% - 56px) / 3)",
                     scrollSnapAlign: "start",
-                    minWidth: 280,
+                    minWidth: 260,
                   }}
                 >
                   <div
@@ -100,8 +102,8 @@ export default function Empathy() {
                       style={{
                         fontFamily: "var(--font-barlow), var(--display)",
                         fontWeight: 700,
-                        fontSize: 30,
-                        lineHeight: 1.05,
+                        fontSize: "clamp(24px, 2vw, 30px)",
+                        lineHeight: 1.1,
                         letterSpacing: "-0.025em",
                       }}
                     >
@@ -125,6 +127,7 @@ export default function Empathy() {
 
             <div
               className="mt-4 flex items-center justify-end gap-2 text-[var(--ink-2)]"
+              aria-hidden="true"
               style={{
                 fontFamily: "var(--font-mono), var(--mono)",
                 fontSize: 10,
@@ -139,13 +142,13 @@ export default function Empathy() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="mt-24 pt-14 border-t border-[var(--rule)] grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-14 items-baseline">
+          <div className="mt-16 lg:mt-24 pt-10 lg:pt-14 border-t border-[var(--rule)] grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-14 items-baseline">
             <div
               style={{
                 fontFamily: "var(--font-barlow), var(--display)",
                 fontWeight: 700,
-                fontSize: "clamp(28px, 3.6vw, 52px)",
-                lineHeight: 1.04,
+                fontSize: "clamp(24px, 3.6vw, 52px)",
+                lineHeight: 1.08,
                 letterSpacing: "-0.03em",
               }}
             >
@@ -163,7 +166,7 @@ export default function Empathy() {
               </span>
             </div>
             <div
-              className="text-[var(--ink-2)] text-right"
+              className="text-[var(--ink-2)] lg:text-right"
               style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, lineHeight: 1.7, letterSpacing: "0.16em", textTransform: "uppercase" }}
             >
               Pas de plantes obscures

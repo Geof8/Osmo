@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import gsap from "gsap";
 import FadeUp from "@/components/FadeUp";
 
@@ -17,7 +17,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 2,
     svg: (
-      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <circle cx="18" cy="18" r="15" />
         <line x1="18" y1="3" x2="18" y2="33" />
         <line x1="3" y1="18" x2="33" y2="18" />
@@ -33,7 +33,7 @@ const pictograms = [
     direction: -1,
     lineSpeed: 2.5,
     svg: (
-      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
@@ -45,7 +45,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 3,
     svg: (
-      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
@@ -57,7 +57,7 @@ const pictograms = [
     direction: -1,
     lineSpeed: 2.8,
     svg: (
-      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
@@ -69,7 +69,7 @@ const pictograms = [
     direction: 1,
     lineSpeed: 3.2,
     svg: (
-      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5}>
+      <svg width={32} height={32} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
@@ -87,7 +87,7 @@ const actifs = [
     dose: "1700",
     role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2}>
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
         <line x1="28" y1="6" x2="28" y2="46" />
         <line x1="12" y1="20" x2="44" y2="20" />
@@ -101,7 +101,7 @@ const actifs = [
     dose: "2000",
     role: "Fonction musculaire. Contraction cardiaque normale.",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
       </svg>
     ),
@@ -113,7 +113,7 @@ const actifs = [
     dose: "1350",
     role: "Récupération nerveuse. Sommeil profond.",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2}>
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M6 22 Q14 14 22 22 T36 22 T50 22" />
         <path d="M6 32 Q14 24 22 32 T36 32 T50 32" />
         <path d="M6 42 Q14 34 22 42 T36 42 T50 42" />
@@ -127,7 +127,7 @@ const actifs = [
     dose: "150",
     role: "Hydratation cellulaire ciblée.",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
         <path d="M21 34 Q21 41 28 44" />
       </svg>
@@ -140,7 +140,7 @@ const actifs = [
     dose: "600",
     role: "Soutien hépatique nocturne. Précurseur du glutathion.",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2}>
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
         <path d="M19 28 L25 34 L37 22" />
       </svg>
@@ -162,7 +162,7 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
       transition={{ duration: 0.4, delay: index * 0.1 }}
       className="hover:-translate-y-1 transition-[transform,box-shadow] duration-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] flex flex-col gap-[14px]"
       style={{
-        padding: "36px 24px 32px",
+        padding: "28px 20px 24px",
         background: "#1A1A1A",
         borderRight: "1px solid #333333",
         borderBottom: "1px solid #333333",
@@ -175,7 +175,7 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
           fontSize: 10,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          color: "#888888",
+          color: "#AAAAAA",
           borderBottom: "1px solid #333333",
         }}
       >
@@ -186,7 +186,7 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
         style={{
           fontFamily: "var(--font-mono), var(--mono)",
           fontSize: 11,
-          color: "#888888",
+          color: "#AAAAAA",
         }}
       >
         {a.mol}
@@ -195,10 +195,9 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
         style={{
           fontFamily: "var(--font-barlow), var(--display)",
           fontWeight: 700,
-          fontSize: 22,
+          fontSize: "clamp(18px, 1.4vw, 22px)",
           letterSpacing: "-0.02em",
           lineHeight: 1.15,
-          alignSelf: "end",
           color: "#FFFFFF",
         }}
       >
@@ -208,7 +207,7 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
         style={{
           fontFamily: "var(--font-barlow), var(--display)",
           fontWeight: 800,
-          fontSize: 36,
+          fontSize: "clamp(28px, 2.5vw, 36px)",
           letterSpacing: "-0.025em",
           lineHeight: 1,
           color: "#FFFFFF",
@@ -222,7 +221,7 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
             fontStyle: "normal",
             fontSize: 16,
             letterSpacing: 0,
-            color: "#888888",
+            color: "#AAAAAA",
           }}
         >
           {" "}mg
@@ -232,8 +231,8 @@ function IngredientCard({ a, index }: { a: typeof actifs[number]; index: number 
         className="pt-3"
         style={{
           fontSize: 13,
-          lineHeight: 1.5,
-          color: "#888888",
+          lineHeight: 1.55,
+          color: "#AAAAAA",
           borderTop: "1px dashed #333333",
         }}
       >
@@ -247,8 +246,11 @@ function MolecularDiagram() {
   const diagramRef = useRef<HTMLDivElement>(null);
   const potRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const diagram = diagramRef.current;
     const pot = potRef.current;
     const glow = glowRef.current;
@@ -309,15 +311,13 @@ function MolecularDiagram() {
           onUpdate: () => {
             const x = CENTER + Math.cos(proxy.angle) * p.radius;
             const y = CENTER + Math.sin(proxy.angle) * p.radius;
-            pictoEl.style.left = `${x - PICTO_HALF}px`;
-            pictoEl.style.top = `${y - PICTO_HALF}px`;
+            pictoEl.style.transform = `translate(${x - PICTO_HALF}px, ${y - PICTO_HALF}px)`;
             lineEl.setAttribute("x2", String(x));
             lineEl.setAttribute("y2", String(y));
           },
         })
       );
 
-      // Scale pulse on each pictogram
       tweens.push(
         gsap.fromTo(
           pictoEl,
@@ -332,7 +332,6 @@ function MolecularDiagram() {
         )
       );
 
-      // Line opacity animation (0.3 to 0.8)
       tweens.push(
         gsap.fromTo(
           lineEl,
@@ -351,12 +350,15 @@ function MolecularDiagram() {
     return () => {
       tweens.forEach((t) => t.kill());
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div
       ref={diagramRef}
-      style={{ width: SIZE, height: SIZE, position: "relative" }}
+      className="hidden sm:block"
+      style={{ width: SIZE, height: SIZE, position: "relative", maxWidth: "100%" }}
+      role="img"
+      aria-label="Diagramme moléculaire montrant les 5 actifs en orbite autour du pot OSMO"
     >
       <div
         ref={glowRef}
@@ -389,7 +391,7 @@ function MolecularDiagram() {
       >
         <Image
           src="/osmo-pot.png"
-          alt="OSMO"
+          alt="OSMO Recovery pot"
           width={220}
           height={240}
           style={{
@@ -401,6 +403,7 @@ function MolecularDiagram() {
       </div>
 
       <div
+        aria-hidden="true"
         style={{
           position: "absolute",
           top: "50%",
@@ -416,6 +419,7 @@ function MolecularDiagram() {
 
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
+        aria-hidden="true"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       >
         {pictograms.map((p, i) => {
@@ -448,8 +452,9 @@ function MolecularDiagram() {
             className={`picto-${p.id}`}
             style={{
               position: "absolute",
-              left: x,
-              top: y,
+              left: 0,
+              top: 0,
+              transform: `translate(${x}px, ${y}px)`,
               width: PICTO_SIZE,
               height: PICTO_SIZE,
               display: "flex",
@@ -476,9 +481,9 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "140px 0" }}
+      style={{ background: "#111111", padding: "clamp(80px, 10vw, 140px) 0" }}
     >
-      <div ref={ref} className="max-w-[1380px] mx-auto px-10">
+      <div ref={ref} className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div
@@ -488,7 +493,7 @@ export default function Formula() {
                 fontSize: 11,
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "#666666",
+                color: "#AAAAAA",
               }}
             >
               La formule
@@ -497,7 +502,7 @@ export default function Formula() {
               style={{
                 fontFamily: "var(--font-barlow), var(--display)",
                 fontWeight: 900,
-                fontSize: "clamp(48px, 5vw, 80px)",
+                fontSize: "clamp(40px, 5vw, 80px)",
                 lineHeight: 0.95,
                 letterSpacing: "-0.035em",
                 color: "#FFFFFF",
@@ -531,8 +536,8 @@ export default function Formula() {
               className="mt-8"
               style={{
                 fontSize: 15,
-                lineHeight: 1.6,
-                color: "#666666",
+                lineHeight: 1.65,
+                color: "#AAAAAA",
                 maxWidth: 380,
               }}
               initial={{ opacity: 0 }}
@@ -550,10 +555,10 @@ export default function Formula() {
           </div>
         </div>
 
-        {/* Ingredients grid — merged into same dark section */}
+        {/* Ingredients grid */}
         <div className="mt-8">
           <div
-            className="grid grid-cols-2 lg:grid-cols-5"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
             style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
           >
             {actifs.map((a, i) => (
@@ -562,14 +567,14 @@ export default function Formula() {
           </div>
 
           <FadeUp delay={0.3}>
-            <div className="mt-14 pt-7 flex justify-between gap-8 flex-wrap items-center" style={{ borderTop: "1px solid #333333" }}>
+            <div className="mt-10 lg:mt-14 pt-7 flex justify-between gap-8 flex-wrap items-center" style={{ borderTop: "1px solid #333333" }}>
               <div
-                className="flex gap-7 flex-wrap"
+                className="flex gap-5 sm:gap-7 flex-wrap"
                 style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#FFFFFF" }}
               >
                 {stamps.map((s) => (
                   <span key={s} className="inline-flex items-center gap-2">
-                    <span className="w-[6px] h-[6px] bg-[#C8963E] rounded-full" />
+                    <span className="w-[6px] h-[6px] bg-[#C8963E] rounded-full" aria-hidden="true" />
                     {s}
                   </span>
                 ))}
