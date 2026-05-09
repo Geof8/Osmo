@@ -19,7 +19,7 @@ const pictograms = [
     direction: 1,
     startAngle: 0,
     svg: (
-      <svg width={20} height={20} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
+      <svg width={28} height={28} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <circle cx="18" cy="18" r="15" />
         <line x1="18" y1="3" x2="18" y2="33" />
         <line x1="3" y1="18" x2="33" y2="18" />
@@ -36,7 +36,7 @@ const pictograms = [
     direction: -1,
     startAngle: (Math.PI * 2) / 5,
     svg: (
-      <svg width={20} height={20} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
+      <svg width={28} height={28} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" />
       </svg>
     ),
@@ -49,7 +49,7 @@ const pictograms = [
     direction: 1,
     startAngle: (Math.PI * 2 * 2) / 5,
     svg: (
-      <svg width={20} height={20} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
+      <svg width={28} height={28} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M18 3 Q8 18 8 23 A10 10 0 0 0 28 23 Q28 18 18 3 Z" />
       </svg>
     ),
@@ -62,7 +62,7 @@ const pictograms = [
     direction: -1,
     startAngle: (Math.PI * 2 * 3) / 5,
     svg: (
-      <svg width={20} height={20} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
+      <svg width={28} height={28} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M18 3 L32 9 V20 Q32 30 18 34 Q4 30 4 20 V9 Z" />
       </svg>
     ),
@@ -75,14 +75,14 @@ const pictograms = [
     direction: 1,
     startAngle: (Math.PI * 2 * 4) / 5,
     svg: (
-      <svg width={20} height={20} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
+      <svg width={28} height={28} viewBox="0 0 36 36" fill="none" stroke="#C8963E" strokeWidth={1.5} aria-hidden="true">
         <path d="M21 3 L8 20 L17 20 L14 33 L28 16 L19 16 Z" />
       </svg>
     ),
   },
 ];
 
-const PICTO_SIZE = 20;
+const PICTO_SIZE = 36;
 const PICTO_HALF = PICTO_SIZE / 2;
 
 const actifs = [
