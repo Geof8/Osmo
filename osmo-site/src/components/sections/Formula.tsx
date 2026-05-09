@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import FadeUp from "@/components/FadeUp";
 
@@ -253,69 +253,23 @@ function MolecularDiagram() {
   const potRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const shadowRef = useRef<HTMLDivElement>(null);
-  const sectionInView = useRef(false);
-  const tweensRef = useRef<gsap.core.Tween[]>([]);
-  const prefersReducedMotion = useReducedMotion();
-  const [containerSize, setContainerSize] = useState(DESKTOP_SIZE);
 
-  /* ─── Responsive ─── */
   useEffect(() => {
-    function updateSize() {
-      setContainerSize(window.innerWidth < 768 ? MOBILE_SIZE : DESKTOP_SIZE);
-    }
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-
-  /* ─── Document visibility pause ─── */
-  useEffect(() => {
-    function handleVisibility() {
-      const tweens = tweensRef.current;
-      if (document.hidden) {
-        tweens.forEach((t) => t.pause());
-      } else if (sectionInView.current) {
-        tweens.forEach((t) => t.resume());
-      }
-    }
-    document.addEventListener("visibilitychange", handleVisibility);
-    return () => document.removeEventListener("visibilitychange", handleVisibility);
-  }, []);
-
-  /* ─── IntersectionObserver to start/pause ─── */
-  useEffect(() => {
-    const diagram = diagramRef.current;
-    if (!diagram) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        sectionInView.current = entry.isIntersecting;
-        const tweens = tweensRef.current;
-        if (entry.isIntersecting && !document.hidden) {
-          tweens.forEach((t) => t.resume());
-        } else {
-          tweens.forEach((t) => t.pause());
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(diagram);
-    return () => observer.disconnect();
-  }, []);
-
-  /* ─── Main GSAP animations ─── */
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-
     const diagram = diagramRef.current;
     const pot = potRef.current;
     const glow = glowRef.current;
     const shadow = shadowRef.current;
     if (!diagram || !pot || !glow || !shadow) return;
 
-    const SIZE = containerSize;
+    const isMobile = window.innerWidth < 768;
+    const SIZE = isMobile ? MOBILE_SIZE : DESKTOP_SIZE;
     const CENTER = SIZE / 2;
     const scale = SIZE / DESKTOP_SIZE;
+
+    /* Update container size */
+    diagram.style.width = `${SIZE}px`;
+    diagram.style.height = `${SIZE}px`;
+
     const tweens: gsap.core.Tween[] = [];
 
     /* Pot float ±8px over 4s + z-rotation ±2deg over 6s */
@@ -330,17 +284,13 @@ function MolecularDiagram() {
         repeat: -1,
         yoyo: true,
         onUpdate: () => {
-          if (pot) {
-            pot.style.transform = `translate(-50%, -52%) perspective(800px) translateY(${floatProxy.y}px) rotateZ(${rotProxy.deg}deg)`;
-          }
-          /* Dynamic shadow: bigger/lighter when pot high, smaller/darker when low */
-          if (shadow) {
-            const progress = (floatProxy.y + 8) / 16; // 0 = highest, 1 = lowest
-            const scaleS = 1 + progress * 0.15;
-            const opacity = 0.15 + progress * 0.2;
-            shadow.style.transform = `translate(-50%, -50%) scaleX(${scaleS}) scaleY(${scaleS * 0.7})`;
-            shadow.style.opacity = String(opacity);
-          }
+          pot.style.transform = `translate(-50%, -52%) perspective(800px) translateY(${floatProxy.y}px) rotateZ(${rotProxy.deg}deg)`;
+          /* Dynamic shadow */
+          const progress = (floatProxy.y + 8) / 16;
+          const scaleS = 1 + progress * 0.15;
+          const opacity = 0.15 + progress * 0.2;
+          shadow.style.transform = `translate(-50%, -50%) scaleX(${scaleS}) scaleY(${scaleS * 0.7})`;
+          shadow.style.opacity = String(opacity);
         },
       })
     );
@@ -391,53 +341,48 @@ function MolecularDiagram() {
             const x = CENTER + Math.cos(proxy.angle) * rx;
             const y = CENTER + Math.sin(proxy.angle) * ry;
 
-            /* 3D depth: sin determines "front/back"
-               Behind (sin < 0) → scale 0.7, opacity 0.5
-               In front (sin > 0) → scale 1.0, opacity 1.0 */
+            /* 3D depth */
             const depthFactor = Math.sin(proxy.angle);
-            const pictoScale = 0.7 + (depthFactor + 1) * 0.15; // 0.7 → 1.0
-            const pictoOpacity = 0.5 + (depthFactor + 1) * 0.25; // 0.5 → 1.0
-            const zIndex = depthFactor > 0 ? 10 : 1;
+            const pictoScale = 0.7 + (depthFactor + 1) * 0.15;
+            const pictoOpacity = 0.5 + (depthFactor + 1) * 0.25;
 
-            pictoEl.style.transform = `translate(${x - PICTO_HALF}px, ${y - PICTO_HALF}px) scale(${pictoScale})`;
+            pictoEl.style.left = `${x - PICTO_HALF}px`;
+            pictoEl.style.top = `${y - PICTO_HALF}px`;
+            pictoEl.style.transform = `scale(${pictoScale})`;
             pictoEl.style.opacity = String(pictoOpacity);
-            pictoEl.style.zIndex = String(zIndex);
+            pictoEl.style.zIndex = depthFactor > 0 ? "10" : "1";
 
             lineEl.setAttribute("x2", String(x));
             lineEl.setAttribute("y2", String(y));
 
-            /* Dynamic line opacity: far = brighter, near = dimmer */
+            /* Dynamic line opacity */
             const dist = Math.sqrt((x - CENTER) ** 2 + (y - CENTER) ** 2);
             const maxDist = Math.max(rx, ry);
-            const lineOpacity = 0.3 + (dist / maxDist) * 0.3; // 0.3 → 0.6
-            lineEl.setAttribute("opacity", String(lineOpacity));
+            lineEl.setAttribute("opacity", String(0.3 + (dist / maxDist) * 0.3));
           },
         })
       );
     });
 
-    tweensRef.current = tweens;
-
-    /* Animations run immediately — IntersectionObserver will pause/resume */
-    sectionInView.current = true;
+    /* Visibility API pause */
+    function onVisChange() {
+      tweens.forEach((t) => (document.hidden ? t.pause() : t.resume()));
+    }
+    document.addEventListener("visibilitychange", onVisChange);
 
     return () => {
       tweens.forEach((t) => t.kill());
-      tweensRef.current = [];
+      document.removeEventListener("visibilitychange", onVisChange);
     };
-  }, [containerSize, prefersReducedMotion]);
-
-  const SIZE = containerSize;
-  const CENTER = SIZE / 2;
-  const scale = SIZE / DESKTOP_SIZE;
+  }, []);
 
   return (
     <div
       ref={diagramRef}
       className="hidden sm:block"
       style={{
-        width: SIZE,
-        height: SIZE,
+        width: DESKTOP_SIZE,
+        height: DESKTOP_SIZE,
         position: "relative",
         perspective: "800px",
         maxWidth: "100%",
@@ -453,11 +398,11 @@ function MolecularDiagram() {
           top: "62%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 160 * scale,
-          height: 40 * scale,
+          width: 160,
+          height: 40,
           borderRadius: "50%",
           background: "radial-gradient(ellipse, rgba(0,0,0,0.35) 0%, transparent 70%)",
-          filter: `blur(${12 * scale}px)`,
+          filter: "blur(12px)",
           pointerEvents: "none",
           opacity: 0.2,
         }}
@@ -471,11 +416,11 @@ function MolecularDiagram() {
           top: "52%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 240 * scale,
-          height: 140 * scale,
+          width: 240,
+          height: 140,
           borderRadius: "50%",
           background: "radial-gradient(ellipse, rgba(200, 150, 62, 0.2) 0%, transparent 70%)",
-          filter: `blur(${24 * scale}px)`,
+          filter: "blur(24px)",
           pointerEvents: "none",
         }}
       />
@@ -488,9 +433,9 @@ function MolecularDiagram() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -52%) perspective(800px)",
-          width: 220 * scale,
-          height: 240 * scale,
-          filter: `drop-shadow(0 12px 32px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(200, 150, 62, 0.12))`,
+          width: 220,
+          height: 240,
+          filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.5)) drop-shadow(0 0 60px rgba(200, 150, 62, 0.12))",
           transformStyle: "preserve-3d",
           zIndex: 5,
         }}
@@ -516,8 +461,8 @@ function MolecularDiagram() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 280 * scale,
-          height: 280 * scale,
+          width: 280,
+          height: 280,
           borderRadius: "50%",
           border: "1px solid rgba(200, 150, 62, 0.08)",
           pointerEvents: "none",
@@ -526,21 +471,19 @@ function MolecularDiagram() {
 
       {/* SVG connecting lines */}
       <svg
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
+        viewBox={`0 0 ${DESKTOP_SIZE} ${DESKTOP_SIZE}`}
         aria-hidden="true"
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
       >
         {pictograms.map((p) => {
-          const rx = p.rx * scale;
-          const ry = p.ry * scale;
-          const x2 = CENTER + Math.cos(p.startAngle) * rx;
-          const y2 = CENTER + Math.sin(p.startAngle) * ry;
+          const x2 = DESKTOP_SIZE / 2 + Math.cos(p.startAngle) * p.rx;
+          const y2 = DESKTOP_SIZE / 2 + Math.sin(p.startAngle) * p.ry;
           return (
             <line
               key={`line-${p.id}`}
               className={`connect-line-${p.id}`}
-              x1={CENTER}
-              y1={CENTER}
+              x1={DESKTOP_SIZE / 2}
+              y1={DESKTOP_SIZE / 2}
               x2={x2}
               y2={y2}
               stroke="#C8963E"
@@ -553,19 +496,17 @@ function MolecularDiagram() {
 
       {/* Orbital pictograms */}
       {pictograms.map((p) => {
-        const rx = p.rx * scale;
-        const ry = p.ry * scale;
-        const x = CENTER + Math.cos(p.startAngle) * rx - PICTO_HALF;
-        const y = CENTER + Math.sin(p.startAngle) * ry - PICTO_HALF;
+        const cx = DESKTOP_SIZE / 2;
+        const ix = cx + Math.cos(p.startAngle) * p.rx - PICTO_HALF;
+        const iy = cx + Math.sin(p.startAngle) * p.ry - PICTO_HALF;
         return (
           <div
             key={p.id}
             className={`picto-${p.id}`}
             style={{
               position: "absolute",
-              left: 0,
-              top: 0,
-              transform: `translate(${x}px, ${y}px)`,
+              left: ix,
+              top: iy,
               width: PICTO_SIZE,
               height: PICTO_SIZE,
               display: "flex",
