@@ -32,15 +32,13 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
           style={{
             fontFamily: "var(--font-barlow), var(--display)",
             fontWeight: 800,
-            fontSize: "clamp(48px, 10vw, 168px)",
-            lineHeight: 0.9,
+            fontSize: "clamp(40px, 7vw, 110px)",
+            lineHeight: 0.92,
             letterSpacing: "-0.04em",
           }}
         >
-          Parce que demain
-          <br />
-          matin, tu n&apos;as
-          <br />
+          Parce que demain matin,{" "}
+          tu n&apos;as{" "}
           <span
             style={{
               fontFamily: "var(--font-barlow), var(--display)",
