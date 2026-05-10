@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CountUp from "@/components/CountUp";
+import { FONTS, HERO_STATS } from "@/lib/constants";
+import type { HeroProps } from "@/types";
 
 const headlineWords = ["Le", "lendemain", "matin,"];
 const headlineWords2 = ["tu", "assures."];
 
-export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => void; revealed: boolean }) {
+export default function Hero({ onOpenModal, revealed }: HeroProps) {
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
@@ -36,7 +38,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
           <div className="flex flex-col gap-7 sm:gap-9 order-1 lg:order-2">
             <h1
               style={{
-                fontFamily: "var(--font-barlow), var(--display)",
+                fontFamily: FONTS.display,
                 fontWeight: 800,
                 fontSize: "clamp(48px, 7vw, 110px)",
                 lineHeight: 0.92,
@@ -81,7 +83,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
               Un complexe d&apos;électrolytes formulé pour la récupération{" "}
               <em
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontStyle: "normal",
                   fontWeight: 600,
                   fontSize: "inherit",
@@ -102,7 +104,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                 onClick={onOpenModal}
                 className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
                 style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontFamily: FONTS.mono,
                   fontSize: 11,
                   fontWeight: 500,
                   letterSpacing: "0.18em",
@@ -115,7 +117,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
                 href="#actifs"
                 className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 active:scale-[0.97]"
                 style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontFamily: FONTS.mono,
                   fontSize: 11,
                   fontWeight: 500,
                   letterSpacing: "0.18em",
@@ -127,7 +129,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
               <span
                 className="text-[var(--ink-2)]"
                 style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontFamily: FONTS.mono,
                   fontSize: 10,
                   letterSpacing: "0.16em",
                   textTransform: "uppercase",
@@ -146,16 +148,11 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 lg:mt-24 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
         >
-          {[
-            { k: 5, label: "5", v: "Actifs cliniques", count: true },
-            { k: 15, label: "15", v: "Doses · 120g", count: true },
-            { k: 25, label: "25 €", v: "Tarif fondateur", amber: true, count: false },
-            { k: 300, label: "300", v: "Places · Mai 2026", count: true },
-          ].map((item, i) => (
+          {HERO_STATS.map((item, i) => (
             <div key={i}>
               <div
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontWeight: 800,
                   fontSize: "clamp(28px, 3vw, 36px)",
                   letterSpacing: "-0.025em",
@@ -168,7 +165,7 @@ export default function Hero({ onOpenModal, revealed }: { onOpenModal: () => voi
               <div
                 className="text-[var(--ink-2)] mt-2"
                 style={{
-                  fontFamily: "var(--font-mono), var(--mono)",
+                  fontFamily: FONTS.mono,
                   fontSize: 10,
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",

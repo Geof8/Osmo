@@ -1,14 +1,7 @@
 "use client";
 
 import FadeUp from "@/components/FadeUp";
-
-const observations = [
-  { num: "01", time: "Vendredi · 22:14", quote: "Trois verres hier soir. Réunion à 9h.", em: "Les deux sont réels." },
-  { num: "02", time: "Mardi · 23:47", quote: "Un dîner qui s'est prolongé. Les enfants se lèvent à 7h.", em: "Sans exception." },
-  { num: "03", time: "Jeudi · 00:12", quote: "La semaine a été longue. Le week-end", em: "doit quand même tenir." },
-  { num: "04", time: "Samedi · 02:31", quote: "Mariage d'un ami. Brunch en famille à 11h.", em: "Pas négociable." },
-  { num: "05", time: "Mercredi · 01:08", quote: "Soirée client qui s'éternise. Pitch important demain.", em: "Tout repose dessus." },
-];
+import { FONTS, OBSERVATIONS } from "@/lib/constants";
 
 export default function Empathy() {
   return (
@@ -19,13 +12,13 @@ export default function Empathy() {
             <div>
               <div
                 className="text-[var(--ink-2)] mb-5 lg:mb-7"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
               >
                 Pourquoi OSMO
               </div>
               <h2
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontWeight: 800,
                   fontSize: "clamp(40px, 5.5vw, 88px)",
                   lineHeight: 0.92,
@@ -34,7 +27,7 @@ export default function Empathy() {
               >
                 Tu connais
                 <br />
-                <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontWeight: 800, fontStyle: "normal" }}>
                   ce matin-là.
                 </span>
               </h2>
@@ -42,7 +35,7 @@ export default function Empathy() {
             <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.6, maxWidth: 460 }}>
               <em
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontStyle: "normal",
                   fontWeight: 700,
                   color: "var(--ink)",
@@ -61,7 +54,7 @@ export default function Empathy() {
             <div className="mb-7">
               <div
                 className="text-[var(--ink-2)]"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}
+                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}
               >
                 05 · Observations
               </div>
@@ -81,7 +74,7 @@ export default function Empathy() {
               }}
             >
               <style>{`.empathy-track::-webkit-scrollbar { display: none; }`}</style>
-              {observations.map((obs) => (
+              {OBSERVATIONS.map((obs) => (
                 <article
                   key={obs.num}
                   className="flex-shrink-0 flex flex-col gap-6 p-6 sm:p-8 min-h-[320px] sm:min-h-[360px] bg-white border border-[var(--rule)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] basis-[85%] sm:basis-[45%] lg:basis-[calc((100%-56px)/3)]"
@@ -92,7 +85,7 @@ export default function Empathy() {
                 >
                   <div
                     className="flex justify-between w-full pb-4 border-b border-[var(--rule)] text-[var(--ink-2)]"
-                    style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
+                    style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
                   >
                     <span>Obs. {obs.num}</span>
                     <span>{obs.time}</span>
@@ -100,7 +93,7 @@ export default function Empathy() {
                   <div className="flex-1 flex items-center">
                     <p
                       style={{
-                        fontFamily: "var(--font-barlow), var(--display)",
+                        fontFamily: FONTS.display,
                         fontWeight: 700,
                         fontSize: "clamp(24px, 2vw, 30px)",
                         lineHeight: 1.1,
@@ -110,7 +103,7 @@ export default function Empathy() {
                       {obs.quote}{" "}
                       <em
                         style={{
-                          fontFamily: "var(--font-barlow), var(--display)",
+                          fontFamily: FONTS.display,
                           fontStyle: "normal",
                           fontWeight: 700,
                           color: "var(--ink)",
@@ -129,7 +122,7 @@ export default function Empathy() {
               className="mt-4 flex items-center justify-end gap-2 text-[var(--ink-2)]"
               aria-hidden="true"
               style={{
-                fontFamily: "var(--font-mono), var(--mono)",
+                fontFamily: FONTS.mono,
                 fontSize: 10,
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
@@ -145,7 +138,7 @@ export default function Empathy() {
           <div className="mt-16 lg:mt-24 pt-10 lg:pt-14 border-t border-[var(--rule)] grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-14 items-baseline">
             <div
               style={{
-                fontFamily: "var(--font-barlow), var(--display)",
+                fontFamily: FONTS.display,
                 fontWeight: 700,
                 fontSize: "clamp(24px, 3.6vw, 52px)",
                 lineHeight: 1.08,
@@ -156,7 +149,7 @@ export default function Empathy() {
               <br />
               <span className="text-[#C8963E]"
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontStyle: "normal",
                   fontWeight: 700,
                   letterSpacing: "-0.02em",
@@ -167,7 +160,7 @@ export default function Empathy() {
             </div>
             <div
               className="text-[var(--ink-2)] lg:text-right"
-              style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, lineHeight: 1.7, letterSpacing: "0.16em", textTransform: "uppercase" }}
+              style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.7, letterSpacing: "0.16em", textTransform: "uppercase" }}
             >
               Pas de plantes obscures
               <br />

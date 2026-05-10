@@ -1,10 +1,12 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
+import { useInView } from "@/hooks/useInView";
+import { ANIMATION_CONFIG, FONTS } from "@/lib/constants";
+import type { Step } from "@/types";
 
-const steps = [
+const steps: Step[] = [
   {
     num: "01",
     sub: "Préparation",
@@ -54,22 +56,21 @@ const steps = [
   },
 ];
 
-function StepCard({ step, index }: { step: typeof steps[number]; index: number }) {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+function StepCard({ step, index }: { step: Step; index: number }) {
+  const [ref, isInView] = useInView<HTMLElement>({ margin: ANIMATION_CONFIG.inViewMarginLoose });
 
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
+      initial={ANIMATION_CONFIG.stepReveal.initial}
+      animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.stepReveal.initial}
+      transition={{ ...ANIMATION_CONFIG.stepReveal.transition, delay: index * 0.15 }}
       className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-6 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
     >
       <div>
         <div
           style={{
-            fontFamily: "var(--font-barlow), var(--display)",
+            fontFamily: FONTS.display,
             fontWeight: 800,
             fontSize: "clamp(64px, 7vw, 96px)",
             lineHeight: 0.85,
@@ -82,7 +83,7 @@ function StepCard({ step, index }: { step: typeof steps[number]; index: number }
         <div
           className="text-[var(--ink-2)] mt-2"
           style={{
-            fontFamily: "var(--font-barlow), var(--display)",
+            fontFamily: FONTS.display,
             fontWeight: 500,
             fontStyle: "normal",
             fontSize: 20,
@@ -95,7 +96,7 @@ function StepCard({ step, index }: { step: typeof steps[number]; index: number }
       <div className="w-14 h-14 text-[var(--ink)]">{step.svg}</div>
       <h3
         style={{
-          fontFamily: "var(--font-barlow), var(--display)",
+          fontFamily: FONTS.display,
           fontWeight: 700,
           fontSize: "clamp(24px, 2vw, 30px)",
           lineHeight: 1.1,
@@ -105,7 +106,7 @@ function StepCard({ step, index }: { step: typeof steps[number]; index: number }
         {step.labelEm ? (
           <>
             {step.label.split(" ")[0]}{" "}
-            <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, letterSpacing: "-0.02em" }}>
               {step.label.split(" ").slice(1).join(" ")}
             </span>
           </>
@@ -118,7 +119,7 @@ function StepCard({ step, index }: { step: typeof steps[number]; index: number }
       </p>
       <div
         className="mt-auto pt-4 border-t border-[var(--soft)] text-[var(--ink)]"
-        style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
+        style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
       >
         {step.timing}
       </div>
@@ -135,13 +136,13 @@ export default function HowItWorks() {
             <div>
               <div
                 className="text-[var(--ink-2)] mb-5 lg:mb-7"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
               >
                 Le protocole
               </div>
               <h2
                 style={{
-                  fontFamily: "var(--font-barlow), var(--display)",
+                  fontFamily: FONTS.display,
                   fontWeight: 800,
                   fontSize: "clamp(40px, 7vw, 112px)",
                   lineHeight: 0.92,
@@ -150,17 +151,17 @@ export default function HowItWorks() {
               >
                 Simple. Le soir.
                 <br />
-                <span className="text-[#C8963E]" style={{ fontFamily: "var(--font-barlow), var(--display)", fontWeight: 800, fontStyle: "normal" }}>
+                <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontWeight: 800, fontStyle: "normal" }}>
                   Pas le matin.
                 </span>
               </h2>
             </div>
             <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(15px, 1.1vw, 17px)", lineHeight: 1.6, maxWidth: 420 }}>
               C&apos;est{" "}
-              <em style={{ fontFamily: "var(--font-barlow), var(--display)", fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 là
               </em>{" "}
-              toute la différence. Les électrolytes, le NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
+              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
             </p>
           </div>
         </FadeUp>

@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
+import { CTA_STATS, FONTS } from "@/lib/constants";
+import type { OpenModalProps } from "@/types";
 
-export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void }) {
+export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
   return (
     <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(100px, 14vw, 180px) 0 clamp(80px, 10vw, 120px)" }}>
       <div
@@ -18,7 +20,7 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
         <FadeUp>
           <div
             className="text-[var(--ink-2)] mb-8 lg:mb-12 flex items-center gap-[14px]"
-            style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase" }}
+            style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase" }}
           >
             <span className="w-7 h-px bg-white/40" aria-hidden="true" />
             Vol. 01 · Édition fondateurs · 300 ex.
@@ -30,7 +32,7 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           style={{
-            fontFamily: "var(--font-barlow), var(--display)",
+            fontFamily: FONTS.display,
             fontWeight: 800,
             fontSize: "clamp(40px, 7vw, 110px)",
             lineHeight: 0.92,
@@ -41,7 +43,7 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
           tu n&apos;as{" "}
           <span
             style={{
-              fontFamily: "var(--font-barlow), var(--display)",
+              fontFamily: FONTS.display,
               fontWeight: 800,
               fontStyle: "normal",
               color: "var(--amber)",
@@ -54,16 +56,11 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
         <FadeUp delay={0.2}>
           <div className="mt-16 lg:mt-24 pt-8 border-t border-white/[0.16] grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-14 items-end">
             <div className="flex gap-8 sm:gap-14 flex-wrap">
-              {[
-                { k: "300", v: "Places", em: true },
-                { k: "25 €", v: "Fondateur", em: false },
-                { k: "29 €", v: "Public", em: false },
-                { k: "0 €", v: "Maintenant", em: false },
-              ].map((stat, i) => (
+              {CTA_STATS.map((stat, i) => (
                 <div key={i}>
                   <div
                     style={{
-                      fontFamily: "var(--font-barlow), var(--display)",
+                      fontFamily: FONTS.display,
                       fontWeight: 800,
                       fontSize: "clamp(36px, 4vw, 48px)",
                       letterSpacing: "-0.025em",
@@ -76,7 +73,7 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
                   <div
                     className="mt-[10px]"
                     style={{
-                      fontFamily: "var(--font-mono), var(--mono)",
+                      fontFamily: FONTS.mono,
                       fontSize: 10,
                       letterSpacing: "0.18em",
                       textTransform: "uppercase",
@@ -92,7 +89,7 @@ export default function ClosingCTA({ onOpenModal }: { onOpenModal: () => void })
               onClick={onOpenModal}
               className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
               style={{
-                fontFamily: "var(--font-mono), var(--mono)",
+                fontFamily: FONTS.mono,
                 fontSize: 11,
                 fontWeight: 500,
                 letterSpacing: "0.18em",

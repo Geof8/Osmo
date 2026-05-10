@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useInView } from "@/hooks/useInView";
+import type { CountUpProps } from "@/types";
 
-export default function CountUp({ target, duration = 1.2 }: { target: number; duration?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
+export default function CountUp({ target, duration = 1.2 }: CountUpProps) {
+  const [ref, isInView] = useInView<HTMLSpanElement>();
   const [value, setValue] = useState(0);
 
   useEffect(() => {

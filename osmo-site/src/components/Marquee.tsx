@@ -1,18 +1,9 @@
 "use client";
 
-const items = [
-  "Bicarbonate de sodium · 1700 mg",
-  "Citrate de potassium · 2000 mg",
-  "Bisglycinate de magnésium · 1350 mg",
-  "NaCl · 150 mg",
-  "NAC · 600 mg",
-  "Lot 001 · 300 ex.",
-  "Édition fondateurs · 25 €",
-  "Made in France",
-];
+import { FONTS, MARQUEE_ITEMS } from "@/lib/constants";
 
-const sep = " ◆ ";
-const text = items.join(sep) + sep;
+const SEP = " ◆ ";
+const text = MARQUEE_ITEMS.join(SEP) + SEP;
 
 export default function Marquee() {
   return (
@@ -29,7 +20,7 @@ export default function Marquee() {
             className="inline-block text-white"
             aria-hidden={i === 1 ? "true" : undefined}
             style={{
-              fontFamily: "var(--font-mono), var(--mono)",
+              fontFamily: FONTS.mono,
               fontSize: 11,
               letterSpacing: "0.16em",
               textTransform: "uppercase",

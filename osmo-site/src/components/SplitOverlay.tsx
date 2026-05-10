@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FONTS } from "@/lib/constants";
+import type { SplitOverlayProps } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +14,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
     <div style={{ textAlign: "center", width: "max-content" }}>
       <div
         style={{
-          fontFamily: "var(--font-barlow), var(--display)",
+          fontFamily: FONTS.display,
           fontWeight: 900,
           fontSize: "clamp(32px, 7vw, 130px)",
           lineHeight: 1,
@@ -26,7 +28,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
       </div>
       <div
         style={{
-          fontFamily: "var(--font-mono), var(--mono)",
+          fontFamily: FONTS.mono,
           fontSize: 11,
           letterSpacing: "0.22em",
           textTransform: "uppercase",
@@ -40,7 +42,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
   );
 }
 
-export default function SplitOverlay({ onComplete }: { onComplete: () => void }) {
+export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const spacerRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);

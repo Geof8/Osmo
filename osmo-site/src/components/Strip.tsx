@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FONTS } from "@/lib/constants";
 
 export default function Strip() {
   return (
@@ -12,7 +13,7 @@ export default function Strip() {
       role="status"
       style={{
         padding: "9px 0",
-        fontFamily: "var(--font-mono), var(--mono)",
+        fontFamily: FONTS.mono,
         fontSize: 10,
         letterSpacing: "0.2em",
         textTransform: "uppercase",

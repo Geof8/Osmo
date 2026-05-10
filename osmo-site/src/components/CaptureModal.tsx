@@ -4,12 +4,8 @@ import { useState, useEffect, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { getSupabase } from "@/lib/supabase";
-
-interface CaptureModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  source?: string;
-}
+import { FONTS } from "@/lib/constants";
+import type { CaptureModalProps } from "@/types";
 
 export default function CaptureModal({
   open,
@@ -127,7 +123,7 @@ export default function CaptureModal({
                   <div
                     className="text-[var(--ink)] mb-2"
                     style={{
-                      fontFamily: "var(--font-barlow), var(--display)",
+                      fontFamily: FONTS.display,
                       fontWeight: 800,
                       fontSize: 28,
                       letterSpacing: "-0.02em",
@@ -145,7 +141,7 @@ export default function CaptureModal({
                     <div
                       className="text-[var(--ink-2)] mb-5"
                       style={{
-                        fontFamily: "var(--font-mono), var(--mono)",
+                        fontFamily: FONTS.mono,
                         fontSize: 10,
                         letterSpacing: "0.18em",
                         textTransform: "uppercase",
@@ -155,7 +151,7 @@ export default function CaptureModal({
                     </div>
                     <h2
                       style={{
-                        fontFamily: "var(--font-barlow), var(--display)",
+                        fontFamily: FONTS.display,
                         fontWeight: 800,
                         fontSize: 32,
                         letterSpacing: "-0.03em",
@@ -174,7 +170,7 @@ export default function CaptureModal({
                         htmlFor="capture-email"
                         className="block mb-1.5 text-[var(--ink)]"
                         style={{
-                          fontFamily: "var(--font-mono), var(--mono)",
+                          fontFamily: FONTS.mono,
                           fontSize: 10,
                           letterSpacing: "0.14em",
                           textTransform: "uppercase",
@@ -201,7 +197,7 @@ export default function CaptureModal({
                         htmlFor="capture-phone"
                         className="block mb-1.5 text-[var(--ink-2)]"
                         style={{
-                          fontFamily: "var(--font-mono), var(--mono)",
+                          fontFamily: FONTS.mono,
                           fontSize: 10,
                           letterSpacing: "0.14em",
                           textTransform: "uppercase",
@@ -229,7 +225,7 @@ export default function CaptureModal({
                       disabled={loading}
                       className="w-full inline-flex items-center justify-center gap-3 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none"
                       style={{
-                        fontFamily: "var(--font-mono), var(--mono)",
+                        fontFamily: FONTS.mono,
                         fontSize: 11,
                         fontWeight: 500,
                         letterSpacing: "0.18em",
@@ -241,7 +237,7 @@ export default function CaptureModal({
                     </button>
                     <p
                       className="text-[var(--ink-3)] text-center"
-                      style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
+                      style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
                     >
                       Prix fondateur garanti · 0 € maintenant
                     </p>

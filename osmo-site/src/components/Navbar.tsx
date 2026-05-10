@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FONTS } from "@/lib/constants";
+import type { OpenModalProps } from "@/types";
 
-export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
+export default function Navbar({ onOpenModal }: OpenModalProps) {
   return (
     <motion.nav
       initial={{ y: -10, opacity: 0 }}
@@ -18,7 +20,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
             aria-label="OSMO — retour en haut"
             className="relative"
             style={{
-              fontFamily: "var(--font-playfair), 'Playfair Display', serif",
+              fontFamily: FONTS.playfair,
               fontWeight: 600,
               fontSize: 30,
               lineHeight: 1,
@@ -44,7 +46,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
           <span
             className="hidden md:inline text-[var(--ink-2)]"
             style={{
-              fontFamily: "var(--font-barlow), var(--display)",
+              fontFamily: FONTS.display,
               fontWeight: 500,
               fontStyle: "normal",
               fontSize: 15,
@@ -59,7 +61,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
           <span
             className="hidden sm:inline text-[var(--ink-2)]"
             style={{
-              fontFamily: "var(--font-mono), var(--mono)",
+              fontFamily: FONTS.mono,
               fontSize: 10,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
@@ -71,7 +73,7 @@ export default function Navbar({ onOpenModal }: { onOpenModal: () => void }) {
             onClick={onOpenModal}
             className="inline-flex items-center gap-3 px-5 min-h-[44px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
             style={{
-              fontFamily: "var(--font-mono), var(--mono)",
+              fontFamily: FONTS.mono,
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: "0.18em",

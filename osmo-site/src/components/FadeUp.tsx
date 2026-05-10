@@ -1,23 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ANIMATION_CONFIG } from "@/lib/constants";
+import type { FadeUpProps } from "@/types";
 
-export default function FadeUp({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+export default function FadeUp({ children, delay = 0, className = "" }: FadeUpProps) {
+  const { initial, whileInView, viewport, transition } = ANIMATION_CONFIG.fadeUp;
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.1, 0.25, 1] }}
+      initial={initial}
+      whileInView={whileInView}
+      viewport={viewport}
+      transition={{ ...transition, delay }}
       className={className}
     >
       {children}

@@ -1,10 +1,6 @@
-export default function Footer() {
-  const cols = [
-    { title: "Produit", links: [{ label: "Recovery", href: "#formule" }, { label: "Composition", href: "#formule" }, { label: "Protocole", href: "#protocole" }] },
-    { title: "Atelier", links: [{ label: "Notre approche", href: "#observations" }, { label: "Lot 001", href: "#reserve" }, { label: "Analyses", href: "#formule" }] },
-    { title: "Légal", links: [{ label: "Mentions légales", href: "#" }, { label: "CGV", href: "#" }, { label: "Contact", href: "#" }] },
-  ];
+import { FONTS, FOOTER_COLUMNS } from "@/lib/constants";
 
+export default function Footer() {
   return (
     <footer className="bg-[var(--paper)] border-t border-[var(--rule)] relative z-[5]" style={{ padding: "64px 0 36px" }}>
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
@@ -13,7 +9,7 @@ export default function Footer() {
             <span
               className="relative pr-[14px] inline-block"
               style={{
-                fontFamily: "var(--font-barlow), var(--display)",
+                fontFamily: FONTS.display,
                 fontWeight: 900,
                 fontSize: 40,
                 letterSpacing: "-0.04em",
@@ -26,7 +22,7 @@ export default function Footer() {
             <div
               className="text-[var(--ink-2)] mt-[14px]"
               style={{
-                fontFamily: "var(--font-barlow), var(--display)",
+                fontFamily: FONTS.display,
                 fontWeight: 500,
                 fontStyle: "normal",
                 fontSize: 18,
@@ -38,11 +34,11 @@ export default function Footer() {
               <span style={{ fontWeight: 700 }}>Recommencez.</span>
             </div>
           </div>
-          {cols.map((col) => (
+          {FOOTER_COLUMNS.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <h4
                 className="text-[var(--ink-2)] mb-[18px]"
-                style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500 }}
+                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500 }}
               >
                 {col.title}
               </h4>
@@ -50,7 +46,7 @@ export default function Footer() {
                 {col.links.map((link) => (
                   <li
                     key={link.label}
-                    style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 12, lineHeight: 2.1 }}
+                    style={{ fontFamily: FONTS.mono, fontSize: 12, lineHeight: 2.1 }}
                   >
                     <a
                       href={link.href}
@@ -67,7 +63,7 @@ export default function Footer() {
 
         <div
           className="mt-14 pt-5 border-t border-[var(--soft)] flex justify-between gap-6 flex-wrap text-[var(--ink-2)]"
-          style={{ fontFamily: "var(--font-mono), var(--mono)", fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase" }}
+          style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase" }}
         >
           <div>© 2026 Osmo Lab · osmolab.fr</div>
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
