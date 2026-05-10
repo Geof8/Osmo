@@ -77,10 +77,11 @@ export default function Empathy() {
               {OBSERVATIONS.map((obs) => (
                 <article
                   key={obs.num}
-                  className="flex-shrink-0 flex flex-col gap-6 p-6 sm:p-8 min-h-[320px] sm:min-h-[360px] bg-white border border-[var(--rule)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] basis-[85%] sm:basis-[45%] lg:basis-[calc((100%-56px)/3)]"
+                  className="flex-shrink-0 flex flex-col gap-6 p-6 sm:p-8 min-h-[320px] sm:min-h-[360px] bg-white transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] basis-[85%] sm:basis-[45%] lg:basis-[calc((100%-56px)/3)]"
                   style={{
                     scrollSnapAlign: "start",
                     minWidth: 260,
+                    border: "1px solid var(--rule)",
                   }}
                 >
                   <div

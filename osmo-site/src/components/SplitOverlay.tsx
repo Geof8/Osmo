@@ -75,7 +75,7 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
               doneRef.current = true;
               ctx.revert();
 
-              window.scrollTo(0, 0);
+              window.scrollTo({ top: 0, behavior: "instant" });
               onComplete();
 
               if (containerRef.current) {

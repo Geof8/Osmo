@@ -65,17 +65,20 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       initial={ANIMATION_CONFIG.stepReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.stepReveal.initial}
       transition={{ ...ANIMATION_CONFIG.stepReveal.transition, delay: index * 0.15 }}
-      className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-6 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+      className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-6 sm:gap-7 relative transition-all duration-300 ease-in-out hover:-translate-y-[6px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:border-[#C8963E] [&:hover_[data-step-num]]:opacity-100"
     >
       <div>
         <div
+          data-step-num
           style={{
             fontFamily: FONTS.display,
             fontWeight: 800,
             fontSize: "clamp(64px, 7vw, 96px)",
             lineHeight: 0.85,
             letterSpacing: "-0.04em",
-            color: "var(--ink)",
+            color: "#C8963E",
+            opacity: 0.45,
+            transition: "opacity 0.3s ease",
           }}
         >
           {step.num}
