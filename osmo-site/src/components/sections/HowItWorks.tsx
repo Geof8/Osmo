@@ -144,7 +144,7 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(40px, 7vw, 112px)",
+                  fontSize: "clamp(40px, 5.5vw, 88px)",
                   lineHeight: 0.92,
                   letterSpacing: "-0.035em",
                 }}
@@ -156,7 +156,7 @@ export default function HowItWorks() {
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(15px, 1.1vw, 17px)", lineHeight: 1.6, maxWidth: 420 }}>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.6, maxWidth: 460 }}>
               C&apos;est{" "}
               <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 là
