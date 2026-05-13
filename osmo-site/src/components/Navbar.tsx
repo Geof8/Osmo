@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
@@ -17,7 +16,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10 grid grid-cols-3 items-center h-[64px] sm:h-[78px]">
         {/* Left — Logo */}
         <div className="flex items-baseline gap-4">
-          <Link
+          <a
             href="/"
             aria-label="OSMO — retour en haut"
             className="relative"
@@ -44,7 +43,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               O
             </span>
             smo
-          </Link>
+          </a>
           <span
             className="hidden lg:inline text-[var(--ink-2)]"
             style={{
@@ -61,7 +60,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
 
         {/* Center — Notre Histoire */}
         <div className="flex justify-center">
-          <Link
+          <a
             href="/notre-histoire"
             className="inline-flex items-center justify-center px-5 min-h-[38px] border border-[var(--rule)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
             style={{
@@ -73,7 +72,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
             }}
           >
             Notre Histoire
-          </Link>
+          </a>
         </div>
 
         {/* Right — CTA */}
