@@ -13,6 +13,7 @@ const actifs: Ingredient[] = [
     ord: "N° 01 · Minéral",
     mol: "NaHCO₃",
     name: "Bicarbonate de sodium",
+    benefit: "Réhydratation rapide",
     dose: "1700",
     role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
     svg: (
@@ -27,6 +28,7 @@ const actifs: Ingredient[] = [
     ord: "N° 02 · Minéral",
     mol: "K₃C₆H₅O₇",
     name: "Citrate de potassium",
+    benefit: "Réduit les crampes",
     dose: "2000",
     role: "Fonction musculaire. Contraction cardiaque normale.",
     svg: (
@@ -39,6 +41,7 @@ const actifs: Ingredient[] = [
     ord: "N° 03 · Minéral",
     mol: "Mg(C₂H₄NO₂)₂",
     name: "Bisglycinate de magnésium",
+    benefit: "Améliore le sommeil",
     dose: "1350",
     role: "Récupération nerveuse. Sommeil profond.",
     svg: (
@@ -50,28 +53,30 @@ const actifs: Ingredient[] = [
     ),
   },
   {
-    ord: "N° 04 · Minéral",
-    mol: "NaCl",
-    name: "Chlorure de sodium",
-    dose: "150",
-    role: "Hydratation cellulaire ciblée.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
-        <path d="M21 34 Q21 41 28 44" />
-      </svg>
-    ),
-  },
-  {
-    ord: "N° 05 · Acide aminé",
+    ord: "N° 04 · Acide aminé",
     mol: "C₅H₉NO₃S",
-    name: "N-Acétyl-Cystéine",
+    name: "N-Acétyl-Cystéine (NAC)",
+    benefit: "Soutien hépatique",
     dose: "600",
     role: "Soutien hépatique nocturne. Précurseur du glutathion.",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
         <path d="M19 28 L25 34 L37 22" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 05 · Minéral",
+    mol: "NaCl",
+    name: "Chlorure de sodium",
+    benefit: "Hydratation cellulaire",
+    dose: "150",
+    role: "Hydratation cellulaire ciblée.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
+        <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
+        <path d="M21 34 Q21 41 28 44" />
       </svg>
     ),
   },
@@ -84,7 +89,7 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "80px 0" }}
+      style={{ background: "#111111", padding: "48px 0 80px" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

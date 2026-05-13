@@ -57,6 +57,9 @@ export default function IngredientCard({
           color: "#FFFFFF",
         }}
       >
+        {a.benefit}
+      </div>
+      <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: "#666666" }}>
         {a.name}
       </div>
       <div

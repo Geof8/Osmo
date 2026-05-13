@@ -4,6 +4,7 @@ export interface Ingredient {
   ord: string;
   mol: string;
   name: string;
+  benefit: string;
   dose: string;
   role: string;
   svg: ReactNode;
