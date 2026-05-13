@@ -14,7 +14,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
       className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--rule)]"
       aria-label="Navigation principale"
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10 flex items-center justify-between h-[64px] sm:h-[78px]">
+      <div className="relative max-w-[1380px] mx-auto px-5 sm:px-10 flex items-center justify-between h-[64px] sm:h-[78px]">
         <div className="flex items-baseline gap-4">
           <Link
             href="/"
