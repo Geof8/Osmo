@@ -71,8 +71,8 @@ export default function WhyYouSuffer() {
                       color: "var(--ink)",
                     }}
                   >
-                    Ce que tu appelles gueule de bois,
-                    c&apos;est une déplétion électrolytique aiguë.
+                    Ce n&apos;est pas dans ta tête — ton corps manque
+                    littéralement de carburant.
                   </p>
                 </div>
 
