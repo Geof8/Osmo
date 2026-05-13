@@ -75,7 +75,7 @@ export default function WhyYouSuffer() {
             <div className="flex justify-center lg:justify-end">
               <div className="w-full max-w-[320px] lg:max-w-[420px]">
                 <Image
-                  src="/images/infographic.png"
+                  src="/images/infographic.svg"
                   alt="Schéma explicatif — problème et solution OSMO"
                   width={420}
                   height={420}

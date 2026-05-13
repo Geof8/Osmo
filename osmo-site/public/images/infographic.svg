@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" fill="none">
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .title { font-size: 28px; font-weight: 700; fill: #111111; letter-spacing: 0.08em; }
+    .subtitle { font-size: 15px; font-weight: 400; fill: #888888; letter-spacing: 0.06em; }
+    .title-amber { font-size: 28px; font-weight: 700; fill: #C8963E; letter-spacing: 0.08em; }
+    .subtitle-amber { font-size: 14px; font-weight: 400; fill: #999999; letter-spacing: 0.04em; }
+    .minerals { font-size: 20px; font-weight: 700; fill: #111111; letter-spacing: 0.1em; }
+    .circle-label { font-size: 14px; font-weight: 600; fill: #111111; }
+  </style>
+
+  <!-- STEP 1: Glass icon + L'ALCOOL -->
+  <g transform="translate(400, 60)">
+    <!-- Glass SVG -->
+    <g transform="translate(-30, 0)" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 0 L60 0" />
+      <path d="M4 0 L10 50 L50 50 L56 0" />
+      <path d="M12 30 Q30 26 48 30" />
+    </g>
+    <text x="0" y="80" text-anchor="middle" class="title">L'ALCOOL</text>
+    <text x="0" y="105" text-anchor="middle" class="subtitle">Agit comme un diurétique</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(400, 140)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#C8963E" stroke-width="2" />
+    <polyline points="-6,34 0,42 6,34" stroke="#C8963E" stroke-width="2" fill="none" stroke-linejoin="round" />
+  </g>
+
+  <!-- STEP 2: Na K Mg dispersing -->
+  <g transform="translate(400, 210)">
+    <!-- Na circle center -->
+    <circle cx="0" cy="0" r="24" stroke="#111111" stroke-width="1.8" fill="none" />
+    <text x="0" y="6" text-anchor="middle" class="circle-label">Na</text>
+
+    <!-- Dispersal arrows from center -->
+    <line x1="-18" y1="16" x2="-50" y2="44" stroke="#C8963E" stroke-width="1.5" />
+    <line x1="18" y1="16" x2="50" y2="44" stroke="#C8963E" stroke-width="1.5" />
+    <polyline points="-44,44 -50,44 -50,38" stroke="#C8963E" stroke-width="1.5" fill="none" />
+    <polyline points="44,44 50,44 50,38" stroke="#C8963E" stroke-width="1.5" fill="none" />
+
+    <!-- K circle left -->
+    <circle cx="-70" cy="60" r="24" stroke="#111111" stroke-width="1.8" fill="none" />
+    <text x="-70" y="66" text-anchor="middle" class="circle-label">K</text>
+
+    <!-- Mg circle right -->
+    <circle cx="70" cy="60" r="24" stroke="#111111" stroke-width="1.8" fill="none" />
+    <text x="70" y="66" text-anchor="middle" class="circle-label">Mg</text>
+
+    <text x="0" y="115" text-anchor="middle" class="minerals">SODIUM · POTASSIUM · MAGNÉSIUM</text>
+    <text x="0" y="140" text-anchor="middle" class="subtitle">Éliminés par ton corps pendant la nuit</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(400, 380)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#C8963E" stroke-width="2" />
+    <polyline points="-6,34 0,42 6,34" stroke="#C8963E" stroke-width="2" fill="none" stroke-linejoin="round" />
+  </g>
+
+  <!-- STEP 3: Brain with crossed lightning -->
+  <g transform="translate(400, 450)">
+    <!-- Brain outline -->
+    <g stroke="#111111" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Left hemisphere -->
+      <path d="M-4 -36 C-28 -38 -42 -24 -42 -8 C-46 -4 -46 8 -38 14 C-40 22 -34 34 -20 36 C-14 40 -6 38 -4 34" />
+      <!-- Right hemisphere -->
+      <path d="M4 -36 C28 -38 42 -24 42 -8 C46 -4 46 8 38 14 C40 22 34 34 20 36 C14 40 6 38 4 34" />
+      <!-- Center line -->
+      <line x1="0" y1="-36" x2="0" y2="34" />
+      <!-- Brain folds left -->
+      <path d="M-4 -10 C-16 -10 -22 -4 -22 4" />
+      <path d="M-4 10 C-14 10 -20 16 -18 22" />
+      <!-- Brain folds right -->
+      <path d="M4 -10 C16 -10 22 -4 22 4" />
+      <path d="M4 10 C14 10 20 16 18 22" />
+    </g>
+    <!-- Crossed lightning bolt -->
+    <g stroke="#111111" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 -18 L-4 -2 L4 -2 L-6 16" />
+      <!-- Cross/X over lightning -->
+      <line x1="-12" y1="-14" x2="12" y2="12" stroke="#CC4444" stroke-width="2.5" />
+      <line x1="12" y1="-14" x2="-12" y2="12" stroke="#CC4444" stroke-width="2.5" />
+    </g>
+
+    <text x="0" y="66" text-anchor="middle" class="title">TON CORPS TOURNE AU RALENTI</text>
+    <text x="0" y="90" text-anchor="middle" class="subtitle">Fatigue · Brouillard mental · Crampes</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g transform="translate(400, 568)">
+    <line x1="0" y1="0" x2="0" y2="30" stroke="#C8963E" stroke-width="2" />
+    <polyline points="-6,24 0,32 6,24" stroke="#C8963E" stroke-width="2" fill="none" stroke-linejoin="round" />
+  </g>
+
+  <!-- Amber horizontal divider -->
+  <line x1="200" y1="620" x2="600" y2="620" stroke="#C8963E" stroke-width="2.5" />
+
+  <!-- STEP 4: Solution — Brain with active lightning -->
+  <g transform="translate(400, 680)">
+    <!-- Brain outline in amber -->
+    <g stroke="#C8963E" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Left hemisphere -->
+      <path d="M-4 -36 C-28 -38 -42 -24 -42 -8 C-46 -4 -46 8 -38 14 C-40 22 -34 34 -20 36 C-14 40 -6 38 -4 34" />
+      <!-- Right hemisphere -->
+      <path d="M4 -36 C28 -38 42 -24 42 -8 C46 -4 46 8 38 14 C40 22 34 34 20 36 C14 40 6 38 4 34" />
+      <!-- Center line -->
+      <line x1="0" y1="-36" x2="0" y2="34" />
+      <!-- Brain folds left -->
+      <path d="M-4 -10 C-16 -10 -22 -4 -22 4" />
+      <path d="M-4 10 C-14 10 -20 16 -18 22" />
+      <!-- Brain folds right -->
+      <path d="M4 -10 C16 -10 22 -4 22 4" />
+      <path d="M4 10 C14 10 20 16 18 22" />
+    </g>
+    <!-- Active lightning bolt in amber -->
+    <path d="M6 -18 L-4 -2 L4 -2 L-6 16" stroke="#C8963E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+
+    <text x="0" y="66" text-anchor="middle" class="title-amber">OSMO RÉTABLIT L'ÉQUILIBRE</text>
+    <text x="0" y="92" text-anchor="middle" class="subtitle-amber">5 actifs cliniques reconstituent ce que</text>
+    <text x="0" y="112" text-anchor="middle" class="subtitle-amber">l'alcool a éliminé. Pendant votre sommeil.</text>
+  </g>
+</svg>
