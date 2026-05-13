@@ -28,6 +28,9 @@ export default function IngredientCard({
         borderBottom: "1px solid #333333",
       }}
     >
+      <div className="w-11 h-11" style={{ color: "#C8963E" }}>
+        {a.svg}
+      </div>
       <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: "#666666" }}>
         {a.name}
       </div>
