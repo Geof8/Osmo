@@ -162,7 +162,7 @@ export default function NotreHistoire() {
                 }}
               >
                 Un an et demi d&apos;études scientifiques, d&apos;avis médicaux,
-                de tests. J&apos;ai compris le rôle de chaque sel minéral —
+                de tests. J&apos;ai compris le rôle de chaque sel minéraux —
                 sodium, potassium, magnésium — ces composants de base
                 du corps humain qu&apos;on néglige et qui sont pourtant
                 à la base de tout. C&apos;est aussi comme ça que j&apos;ai découvert
