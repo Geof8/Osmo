@@ -31,20 +31,23 @@ export default function IngredientCard({
       <div className="w-11 h-11" style={{ color: "#C8963E" }}>
         {a.svg}
       </div>
-      <div style={{ fontFamily: FONTS.mono, fontSize: 11, color: "#AAAAAA" }}>
+      <div style={{ fontFamily: FONTS.mono, fontSize: 11, color: "#CCCCCC" }}>
         {a.mol}
       </div>
-      <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: "#666666" }}>
+      <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: "#FFFFFF" }}>
         {a.name}
       </div>
       <div
         style={{
+          marginTop: 4,
+          padding: "8px 12px",
+          border: "1px solid #C8963E",
           fontFamily: FONTS.display,
           fontWeight: 700,
-          fontSize: "clamp(18px, 1.4vw, 22px)",
+          fontSize: "clamp(14px, 1.2vw, 16px)",
           letterSpacing: "-0.02em",
           lineHeight: 1.15,
-          color: "#FFFFFF",
+          color: "#C8963E",
         }}
       >
         {a.benefit}
