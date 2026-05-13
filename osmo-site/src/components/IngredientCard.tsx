@@ -37,9 +37,9 @@ export default function IngredientCard({
       <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: "#FFFFFF" }}>
         {a.name}
       </div>
+      <div style={{ borderTop: "1px dashed #333333", marginTop: 4 }} />
       <div
         style={{
-          marginTop: 4,
           padding: "8px 12px",
           border: "1px solid #C8963E",
           fontFamily: FONTS.display,
