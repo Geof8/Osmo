@@ -53,21 +53,7 @@ const actifs: Ingredient[] = [
     ),
   },
   {
-    ord: "N° 04 · Acide aminé",
-    mol: "C₅H₉NO₃S",
-    name: "N-Acétyl-Cystéine (NAC)",
-    benefit: "Soutien hépatique",
-    dose: "600",
-    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
-        <path d="M19 28 L25 34 L37 22" />
-      </svg>
-    ),
-  },
-  {
-    ord: "N° 05 · Minéral",
+    ord: "N° 04 · Minéral",
     mol: "NaCl",
     name: "Chlorure de sodium",
     benefit: "Hydratation cellulaire",
@@ -77,6 +63,20 @@ const actifs: Ingredient[] = [
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
         <path d="M21 34 Q21 41 28 44" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 05 · Acide aminé",
+    mol: "C₅H₉NO₃S",
+    name: "N-Acétyl-Cystéine (NAC)",
+    benefit: "Soutien hépatique",
+    dose: "600",
+    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
+        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
+        <path d="M19 28 L25 34 L37 22" />
       </svg>
     ),
   },
