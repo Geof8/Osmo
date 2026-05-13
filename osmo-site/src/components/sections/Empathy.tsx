@@ -22,9 +22,9 @@ export default function Empathy() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(40px, 5.5vw, 88px)",
+                  fontSize: "clamp(36px, 5vw, 72px)",
                   lineHeight: 0.92,
-                  letterSpacing: "-0.035em",
+                  letterSpacing: "-0.02em",
                 }}
               >
                 Tu connais
@@ -34,7 +34,7 @@ export default function Empathy() {
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.6, maxWidth: 460 }}>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.65, maxWidth: 460 }}>
               <em
                 style={{
                   fontFamily: FONTS.display,
@@ -56,7 +56,7 @@ export default function Empathy() {
             <div className="mb-7">
               <div
                 className="text-[var(--ink-2)]"
-                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase" }}
+                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
               >
                 05 · Observations
               </div>
@@ -87,7 +87,7 @@ export default function Empathy() {
                 >
                   <div
                     className="flex justify-between w-full pb-4 border-b border-[var(--rule)] text-[var(--ink-2)]"
-                    style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}
+                    style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
                   >
                     <span>Obs. {obs.num}</span>
                     <span>{obs.time}</span>
@@ -99,7 +99,7 @@ export default function Empathy() {
                         fontWeight: 700,
                         fontSize: "clamp(24px, 2vw, 30px)",
                         lineHeight: 1.1,
-                        letterSpacing: "-0.025em",
+                        letterSpacing: "-0.02em",
                       }}
                     >
                       {obs.quote}{" "}
@@ -126,7 +126,7 @@ export default function Empathy() {
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 10,
-                letterSpacing: "0.16em",
+                letterSpacing: "0.18em",
                 textTransform: "uppercase",
               }}
             >
@@ -144,7 +144,7 @@ export default function Empathy() {
                 fontWeight: 700,
                 fontSize: "clamp(24px, 3.6vw, 52px)",
                 lineHeight: 1.08,
-                letterSpacing: "-0.03em",
+                letterSpacing: "-0.02em",
               }}
             >
               OSMO n&apos;est pas un remède miracle.
@@ -162,7 +162,7 @@ export default function Empathy() {
             </div>
             <div
               className="text-[var(--ink-2)] lg:text-right"
-              style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.7, letterSpacing: "0.16em", textTransform: "uppercase" }}
+              style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.7, letterSpacing: "0.18em", textTransform: "uppercase" }}
             >
               Pas de plantes obscures
               <br />

@@ -22,7 +22,7 @@ export default function Marquee() {
             style={{
               fontFamily: FONTS.mono,
               fontSize: 11,
-              letterSpacing: "0.16em",
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
             }}
           >

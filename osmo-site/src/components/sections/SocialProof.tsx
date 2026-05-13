@@ -20,9 +20,9 @@ export default function SocialProof() {
           <h2
             style={{
               fontFamily: FONTS.display,
-              fontWeight: 900,
+              fontWeight: 800,
               fontSize: "clamp(36px, 5vw, 72px)",
-              lineHeight: 0.95,
+              lineHeight: 0.92,
               letterSpacing: "-0.02em",
               marginBottom: "clamp(32px, 4vw, 56px)",
             }}
@@ -39,7 +39,7 @@ export default function SocialProof() {
             style={{
               fontFamily: FONTS.display,
               fontSize: "clamp(16px, 1.3vw, 20px)",
-              lineHeight: 1.7,
+              lineHeight: 1.65,
               maxWidth: 640,
               marginBottom: "clamp(40px, 5vw, 64px)",
             }}
@@ -82,7 +82,7 @@ export default function SocialProof() {
                     fontWeight: 800,
                     fontSize: "clamp(28px, 3vw, 44px)",
                     lineHeight: 1,
-                    letterSpacing: "-0.03em",
+                    letterSpacing: "-0.02em",
                     marginBottom: 8,
                   }}
                 >
@@ -93,7 +93,7 @@ export default function SocialProof() {
                   style={{
                     fontFamily: FONTS.mono,
                     fontSize: 11,
-                    letterSpacing: "0.16em",
+                    letterSpacing: "0.18em",
                     textTransform: "uppercase",
                   }}
                 >

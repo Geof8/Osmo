@@ -90,7 +90,7 @@ export default function Formula() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div
-              className="mb-4"
+              className="mb-2"
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 11,
@@ -104,9 +104,9 @@ export default function Formula() {
             <h2
               style={{
                 fontFamily: FONTS.display,
-                fontWeight: 900,
-                fontSize: "clamp(40px, 5vw, 80px)",
-                lineHeight: 0.95,
+                fontWeight: 800,
+                fontSize: "clamp(36px, 5vw, 72px)",
+                lineHeight: 0.92,
                 letterSpacing: "-0.02em",
                 color: "#FFFFFF",
               }}
@@ -153,7 +153,7 @@ export default function Formula() {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-2">
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
             style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
@@ -173,7 +173,7 @@ export default function Formula() {
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 11,
-                  letterSpacing: "0.16em",
+                  letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "#FFFFFF",
                 }}

@@ -20,7 +20,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
         <FadeUp>
           <div
             className="text-[var(--ink-2)] mb-8 lg:mb-12 flex items-center gap-[14px]"
-            style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase" }}
+            style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
           >
             <span className="w-7 h-px bg-white/40" aria-hidden="true" />
             Vol. 01 · Édition fondateurs · 500 ex.
@@ -58,8 +58,8 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             className="mt-6"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 12,
-              letterSpacing: "0.14em",
+              fontSize: 11,
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: "rgba(255,248,232,0.6)",
             }}
@@ -81,18 +81,18 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             <p
               style={{
                 fontFamily: FONTS.display,
-                fontWeight: 500,
+                fontWeight: 400,
                 fontSize: "clamp(14px, 1.1vw, 17px)",
-                lineHeight: 1.7,
+                lineHeight: 1.65,
                 color: "rgba(255,248,232,0.8)",
               }}
             >
               <strong style={{ color: "var(--amber)", fontWeight: 700 }}>Pourquoi 6 mois ?</strong>{" "}
               OSMO est en phase de pré-lancement. La commande au laboratoire
               sera passée une fois les 500 fondateurs réunis.
-              Vous serez informés à chaque étape :
+              Tu seras informé à chaque étape :
               confirmation de commande, production, expédition.
-              Votre achat rend le lancement possible.
+              Ton achat rend le lancement possible.
             </p>
           </div>
         </FadeUp>

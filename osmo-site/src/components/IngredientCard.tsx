@@ -33,7 +33,7 @@ export default function IngredientCard({
         style={{
           fontFamily: FONTS.mono,
           fontSize: 10,
-          letterSpacing: "0.2em",
+          letterSpacing: "0.18em",
           textTransform: "uppercase",
           color: "#AAAAAA",
           borderBottom: "1px solid #333333",

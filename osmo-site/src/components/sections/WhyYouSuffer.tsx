@@ -18,9 +18,9 @@ export default function WhyYouSuffer() {
               <h2
                 style={{
                   fontFamily: FONTS.display,
-                  fontWeight: 900,
+                  fontWeight: 800,
                   fontSize: "clamp(36px, 5vw, 72px)",
-                  lineHeight: 0.95,
+                  lineHeight: 0.92,
                   letterSpacing: "-0.02em",
                 }}
               >
@@ -36,7 +36,7 @@ export default function WhyYouSuffer() {
                   fontFamily: FONTS.display,
                   fontSize: 17,
                   fontWeight: 400,
-                  lineHeight: 1.8,
+                  lineHeight: 1.65,
                   color: "#666666",
                   marginTop: 32,
                   maxWidth: 540,

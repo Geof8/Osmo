@@ -38,11 +38,11 @@ export default function Home() {
         <Hero onOpenModal={() => openModal("homepage_hero")} revealed={heroRevealed} />
         <Marquee />
         <WhyYouSuffer />
-        <HowItWorks />
         <Formula />
+        <HowItWorks />
         <SocialProof />
-        <FAQ />
         <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
+        <FAQ />
       </main>
       <Footer />
       <CaptureModal

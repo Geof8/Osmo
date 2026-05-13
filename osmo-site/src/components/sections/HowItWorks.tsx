@@ -144,7 +144,7 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(40px, 5.5vw, 88px)",
+                  fontSize: "clamp(36px, 5vw, 72px)",
                   lineHeight: 0.92,
                   letterSpacing: "-0.02em",
                 }}
@@ -156,12 +156,12 @@ export default function HowItWorks() {
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.6, maxWidth: 460 }}>
+            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.65, maxWidth: 460 }}>
               C&apos;est{" "}
               <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 là
               </em>{" "}
-              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que vous dormez — pas pendant que vous attendez qu&apos;ils agissent.
+              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que tu dors — pas pendant que tu attends qu&apos;ils agissent.
             </p>
           </div>
         </FadeUp>

@@ -132,7 +132,7 @@ export default function CaptureModal({
                     Place réservée.
                   </div>
                   <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                    Vous serez contacté en priorité dès que le stock est disponible.
+                    Tu seras contacté en priorité dès que le stock est disponible.
                   </p>
                 </div>
               ) : (
@@ -161,7 +161,7 @@ export default function CaptureModal({
                       Devenir fondateur
                     </h2>
                     <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                      Rejoignez les 500 fondateurs. <span style={{ textDecoration: "line-through" }}>30€</span> → 15€ — expédié sous 6 mois.
+                      Rejoins les 500 fondateurs. <span style={{ textDecoration: "line-through" }}>30€</span> → 15€ — expédié sous 6 mois.
                     </p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -182,7 +182,7 @@ export default function CaptureModal({
                         ref={emailRef}
                         id="capture-email"
                         type="email"
-                        placeholder="votre@email.com"
+                        placeholder="ton@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

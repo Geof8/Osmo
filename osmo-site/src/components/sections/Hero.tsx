@@ -114,19 +114,6 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
                 >
                   Devenir fondateur — 15 € <span aria-hidden="true">→</span>
                 </button>
-                <a
-                  href="#actifs"
-                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 active:scale-[0.97]"
-                  style={{
-                    fontFamily: FONTS.mono,
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Voir la formule
-                </a>
               </div>
               <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
                 <li>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</li>
@@ -142,7 +129,7 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
             >
               <p
                 className="text-[var(--ink-3)]"
-                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
+                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
               >
                 Édition fondateurs · 500 places · 15€ · Expédié sous 6 mois
               </p>

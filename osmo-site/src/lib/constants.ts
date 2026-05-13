@@ -111,11 +111,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Qu'est-ce que l'accès prioritaire ?",
-    a: "En devenant fondateur à 15€ (au lieu de 30€ au lancement), vous permettez à OSMO de lancer sa première production. La commande au laboratoire sera passée une fois les 500 fondateurs réunis. Expédition estimée dans un délai de 6 mois maximum. Vous serez tenus informés à chaque étape.",
+    a: "En devenant fondateur à 15€ (au lieu de 30€ au lancement), tu permets à OSMO de lancer sa première production. La commande au laboratoire sera passée une fois les 500 fondateurs réunis. Expédition estimée dans un délai de 6 mois maximum. Tu seras tenu informé à chaque étape.",
   },
   {
     q: "Est-ce que je serai débité maintenant ?",
-    a: "Le paiement de 15€ est effectué au moment de votre réservation. Il confirme votre place dans l'édition fondateurs et déclenche, une fois les 500 places réunies, la commande de production. En cas d'annulation du projet, vous serez intégralement remboursé.",
+    a: "Le paiement de 15€ est effectué au moment de ta réservation. Il confirme ta place dans l'édition fondateurs et déclenche, une fois les 500 places réunies, la commande de production. En cas d'annulation du projet, tu seras intégralement remboursé.",
   },
 ];
 

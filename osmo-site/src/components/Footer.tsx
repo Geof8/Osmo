@@ -38,7 +38,7 @@ export default function Footer() {
             <nav key={col.title} aria-label={col.title}>
               <h4
                 className="text-[var(--ink-2)] mb-[18px]"
-                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 500 }}
+                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}
               >
                 {col.title}
               </h4>
@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div
           className="mt-14 pt-5 border-t border-[var(--soft)] flex justify-between gap-6 flex-wrap text-[var(--ink-2)]"
-          style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase" }}
+          style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
         >
           <div>© 2026 Osmo Lab · osmolab.fr</div>
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
