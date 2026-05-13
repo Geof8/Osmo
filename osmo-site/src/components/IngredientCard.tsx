@@ -60,18 +60,6 @@ export default function IngredientCard({
         {a.name}
       </div>
       <div
-        style={{
-          fontFamily: FONTS.display,
-          fontWeight: 800,
-          fontSize: "clamp(28px, 2.5vw, 36px)",
-          letterSpacing: "-0.025em",
-          lineHeight: 1,
-          color: "#FFFFFF",
-        }}
-      >
-        {a.dose}
-      </div>
-      <div
         className="pt-3"
         style={{
           fontSize: 13,

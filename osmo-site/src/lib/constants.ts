@@ -82,11 +82,11 @@ export const STAMPS = [
 ];
 
 export const MARQUEE_ITEMS = [
-  "Bicarbonate de sodium · 1700 mg",
-  "Citrate de potassium · 2000 mg",
-  "Bisglycinate de magnésium · 1350 mg",
-  "NaCl · 150 mg",
-  "NAC · 600 mg",
+  "Bicarbonate de sodium",
+  "Citrate de potassium",
+  "Bisglycinate de magnésium",
+  "NaCl",
+  "NAC",
   "Lot 001 · 500 ex.",
   "Édition fondateurs · 15 €",
   "Made in France",
