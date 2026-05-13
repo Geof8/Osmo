@@ -61,19 +61,15 @@ export default function Empathy() {
             </div>
 
             <div
-              className="empathy-track flex gap-5 sm:gap-7 pb-4"
+              className="scrollbar-hide flex gap-5 sm:gap-7 pb-4 overflow-x-auto"
               role="region"
               aria-label="Témoignages d'utilisation"
               tabIndex={0}
               style={{
-                overflowX: "auto",
                 scrollSnapType: "x mandatory",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
                 WebkitOverflowScrolling: "touch",
               }}
             >
-              <style>{`.empathy-track::-webkit-scrollbar { display: none; }`}</style>
               {OBSERVATIONS.map((obs) => (
                 <article
                   key={obs.num}

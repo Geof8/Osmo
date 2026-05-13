@@ -6,22 +6,6 @@ import type {
   Observation,
 } from "@/types";
 
-export const COLORS = {
-  paper: "var(--paper)",
-  paper2: "var(--paper-2)",
-  paper3: "var(--paper-3)",
-  ink: "var(--ink)",
-  ink2: "var(--ink-2)",
-  ink3: "var(--ink-3)",
-  rule: "var(--rule)",
-  soft: "var(--soft)",
-  amber: "var(--amber)",
-  amberHover: "var(--amber-hover)",
-  amberHex: "#C8963E",
-  inkHex: "#111111",
-  paperHex: "#FFFFFF",
-} as const;
-
 export const FONTS = {
   display: "var(--font-barlow), var(--display)",
   mono: "var(--font-mono), var(--mono)",
@@ -35,9 +19,7 @@ export const ANIMATION_CONFIG = {
     viewport: { once: true, margin: "-60px" },
     transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
   },
-  inViewMargin: "-40px",
   inViewMarginLoose: "-80px",
-  inViewMarginTight: "-60px",
   cardReveal: {
     initial: { opacity: 0, y: 15 },
     transition: { duration: 0.4 },
@@ -51,14 +33,6 @@ export const ANIMATION_CONFIG = {
     mobileSize: 300,
     pictoSize: 36,
   },
-} as const;
-
-export const COPY = {
-  brand: "OSMO",
-  tagline: "Recovery — édition fondateurs",
-  capacity: "300 / 300 places",
-  cta: "Réserver",
-  ctaArrow: "→",
 } as const;
 
 export const HERO_STATS: HeroStat[] = [

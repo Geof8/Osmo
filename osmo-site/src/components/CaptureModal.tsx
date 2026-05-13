@@ -18,7 +18,6 @@ export default function CaptureModal({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const emailRef = useRef<HTMLInputElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -108,7 +107,6 @@ export default function CaptureModal({
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                ref={closeRef}
                 onClick={handleClose}
                 className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-[var(--ink-3)] hover:text-[var(--ink)] transition-colors"
                 aria-label="Fermer"
