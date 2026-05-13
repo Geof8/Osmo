@@ -7,7 +7,7 @@ export default function WhyYouSuffer() {
   return (
     <section
       className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "clamp(40px, 5vw, 70px) 0 clamp(80px, 10vw, 140px)" }}
+      style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <FadeUp>

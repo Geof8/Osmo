@@ -14,7 +14,7 @@ export default function FAQ() {
     <section
       id="faq"
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+      style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">

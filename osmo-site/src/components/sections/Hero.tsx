@@ -13,7 +13,7 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "40px 0 24px" }}
+      style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
