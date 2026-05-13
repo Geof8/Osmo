@@ -1,12 +1,13 @@
 "use client";
 
+import CountUp from "@/components/CountUp";
 import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [
-  { value: "500", label: "places fondateurs disponibles" },
-  { value: "15 €", label: "tarif fondateur (-50%)" },
-  { value: "6 mois", label: "délai d'expédition maximum" },
+  { num: 500, suffix: "", label: "places fondateurs disponibles" },
+  { num: 15, suffix: " €", label: "tarif fondateur (-50%)" },
+  { num: 6, suffix: " mois", label: "délai d'expédition maximum" },
 ];
 
 export default function SocialProof() {
@@ -86,7 +87,7 @@ export default function SocialProof() {
                     marginBottom: 8,
                   }}
                 >
-                  {stat.value}
+                  <CountUp target={stat.num} />{stat.suffix}
                 </div>
                 <div
                   className="text-[var(--ink-2)]"
