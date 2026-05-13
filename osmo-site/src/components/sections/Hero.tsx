@@ -122,18 +122,6 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
               </ul>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <p
-                className="text-[var(--ink-3)]"
-                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
-              >
-                Édition fondateurs · 500 places · 15€ · Expédié sous 6 mois
-              </p>
-            </motion.div>
           </div>
         </div>
 
