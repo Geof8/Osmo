@@ -14,7 +14,8 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
       className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--rule)]"
       aria-label="Navigation principale"
     >
-      <div className="relative max-w-[1380px] mx-auto px-5 sm:px-10 flex items-center justify-between h-[64px] sm:h-[78px]">
+      <div className="max-w-[1380px] mx-auto px-5 sm:px-10 grid grid-cols-3 items-center h-[64px] sm:h-[78px]">
+        {/* Left — Logo */}
         <div className="flex items-baseline gap-4">
           <Link
             href="/"
@@ -45,7 +46,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
             smo
           </Link>
           <span
-            className="hidden md:inline text-[var(--ink-2)]"
+            className="hidden lg:inline text-[var(--ink-2)]"
             style={{
               fontFamily: FONTS.display,
               fontWeight: 500,
@@ -58,10 +59,11 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
           </span>
         </div>
 
-        <div className="absolute left-1/2 -translate-x-1/2">
+        {/* Center — Notre Histoire */}
+        <div className="flex justify-center">
           <Link
             href="/notre-histoire"
-            className="inline-flex items-center gap-2 px-5 min-h-[38px] border border-[var(--rule)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+            className="inline-flex items-center justify-center px-5 min-h-[38px] border border-[var(--rule)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
             style={{
               fontFamily: FONTS.mono,
               fontSize: 10,
@@ -74,7 +76,8 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
           </Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        {/* Right — CTA */}
+        <div className="flex items-center justify-end gap-4">
           <span
             className="hidden sm:inline text-[var(--ink-2)]"
             style={{
