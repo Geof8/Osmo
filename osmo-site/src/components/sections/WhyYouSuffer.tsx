@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 
@@ -10,7 +11,7 @@ export default function WhyYouSuffer() {
       style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-center">
           {/* Left column — text */}
           <div>
             <FadeUp>
@@ -117,36 +118,18 @@ export default function WhyYouSuffer() {
             </FadeUp>
           </div>
 
-          {/* Right column — infographic placeholder */}
+          {/* Right column — infographic */}
           <FadeUp delay={0.2}>
             <div className="flex justify-center lg:justify-end">
-              <div
-                className="relative w-full flex items-center justify-center"
-                style={{
-                  maxWidth: 420,
-                  minHeight: 480,
-                  backgroundColor: "#F4F4F4",
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="w-full max-w-[320px] lg:max-w-[420px]">
+                <Image
                   src="/images/infographic.png"
                   alt="Schéma explicatif — problème et solution OSMO"
-                  className="w-full h-auto absolute inset-0 object-contain"
-                  style={{ display: "block" }}
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                  width={420}
+                  height={420}
+                  className="w-full h-auto"
+                  style={{ objectFit: "contain" }}
                 />
-                <span
-                  className="text-[var(--ink-3)] select-none pointer-events-none"
-                  style={{
-                    fontFamily: FONTS.mono,
-                    fontSize: 11,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Infographie
-                </span>
               </div>
             </div>
           </FadeUp>
