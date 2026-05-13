@@ -236,7 +236,7 @@ export default function CaptureModal({
                       {!loading && <span aria-hidden="true">→</span>}
                     </button>
                     <ul className="mt-2" style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
-                      <li>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</li>
+                      <li><strong>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</strong></li>
                       <li>— Expédition estimée : dans 6 mois maximum</li>
                       <li>— Aucun frais caché — paiement sécurisé</li>
                     </ul>

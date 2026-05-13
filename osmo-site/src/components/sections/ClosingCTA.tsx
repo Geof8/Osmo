@@ -113,7 +113,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
               Devenir fondateur — 15 € <span aria-hidden="true">→</span>
             </button>
             <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
-              <li>— Prix fondateur : 15€ au lieu de 30€ — 50% de réduction</li>
+              <li><strong>— Prix fondateur : 15€ au lieu de 30€ — 50% de réduction</strong></li>
               <li>— Expédition estimée : dans 6 mois maximum</li>
               <li>— Aucun frais caché — paiement sécurisé</li>
             </ul>
