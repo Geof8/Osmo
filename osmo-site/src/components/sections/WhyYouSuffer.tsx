@@ -35,64 +35,38 @@ export default function WhyYouSuffer() {
                 style={{
                   fontFamily: FONTS.display,
                   fontSize: 17,
-                  lineHeight: 1.7,
-                  color: "#444444",
+                  fontWeight: 400,
+                  lineHeight: 1.8,
+                  color: "#666666",
                   marginTop: 32,
-                  marginBottom: 40,
                   maxWidth: 540,
                 }}
               >
                 L&apos;alcool est un diurétique. En quelques heures,
                 il élimine sodium, potassium et magnésium —
-                les minéraux essentiels au fonctionnement
-                de ton corps. Sans eux, ton cerveau tourne
-                au ralenti. Tes muscles sont lourds.
+                les minéraux dont ton corps a besoin pour fonctionner.
+                Sans eux, ton cerveau tourne au ralenti,
+                tes muscles sont lourds. OSMO reconstitue
+                ce que l&apos;alcool a éliminé, pendant ton sommeil.
               </p>
             </FadeUp>
 
             <FadeUp delay={0.15}>
-              <blockquote
+              <p
                 style={{
                   fontFamily: FONTS.display,
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: 700,
                   lineHeight: 1.4,
-                  color: "#111111",
-                  borderLeft: "3px solid #C8963E",
-                  paddingLeft: 20,
-                  marginBottom: 32,
+                  color: "#C8963E",
+                  marginTop: 40,
                   maxWidth: 540,
                 }}
               >
                 Ce n&apos;est pas un remède miracle.
                 <br />
                 C&apos;est de la biochimie.
-              </blockquote>
-            </FadeUp>
-
-            <FadeUp delay={0.2}>
-              <div
-                style={{
-                  backgroundColor: "#FFF8EE",
-                  borderLeft: "3px solid #C8963E",
-                  padding: "20px 24px",
-                  maxWidth: 540,
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: FONTS.display,
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: "#111111",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  OSMO rétablit l&apos;équilibre — 5 actifs cliniques
-                  reconstituent ce que l&apos;alcool a éliminé,
-                  pendant votre sommeil.
-                </p>
-              </div>
+              </p>
             </FadeUp>
           </div>
 
