@@ -2,11 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FONTS } from "@/lib/constants";
 import type { SplitOverlayProps } from "@/types";
-
-gsap.registerPlugin(ScrollTrigger);
 
 function OverlayContent({ color }: { color: "light" | "dark" }) {
   const textColor = color === "light" ? "#FFFFFF" : "#111111";
@@ -44,7 +41,6 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
 
 export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const spacerRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const doneRef = useRef(false);
@@ -57,80 +53,66 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
       doneRef.current = true;
       onComplete();
       containerRef.current?.remove();
-      spacerRef.current?.remove();
       return;
     }
 
-    const ctx = gsap.context(() => {
+    function dismiss() {
+      if (doneRef.current) return;
+      doneRef.current = true;
+
+      window.removeEventListener("wheel", dismiss);
+      window.removeEventListener("touchstart", dismiss);
+
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: spacerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-          pin: true,
-          pinSpacing: false,
-          onLeave: () => {
-            if (!doneRef.current) {
-              doneRef.current = true;
-              ctx.revert();
-
-              window.scrollTo(0, 0);
-              onComplete();
-
-              if (containerRef.current) {
-                gsap.to(containerRef.current, {
-                  opacity: 0,
-                  duration: 0.5,
-                  ease: "power2.inOut",
-                  onComplete: () => {
-                    containerRef.current?.remove();
-                  },
-                });
-              }
-              if (spacerRef.current) {
-                const pinWrapper = spacerRef.current.parentElement;
-                if (pinWrapper?.classList.contains("pin-spacer")) {
-                  pinWrapper.remove();
-                } else {
-                  spacerRef.current.remove();
-                }
-              }
-            }
-          },
+        onComplete: () => {
+          onComplete();
+          if (containerRef.current) {
+            gsap.to(containerRef.current, {
+              opacity: 0,
+              duration: 0.4,
+              ease: "power2.inOut",
+              onComplete: () => containerRef.current?.remove(),
+            });
+          }
         },
       });
 
-      tl.to(leftRef.current, { x: "-100%", ease: "none" }, 0)
-        .to(rightRef.current, { x: "100%", ease: "none" }, 0);
-    });
+      tl.to(leftRef.current, { x: "-100%", duration: 0.8, ease: "power3.inOut" }, 0)
+        .to(rightRef.current, { x: "100%", duration: 0.8, ease: "power3.inOut" }, 0);
+    }
 
-    return () => ctx.revert();
+    window.addEventListener("wheel", dismiss, { passive: true, once: true });
+    window.addEventListener("touchstart", dismiss, { passive: true, once: true });
+
+    const fallback = setTimeout(dismiss, 6000);
+
+    return () => {
+      clearTimeout(fallback);
+      window.removeEventListener("wheel", dismiss);
+      window.removeEventListener("touchstart", dismiss);
+    };
   }, [onComplete]);
 
   return (
-    <>
-      <div ref={spacerRef} style={{ height: "100vh", position: "relative", zIndex: 0 }} />
-      <div ref={containerRef} className="fixed inset-0 z-[100] pointer-events-none" aria-hidden="true">
-        <div
-          ref={leftRef}
-          className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
-          style={{ background: "#111111" }}
-        >
-          <div style={{ position: "absolute", top: "50%", left: "100%", transform: "translate(-50%, -50%)" }}>
-            <OverlayContent color="light" />
-          </div>
-        </div>
-        <div
-          ref={rightRef}
-          className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
-          style={{ background: "#FFFFFF" }}
-        >
-          <div style={{ position: "absolute", top: "50%", left: "0%", transform: "translate(-50%, -50%)" }}>
-            <OverlayContent color="dark" />
-          </div>
+    <div ref={containerRef} className="fixed inset-0 z-[100]" aria-hidden="true">
+      <div
+        ref={leftRef}
+        className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
+        style={{ background: "#111111" }}
+      >
+        <div style={{ position: "absolute", top: "50%", left: "100%", transform: "translate(-50%, -50%)" }}>
+          <OverlayContent color="light" />
         </div>
       </div>
-    </>
+      <div
+        ref={rightRef}
+        className="absolute top-0 right-0 w-1/2 h-full overflow-hidden"
+        style={{ background: "#FFFFFF" }}
+      >
+        <div style={{ position: "absolute", top: "50%", left: "0%", transform: "translate(-50%, -50%)" }}>
+          <OverlayContent color="dark" />
+        </div>
+      </div>
+    </div>
   );
 }
