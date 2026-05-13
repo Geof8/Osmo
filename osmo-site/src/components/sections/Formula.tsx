@@ -84,13 +84,13 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "clamp(40px, 5vw, 70px) 0 clamp(40px, 5vw, 70px)" }}
+      style={{ background: "#111111", padding: "clamp(32px, 4vw, 60px) 0 clamp(16px, 2vw, 24px)" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <div
-              className="mb-7"
+              className="mb-4"
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 11,
@@ -136,7 +136,7 @@ export default function Formula() {
               ))}
             </h2>
             <motion.p
-              className="mt-8"
+              className="mt-5"
               style={{ fontSize: 15, lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
@@ -153,7 +153,7 @@ export default function Formula() {
           </div>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-6">
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
             style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
@@ -165,7 +165,7 @@ export default function Formula() {
 
           <FadeUp delay={0.3}>
             <div
-              className="mt-10 lg:mt-14 pt-7 flex justify-between gap-8 flex-wrap items-center"
+              className="mt-5 lg:mt-6 pt-4 flex justify-between gap-8 flex-wrap items-center"
               style={{ borderTop: "1px solid #333333" }}
             >
               <div
