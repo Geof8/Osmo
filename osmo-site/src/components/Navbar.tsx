@@ -58,19 +58,23 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="absolute left-1/2 -translate-x-1/2">
           <Link
             href="/notre-histoire"
-            className="hidden sm:inline-flex items-center min-h-[44px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200"
+            className="inline-flex items-center gap-2 px-5 min-h-[38px] border border-[var(--rule)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
             style={{
               fontFamily: FONTS.mono,
               fontSize: 10,
+              fontWeight: 500,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
             }}
           >
             Notre Histoire
           </Link>
+        </div>
+
+        <div className="flex items-center gap-4">
           <span
             className="hidden sm:inline text-[var(--ink-2)]"
             style={{
