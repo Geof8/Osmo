@@ -1,7 +1,9 @@
 "use client";
 
 import FadeUp from "@/components/FadeUp";
-import { FONTS, OBSERVATIONS } from "@/lib/constants";
+import { FONTS } from "@/lib/constants";
+
+const OBSERVATIONS: { num: string; time: string; quote: string; em: string }[] = [];
 
 export default function Empathy() {
   return (
