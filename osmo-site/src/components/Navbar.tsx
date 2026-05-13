@@ -62,7 +62,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
         <div className="flex justify-center">
           <a
             href="/notre-histoire"
-            className="inline-flex items-center justify-center px-5 min-h-[38px] border border-[var(--rule)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-colors duration-200"
+            className="inline-flex items-center justify-center min-h-[44px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200"
             style={{
               fontFamily: FONTS.mono,
               fontSize: 10,
