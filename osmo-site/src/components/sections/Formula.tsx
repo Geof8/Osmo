@@ -70,7 +70,7 @@ const actifs: Ingredient[] = [
     ord: "N° 05 · Acide aminé",
     mol: "C₅H₉NO₃S",
     name: "N-Acétyl-Cystéine (NAC)",
-    benefit: "Soutien hépatique",
+    benefit: "Soutient le foie",
     dose: "600",
     role: "Soutien hépatique nocturne. Précurseur du glutathion.",
     svg: (
