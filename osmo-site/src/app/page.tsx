@@ -7,11 +7,12 @@ import SplitOverlay from "@/components/SplitOverlay";
 import CaptureModal from "@/components/CaptureModal";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/Marquee";
-import Empathy from "@/components/sections/Empathy";
+import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Formula from "@/components/sections/Formula";
-import ClosingCTA from "@/components/sections/ClosingCTA";
+import SocialProof from "@/components/sections/SocialProof";
 import FAQ from "@/components/sections/FAQ";
+import ClosingCTA from "@/components/sections/ClosingCTA";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -36,11 +37,12 @@ export default function Home() {
       <main>
         <Hero onOpenModal={() => openModal("homepage_hero")} revealed={heroRevealed} />
         <Marquee />
-        <Empathy />
-        <Formula />
+        <WhyYouSuffer />
         <HowItWorks />
-        <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
+        <Formula />
+        <SocialProof />
         <FAQ />
+        <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
       </main>
       <Footer />
       <CaptureModal

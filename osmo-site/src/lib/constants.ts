@@ -3,7 +3,6 @@ import type {
   FaqItem,
   FooterColumn,
   HeroStat,
-  Observation,
 } from "@/types";
 
 export const COLORS = {
@@ -91,39 +90,6 @@ export const MARQUEE_ITEMS = [
   "Lot 001 · 300 ex.",
   "Édition fondateurs · 25 €",
   "Made in France",
-];
-
-export const OBSERVATIONS: Observation[] = [
-  {
-    num: "01",
-    time: "Vendredi · 22:14",
-    quote: "Trois verres hier soir. Réunion à 9h.",
-    em: "Les deux sont réels.",
-  },
-  {
-    num: "02",
-    time: "Mardi · 23:47",
-    quote: "Un dîner qui s'est prolongé. Les enfants se lèvent à 7h.",
-    em: "Sans exception.",
-  },
-  {
-    num: "03",
-    time: "Jeudi · 00:12",
-    quote: "La semaine a été longue. Le week-end",
-    em: "doit quand même tenir.",
-  },
-  {
-    num: "04",
-    time: "Samedi · 02:31",
-    quote: "Mariage d'un ami. Brunch en famille à 11h.",
-    em: "Pas négociable.",
-  },
-  {
-    num: "05",
-    time: "Mercredi · 01:08",
-    quote: "Soirée client qui s'éternise. Pitch important demain.",
-    em: "Tout repose dessus.",
-  },
 ];
 
 export const FAQ_ITEMS: FaqItem[] = [

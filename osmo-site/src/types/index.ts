@@ -19,13 +19,6 @@ export interface Step {
   svg: ReactNode;
 }
 
-export interface Observation {
-  num: string;
-  time: string;
-  quote: string;
-  em: string;
-}
-
 export interface FaqItem {
   q: string;
   a: string;
