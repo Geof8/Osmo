@@ -7,7 +7,7 @@ import type { OpenModalProps } from "@/types";
 
 export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
   return (
-    <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(100px, 14vw, 180px) 0 clamp(80px, 10vw, 120px)" }}>
+    <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(50px, 7vw, 90px) 0 clamp(80px, 10vw, 120px)" }}>
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         aria-hidden="true"

@@ -129,7 +129,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
 
 export default function HowItWorks() {
   return (
-    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(80px, 10vw, 140px) 0" }}>
+    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(40px, 5vw, 70px) 0 clamp(80px, 10vw, 140px)" }}>
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <FadeUp>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">

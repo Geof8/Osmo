@@ -84,7 +84,7 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "clamp(80px, 10vw, 140px) 0" }}
+      style={{ background: "#111111", padding: "clamp(40px, 5vw, 70px) 0 clamp(40px, 5vw, 70px)" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

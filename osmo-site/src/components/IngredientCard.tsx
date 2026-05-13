@@ -70,19 +70,6 @@ export default function IngredientCard({
         }}
       >
         {a.dose}
-        <span
-          style={{
-            fontFamily: FONTS.display,
-            fontWeight: 500,
-            fontStyle: "normal",
-            fontSize: 16,
-            letterSpacing: 0,
-            color: "#AAAAAA",
-          }}
-        >
-          {" "}
-          mg
-        </span>
       </div>
       <div
         className="pt-3"

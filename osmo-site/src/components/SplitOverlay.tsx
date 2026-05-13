@@ -48,9 +48,13 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
   useEffect(() => {
     if (doneRef.current) return;
 
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
       doneRef.current = true;
+      document.body.style.overflow = "";
       onComplete();
       containerRef.current?.remove();
       return;
@@ -60,6 +64,7 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
       if (doneRef.current) return;
       doneRef.current = true;
 
+      document.body.style.overflow = "";
       window.removeEventListener("wheel", dismiss);
       window.removeEventListener("touchstart", dismiss);
 
@@ -88,6 +93,7 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
 
     return () => {
       clearTimeout(fallback);
+      document.body.style.overflow = "";
       window.removeEventListener("wheel", dismiss);
       window.removeEventListener("touchstart", dismiss);
     };

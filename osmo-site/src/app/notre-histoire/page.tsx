@@ -64,7 +64,7 @@ export default function NotreHistoire() {
         {/* Hero */}
         <section
           className="bg-[var(--paper)]"
-          style={{ padding: "clamp(80px, 12vw, 160px) 0 clamp(60px, 8vw, 100px)" }}
+          style={{ padding: "clamp(80px, 12vw, 160px) 0 clamp(30px, 4vw, 50px)" }}
         >
           <div className="max-w-[760px] mx-auto px-5 sm:px-10">
             <FadeUp>
@@ -265,7 +265,7 @@ export default function NotreHistoire() {
           style={{ padding: "clamp(80px, 12vw, 140px) 0 clamp(60px, 8vw, 100px)" }}
         >
           <div className="max-w-[760px] mx-auto px-5 sm:px-10">
-            <WordByWord text="Si tu lis ça, tu fais peut-être partie des 300." />
+            <WordByWord text="Si tu lis ça, tu fais peut-être partie des 500." />
 
             <FadeUp delay={0.6}>
               <div className="mt-12 flex justify-center">
