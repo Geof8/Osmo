@@ -111,7 +111,7 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
   return (
     <>
       <div ref={spacerRef} style={{ height: "100vh", position: "relative", zIndex: 0 }} />
-      <div ref={containerRef} className="fixed inset-0 z-[100]" aria-hidden="true">
+      <div ref={containerRef} className="fixed inset-0 z-[100] pointer-events-none" aria-hidden="true">
         <div
           ref={leftRef}
           className="absolute top-0 left-0 w-1/2 h-full overflow-hidden"
