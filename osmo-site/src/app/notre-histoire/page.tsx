@@ -125,7 +125,7 @@ export default function NotreHistoire() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Le Doliprane défonce le foie. Les électrolytes
+                Le Doliprane abime le foie. Les électrolytes
                 du commerce sont sous-dosés, trop sucrés, pensés
                 pour le sport. Rien n&apos;était conçu pour quelqu&apos;un
                 qui boit socialement et doit assurer le lendemain.
