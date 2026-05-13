@@ -4,9 +4,9 @@ import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [
-  { value: "~20", label: "testeurs en cercle fermé" },
-  { value: "Plusieurs mois", label: "de tests" },
-  { value: "1 retour", label: "unanime" },
+  { value: "500", label: "places fondateurs disponibles" },
+  { value: "15 €", label: "tarif fondateur (-50%)" },
+  { value: "6 mois", label: "délai d'expédition maximum" },
 ];
 
 export default function SocialProof() {
@@ -23,11 +23,11 @@ export default function SocialProof() {
               fontWeight: 900,
               fontSize: "clamp(36px, 5vw, 72px)",
               lineHeight: 0.95,
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.02em",
               marginBottom: "clamp(32px, 4vw, 56px)",
             }}
           >
-            Avant les 300
+            Avant les 500
             <br />
             <span className="text-[#C8963E]">fondateurs.</span>
           </h2>

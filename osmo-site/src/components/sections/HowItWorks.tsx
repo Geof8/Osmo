@@ -74,7 +74,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
             fontWeight: 800,
             fontSize: "clamp(64px, 7vw, 96px)",
             lineHeight: 0.85,
-            letterSpacing: "-0.04em",
+            letterSpacing: "-0.02em",
             color: "var(--ink)",
           }}
         >
@@ -146,7 +146,7 @@ export default function HowItWorks() {
                   fontWeight: 800,
                   fontSize: "clamp(40px, 5.5vw, 88px)",
                   lineHeight: 0.92,
-                  letterSpacing: "-0.035em",
+                  letterSpacing: "-0.02em",
                 }}
               >
                 Simple. Le soir.

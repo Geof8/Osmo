@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
-import { CTA_STATS, FONTS } from "@/lib/constants";
+import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
 export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
@@ -23,7 +23,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase" }}
           >
             <span className="w-7 h-px bg-white/40" aria-hidden="true" />
-            Vol. 01 · Édition fondateurs · 300 ex.
+            Vol. 01 · Édition fondateurs · 500 ex.
           </div>
         </FadeUp>
 
@@ -36,7 +36,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             fontWeight: 800,
             fontSize: "clamp(40px, 7vw, 110px)",
             lineHeight: 0.92,
-            letterSpacing: "-0.04em",
+            letterSpacing: "-0.02em",
           }}
         >
           Parce que demain matin,{" "}
@@ -53,38 +53,52 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
           </span>
         </motion.h2>
 
+        <FadeUp delay={0.1}>
+          <p
+            className="mt-6"
+            style={{
+              fontFamily: FONTS.mono,
+              fontSize: 12,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "rgba(255,248,232,0.6)",
+            }}
+          >
+            500 places · 15€ · Expédié sous 6 mois
+          </p>
+        </FadeUp>
+
+        <FadeUp delay={0.15}>
+          <div
+            className="mt-12 lg:mt-16"
+            style={{
+              borderLeft: "3px solid #C8963E",
+              backgroundColor: "rgba(255,255,255,0.06)",
+              padding: "clamp(20px, 3vw, 32px)",
+              maxWidth: 680,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: FONTS.display,
+                fontWeight: 500,
+                fontSize: "clamp(14px, 1.1vw, 17px)",
+                lineHeight: 1.7,
+                color: "rgba(255,248,232,0.8)",
+              }}
+            >
+              <strong style={{ color: "var(--amber)", fontWeight: 700 }}>Pourquoi 6 mois ?</strong>{" "}
+              OSMO est en phase de pré-lancement. La commande au laboratoire
+              sera passée une fois les 500 fondateurs réunis.
+              Vous serez informés à chaque étape :
+              confirmation de commande, production, expédition.
+              Votre achat rend le lancement possible.
+            </p>
+          </div>
+        </FadeUp>
+
         <FadeUp delay={0.2}>
-          <div className="mt-16 lg:mt-24 pt-8 border-t border-white/[0.16] grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-14 items-end">
-            <div className="flex gap-8 sm:gap-14 flex-wrap">
-              {CTA_STATS.map((stat, i) => (
-                <div key={i}>
-                  <div
-                    style={{
-                      fontFamily: FONTS.display,
-                      fontWeight: 800,
-                      fontSize: "clamp(36px, 4vw, 48px)",
-                      letterSpacing: "-0.025em",
-                      lineHeight: 1,
-                      ...(stat.em ? { fontStyle: "normal" } : {}),
-                    }}
-                  >
-                    {stat.k}
-                  </div>
-                  <div
-                    className="mt-[10px]"
-                    style={{
-                      fontFamily: FONTS.mono,
-                      fontSize: 10,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "rgba(255,248,232,0.55)",
-                    }}
-                  >
-                    {stat.v}
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.16] flex flex-col sm:flex-row gap-6 items-start sm:items-center">
             <button
               onClick={onOpenModal}
               className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
@@ -96,8 +110,13 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
                 textTransform: "uppercase",
               }}
             >
-              Réserver mon accès prioritaire <span aria-hidden="true">→</span>
+              Devenir fondateur — 15 € <span aria-hidden="true">→</span>
             </button>
+            <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
+              <li>— Prix fondateur : 15€ au lieu de 30€ — 50% de réduction</li>
+              <li>— Expédition estimée : dans 6 mois maximum</li>
+              <li>— Aucun frais caché — paiement sécurisé</li>
+            </ul>
           </div>
         </FadeUp>
       </div>

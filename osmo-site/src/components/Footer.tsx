@@ -67,7 +67,7 @@ export default function Footer() {
         >
           <div>© 2026 Osmo Lab · osmolab.fr</div>
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
-          <div>Made in France · 300 ex.</div>
+          <div>Made in France · 500 ex.</div>
         </div>
       </div>
     </footer>

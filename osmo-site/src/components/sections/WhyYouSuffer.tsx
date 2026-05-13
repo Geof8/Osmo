@@ -17,7 +17,7 @@ export default function WhyYouSuffer() {
               fontWeight: 900,
               fontSize: "clamp(36px, 5vw, 72px)",
               lineHeight: 0.95,
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.02em",
               marginBottom: "clamp(32px, 4vw, 56px)",
             }}
           >

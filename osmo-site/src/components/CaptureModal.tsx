@@ -158,10 +158,10 @@ export default function CaptureModal({
                         lineHeight: 1,
                       }}
                     >
-                      Réserver mon accès
+                      Devenir fondateur
                     </h2>
                     <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                      Aucun paiement maintenant. Vous serez contacté en priorité dès que le stock est disponible.
+                      Rejoignez les 500 fondateurs. <span style={{ textDecoration: "line-through" }}>30€</span> → 15€ — expédié sous 6 mois.
                     </p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -232,15 +232,14 @@ export default function CaptureModal({
                         textTransform: "uppercase",
                       }}
                     >
-                      {loading ? "Envoi..." : "Réserver — 25 €"}
+                      {loading ? "Envoi..." : "Devenir fondateur — 15 €"}
                       {!loading && <span aria-hidden="true">→</span>}
                     </button>
-                    <p
-                      className="text-[var(--ink-3)] text-center"
-                      style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
-                    >
-                      Prix fondateur garanti · 0 € maintenant
-                    </p>
+                    <ul className="mt-2" style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
+                      <li>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</li>
+                      <li>— Expédition estimée : dans 6 mois maximum</li>
+                      <li>— Aucun frais caché — paiement sécurisé</li>
+                    </ul>
                   </form>
                 </>
               )}

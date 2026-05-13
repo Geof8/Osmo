@@ -252,7 +252,7 @@ export default function NotreHistoire() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                300 places fondateurs. Le stock sera commandé
+                500 places fondateurs. Le stock sera commandé
                 quand la demande sera confirmée — pas avant.
               </p>
             </FadeUp>

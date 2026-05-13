@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OSMO Recovery — Le lendemain matin, tu assures.",
     description:
-      "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée. Tarif fondateur : 25€.",
+      "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée. Tarif fondateur : 15€.",
     url: "https://osmolab.fr",
     siteName: "OSMO Lab",
     locale: "fr_FR",

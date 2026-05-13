@@ -15,7 +15,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
           fontWeight: 900,
           fontSize: "clamp(32px, 7vw, 130px)",
           lineHeight: 1,
-          letterSpacing: "-0.04em",
+          letterSpacing: "-0.02em",
           color: textColor,
         }}
       >
@@ -33,7 +33,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
           color: textColor,
         }}
       >
-        300 places
+        500 places
       </div>
     </div>
   );

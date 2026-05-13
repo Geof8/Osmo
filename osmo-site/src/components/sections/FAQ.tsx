@@ -36,7 +36,7 @@ export default function FAQ() {
                 fontWeight: 800,
                 fontSize: "clamp(40px, 6vw, 96px)",
                 lineHeight: 0.92,
-                letterSpacing: "-0.035em",
+                letterSpacing: "-0.02em",
               }}
             >
               Questions

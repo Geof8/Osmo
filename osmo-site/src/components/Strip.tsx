@@ -22,10 +22,10 @@ export default function Strip() {
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10 flex justify-between gap-6 flex-wrap">
         <div className="flex items-center gap-2">
           <span className="w-[6px] h-[6px] bg-white rounded-full animate-pulse" aria-hidden="true" />
-          Pré-lancement · Lot N°001 · 300 places
+          Pré-lancement · Lot N°001 · 500 places
         </div>
         <div className="hidden md:block">OSMO Lab — Paris, France</div>
-        <div className="hidden sm:block">Tarif fondateur · 25 € · Aucun paiement maintenant</div>
+        <div className="hidden sm:block">Tarif fondateur · 15 € · Paiement sécurisé</div>
       </div>
     </motion.div>
   );

@@ -42,7 +42,7 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
                 fontWeight: 800,
                 fontSize: "clamp(48px, 7vw, 110px)",
                 lineHeight: 0.92,
-                letterSpacing: "-0.035em",
+                letterSpacing: "-0.02em",
               }}
             >
               <span className="block">
@@ -98,45 +98,54 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex gap-3 flex-wrap items-center"
+              className="flex flex-col gap-4"
             >
-              <button
-                onClick={onOpenModal}
-                className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
+              <div className="flex gap-3 flex-wrap items-center">
+                <button
+                  onClick={onOpenModal}
+                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
+                  style={{
+                    fontFamily: FONTS.mono,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Devenir fondateur — 15 € <span aria-hidden="true">→</span>
+                </button>
+                <a
+                  href="#actifs"
+                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 active:scale-[0.97]"
+                  style={{
+                    fontFamily: FONTS.mono,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Voir la formule
+                </a>
+              </div>
+              <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
+                <li>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</li>
+                <li>— Expédition estimée : dans 6 mois maximum</li>
+                <li>— Aucun frais caché — paiement sécurisé</li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <p
+                className="text-[var(--ink-3)]"
+                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase" }}
               >
-                Réserver — 25 € <span aria-hidden="true">→</span>
-              </button>
-              <a
-                href="#actifs"
-                className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-transparent text-[var(--ink)] border border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white transition-all duration-200 active:scale-[0.97]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Voir la formule
-              </a>
-              <span
-                className="text-[var(--ink-2)]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.16em",
-                  textTransform: "uppercase",
-                }}
-              >
-                <span aria-hidden="true">⌁</span> Aucun paiement maintenant
-              </span>
+                Édition fondateurs · 500 places · 15€ · Expédié sous 6 mois
+              </p>
             </motion.div>
           </div>
         </div>

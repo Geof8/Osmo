@@ -55,23 +55,23 @@ export const ANIMATION_CONFIG = {
 export const COPY = {
   brand: "OSMO",
   tagline: "Recovery — édition fondateurs",
-  capacity: "300 / 300 places",
-  cta: "Réserver",
+  capacity: "500 / 500 places",
+  cta: "Devenir fondateur",
   ctaArrow: "→",
 } as const;
 
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
-  { k: 25, label: "25 €", v: "Tarif fondateur", amber: true, count: false },
-  { k: 300, label: "300", v: "Places · Mai 2026", count: true },
+  { k: 15, label: "15 €", v: "Tarif fondateur (-50%)", amber: true, count: false },
+  { k: 500, label: "500", v: "Places fondateurs", count: true },
 ];
 
 export const CTA_STATS: CtaStat[] = [
-  { k: "300", v: "Places", em: true },
-  { k: "25 €", v: "Fondateur", em: false },
-  { k: "29 €", v: "Public", em: false },
-  { k: "0 €", v: "Maintenant", em: false },
+  { k: "500", v: "Places", em: true },
+  { k: "15 €", v: "Fondateur", em: false },
+  { k: "30 €", v: "Public", em: false },
+  { k: "6 mois", v: "Expédition max.", em: false },
 ];
 
 export const STAMPS = [
@@ -87,8 +87,8 @@ export const MARQUEE_ITEMS = [
   "Bisglycinate de magnésium · 1350 mg",
   "NaCl · 150 mg",
   "NAC · 600 mg",
-  "Lot 001 · 300 ex.",
-  "Édition fondateurs · 25 €",
+  "Lot 001 · 500 ex.",
+  "Édition fondateurs · 15 €",
   "Made in France",
 ];
 
@@ -111,11 +111,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Qu'est-ce que l'accès prioritaire ?",
-    a: "Une pré-inscription sans paiement. Vous serez contacté en priorité dès que le stock est disponible, au tarif fondateur de 25€ au lieu de 29€.",
+    a: "En devenant fondateur à 15€ (au lieu de 30€ au lancement), vous permettez à OSMO de lancer sa première production. La commande au laboratoire sera passée une fois les 500 fondateurs réunis. Expédition estimée dans un délai de 6 mois maximum. Vous serez tenus informés à chaque étape.",
   },
   {
     q: "Est-ce que je serai débité maintenant ?",
-    a: "Non. Aucun paiement n'est demandé. Vous ne paierez que si vous décidez d'acheter au moment de la disponibilité.",
+    a: "Le paiement de 15€ est effectué au moment de votre réservation. Il confirme votre place dans l'édition fondateurs et déclenche, une fois les 500 places réunies, la commande de production. En cas d'annulation du projet, vous serez intégralement remboursé.",
   },
 ];
 

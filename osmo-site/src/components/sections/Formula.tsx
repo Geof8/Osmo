@@ -107,7 +107,7 @@ export default function Formula() {
                 fontWeight: 900,
                 fontSize: "clamp(40px, 5vw, 80px)",
                 lineHeight: 0.95,
-                letterSpacing: "-0.035em",
+                letterSpacing: "-0.02em",
                 color: "#FFFFFF",
               }}
             >

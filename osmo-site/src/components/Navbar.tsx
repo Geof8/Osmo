@@ -87,7 +87,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               textTransform: "uppercase",
             }}
           >
-            300 / 300 places
+            500 / 500 places
           </span>
           <button
             onClick={onOpenModal}
@@ -100,7 +100,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               textTransform: "uppercase",
             }}
           >
-            Réserver
+            Devenir fondateur
             <span aria-hidden="true" className="inline-block">→</span>
           </button>
         </div>
