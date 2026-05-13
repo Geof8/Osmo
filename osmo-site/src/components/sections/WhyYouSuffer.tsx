@@ -7,8 +7,8 @@ import { FONTS } from "@/lib/constants";
 export default function WhyYouSuffer() {
   return (
     <section
-      className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "80px 0" }}
+      className="relative z-[5]"
+      style={{ padding: "80px 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-center">
