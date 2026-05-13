@@ -83,8 +83,8 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
         },
       });
 
-      tl.to(leftRef.current, { x: "-100%", duration: 0.8, ease: "power3.inOut" }, 0)
-        .to(rightRef.current, { x: "100%", duration: 0.8, ease: "power3.inOut" }, 0);
+      tl.to(leftRef.current, { x: "-100%", duration: 1.4, ease: "power2.inOut" }, 0)
+        .to(rightRef.current, { x: "100%", duration: 1.4, ease: "power2.inOut" }, 0);
     }
 
     window.addEventListener("wheel", dismiss, { passive: true, once: true });
