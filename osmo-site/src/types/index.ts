@@ -81,4 +81,5 @@ export interface FadeUpProps {
 export interface CountUpProps {
   target: number;
   duration?: number;
+  start?: boolean;
 }

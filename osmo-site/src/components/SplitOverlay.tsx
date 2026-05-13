@@ -64,12 +64,13 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
       if (doneRef.current) return;
       doneRef.current = true;
 
-      document.body.style.overflow = "";
       window.removeEventListener("wheel", dismiss);
       window.removeEventListener("touchstart", dismiss);
 
       const tl = gsap.timeline({
         onComplete: () => {
+          document.body.style.overflow = "";
+          window.scrollTo(0, 0);
           onComplete();
           if (containerRef.current) {
             gsap.to(containerRef.current, {

@@ -156,7 +156,7 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
                   color: item.amber ? "var(--amber)" : "var(--ink)",
                 }}
               >
-                {item.count ? <CountUp target={item.k} /> : item.label}
+                {item.count ? <CountUp target={item.k} start={revealed} /> : item.label}
               </div>
               <div
                 className="text-[var(--ink-2)] mt-2"
