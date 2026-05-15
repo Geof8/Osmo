@@ -11,7 +11,7 @@ export default function WhyYouSuffer() {
       style={{ padding: "80px 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-16 items-center">
           {/* Left column — text */}
           <div>
             <FadeUp>
@@ -72,13 +72,13 @@ export default function WhyYouSuffer() {
 
           {/* Right column — infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center lg:justify-end">
-              <div className="w-full max-w-[320px] lg:max-w-[420px]">
+            <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
+              <div className="w-full max-w-[400px] lg:max-w-[520px]">
                 <Image
                   src="/images/infographic.png"
                   alt="Schéma explicatif — problème et solution OSMO"
-                  width={420}
-                  height={420}
+                  width={520}
+                  height={520}
                   className="w-full h-auto"
                   style={{ objectFit: "contain" }}
                 />
