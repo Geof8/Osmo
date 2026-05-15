@@ -5,7 +5,7 @@ import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
-export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
+export default function ClosingCTA({ onOpenModal, soldOut = false }: OpenModalProps) {
   return (
     <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "80px 0" }}>
       <div
@@ -23,7 +23,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
           >
             <span className="w-7 h-px bg-white/40" aria-hidden="true" />
-            Vol. 01 · Édition fondateurs · 500 ex.
+            Vol. 01 · Lot N°001 · 50 ex.
           </div>
         </FadeUp>
 
@@ -64,7 +64,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
               color: "rgba(255,248,232,0.6)",
             }}
           >
-            500 places · 15€ · Expédié sous 6 mois
+            50 places · 20€ · Expédié sous 6 mois
           </p>
         </FadeUp>
 
@@ -89,10 +89,7 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
             >
               <strong style={{ color: "var(--amber)", fontWeight: 700 }}>Pourquoi 6 mois ?</strong>{" "}
               OSMO est en phase de pré-lancement. La commande au laboratoire
-              sera passée une fois les 500 fondateurs réunis.
-              Tu seras informé à chaque étape :
-              confirmation de commande, production, expédition.
-              Ton achat rend le lancement possible.
+              sera passée une fois les 50 Early Adopters réunis.
             </p>
           </div>
         </FadeUp>
@@ -110,10 +107,13 @@ export default function ClosingCTA({ onOpenModal }: OpenModalProps) {
                 textTransform: "uppercase",
               }}
             >
-              Devenir fondateur — 15 € <span aria-hidden="true">→</span>
+              {soldOut
+                ? "Lot N°001 complet — rejoindre la liste d'attente"
+                : "Devenir Early Adopter — 20 €"}{" "}
+              <span aria-hidden="true">→</span>
             </button>
             <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
-              <li><strong>— Prix fondateur : 15€ au lieu de 30€ — 50% de réduction</strong></li>
+              <li><strong>— Prix Early Adopter : 20€ au lieu de 30€ — 33% de réduction</strong></li>
               <li>— Expédition estimée : dans 6 mois maximum</li>
               <li>— Aucun frais caché — paiement sécurisé</li>
             </ul>

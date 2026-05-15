@@ -9,7 +9,7 @@ import type { HeroProps } from "@/types";
 const headlineWords = ["Le", "lendemain", "matin,"];
 const headlineWords2 = ["tu", "assures."];
 
-export default function Hero({ onOpenModal, revealed }: HeroProps) {
+export default function Hero({ onOpenModal, revealed, soldOut = false }: HeroProps) {
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
@@ -112,11 +112,20 @@ export default function Hero({ onOpenModal, revealed }: HeroProps) {
                     textTransform: "uppercase",
                   }}
                 >
-                  Devenir fondateur — 15 € <span aria-hidden="true">→</span>
+                  {soldOut
+                    ? "Lot N°001 complet — rejoindre la liste d'attente"
+                    : "Rejoindre les Early Adopters — 20 €"}{" "}
+                  <span aria-hidden="true">→</span>
                 </button>
               </div>
+              <div
+                className="text-[var(--ink-2)] mb-2"
+                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase" }}
+              >
+                Lot N°001 · Early Adopters · 20€ au lieu de 30€
+              </div>
               <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
-                <li><strong>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</strong></li>
+                <li><strong>— Prix Early Adopter : 20€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 33% de réduction</strong></li>
                 <li>— Expédition estimée : dans 6 mois maximum</li>
                 <li>— Aucun frais caché — paiement sécurisé</li>
               </ul>

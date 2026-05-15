@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
-export default function Navbar({ onOpenModal }: OpenModalProps) {
+export default function Navbar({ onOpenModal, remaining = 50, soldOut = false }: OpenModalProps) {
   return (
     <motion.nav
       initial={{ y: -10, opacity: 0 }}
@@ -54,7 +54,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               letterSpacing: "-0.01em",
             }}
           >
-            Recovery — édition fondateurs
+            Recovery — Lot N°001
           </span>
         </div>
 
@@ -86,7 +86,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               textTransform: "uppercase",
             }}
           >
-            500 / 500 places
+            {remaining} / 50 · LOT N°001
           </span>
           <button
             onClick={onOpenModal}
@@ -99,7 +99,7 @@ export default function Navbar({ onOpenModal }: OpenModalProps) {
               textTransform: "uppercase",
             }}
           >
-            Devenir fondateur
+            {soldOut ? "Liste d’attente · Lot N°002" : "Devenir Early Adopter"}
             <span aria-hidden="true" className="inline-block">→</span>
           </button>
         </div>

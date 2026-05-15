@@ -14,11 +14,13 @@ import SocialProof from "@/components/sections/SocialProof";
 import FAQ from "@/components/sections/FAQ";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import Footer from "@/components/Footer";
+import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [source, setSource] = useState("homepage_hero");
   const [heroRevealed, setHeroRevealed] = useState(false);
+  const { remaining, soldOut } = useWaitlistCount();
 
   const openModal = (src: string = "homepage_hero") => {
     setSource(src);
@@ -33,15 +35,15 @@ export default function Home() {
     <>
       <SplitOverlay onComplete={handleOverlayComplete} />
       <Strip />
-      <Navbar onOpenModal={() => openModal("navbar")} />
+      <Navbar onOpenModal={() => openModal("navbar")} remaining={remaining} soldOut={soldOut} />
       <main>
-        <Hero onOpenModal={() => openModal("homepage_hero")} revealed={heroRevealed} />
+        <Hero onOpenModal={() => openModal("homepage_hero")} revealed={heroRevealed} remaining={remaining} soldOut={soldOut} />
         <Marquee />
         <WhyYouSuffer />
         <Formula />
         <HowItWorks />
         <SocialProof />
-        <ClosingCTA onOpenModal={() => openModal("homepage_cta")} />
+        <ClosingCTA onOpenModal={() => openModal("homepage_cta")} remaining={remaining} soldOut={soldOut} />
         <FAQ />
       </main>
       <Footer />

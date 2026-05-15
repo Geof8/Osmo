@@ -158,10 +158,10 @@ export default function CaptureModal({
                         lineHeight: 1,
                       }}
                     >
-                      Devenir fondateur
+                      Devenir Early Adopter
                     </h2>
                     <p className="text-[var(--ink-2)] mt-3" style={{ fontSize: 14, lineHeight: 1.6 }}>
-                      Rejoins les 500 fondateurs. <span style={{ textDecoration: "line-through" }}>30€</span> → 15€ — expédié sous 6 mois.
+                      Rejoins les 50 Early Adopters. <span style={{ textDecoration: "line-through" }}>30€</span> → 20€ — expédié sous 6 mois.
                     </p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -232,11 +232,11 @@ export default function CaptureModal({
                         textTransform: "uppercase",
                       }}
                     >
-                      {loading ? "Envoi..." : "Devenir fondateur — 15 €"}
+                      {loading ? "Envoi..." : "Devenir Early Adopter — 20 €"}
                       {!loading && <span aria-hidden="true">→</span>}
                     </button>
                     <ul className="mt-2" style={{ fontFamily: FONTS.mono, fontSize: 10, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
-                      <li><strong>— Prix fondateur : 15€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 50% de réduction</strong></li>
+                      <li><strong>— Prix Early Adopter : 20€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 33% de réduction</strong></li>
                       <li>— Expédition estimée : dans 6 mois maximum</li>
                       <li>— Aucun frais caché — paiement sécurisé</li>
                     </ul>

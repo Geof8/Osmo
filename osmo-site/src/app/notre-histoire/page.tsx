@@ -10,6 +10,7 @@ import FadeUp from "@/components/FadeUp";
 import CountUp from "@/components/CountUp";
 import { FONTS } from "@/lib/constants";
 import { useInView } from "@/hooks/useInView";
+import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
 function WordByWord({ text }: { text: string }) {
   const [ref, isInView] = useInView<HTMLParagraphElement>({ margin: "-60px" });
@@ -50,6 +51,7 @@ function WordByWord({ text }: { text: string }) {
 export default function NotreHistoire() {
   const [modalOpen, setModalOpen] = useState(false);
   const [source, setSource] = useState("notre_histoire");
+  const { remaining, soldOut } = useWaitlistCount();
 
   const openModal = (src: string = "notre_histoire") => {
     setSource(src);
@@ -59,7 +61,7 @@ export default function NotreHistoire() {
   return (
     <>
       <Strip />
-      <Navbar onOpenModal={() => openModal("navbar")} />
+      <Navbar onOpenModal={() => openModal("navbar")} remaining={remaining} soldOut={soldOut} />
       <main>
         {/* Hero */}
         <section
@@ -252,7 +254,7 @@ export default function NotreHistoire() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                500 places fondateurs. Le stock sera commandé
+                50 Early Adopters · Lot N°001. Le stock sera commandé
                 quand la demande sera confirmée — pas avant.
               </p>
             </FadeUp>
@@ -265,7 +267,7 @@ export default function NotreHistoire() {
           style={{ padding: "clamp(80px, 12vw, 140px) 0 clamp(60px, 8vw, 100px)" }}
         >
           <div className="max-w-[760px] mx-auto px-5 sm:px-10">
-            <WordByWord text="Si tu lis ça, tu fais peut-être partie des 500." />
+            <WordByWord text="Si tu lis ça, tu fais peut-être partie des 50." />
 
             <FadeUp delay={0.6}>
               <div className="mt-12 flex justify-center">
@@ -280,7 +282,9 @@ export default function NotreHistoire() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Réserver mon accès prioritaire
+                  {soldOut
+                    ? "Lot N°001 complet — rejoindre la liste d'attente"
+                    : "Rejoindre les Early Adopters — 20€"}
                   <span aria-hidden="true">→</span>
                 </button>
               </div>

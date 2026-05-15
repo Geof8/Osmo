@@ -34,11 +34,11 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   title: "OSMO Recovery — Le lendemain matin, tu assures.",
   description:
-    "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée, une semaine chargée, ou les deux. Pré-commandez au tarif fondateur.",
+    "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée, une semaine chargée, ou les deux. Pré-commandez au tarif Early Adopter.",
   openGraph: {
     title: "OSMO Recovery — Le lendemain matin, tu assures.",
     description:
-      "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée. Tarif fondateur : 15€.",
+      "Complexe d'électrolytes formulé pour récupérer vite après une soirée alcoolisée. Tarif Early Adopter : 20€.",
     url: "https://osmolab.fr",
     siteName: "OSMO Lab",
     locale: "fr_FR",

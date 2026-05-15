@@ -62,10 +62,14 @@ export interface CaptureModalProps {
 
 export interface OpenModalProps {
   onOpenModal: () => void;
+  remaining?: number;
+  soldOut?: boolean;
 }
 
 export interface HeroProps extends OpenModalProps {
   revealed: boolean;
+  remaining?: number;
+  soldOut?: boolean;
 }
 
 export interface SplitOverlayProps {

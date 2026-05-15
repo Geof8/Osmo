@@ -33,7 +33,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
           color: textColor,
         }}
       >
-        500 places
+        50 places · Lot N°001
       </div>
     </div>
   );

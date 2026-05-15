@@ -54,22 +54,22 @@ export const ANIMATION_CONFIG = {
 
 export const COPY = {
   brand: "OSMO",
-  tagline: "Recovery — édition fondateurs",
-  capacity: "500 / 500 places",
-  cta: "Devenir fondateur",
+  tagline: "Recovery — Lot N°001",
+  capacity: "50 / 50 · LOT N°001",
+  cta: "Devenir Early Adopter",
   ctaArrow: "→",
 } as const;
 
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
-  { k: 15, label: "15 €", v: "Tarif fondateur (-50%)", amber: true, count: false },
-  { k: 500, label: "500", v: "Places fondateurs", count: true },
+  { k: 20, label: "20 €", v: "Tarif Early Adopter (-33%)", amber: true, count: false },
+  { k: 50, label: "50", v: "Places Early Adopters", count: true },
 ];
 
 export const CTA_STATS: CtaStat[] = [
-  { k: "500", v: "Places", em: true },
-  { k: "15 €", v: "Fondateur", em: false },
+  { k: "50", v: "Places Early Adopters", em: true },
+  { k: "20 €", v: "Early Adopter", em: false },
   { k: "30 €", v: "Public", em: false },
   { k: "6 mois", v: "Expédition max.", em: false },
 ];
@@ -87,8 +87,10 @@ export const MARQUEE_ITEMS = [
   "Bisglycinate de magnésium",
   "NaCl",
   "NAC",
-  "Lot 001 · 500 ex.",
-  "Édition fondateurs · 15 €",
+  "Lot N°001 · 50 ex.",
+  "Early Adopters · 20 €",
+  "LOT N°001",
+  "EARLY ADOPTERS",
   "Made in France",
 ];
 
@@ -111,11 +113,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Qu'est-ce que l'accès prioritaire ?",
-    a: "En devenant fondateur à 15€ (au lieu de 30€ au lancement), tu permets à OSMO de lancer sa première production. La commande au laboratoire sera passée une fois les 500 fondateurs réunis. Expédition estimée dans un délai de 6 mois maximum. Tu seras tenu informé à chaque étape.",
+    a: "En devenant Early Adopter à 20€ (au lieu de 30€), tu fais partie du Lot N°001 — les 50 premières personnes à recevoir OSMO Recovery. Expédition estimée sous 6 mois.",
   },
   {
     q: "Est-ce que je serai débité maintenant ?",
-    a: "Le paiement de 15€ est effectué au moment de ta réservation. Il confirme ta place dans l'édition fondateurs et déclenche, une fois les 500 places réunies, la commande de production. En cas d'annulation du projet, tu seras intégralement remboursé.",
+    a: "Le paiement de 20€ est effectué au moment de ta réservation. Il confirme ta place dans le Lot N°001 et déclenche, une fois les 50 places réunies, la commande de production. En cas d'annulation du projet, tu seras intégralement remboursé.",
   },
 ];
 
