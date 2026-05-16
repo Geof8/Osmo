@@ -61,12 +61,12 @@ export interface CaptureModalProps {
 }
 
 export interface OpenModalProps {
-  onOpenModal: () => void;
+  onOpenModal?: () => void;
   remaining?: number;
   soldOut?: boolean;
 }
 
-export interface HeroProps extends OpenModalProps {
+export interface HeroProps {
   revealed: boolean;
   remaining?: number;
   soldOut?: boolean;

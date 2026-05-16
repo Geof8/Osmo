@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
+import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
-export default function ClosingCTA({ onOpenModal, soldOut = false }: OpenModalProps) {
+export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
+  const { addToCartAndNavigate } = useCart();
   return (
     <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "80px 0" }}>
       <div
@@ -97,7 +99,7 @@ export default function ClosingCTA({ onOpenModal, soldOut = false }: OpenModalPr
         <FadeUp delay={0.2}>
           <div className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.16] flex flex-col sm:flex-row gap-6 items-start sm:items-center">
             <button
-              onClick={onOpenModal}
+              onClick={addToCartAndNavigate}
               className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
               style={{
                 fontFamily: FONTS.mono,

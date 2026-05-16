@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Strip from "@/components/Strip";
-import CaptureModal from "@/components/CaptureModal";
 import FadeUp from "@/components/FadeUp";
 import CountUp from "@/components/CountUp";
+import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 import { useInView } from "@/hooks/useInView";
 import { useWaitlistCount } from "@/hooks/useWaitlistCount";
@@ -49,19 +48,13 @@ function WordByWord({ text }: { text: string }) {
 }
 
 export default function NotreHistoire() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [source, setSource] = useState("notre_histoire");
   const { remaining, soldOut } = useWaitlistCount();
-
-  const openModal = (src: string = "notre_histoire") => {
-    setSource(src);
-    setModalOpen(true);
-  };
+  const { addToCartAndNavigate } = useCart();
 
   return (
     <>
       <Strip />
-      <Navbar onOpenModal={() => openModal("navbar")} remaining={remaining} soldOut={soldOut} />
+      <Navbar remaining={remaining} soldOut={soldOut} />
       <main>
         {/* Hero */}
         <section
@@ -272,7 +265,7 @@ export default function NotreHistoire() {
             <FadeUp delay={0.6}>
               <div className="mt-12 flex justify-center">
                 <button
-                  onClick={() => openModal("notre_histoire_cta")}
+                  onClick={addToCartAndNavigate}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 min-h-[52px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
                   style={{
                     fontFamily: FONTS.mono,
@@ -293,11 +286,6 @@ export default function NotreHistoire() {
         </section>
       </main>
       <Footer />
-      <CaptureModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-        source={source}
-      />
     </>
   );
 }

@@ -121,6 +121,17 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
 ];
 
+export const PRODUCT = {
+  name: "OSMO Recovery",
+  weight: "120g",
+  doses: 15,
+  image: "/osmo-hero.png",
+  earlyPrice: 20,
+  publicPrice: 30,
+  currency: "EUR",
+  maxEarlyAdopters: 50,
+} as const;
+
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Produit",

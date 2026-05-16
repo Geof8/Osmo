@@ -3,13 +3,15 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import CountUp from "@/components/CountUp";
+import { useCart } from "@/context/CartContext";
 import { FONTS, HERO_STATS } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
 const headlineWords = ["Le", "lendemain", "matin,"];
 const headlineWords2 = ["tu", "assures."];
 
-export default function Hero({ onOpenModal, revealed, soldOut = false }: HeroProps) {
+export default function Hero({ revealed, soldOut = false }: HeroProps) {
+  const { addToCartAndNavigate } = useCart();
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
@@ -102,7 +104,7 @@ export default function Hero({ onOpenModal, revealed, soldOut = false }: HeroPro
             >
               <div className="flex gap-3 flex-wrap items-center">
                 <button
-                  onClick={onOpenModal}
+                  onClick={addToCartAndNavigate}
                   className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
                   style={{
                     fontFamily: FONTS.mono,

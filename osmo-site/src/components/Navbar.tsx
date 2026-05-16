@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
-export default function Navbar({ onOpenModal, remaining = 50, soldOut = false }: OpenModalProps) {
+export default function Navbar({ remaining = 50, soldOut = false }: OpenModalProps) {
+  const { addToCartAndNavigate } = useCart();
   return (
     <motion.nav
       initial={{ y: -10, opacity: 0 }}
@@ -89,7 +91,7 @@ export default function Navbar({ onOpenModal, remaining = 50, soldOut = false }:
             {remaining} / 50 · LOT N°001
           </span>
           <button
-            onClick={onOpenModal}
+            onClick={addToCartAndNavigate}
             className="inline-flex items-center gap-3 px-5 min-h-[44px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
             style={{
               fontFamily: FONTS.mono,
