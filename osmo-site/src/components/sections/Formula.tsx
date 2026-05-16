@@ -10,38 +10,27 @@ import type { Ingredient } from "@/types";
 
 const actifs: Ingredient[] = [
   {
-    ord: "N° 01 · Minéral",
-    mol: "NaHCO₃",
-    name: "Bicarbonate de sodium",
-    benefit: "Réhydratation rapide",
-    dose: "1700",
-    role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
+    ord: "N° 01 · Acide aminé",
+    mol: "C₅H₉NO₃S",
+    name: "N-Acétyl-Cystéine (NAC)",
+    benefit: "Soutien hépatique",
+    detail: "Le seul actif qui soutient directement le foie après une consommation d'alcool. Utilisé en milieu hospitalier.",
+    dose: "600",
+    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
+    badge: "★ Actif différenciant",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
-        <line x1="28" y1="6" x2="28" y2="46" />
-        <line x1="12" y1="20" x2="44" y2="20" />
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
+        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
+        <path d="M19 28 L25 34 L37 22" />
       </svg>
     ),
   },
   {
     ord: "N° 02 · Minéral",
-    mol: "K₃C₆H₅O₇",
-    name: "Citrate de potassium",
-    benefit: "Réduit les crampes",
-    dose: "2000",
-    role: "Fonction musculaire. Contraction cardiaque normale.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
-      </svg>
-    ),
-  },
-  {
-    ord: "N° 03 · Minéral",
     mol: "Mg(C₂H₄NO₂)₂",
     name: "Bisglycinate de magnésium",
     benefit: "Améliore le sommeil",
+    detail: "Favorise un sommeil profond et réparateur. Réduit les crampes nocturnes.",
     dose: "1350",
     role: "Récupération nerveuse. Sommeil profond.",
     svg: (
@@ -53,30 +42,47 @@ const actifs: Ingredient[] = [
     ),
   },
   {
+    ord: "N° 03 · Minéral",
+    mol: "K₃C₆H₅O₇",
+    name: "Citrate de potassium",
+    benefit: "Réduit les crampes",
+    detail: "Soutient la fonction musculaire et cardiaque normale.",
+    dose: "2000",
+    role: "Fonction musculaire. Contraction cardiaque normale.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
+        <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
+      </svg>
+    ),
+  },
+  {
     ord: "N° 04 · Minéral",
+    mol: "NaHCO₃",
+    name: "Bicarbonate de sodium",
+    benefit: "Réhydratation rapide",
+    detail: "Restaure l'équilibre acido-basique post-alcool.",
+    dose: "1700",
+    role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
+        <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
+        <line x1="28" y1="6" x2="28" y2="46" />
+        <line x1="12" y1="20" x2="44" y2="20" />
+      </svg>
+    ),
+  },
+  {
+    ord: "N° 05 · Minéral",
     mol: "NaCl",
     name: "Chlorure de sodium",
     benefit: "Hydratation cellulaire",
+    detail: "Maintient l'équilibre hydrique au niveau cellulaire.",
     dose: "150",
     role: "Hydratation cellulaire ciblée.",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
         <path d="M21 34 Q21 41 28 44" />
-      </svg>
-    ),
-  },
-  {
-    ord: "N° 05 · Acide aminé",
-    mol: "C₅H₉NO₃S",
-    name: "N-Acétyl-Cystéine (NAC)",
-    benefit: "Soutient le foie",
-    dose: "600",
-    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
-        <path d="M19 28 L25 34 L37 22" />
       </svg>
     ),
   },

@@ -5,9 +5,11 @@ export interface Ingredient {
   mol: string;
   name: string;
   benefit: string;
+  detail: string;
   dose: string;
   role: string;
   svg: ReactNode;
+  badge?: string;
 }
 
 export interface Step {
@@ -61,12 +63,12 @@ export interface CaptureModalProps {
 }
 
 export interface OpenModalProps {
-  onOpenModal: () => void;
+  onOpenModal?: () => void;
   remaining?: number;
   soldOut?: boolean;
 }
 
-export interface HeroProps extends OpenModalProps {
+export interface HeroProps {
   revealed: boolean;
   remaining?: number;
   soldOut?: boolean;

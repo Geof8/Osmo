@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Barlow_Condensed, Inter, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
+import Providers from "./Providers";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -56,7 +57,7 @@ export default function RootLayout({
       lang="fr"
       className={`${barlowCondensed.variable} ${inter.variable} ${ibmPlexMono.variable} ${playfairDisplay.variable}`}
     >
-      <body>{children}</body>
+      <body><Providers>{children}</Providers></body>
     </html>
   );
 }
