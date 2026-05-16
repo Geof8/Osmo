@@ -164,6 +164,11 @@ export default function NotreHistoire() {
                 la NAC, un acide aminé méconnu du grand public mais utilisé
                 en milieu hospitalier pour les crises hépatiques.
                 Discret. Puissant. On l&apos;a intégré à la formule.
+                <br /><br />
+                La formule a été développée en collaboration
+                avec un laboratoire français spécialisé
+                en compléments alimentaires —
+                formulé, testé, ajusté, validé.
               </p>
             </FadeUp>
           </div>
@@ -210,7 +215,7 @@ export default function NotreHistoire() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Gélules d&apos;abord, puis poudre. Dosages ajustés,
+                Gélules d&apos;abord, puis poudre. Dosages ajustés en laboratoire,
                 goût reformulé. Testé sur moi d&apos;abord, puis sur
                 la famille, des amis, des collègues.
                 Le retour le plus fréquent :

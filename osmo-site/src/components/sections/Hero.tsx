@@ -131,6 +131,12 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 <li>— Expédition estimée : dans 6 mois maximum</li>
                 <li>— Aucun frais caché — paiement sécurisé</li>
               </ul>
+              <div
+                className="mt-4"
+                style={{ fontSize: 12, lineHeight: 1.6, color: "#666666" }}
+              >
+                ✓ Formulé avec un laboratoire français certifié · ✓ Apports conformes ANSES · ✓ Sans sucre · Sans colorant
+              </div>
             </motion.div>
 
           </div>

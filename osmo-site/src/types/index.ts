@@ -5,9 +5,11 @@ export interface Ingredient {
   mol: string;
   name: string;
   benefit: string;
+  detail: string;
   dose: string;
   role: string;
   svg: ReactNode;
+  badge?: string;
 }
 
 export interface Step {
