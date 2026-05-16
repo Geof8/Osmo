@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import CountUp from "@/components/CountUp";
+import HeroCarousel from "@/components/HeroCarousel";
 import { FONTS, HERO_STATS } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
@@ -16,26 +16,9 @@ export default function Hero({ onOpenModal, revealed, soldOut = false }: HeroPro
       style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
-          {/* LEFT: Product image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="order-2 lg:order-1"
-          >
-            <Image
-              src="/osmo-hero.png"
-              alt="OSMO Recovery — complexe d'électrolyte, goût citron, 150g"
-              width={1024}
-              height={1024}
-              className="w-full lg:w-[108%] max-h-[50vh] lg:max-h-[65vh] object-contain lg:ml-[-40px]"
-              priority
-            />
-          </motion.div>
-
-          {/* RIGHT: Editorial text */}
-          <div className="flex flex-col gap-7 sm:gap-9 order-1 lg:order-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
+          {/* LEFT: Editorial text (desktop) / Below carousel (mobile) */}
+          <div className="flex flex-col gap-7 sm:gap-9 order-2 lg:order-1">
             <h1
               style={{
                 fontFamily: FONTS.display,
@@ -132,6 +115,16 @@ export default function Hero({ onOpenModal, revealed, soldOut = false }: HeroPro
             </motion.div>
 
           </div>
+
+          {/* RIGHT: Carousel (desktop) / Top (mobile) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="order-1 lg:order-2"
+          >
+            <HeroCarousel />
+          </motion.div>
         </div>
 
         {/* Hero meta strip */}
