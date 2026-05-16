@@ -5,8 +5,8 @@ import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [
-  { num: 20, suffix: "", label: "testeurs en cercle fermé", value: "~20" },
-  { num: 0, suffix: "", label: "de tests", value: "Plusieurs mois" },
+  { num: 100, suffix: "+", label: "testeurs en cercle fermé", value: "~100" },
+  { num: 0, suffix: "", label: "de développement en laboratoire", value: "18 mois" },
   { num: 1, suffix: "", label: "unanime", value: "1 retour" },
 ];
 
@@ -28,9 +28,9 @@ export default function SocialProof() {
               marginBottom: "clamp(32px, 4vw, 56px)",
             }}
           >
-            Avant les 50
+            Validé en laboratoire.
             <br />
-            <span className="text-[#C8963E]">Early Adopters.</span>
+            <span className="text-[#C8963E]">Testé par l&apos;entourage.</span>
           </h2>
         </FadeUp>
 
@@ -45,8 +45,9 @@ export default function SocialProof() {
               marginBottom: "clamp(40px, 5vw, 64px)",
             }}
           >
-            OSMO a d&apos;abord été testé en cercle fermé.
-            Famille, amis, collègues. Une vingtaine de personnes
+            La formule OSMO a été développée avec un laboratoire français
+            spécialisé en compléments alimentaires, puis testée en cercle fermé.
+            Famille, amis, collègues — une centaine de personnes
             sur plusieurs mois. La quasi-totalité a demandé
             à être prévenue au lancement.
             Certains ont déjà leur place réservée.
