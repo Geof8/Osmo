@@ -12,8 +12,13 @@ const STATS = [
 export default function SocialProof() {
   return (
     <section
-      className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "clamp(56px, 9vw, 80px) 0" }}
+      className="relative z-[5]"
+      style={{
+        background: "#111111",
+        color: "#FFFFFF",
+        padding: "clamp(56px, 9vw, 80px) 0",
+        borderBottom: "1px solid #222222",
+      }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <FadeUp>
@@ -25,6 +30,7 @@ export default function SocialProof() {
               lineHeight: 0.95,
               letterSpacing: "-0.02em",
               marginBottom: "clamp(28px, 4vw, 56px)",
+              color: "#FFFFFF",
             }}
           >
             Développé en laboratoire.
@@ -35,13 +41,13 @@ export default function SocialProof() {
 
         <FadeUp delay={0.1}>
           <p
-            className="text-[var(--ink-2)]"
             style={{
               fontFamily: FONTS.body,
               fontSize: "clamp(15px, 3.6vw, 20px)",
               lineHeight: 1.65,
               maxWidth: 640,
               marginBottom: 0,
+              color: "#AAAAAA",
             }}
           >
             La formule OSMO a été développée avec un laboratoire français
@@ -73,7 +79,10 @@ export default function SocialProof() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="border-t border-[var(--rule)] pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center">
+          <div
+            className="pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center"
+            style={{ borderTop: "1px solid #333333" }}
+          >
             {STATS.map((stat) => (
               <div key={stat.value}>
                 <div
@@ -84,16 +93,16 @@ export default function SocialProof() {
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
                     marginBottom: 8,
+                    color: "#FFFFFF",
                   }}
                 >
                   {stat.value}
                 </div>
                 <div
-                  className="text-[var(--ink-2)]"
                   style={{
                     fontFamily: FONTS.body,
                     fontSize: 13,
-                    color: "#666666",
+                    color: "#AAAAAA",
                   }}
                 >
                   {stat.label}
