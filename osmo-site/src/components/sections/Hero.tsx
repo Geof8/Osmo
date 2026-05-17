@@ -104,23 +104,6 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 </button>
                 <div className="cta-guarantee w-full">{GUARANTEE_LINE}</div>
               </div>
-              <div
-                className="text-[var(--ink-2)] mb-2"
-                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase" }}
-              >
-                Lot N°001 · Early Adopters · 20€ au lieu de 30€
-              </div>
-              <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "#666666", listStyle: "none", padding: 0 }}>
-                <li><strong>— Prix Early Adopter : 20€ au lieu de <span style={{ textDecoration: "line-through" }}>30€</span> — 33% de réduction</strong></li>
-                <li>— Expédition estimée : dans 6 mois maximum</li>
-                <li>— Aucun frais caché — paiement sécurisé</li>
-              </ul>
-              <div
-                className="mt-4"
-                style={{ fontSize: 12, lineHeight: 1.6, color: "#666666" }}
-              >
-                ✓ Formulé avec un laboratoire français certifié · ✓ Apports conformes ANSES · ✓ Sans sucre · Sans colorant
-              </div>
             </motion.div>
 
           </div>
@@ -200,7 +183,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-8"
+          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 gap-y-6 gap-x-4 sm:gap-8"
         >
           {HERO_STATS.map((item, i) => (
             <div key={i} className="min-w-0">

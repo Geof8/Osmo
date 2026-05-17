@@ -29,7 +29,7 @@ export const FONTS = {
 } as const;
 
 export const GUARANTEE_LINE =
-  "✓ À réception du produit — 60 jours satisfait ou remboursé";
+  "✓ À réception du produit — 30 jours satisfait ou remboursé";
 
 export const ANIMATION_CONFIG = {
   fadeUp: {
@@ -67,8 +67,6 @@ export const COPY = {
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
-  { k: 20, label: "20 €", v: "Tarif Early Adopter (-33%)", amber: true, count: false },
-  { k: 50, label: "50", v: "Places Early Adopters", count: true },
 ];
 
 export const CTA_STATS: CtaStat[] = [

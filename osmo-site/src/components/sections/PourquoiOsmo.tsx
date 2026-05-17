@@ -25,8 +25,8 @@ const ITEMS: Item[] = [
   },
   {
     id: "guarantee",
-    title: "60 jours satisfait ou remboursé",
-    desc: "À réception, 60 jours pour être convaincu. Sinon remboursé.",
+    title: "30 jours satisfait ou remboursé",
+    desc: "À réception, 30 jours pour être convaincu. Sinon remboursé.",
   },
   {
     id: "shipping",
