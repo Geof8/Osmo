@@ -91,6 +91,7 @@ export const MARQUEE_ITEMS = [
   "Early Adopters · 20 €",
   "LOT N°001",
   "EARLY ADOPTERS",
+  "EXPÉDITION SOUS 6 MOIS",
   "Made in France",
 ];
 

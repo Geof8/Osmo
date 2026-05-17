@@ -22,7 +22,7 @@ export default function Strip() {
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10 flex justify-between gap-6 flex-wrap">
         <div className="flex items-center gap-2">
           <span className="w-[6px] h-[6px] bg-white rounded-full animate-pulse" aria-hidden="true" />
-          LOT N°001 · 50 PLACES · EARLY ADOPTERS · 20€ · AUCUN PAIEMENT MAINTENANT
+          LOT N°001 · 50 PLACES · EARLY ADOPTERS · 20€ · EXPÉDITION SOUS 6 MOIS
         </div>
         <div className="hidden md:block">OSMO Lab — Paris, France</div>
       </div>

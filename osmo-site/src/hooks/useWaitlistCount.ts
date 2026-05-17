@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getSupabaseCount, computeRemaining } from "@/lib/supabase";
 
 export function useWaitlistCount() {
-  const [remaining, setRemaining] = useState(500);
+  const [remaining, setRemaining] = useState(50);
   const [displayedSold, setDisplayedSold] = useState(0);
   const soldOut = remaining <= 0;
 

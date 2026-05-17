@@ -18,9 +18,9 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
       style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
-          {/* LEFT: Editorial text (desktop) / Below carousel (mobile) */}
-          <div className="flex flex-col gap-7 sm:gap-9 order-2 lg:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
+          {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
+          <div className="flex flex-col gap-7 sm:gap-9 order-2 lg:order-2">
             <h1
               style={{
                 fontFamily: FONTS.display,
@@ -124,12 +124,12 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
 
           </div>
 
-          {/* RIGHT: Carousel (desktop) / Top (mobile) */}
+          {/* LEFT: Carousel (desktop) / Top (mobile) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="order-1 lg:order-2"
+            className="order-1 lg:order-1"
           >
             <HeroCarousel />
           </motion.div>

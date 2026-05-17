@@ -157,18 +157,24 @@ export default function NotreHistoire() {
                 }}
               >
                 Un an et demi d&apos;études scientifiques, d&apos;avis médicaux,
-                de tests. J&apos;ai compris le rôle de chaque sel minéraux —
+                de tests. J&apos;ai compris le rôle de chaque sel minéral —
                 sodium, potassium, magnésium — ces composants de base
                 du corps humain qu&apos;on néglige et qui sont pourtant
-                à la base de tout. C&apos;est aussi comme ça que j&apos;ai découvert
-                la NAC, un acide aminé méconnu du grand public mais utilisé
+                à la base de tout.
+                <br /><br />
+                La formule a été développée en collaboration avec
+                un laboratoire français spécialisé en compléments
+                alimentaires — certifié, équipé pour les analyses
+                de stabilité, de solubilité et de tolérance.
+                Chaque actif a été sélectionné sur la base d&apos;études
+                cliniques publiées. Les dosages ont été ajustés
+                pour rester dans les apports de référence ANSES
+                tout en maximisant l&apos;efficacité.
+                <br /><br />
+                C&apos;est aussi comme ça que j&apos;ai découvert la NAC,
+                un acide aminé méconnu du grand public mais utilisé
                 en milieu hospitalier pour les crises hépatiques.
                 Discret. Puissant. On l&apos;a intégré à la formule.
-                <br /><br />
-                La formule a été développée en collaboration
-                avec un laboratoire français spécialisé
-                en compléments alimentaires —
-                formulé, testé, ajusté, validé.
               </p>
             </FadeUp>
           </div>
@@ -202,6 +208,18 @@ export default function NotreHistoire() {
                 }}
               >
                 <CountUp target={29} duration={1.5} />
+              </div>
+              <div
+                className="text-[var(--ink-2)]"
+                style={{
+                  fontFamily: FONTS.mono,
+                  fontSize: 12,
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  marginTop: 12,
+                }}
+              >
+                versions de la formule
               </div>
             </FadeUp>
             <FadeUp delay={0.2}>

@@ -27,6 +27,6 @@ export async function getSupabaseCount(): Promise<number> {
 
 export function computeRemaining(actualCount: number) {
   const displayedSold = Math.floor(actualCount / 5);
-  const remaining = 500 - displayedSold;
+  const remaining = 50 - displayedSold;
   return { displayedSold, remaining: Math.max(0, remaining) };
 }
