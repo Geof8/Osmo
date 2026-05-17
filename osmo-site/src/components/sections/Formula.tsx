@@ -10,81 +10,50 @@ import type { Ingredient } from "@/types";
 
 const actifs: Ingredient[] = [
   {
-    ord: "N° 01 · Acide aminé",
-    mol: "C₅H₉NO₃S",
-    name: "N-Acétyl-Cystéine (NAC)",
-    benefit: "Soutien hépatique",
-    detail: "Le seul actif qui soutient directement le foie après une consommation d'alcool. Utilisé en milieu hospitalier.",
-    dose: "600",
-    role: "Soutien hépatique nocturne. Précurseur du glutathion.",
-    badge: "★ Actif différenciant",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 L46 14 V28 Q46 44 28 50 Q10 44 10 28 V14 Z" />
-        <path d="M19 28 L25 34 L37 22" />
-      </svg>
-    ),
+    tag: "Soutien hépatique",
+    name: "N-Acétyl-Cystéine",
+    bullets: [
+      "Précurseur du glutathion, principal antioxydant du foie",
+      "Utilisé en milieu hospitalier pour les crises hépatiques",
+    ],
+    detail: "Actif méconnu du grand public. Redoutablement efficace.",
+    highlight: true,
   },
   {
-    ord: "N° 02 · Minéral",
-    mol: "Mg(C₂H₄NO₂)₂",
-    name: "Bisglycinate de magnésium",
-    benefit: "Améliore le sommeil",
-    detail: "Favorise un sommeil profond et réparateur. Réduit les crampes nocturnes.",
-    dose: "1350",
-    role: "Récupération nerveuse. Sommeil profond.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M6 22 Q14 14 22 22 T36 22 T50 22" />
-        <path d="M6 32 Q14 24 22 32 T36 32 T50 32" />
-        <path d="M6 42 Q14 34 22 42 T36 42 T50 42" />
-      </svg>
-    ),
+    tag: "Sommeil & récupération",
+    name: "Bisglycinate de Magnésium",
+    bullets: [
+      "Favorise un sommeil profond et réparateur",
+      "Réduit les crampes musculaires nocturnes",
+    ],
+    detail: "Forme hautement biodisponible du magnésium.",
   },
   {
-    ord: "N° 03 · Minéral",
-    mol: "K₃C₆H₅O₇",
-    name: "Citrate de potassium",
-    benefit: "Réduit les crampes",
-    detail: "Soutient la fonction musculaire et cardiaque normale.",
-    dose: "2000",
-    role: "Fonction musculaire. Contraction cardiaque normale.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M30 6 L16 32 L24 32 L20 50 L40 24 L30 24 Z" />
-      </svg>
-    ),
+    tag: "Fonction musculaire",
+    name: "Citrate de Potassium",
+    bullets: [
+      "Soutient la contraction musculaire et cardiaque",
+      "Prévient les crampes liées à la déshydratation",
+    ],
+    detail: "Sel minéral essentiel éliminé en priorité par l'alcool.",
   },
   {
-    ord: "N° 04 · Minéral",
-    mol: "NaHCO₃",
-    name: "Bicarbonate de sodium",
-    benefit: "Réhydratation rapide",
-    detail: "Restaure l'équilibre acido-basique post-alcool.",
-    dose: "1700",
-    role: "Équilibre acido-basique post-alcool. Tampon des fluides corporels.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 L44 20 L36 46 L20 46 L12 20 Z" />
-        <line x1="28" y1="6" x2="28" y2="46" />
-        <line x1="12" y1="20" x2="44" y2="20" />
-      </svg>
-    ),
+    tag: "Réhydratation rapide",
+    name: "Bicarbonate de Sodium",
+    bullets: [
+      "Restaure l'équilibre acido-basique post-alcool",
+      "Accélère la réhydratation au niveau cellulaire",
+    ],
+    detail: "Tampon naturel des fluides corporels.",
   },
   {
-    ord: "N° 05 · Minéral",
-    mol: "NaCl",
-    name: "Chlorure de sodium",
-    benefit: "Hydratation cellulaire",
-    detail: "Maintient l'équilibre hydrique au niveau cellulaire.",
-    dose: "150",
-    role: "Hydratation cellulaire ciblée.",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M28 6 Q14 24 14 34 A14 14 0 0 0 42 34 Q42 24 28 6 Z" />
-        <path d="M21 34 Q21 41 28 44" />
-      </svg>
-    ),
+    tag: "Hydratation cellulaire",
+    name: "Chlorure de Sodium",
+    bullets: [
+      "Régule l'équilibre hydrique intracellulaire",
+      "Active la transmission nerveuse et musculaire",
+    ],
+    detail: "Le sel essentiel — ni trop, ni pas assez.",
   },
 ];
 
@@ -165,10 +134,7 @@ export default function Formula() {
         </div>
 
         <div className="mt-2">
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5"
-            style={{ borderTop: "1px solid #333333", borderLeft: "1px solid #333333" }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {actifs.map((a, i) => (
               <IngredientCard key={i} a={a} index={i} />
             ))}

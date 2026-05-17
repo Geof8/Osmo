@@ -1,15 +1,11 @@
 import type { ReactNode } from "react";
 
 export interface Ingredient {
-  ord: string;
-  mol: string;
+  tag: string;
   name: string;
-  benefit: string;
+  bullets: [string, string];
   detail: string;
-  dose: string;
-  role: string;
-  svg: ReactNode;
-  badge?: string;
+  highlight?: boolean;
 }
 
 export interface Step {

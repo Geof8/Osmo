@@ -20,66 +20,100 @@ export default function IngredientCard({
       initial={ANIMATION_CONFIG.cardReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.cardReveal.initial}
       transition={{ ...ANIMATION_CONFIG.cardReveal.transition, delay: index * 0.1 }}
-      className="hover:-translate-y-1 transition-[transform,box-shadow] duration-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] flex flex-col justify-center gap-3"
+      className="group flex flex-col"
       style={{
-        padding: "28px 20px",
         background: "#1A1A1A",
-        borderRight: "1px solid #333333",
-        borderBottom: "1px solid #333333",
+        border: "1px solid #2A2A2A",
+        borderTop: a.highlight ? "2px solid #C8963E" : "1px solid #2A2A2A",
+        borderRadius: 12,
+        padding: 24,
         position: "relative",
+        transition: "border-color 0.2s ease",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = "#C8963E";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = "#2A2A2A";
+        if (a.highlight) e.currentTarget.style.borderTopColor = "#C8963E";
       }}
     >
-      {a.badge && (
-        <div
+      {a.highlight && (
+        <span
           style={{
             position: "absolute",
-            top: 12,
-            left: 12,
-            border: "1px solid #C8963E",
+            top: 16,
+            right: 16,
+            background: "rgba(200, 150, 62, 0.15)",
             color: "#C8963E",
+            fontFamily: FONTS.mono,
             fontSize: 11,
             padding: "2px 8px",
-            fontFamily: FONTS.mono,
+            borderRadius: 50,
             letterSpacing: "0.05em",
           }}
         >
-          {a.badge}
-        </div>
+          ★ Clé
+        </span>
       )}
-      <div className="w-11 h-11" style={{ color: "#C8963E", marginTop: a.badge ? 20 : 0 }}>
-        {a.svg}
-      </div>
-      <div
-        style={{
-          fontFamily: FONTS.display,
-          fontWeight: 700,
-          fontSize: "clamp(16px, 1.4vw, 20px)",
-          letterSpacing: "-0.02em",
-          lineHeight: 1.2,
-          color: "#FFFFFF",
-        }}
-      >
-        {a.benefit}
-      </div>
+
       <div
         style={{
           fontFamily: FONTS.mono,
           fontSize: 11,
-          fontWeight: 400,
-          color: "#666666",
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "#C8963E",
+          marginBottom: 8,
+          paddingRight: a.highlight ? 56 : 0,
+        }}
+      >
+        {a.tag}
+      </div>
+
+      <div
+        style={{
+          fontFamily: FONTS.display,
+          fontSize: 20,
+          fontWeight: 700,
+          lineHeight: 1.2,
+          letterSpacing: "-0.01em",
+          color: "#FFFFFF",
+          marginBottom: 16,
         }}
       >
         {a.name}
       </div>
+
+      <div style={{ height: 1, background: "#333333", marginBottom: 16 }} />
+
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: 16, display: "flex", flexDirection: "column", gap: 6 }}>
+        {a.bullets.map((b, i) => (
+          <li
+            key={i}
+            style={{
+              fontFamily: FONTS.display,
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: "#CCCCCC",
+              display: "flex",
+              gap: 8,
+            }}
+          >
+            <span aria-hidden="true" style={{ color: "#C8963E", flexShrink: 0 }}>→</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
       <div
         style={{
           fontFamily: FONTS.display,
           fontSize: 12,
-          fontWeight: 300,
           fontStyle: "italic",
           color: "#888888",
-          lineHeight: 1.4,
-          maxWidth: 200,
+          lineHeight: 1.5,
+          marginTop: "auto",
         }}
       >
         {a.detail}
