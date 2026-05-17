@@ -72,17 +72,17 @@ export default function WhyYouSuffer() {
 
           {/* Right column — infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <div className="flex justify-center self-center mt-8 lg:mt-0">
               <div
-                className="w-full max-w-[400px] lg:max-w-[520px] overflow-hidden"
+                className="w-full max-w-[420px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
               >
                 <Image
                   src="/images/infographic.png"
                   alt="Schéma explicatif — problème et solution OSMO"
-                  width={520}
-                  height={520}
-                  className="w-full h-auto"
+                  width={420}
+                  height={420}
+                  className="w-full h-auto mx-auto"
                   style={{ objectFit: "contain" }}
                 />
               </div>

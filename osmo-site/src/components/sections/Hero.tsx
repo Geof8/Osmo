@@ -18,14 +18,14 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
       style={{ padding: "80px 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-center min-h-[50vh] lg:min-h-[70vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start min-h-[50vh] lg:min-h-[70vh]">
           {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
           <div className="flex flex-col gap-7 sm:gap-9 order-2 lg:order-2">
             <h1
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 800,
-                fontSize: "clamp(48px, 7vw, 110px)",
+                fontSize: "clamp(42px, 6vw, 96px)",
                 lineHeight: 0.92,
                 letterSpacing: "-0.02em",
               }}

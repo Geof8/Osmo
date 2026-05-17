@@ -133,7 +133,7 @@ export default function Formula() {
           </div>
         </div>
 
-        <div className="mt-2">
+        <div className="-mt-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {actifs.map((a, i) => (
               <IngredientCard key={i} a={a} index={i} />

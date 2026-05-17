@@ -67,8 +67,8 @@ export default function Navbar({ soldOut = false }: OpenModalProps) {
             className="inline-flex items-center justify-center min-h-[44px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 10,
-              fontWeight: 500,
+              fontSize: 12,
+              fontWeight: 700,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
             }}
