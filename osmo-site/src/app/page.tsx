@@ -32,11 +32,11 @@ export default function Home() {
       <main>
         <Hero revealed={heroRevealed} remaining={remaining} soldOut={soldOut} />
         <Marquee />
-        <PourquoiOsmo />
         <WhyYouSuffer />
         <Formula />
         <HowItWorks />
         <SocialProof />
+        <PourquoiOsmo />
         <ClosingCTA remaining={remaining} soldOut={soldOut} />
         <FAQ />
       </main>

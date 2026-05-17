@@ -37,7 +37,7 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
           style={{
             fontFamily: FONTS.display,
             fontWeight: 800,
-            fontSize: "clamp(40px, 7vw, 110px)",
+            fontSize: "clamp(36px, 5vw, 72px)",
             lineHeight: 0.92,
             letterSpacing: "-0.02em",
           }}
