@@ -1,8 +1,14 @@
 "use client";
 
 import { CartProvider } from "@/context/CartContext";
+import SideCart from "@/components/SideCart";
 import type { ReactNode } from "react";
 
 export default function Providers({ children }: { children: ReactNode }) {
-  return <CartProvider>{children}</CartProvider>;
+  return (
+    <CartProvider>
+      {children}
+      <SideCart />
+    </CartProvider>
+  );
 }
