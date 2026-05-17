@@ -26,7 +26,7 @@ export default function IngredientCard({
         border: "1px solid #2A2A2A",
         borderTop: a.highlight ? "2px solid #C8963E" : "1px solid #2A2A2A",
         borderRadius: 12,
-        padding: 24,
+        padding: "clamp(18px, 4vw, 24px)",
         position: "relative",
         transition: "border-color 0.2s ease",
       }}

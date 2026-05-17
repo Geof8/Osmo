@@ -65,14 +65,14 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       initial={ANIMATION_CONFIG.stepReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.stepReveal.initial}
       transition={{ ...ANIMATION_CONFIG.stepReveal.transition, delay: index * 0.15 }}
-      className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] rounded-[16px] flex flex-col gap-6 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+      className="p-5 sm:p-8 min-h-[340px] sm:min-h-[420px] bg-white border border-[var(--rule)] rounded-[16px] flex flex-col gap-5 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
     >
       <div>
         <div
           style={{
             fontFamily: FONTS.display,
             fontWeight: 800,
-            fontSize: "clamp(64px, 7vw, 96px)",
+            fontSize: "clamp(56px, 14vw, 96px)",
             lineHeight: 0.85,
             letterSpacing: "-0.02em",
             color: "var(--ink)",
@@ -129,8 +129,8 @@ function StepCard({ step, index }: { step: Step; index: number }) {
 
 export default function HowItWorks() {
   return (
-    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "80px 0" }}>
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <FadeUp>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">
             <div>
@@ -144,8 +144,8 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(36px, 5vw, 72px)",
-                  lineHeight: 0.92,
+                  fontSize: "clamp(30px, 7vw, 72px)",
+                  lineHeight: 0.95,
                   letterSpacing: "-0.02em",
                 }}
               >

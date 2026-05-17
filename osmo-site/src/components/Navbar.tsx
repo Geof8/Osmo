@@ -15,9 +15,9 @@ export default function Navbar({ soldOut = false }: OpenModalProps) {
       className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--rule)]"
       aria-label="Navigation principale"
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10 grid grid-cols-3 items-center h-[64px] sm:h-[78px]">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-3 h-[60px] sm:h-[78px]">
         {/* Left — Logo */}
-        <div className="flex items-baseline gap-4">
+        <div className="flex items-baseline gap-4 min-w-0">
           <a
             href="/"
             aria-label="OSMO — retour en haut"
@@ -25,7 +25,7 @@ export default function Navbar({ soldOut = false }: OpenModalProps) {
             style={{
               fontFamily: FONTS.playfair,
               fontWeight: 600,
-              fontSize: 30,
+              fontSize: "clamp(24px, 6vw, 30px)",
               lineHeight: 1,
               letterSpacing: "-0.02em",
             }}
@@ -60,8 +60,8 @@ export default function Navbar({ soldOut = false }: OpenModalProps) {
           </span>
         </div>
 
-        {/* Center — Notre Histoire */}
-        <div className="flex justify-center">
+        {/* Center — Notre Histoire (hidden on small screens to free room for CTA) */}
+        <div className="hidden sm:flex justify-center">
           <a
             href="/notre-histoire"
             className="inline-flex items-center justify-center min-h-[44px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200"
@@ -81,16 +81,20 @@ export default function Navbar({ soldOut = false }: OpenModalProps) {
         <div className="flex items-center justify-end gap-4">
           <button
             onClick={addToCartAndNavigate}
-            className="cta-pill inline-flex items-center gap-3 px-6 min-h-[44px] active:scale-[0.97]"
+            className="cta-pill inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 min-h-[44px] active:scale-[0.97] whitespace-nowrap"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
               fontWeight: 500,
-              letterSpacing: "0.18em",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
             }}
           >
-            {soldOut ? "Liste d’attente · Lot N°002" : "Devenir Early Adopter"}
+            <span className="sm:hidden" style={{ fontSize: 11 }}>
+              {soldOut ? "Liste d’attente" : "Réserver — 20€"}
+            </span>
+            <span className="hidden sm:inline" style={{ fontSize: 11, letterSpacing: "0.18em" }}>
+              {soldOut ? "Liste d’attente · Lot N°002" : "Devenir Early Adopter"}
+            </span>
             <span aria-hidden="true" className="inline-block">→</span>
           </button>
         </div>

@@ -8,10 +8,10 @@ export default function WhyYouSuffer() {
   return (
     <section
       className="relative z-[5]"
-      style={{ padding: "80px 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
+      style={{ padding: "clamp(56px, 9vw, 80px) 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-12 lg:gap-16 items-center">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-10 lg:gap-16 items-center">
           {/* Left column — text */}
           <div>
             <FadeUp>
@@ -19,8 +19,8 @@ export default function WhyYouSuffer() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(36px, 5vw, 72px)",
-                  lineHeight: 0.92,
+                  fontSize: "clamp(30px, 7vw, 72px)",
+                  lineHeight: 0.95,
                   letterSpacing: "-0.02em",
                 }}
               >
@@ -34,11 +34,11 @@ export default function WhyYouSuffer() {
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: 17,
+                  fontSize: "clamp(15px, 3.6vw, 17px)",
                   fontWeight: 400,
                   lineHeight: 1.65,
                   color: "#666666",
-                  marginTop: 32,
+                  marginTop: 28,
                   maxWidth: 540,
                 }}
               >
@@ -55,10 +55,10 @@ export default function WhyYouSuffer() {
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: 22,
+                  fontSize: "clamp(18px, 4.5vw, 22px)",
                   fontWeight: 700,
                   lineHeight: 1.4,
-                  marginTop: 40,
+                  marginTop: 32,
                   maxWidth: 540,
                 }}
               >
@@ -71,9 +71,9 @@ export default function WhyYouSuffer() {
 
           {/* Right column — infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center self-center mt-8 lg:mt-0">
+            <div className="flex justify-center self-center mt-4 lg:mt-0">
               <div
-                className="w-full max-w-[360px] mx-auto overflow-hidden"
+                className="w-full max-w-[320px] lg:max-w-[360px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
               >
                 <Image

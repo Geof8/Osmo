@@ -64,10 +64,10 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "48px 0 80px" }}
+      style={{ background: "#111111", padding: "clamp(40px, 7vw, 48px) 0 clamp(56px, 9vw, 80px)" }}
     >
-      <div ref={ref} className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div ref={ref} className="max-w-[1380px] mx-auto px-6 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
             <div
               className="mb-2"
@@ -85,8 +85,8 @@ export default function Formula() {
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 800,
-                fontSize: "clamp(36px, 5vw, 72px)",
-                lineHeight: 0.92,
+                fontSize: "clamp(28px, 7vw, 72px)",
+                lineHeight: 0.95,
                 letterSpacing: "-0.02em",
                 color: "#FFFFFF",
               }}
@@ -117,7 +117,7 @@ export default function Formula() {
             </h2>
             <motion.p
               className="mt-5"
-              style={{ fontSize: 15, lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
+              style={{ fontSize: "clamp(14px, 3.4vw, 15px)", lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.6 }}

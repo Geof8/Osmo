@@ -14,10 +14,10 @@ export default function FAQ() {
     <section
       id="faq"
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "80px 0" }}
+      style={{ padding: "clamp(56px, 9vw, 80px) 0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-12 lg:gap-20 items-start">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-20 items-start">
           <FadeUp>
             <div
               className="text-[var(--ink-2)] mb-5 lg:mb-7"
@@ -34,7 +34,7 @@ export default function FAQ() {
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 800,
-                fontSize: "clamp(36px, 5vw, 72px)",
+                fontSize: "clamp(28px, 7vw, 72px)",
                 lineHeight: 0.92,
                 letterSpacing: "-0.02em",
               }}
@@ -53,12 +53,15 @@ export default function FAQ() {
                 <AccordionItem key={i} value={`faq-${i}`}>
                   <AccordionTrigger>
                     <span
+                      className="pr-4"
                       style={{
                         fontFamily: FONTS.display,
                         fontWeight: 600,
-                        fontSize: "clamp(18px, 1.4vw, 22px)",
+                        fontSize: "clamp(15px, 3.8vw, 22px)",
+                        lineHeight: 1.3,
                         letterSpacing: "-0.02em",
                         color: "var(--ink)",
+                        textAlign: "left",
                       }}
                     >
                       {item.q}
@@ -69,7 +72,7 @@ export default function FAQ() {
                       className="text-[var(--ink-2)]"
                       style={{
                         maxWidth: 620,
-                        fontSize: 15,
+                        fontSize: "clamp(14px, 3.4vw, 15px)",
                         lineHeight: 1.65,
                       }}
                     >

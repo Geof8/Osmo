@@ -8,13 +8,13 @@ import type { SplitOverlayProps } from "@/types";
 function OverlayContent({ color }: { color: "light" | "dark" }) {
   const textColor = color === "light" ? "#FFFFFF" : "#111111";
   return (
-    <div style={{ textAlign: "center", width: "max-content" }}>
+    <div style={{ textAlign: "center", width: "max-content", maxWidth: "92vw" }}>
       <div
         style={{
           fontFamily: FONTS.display,
           fontWeight: 900,
-          fontSize: "clamp(32px, 7vw, 130px)",
-          lineHeight: 1,
+          fontSize: "clamp(24px, 7vw, 130px)",
+          lineHeight: 1.05,
           letterSpacing: "-0.02em",
           color: textColor,
         }}
@@ -26,7 +26,7 @@ function OverlayContent({ color }: { color: "light" | "dark" }) {
       <div
         style={{
           fontFamily: FONTS.mono,
-          fontSize: 11,
+          fontSize: "clamp(10px, 2.6vw, 11px)",
           letterSpacing: "0.22em",
           textTransform: "uppercase",
           marginTop: 24,

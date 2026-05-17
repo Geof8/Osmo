@@ -103,16 +103,16 @@ export default function PourquoiOsmo() {
   return (
     <section
       className="relative z-[5]"
-      style={{ padding: "96px 0", background: "#F4F4F4", borderBottom: "1px solid #E0E0E0" }}
+      style={{ padding: "clamp(64px, 10vw, 96px) 0", background: "#F4F4F4", borderBottom: "1px solid #E0E0E0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="text-center max-w-[720px] mx-auto">
           <FadeUp>
             <h2
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 900,
-                fontSize: "clamp(36px, 5vw, 64px)",
+                fontSize: "clamp(28px, 7vw, 64px)",
                 lineHeight: 0.95,
                 letterSpacing: "-0.02em",
                 color: "#111111",
@@ -140,8 +140,8 @@ export default function PourquoiOsmo() {
         </div>
 
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
-          style={{ columnGap: 24, rowGap: 56, marginTop: 72 }}
+          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10 sm:gap-y-14"
+          style={{ marginTop: "clamp(40px, 7vw, 72px)" }}
         >
           {ITEMS.map((item, i) => (
             <FadeUp key={item.id} delay={0.2 + i * 0.08}>

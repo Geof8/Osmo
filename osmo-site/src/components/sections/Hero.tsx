@@ -15,18 +15,18 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
   return (
     <section
       className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "80px 0" }}
+      style={{ padding: "clamp(48px, 8vw, 80px) 0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start min-h-[50vh] lg:min-h-[70vh]">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start lg:min-h-[70vh]">
           {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
-          <div className="flex flex-col gap-7 sm:gap-9 order-2 lg:order-2">
+          <div className="flex flex-col gap-6 sm:gap-9 order-2 lg:order-2">
             <h1
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 800,
-                fontSize: "clamp(42px, 6vw, 96px)",
-                lineHeight: 0.92,
+                fontSize: "clamp(36px, 8vw, 96px)",
+                lineHeight: 0.95,
                 letterSpacing: "-0.02em",
               }}
             >
@@ -63,7 +63,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="text-[var(--ink)]"
-              style={{ fontSize: "clamp(16px, 1.2vw, 19px)", lineHeight: 1.6, maxWidth: 480 }}
+              style={{ fontSize: "clamp(15px, 3.5vw, 19px)", lineHeight: 1.6, maxWidth: 480 }}
             >
               Un complexe d&apos;électrolytes formulé pour la récupération{" "}
               <em
@@ -85,20 +85,20 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-col gap-4"
             >
-              <div className="flex flex-col gap-2 items-start">
+              <div className="flex flex-col gap-2 items-stretch sm:items-start">
                 <button
                   onClick={addToCartAndNavigate}
-                  className="cta-pill inline-flex items-center gap-3 px-7 min-h-[48px] active:scale-[0.97]"
+                  className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full sm:w-auto"
                   style={{
                     fontFamily: FONTS.mono,
                     fontSize: 11,
                     fontWeight: 500,
-                    letterSpacing: "0.18em",
+                    letterSpacing: "0.16em",
                     textTransform: "uppercase",
                   }}
                 >
                   {soldOut
-                    ? "Lot N°001 complet — rejoindre la liste d'attente"
+                    ? "Lot N°001 complet — liste d'attente"
                     : "Rejoindre les Early Adopters — 20 €"}{" "}
                   <span aria-hidden="true">→</span>
                 </button>
@@ -167,11 +167,11 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               ].map((f) => (
                 <div
                   key={f.label}
-                  className="flex flex-col items-center text-center gap-3"
+                  className="flex flex-col items-center text-center gap-2 sm:gap-3"
                   style={{
                     border: "1px solid var(--rule)",
                     borderRadius: 14,
-                    padding: "22px 12px",
+                    padding: "14px 6px",
                     background: "var(--paper)",
                   }}
                 >
@@ -179,12 +179,12 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   <div
                     style={{
                       fontFamily: FONTS.mono,
-                      fontSize: 12,
+                      fontSize: "clamp(10px, 2.6vw, 12px)",
                       fontWeight: 500,
-                      letterSpacing: "0.12em",
+                      letterSpacing: "0.08em",
                       textTransform: "uppercase",
                       color: "var(--ink)",
-                      lineHeight: 1.35,
+                      lineHeight: 1.3,
                     }}
                   >
                     {f.label}
@@ -200,15 +200,15 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-8"
         >
           {HERO_STATS.map((item, i) => (
-            <div key={i}>
+            <div key={i} className="min-w-0">
               <div
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(28px, 3vw, 36px)",
+                  fontSize: "clamp(26px, 5vw, 36px)",
                   letterSpacing: "-0.025em",
                   lineHeight: 1,
                   color: item.amber ? "var(--amber)" : "var(--ink)",
@@ -221,8 +221,9 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 10,
-                  letterSpacing: "0.18em",
+                  letterSpacing: "0.14em",
                   textTransform: "uppercase",
+                  lineHeight: 1.4,
                 }}
               >
                 {item.v}

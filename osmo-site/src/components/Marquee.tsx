@@ -40,6 +40,11 @@ export default function Marquee() {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
+        @media (max-width: 767px) {
+          .marquee-track {
+            animation-duration: 22s;
+          }
+        }
         @media (prefers-reduced-motion: reduce) {
           .marquee-track {
             animation: none;

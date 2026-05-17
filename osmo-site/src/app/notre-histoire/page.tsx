@@ -22,7 +22,7 @@ function WordByWord({ text }: { text: string }) {
       style={{
         fontFamily: FONTS.display,
         fontWeight: 900,
-        fontSize: "clamp(28px, 5vw, 48px)",
+        fontSize: "clamp(22px, 6vw, 48px)",
         letterSpacing: "-0.03em",
         lineHeight: 1.1,
         color: "var(--amber)",
@@ -61,13 +61,13 @@ export default function NotreHistoire() {
           className="bg-[var(--paper)]"
           style={{ padding: "clamp(80px, 12vw, 160px) 0 clamp(30px, 4vw, 50px)" }}
         >
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <h1
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 900,
-                  fontSize: "clamp(42px, 7vw, 72px)",
+                  fontSize: "clamp(34px, 9vw, 72px)",
                   letterSpacing: "-0.04em",
                   lineHeight: 1,
                 }}
@@ -82,7 +82,7 @@ export default function NotreHistoire() {
                   fontFamily: FONTS.display,
                   fontWeight: 600,
                   fontStyle: "italic",
-                  fontSize: "clamp(18px, 2.5vw, 24px)",
+                  fontSize: "clamp(16px, 4vw, 24px)",
                   lineHeight: 1.45,
                   letterSpacing: "-0.01em",
                   color: "var(--amber)",
@@ -98,7 +98,7 @@ export default function NotreHistoire() {
 
         {/* Section 1 — Le problème */}
         <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <span
                 className="block mb-4 text-[var(--ink-2)]"
@@ -115,7 +115,7 @@ export default function NotreHistoire() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 500,
-                  fontSize: "clamp(20px, 3vw, 28px)",
+                  fontSize: "clamp(17px, 4.2vw, 28px)",
                   lineHeight: 1.45,
                   letterSpacing: "-0.01em",
                 }}
@@ -134,7 +134,7 @@ export default function NotreHistoire() {
           className="bg-[var(--paper-2)]"
           style={{ padding: "clamp(60px, 8vw, 100px) 0" }}
         >
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <span
                 className="block mb-4 text-[var(--ink-2)]"
@@ -151,7 +151,7 @@ export default function NotreHistoire() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 500,
-                  fontSize: "clamp(20px, 3vw, 28px)",
+                  fontSize: "clamp(17px, 4.2vw, 28px)",
                   lineHeight: 1.45,
                   letterSpacing: "-0.01em",
                 }}
@@ -182,7 +182,7 @@ export default function NotreHistoire() {
 
         {/* Section 3 — 29 versions */}
         <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <span
                 className="block mb-4 text-[var(--ink-2)]"
@@ -201,7 +201,7 @@ export default function NotreHistoire() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 900,
-                  fontSize: "clamp(100px, 18vw, 200px)",
+                  fontSize: "clamp(80px, 20vw, 160px)",
                   lineHeight: 1,
                   letterSpacing: "-0.04em",
                   color: "var(--amber)",
@@ -228,7 +228,7 @@ export default function NotreHistoire() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 500,
-                  fontSize: "clamp(20px, 3vw, 28px)",
+                  fontSize: "clamp(17px, 4.2vw, 28px)",
                   lineHeight: 1.45,
                   letterSpacing: "-0.01em",
                 }}
@@ -248,7 +248,7 @@ export default function NotreHistoire() {
           className="bg-[var(--paper-2)]"
           style={{ padding: "clamp(60px, 8vw, 100px) 0" }}
         >
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <span
                 className="block mb-4 text-[var(--ink-2)]"
@@ -265,7 +265,7 @@ export default function NotreHistoire() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 500,
-                  fontSize: "clamp(20px, 3vw, 28px)",
+                  fontSize: "clamp(17px, 4.2vw, 28px)",
                   lineHeight: 1.45,
                   letterSpacing: "-0.01em",
                 }}
@@ -282,7 +282,7 @@ export default function NotreHistoire() {
           className="bg-[var(--paper)]"
           style={{ padding: "clamp(80px, 12vw, 140px) 0 clamp(60px, 8vw, 100px)" }}
         >
-          <div className="max-w-[760px] mx-auto px-5 sm:px-10">
+          <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <WordByWord text="Si tu lis ça, tu fais peut-être partie des 50." />
 
             <FadeUp delay={0.6}>

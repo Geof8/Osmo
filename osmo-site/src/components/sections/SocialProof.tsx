@@ -13,18 +13,18 @@ export default function SocialProof() {
   return (
     <section
       className="bg-[var(--paper-2)] border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "80px 0" }}
+      style={{ padding: "clamp(56px, 9vw, 80px) 0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <FadeUp>
           <h2
             style={{
               fontFamily: FONTS.display,
               fontWeight: 800,
-              fontSize: "clamp(36px, 5vw, 72px)",
-              lineHeight: 0.92,
+              fontSize: "clamp(28px, 7vw, 72px)",
+              lineHeight: 0.95,
               letterSpacing: "-0.02em",
-              marginBottom: "clamp(32px, 4vw, 56px)",
+              marginBottom: "clamp(28px, 4vw, 56px)",
             }}
           >
             Développé en laboratoire.
@@ -38,7 +38,7 @@ export default function SocialProof() {
             className="text-[var(--ink-2)]"
             style={{
               fontFamily: FONTS.body,
-              fontSize: "clamp(16px, 1.3vw, 20px)",
+              fontSize: "clamp(15px, 3.6vw, 20px)",
               lineHeight: 1.65,
               maxWidth: 640,
               marginBottom: 0,
@@ -59,7 +59,7 @@ export default function SocialProof() {
               fontFamily: FONTS.playfair,
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: "clamp(24px, 3vw, 42px)",
+              fontSize: "clamp(20px, 5vw, 42px)",
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
               color: "#C8963E",
@@ -80,7 +80,7 @@ export default function SocialProof() {
                   style={{
                     fontFamily: FONTS.display,
                     fontWeight: 900,
-                    fontSize: "clamp(28px, 3vw, 44px)",
+                    fontSize: "clamp(26px, 6vw, 44px)",
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
                     marginBottom: 8,

@@ -2,8 +2,8 @@ import { FONTS, FOOTER_COLUMNS } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--paper)] border-t border-[var(--rule)] relative z-[5]" style={{ padding: "80px 0" }}>
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
+    <footer className="bg-[var(--paper)] border-t border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 lg:gap-14">
           <div>
             <span
@@ -46,11 +46,11 @@ export default function Footer() {
                 {col.links.map((link) => (
                   <li
                     key={link.label}
-                    style={{ fontFamily: FONTS.mono, fontSize: 12, lineHeight: 2.1 }}
+                    style={{ fontFamily: FONTS.mono, fontSize: 14, lineHeight: 1.8 }}
                   >
                     <a
                       href={link.href}
-                      className="hover:text-[var(--ink)] transition-colors inline-flex items-center min-h-[32px]"
+                      className="hover:text-[var(--ink)] transition-colors inline-flex items-center min-h-[44px]"
                     >
                       {link.label}
                     </a>
@@ -62,8 +62,8 @@ export default function Footer() {
         </div>
 
         <div
-          className="mt-14 pt-5 border-t border-[var(--soft)] flex justify-between gap-6 flex-wrap text-[var(--ink-2)]"
-          style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
+          className="mt-14 pt-5 border-t border-[var(--soft)] flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-6 sm:flex-wrap text-[var(--ink-2)]"
+          style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
         >
           <div>© 2026 Osmo Lab · osmolab.fr</div>
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>

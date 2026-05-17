@@ -38,6 +38,11 @@
     border-color: var(--soft);
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -91,6 +96,30 @@
   img, video, svg {
     max-width: 100%;
     height: auto;
+  }
+
+  /* Reduce body font on small screens */
+  @media (max-width: 480px) {
+    body {
+      font-size: 15px;
+    }
+  }
+}
+
+/* Mobile safety — prevent any descendant from forcing horizontal scroll */
+@media (max-width: 767px) {
+  main, section, header, footer, nav, aside {
+    max-width: 100vw;
+  }
+}
+
+/* Touch targets — interactive elements get a minimum 44x44px hit area */
+@media (max-width: 767px) {
+  button,
+  a[href],
+  summary,
+  [role="button"] {
+    min-height: 44px;
   }
 }
 

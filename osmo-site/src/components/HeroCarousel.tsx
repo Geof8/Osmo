@@ -34,7 +34,7 @@ export default function HeroCarousel() {
   return (
     <div
       className="relative aspect-square w-full overflow-hidden rounded-2xl"
-      style={{ background: "var(--paper-2)" }}
+      style={{ background: "var(--paper-2)", maxHeight: "60vh" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

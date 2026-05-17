@@ -10,7 +10,7 @@ import type { OpenModalProps } from "@/types";
 export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
   const { addToCartAndNavigate } = useCart();
   return (
-    <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "80px 0" }}>
+    <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         aria-hidden="true"
@@ -19,7 +19,7 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
           backgroundSize: "56px 56px",
         }}
       />
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-10 relative">
+      <div className="max-w-[1380px] mx-auto px-6 sm:px-10 relative">
         <FadeUp>
           <div
             className="text-[var(--ink-2)] mb-8 lg:mb-12 flex items-center gap-[14px]"
@@ -37,8 +37,8 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
           style={{
             fontFamily: FONTS.display,
             fontWeight: 800,
-            fontSize: "clamp(36px, 5vw, 72px)",
-            lineHeight: 0.92,
+            fontSize: "clamp(32px, 7vw, 72px)",
+            lineHeight: 0.95,
             letterSpacing: "-0.02em",
           }}
         >
@@ -73,11 +73,11 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
 
         <FadeUp delay={0.15}>
           <div
-            className="mt-12 lg:mt-16"
+            className="mt-10 lg:mt-16"
             style={{
               borderLeft: "3px solid #C8963E",
               backgroundColor: "rgba(255,255,255,0.06)",
-              padding: "clamp(20px, 3vw, 32px)",
+              padding: "16px",
               maxWidth: 680,
             }}
           >
@@ -85,7 +85,7 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 400,
-                fontSize: "clamp(14px, 1.1vw, 17px)",
+                fontSize: "clamp(14px, 3.4vw, 17px)",
                 lineHeight: 1.65,
                 color: "rgba(255,248,232,0.8)",
               }}
@@ -102,16 +102,16 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
             {soldOut ? (
               <WaitlistForm />
             ) : (
-              <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-                <div className="flex flex-col gap-2 items-start">
+              <div className="flex flex-col sm:flex-row gap-6 items-stretch sm:items-center">
+                <div className="flex flex-col gap-2 items-stretch sm:items-start">
                   <button
                     onClick={addToCartAndNavigate}
-                    className="cta-pill inline-flex items-center gap-3 px-7 min-h-[48px] active:scale-[0.97]"
+                    className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full sm:w-auto"
                     style={{
                       fontFamily: FONTS.mono,
                       fontSize: 11,
                       fontWeight: 500,
-                      letterSpacing: "0.18em",
+                      letterSpacing: "0.16em",
                       textTransform: "uppercase",
                     }}
                   >

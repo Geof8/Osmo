@@ -113,12 +113,12 @@ export default function SideCart() {
           />
           <motion.aside
             key="drawer"
-            className="fixed right-0 top-0 z-50 h-full w-full sm:w-[480px] overflow-y-auto"
+            className="fixed right-0 top-0 z-50 h-full w-full sm:w-[480px] overflow-y-auto sm:rounded-l-2xl"
             style={{
               background: "#FFFFFF",
               borderLeft: "1px solid #E0E0E0",
-              borderRadius: "16px 0 0 16px",
-              padding: 32,
+              padding: "clamp(20px, 5vw, 32px)",
+              maxWidth: "100vw",
             }}
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
