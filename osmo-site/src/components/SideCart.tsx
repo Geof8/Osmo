@@ -117,6 +117,7 @@ export default function SideCart() {
             style={{
               background: "#FFFFFF",
               borderLeft: "1px solid #E0E0E0",
+              borderRadius: "16px 0 0 16px",
               padding: 32,
             }}
             initial={{ x: "100%" }}

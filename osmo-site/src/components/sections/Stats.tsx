@@ -24,9 +24,17 @@ export default function Stats() {
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-10">
         <FadeUp>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 text-center">
             {STATS.map((stat) => (
-              <div key={stat.value}>
+              <div
+                key={stat.value}
+                style={{
+                  borderRadius: 12,
+                  border: "1px solid var(--soft)",
+                  background: "#FFFFFF",
+                  padding: "clamp(20px, 2.5vw, 32px) clamp(16px, 2vw, 24px)",
+                }}
+              >
                 <div
                   style={{
                     fontFamily: FONTS.display,
