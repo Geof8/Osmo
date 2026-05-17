@@ -65,7 +65,7 @@ export default function SocialProof() {
               color: "#C8963E",
               margin: "0 auto",
               maxWidth: 700,
-              padding: "clamp(12px, 1.5vw, 20px) 0 clamp(32px, 4vw, 56px) 0",
+              padding: "clamp(20px, 2.5vw, 32px) 0 clamp(32px, 4vw, 56px) 0",
             }}
           >
             &ldquo;Dès que c&apos;est dispo, tu m&apos;en mets de côté.&rdquo;
