@@ -33,7 +33,7 @@ export default function WhyYouSuffer() {
             <FadeUp delay={0.1}>
               <p
                 style={{
-                  fontFamily: FONTS.display,
+                  fontFamily: FONTS.body,
                   fontSize: 17,
                   fontWeight: 400,
                   lineHeight: 1.65,
@@ -54,7 +54,7 @@ export default function WhyYouSuffer() {
             <FadeUp delay={0.15}>
               <p
                 style={{
-                  fontFamily: FONTS.display,
+                  fontFamily: FONTS.body,
                   fontSize: 22,
                   fontWeight: 700,
                   lineHeight: 1.4,

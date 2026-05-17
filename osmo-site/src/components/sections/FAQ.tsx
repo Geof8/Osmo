@@ -48,7 +48,7 @@ export default function FAQ() {
           </FadeUp>
 
           <FadeUp delay={0.15}>
-            <Accordion type="single" collapsible className="border-t border-[var(--rule)]">
+            <Accordion type="single" collapsible className="flex flex-col gap-0">
               {FAQ_ITEMS.map((item, i) => (
                 <AccordionItem key={i} value={`faq-${i}`}>
                   <AccordionTrigger>

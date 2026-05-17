@@ -1,13 +1,11 @@
 "use client";
 
-import CountUp from "@/components/CountUp";
 import FadeUp from "@/components/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [
-  { num: 50, suffix: "+", label: "testeurs en cercle fermé", value: "~50" },
-  { num: 0, suffix: "", label: "de développement en laboratoire", value: "18 mois" },
-  { num: 1, suffix: "", label: "unanime", value: "1 retour" },
+  { value: "1 an et demi", label: "de développement" },
+  { value: "1 retour", label: "unanime" },
 ];
 
 export default function SocialProof() {
@@ -38,7 +36,7 @@ export default function SocialProof() {
           <p
             className="text-[var(--ink-2)]"
             style={{
-              fontFamily: FONTS.display,
+              fontFamily: FONTS.body,
               fontSize: "clamp(16px, 1.3vw, 20px)",
               lineHeight: 1.65,
               maxWidth: 640,
@@ -46,11 +44,10 @@ export default function SocialProof() {
             }}
           >
             La formule OSMO a été développée avec un laboratoire français
-            spécialisé en compléments alimentaires, puis testée en cercle fermé.
-            Famille, amis, collègues — ~50 testeurs
-            sur plusieurs mois. La quasi-totalité a demandé
-            à être prévenue au lancement.
-            Certains ont déjà leur place réservée.
+            spécialisé en compléments alimentaires, puis affinée pendant
+            un an et demi en laboratoire. Le retour de l&apos;entourage
+            est unanime — la quasi-totalité a demandé à être prévenue
+            au lancement. Certains ont déjà leur place réservée.
           </p>
         </FadeUp>
 
@@ -75,28 +72,27 @@ export default function SocialProof() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="border-t border-[var(--rule)] pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center">
+          <div className="border-t border-[var(--rule)] pt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 text-center">
             {STATS.map((stat) => (
               <div key={stat.value}>
                 <div
                   style={{
                     fontFamily: FONTS.display,
-                    fontWeight: 800,
+                    fontWeight: 900,
                     fontSize: "clamp(28px, 3vw, 44px)",
                     lineHeight: 1,
                     letterSpacing: "-0.02em",
                     marginBottom: 8,
                   }}
                 >
-                  {stat.value || <><CountUp target={stat.num} />{stat.suffix}</>}
+                  {stat.value}
                 </div>
                 <div
                   className="text-[var(--ink-2)]"
                   style={{
-                    fontFamily: FONTS.mono,
-                    fontSize: 11,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
+                    fontFamily: FONTS.body,
+                    fontSize: 13,
+                    color: "#666666",
                   }}
                 >
                   {stat.label}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FONTS } from "@/lib/constants";
+import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
 
 interface WaitlistFormData {
   firstName: string;
@@ -218,7 +218,7 @@ export default function WaitlistForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[48px] active:scale-[0.97] disabled:opacity-60 disabled:cursor-not-allowed"
         style={{
           fontFamily: FONTS.mono,
           fontSize: 11,
@@ -230,6 +230,7 @@ export default function WaitlistForm() {
         {status === "submitting" ? "Inscription..." : "Rejoindre la liste d'attente"}
         {status !== "submitting" && <span aria-hidden="true">→</span>}
       </button>
+      <div className="cta-guarantee cta-guarantee-dark">{GUARANTEE_LINE}</div>
     </form>
   );
 }

@@ -7,7 +7,7 @@ import Strip from "@/components/Strip";
 import FadeUp from "@/components/FadeUp";
 import CountUp from "@/components/CountUp";
 import { useCart } from "@/context/CartContext";
-import { FONTS } from "@/lib/constants";
+import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
 import { useInView } from "@/hooks/useInView";
 import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
@@ -286,10 +286,10 @@ export default function NotreHistoire() {
             <WordByWord text="Si tu lis ça, tu fais peut-être partie des 50." />
 
             <FadeUp delay={0.6}>
-              <div className="mt-12 flex justify-center">
+              <div className="mt-12 flex flex-col items-center gap-2">
                 <button
                   onClick={addToCartAndNavigate}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 min-h-[52px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
+                  className="cta-pill w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 min-h-[52px] active:scale-[0.97]"
                   style={{
                     fontFamily: FONTS.mono,
                     fontSize: 11,
@@ -303,6 +303,7 @@ export default function NotreHistoire() {
                     : "Rejoindre les Early Adopters — 20€"}
                   <span aria-hidden="true">→</span>
                 </button>
+                <div className="cta-guarantee">{GUARANTEE_LINE}</div>
               </div>
             </FadeUp>
           </div>

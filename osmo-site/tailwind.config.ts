@@ -23,8 +23,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-barlow)", "sans-serif"],
-        body: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-fraunces)", "serif"],
+        body: ["var(--font-dm-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
         playfair: ["var(--font-playfair)", "serif"],
       },

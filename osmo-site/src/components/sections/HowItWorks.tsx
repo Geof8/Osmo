@@ -65,7 +65,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       initial={ANIMATION_CONFIG.stepReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.stepReveal.initial}
       transition={{ ...ANIMATION_CONFIG.stepReveal.transition, delay: index * 0.15 }}
-      className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] flex flex-col gap-6 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
+      className="p-6 sm:p-8 min-h-[380px] sm:min-h-[420px] bg-white border border-[var(--rule)] rounded-[12px] flex flex-col gap-6 sm:gap-7 relative transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
     >
       <div>
         <div

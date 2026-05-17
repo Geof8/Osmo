@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Inter, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
+import { Fraunces, DM_Sans, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
 import Providers from "./Providers";
 import "./globals.css";
 
-const barlowCondensed = Barlow_Condensed({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-  variable: "--font-barlow",
+  weight: ["400", "600", "700", "900"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -55,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${barlowCondensed.variable} ${inter.variable} ${ibmPlexMono.variable} ${playfairDisplay.variable}`}
+      className={`${fraunces.variable} ${dmSans.variable} ${ibmPlexMono.variable} ${playfairDisplay.variable}`}
     >
       <body><Providers>{children}</Providers></body>
     </html>
