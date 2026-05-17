@@ -7,11 +7,10 @@ import SplitOverlay from "@/components/SplitOverlay";
 import Hero from "@/components/sections/Hero";
 import Marquee from "@/components/Marquee";
 import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
+import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Formula from "@/components/sections/Formula";
 import SocialProof from "@/components/sections/SocialProof";
-import Stats from "@/components/sections/Stats";
-import Certifications from "@/components/sections/Certifications";
 import FAQ from "@/components/sections/FAQ";
 import ClosingCTA from "@/components/sections/ClosingCTA";
 import Footer from "@/components/Footer";
@@ -33,13 +32,12 @@ export default function Home() {
       <main>
         <Hero revealed={heroRevealed} remaining={remaining} soldOut={soldOut} />
         <Marquee />
+        <PourquoiOsmo />
         <WhyYouSuffer />
         <Formula />
         <HowItWorks />
         <SocialProof />
         <ClosingCTA remaining={remaining} soldOut={soldOut} />
-        <Stats />
-        <Certifications />
         <FAQ />
       </main>
       <Footer />
