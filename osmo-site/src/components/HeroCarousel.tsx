@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence, type PanInfo } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const SLIDES = [
@@ -10,25 +10,16 @@ const SLIDES = [
   { src: "/osmo-slide-bienfaits.png", alt: "Les bienfaits des électrolytes OSMO — soutien hépatique, sommeil, anti-fatigue, réhydratation" },
 ];
 
-const INTERVAL = 5000;
-const SWIPE_THRESHOLD = 50;
+const INTERVAL = 6000;
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const goTo = useCallback((index: number) => {
-    setCurrent(index);
-  }, []);
-
-  const next = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % SLIDES.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  }, []);
+  const goTo = useCallback((index: number) => setCurrent(index), []);
+  const next = useCallback(() => setCurrent((p) => (p + 1) % SLIDES.length), []);
+  const prev = useCallback(() => setCurrent((p) => (p - 1 + SLIDES.length) % SLIDES.length), []);
 
   useEffect(() => {
     if (paused) {
@@ -41,55 +32,101 @@ export default function HeroCarousel() {
     };
   }, [paused, next, current]);
 
-  const handleDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x < -SWIPE_THRESHOLD) next();
-    else if (info.offset.x > SWIPE_THRESHOLD) prev();
-  };
-
   return (
     <div
-      className="relative aspect-square w-full overflow-hidden rounded-2xl"
+      className="w-full flex flex-col gap-3"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.1}
-          onDragEnd={handleDragEnd}
-          className="absolute inset-0"
-        >
-          <Image
-            src={SLIDES[current].src}
-            alt={SLIDES[current].alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            className="object-cover"
-            priority={current === 0}
-          />
-        </motion.div>
-      </AnimatePresence>
+      {/* Main image area */}
+      <div
+        className="relative aspect-square w-full overflow-hidden rounded-2xl"
+        style={{ background: "var(--paper-2)" }}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={SLIDES[current].src}
+              alt={SLIDES[current].alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+              priority={current === 0}
+            />
+          </motion.div>
+        </AnimatePresence>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
-        {SLIDES.map((_, i) => (
+        <button
+          onClick={prev}
+          aria-label="Image précédente"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.85)",
+            backdropFilter: "blur(8px)",
+            color: "#111111",
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="11 14 6 9 11 4" />
+          </svg>
+        </button>
+
+        <button
+          onClick={next}
+          aria-label="Image suivante"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.85)",
+            backdropFilter: "blur(8px)",
+            color: "#111111",
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="7 4 12 9 7 14" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Thumbnail strip */}
+      <div className="grid grid-cols-3 gap-2">
+        {SLIDES.map((s, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            aria-label={`Slide ${i + 1}`}
-            className="rounded-full transition-all duration-300"
+            aria-label={`Voir slide ${i + 1}`}
+            className="relative aspect-square overflow-hidden rounded-lg transition-all duration-200"
             style={{
-              width: i === current ? 24 : 8,
-              height: 8,
-              background: i === current ? "#FFFFFF" : "rgba(255,255,255,0.4)",
+              border: i === current ? "2px solid #C8963E" : "1px solid var(--rule)",
+              opacity: i === current ? 1 : 0.55,
             }}
-          />
+            onMouseEnter={(e) => {
+              if (i !== current) e.currentTarget.style.opacity = "0.9";
+            }}
+            onMouseLeave={(e) => {
+              if (i !== current) e.currentTarget.style.opacity = "0.55";
+            }}
+          >
+            <Image
+              src={s.src}
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 33vw, 16vw"
+              className="object-cover"
+            />
+          </button>
         ))}
       </div>
     </div>
