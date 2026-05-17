@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 import { useCart } from "@/context/CartContext";
+import WaitlistForm from "@/components/WaitlistForm";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
@@ -97,29 +98,33 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.16] flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-            <button
-              onClick={addToCartAndNavigate}
-              className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
-              style={{
-                fontFamily: FONTS.mono,
-                fontSize: 11,
-                fontWeight: 500,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-              }}
-            >
-              {soldOut
-                ? "Lot N°001 complet — rejoindre la liste d'attente"
-                : "Devenir Early Adopter — 20 €"}{" "}
-              <span aria-hidden="true">→</span>
-            </button>
-            <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
-              <li><strong>— Prix Early Adopter : 20€ au lieu de 30€ — 33% de réduction</strong></li>
-              <li>— Validé par un laboratoire, testé par l&apos;entourage</li>
-              <li>— Expédition estimée : dans 6 mois maximum</li>
-              <li>— Aucun frais caché — paiement sécurisé</li>
-            </ul>
+          <div className="mt-12 lg:mt-16 pt-8 border-t border-white/[0.16]">
+            {soldOut ? (
+              <WaitlistForm />
+            ) : (
+              <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                <button
+                  onClick={addToCartAndNavigate}
+                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
+                  style={{
+                    fontFamily: FONTS.mono,
+                    fontSize: 11,
+                    fontWeight: 500,
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Devenir Early Adopter — 20 €{" "}
+                  <span aria-hidden="true">→</span>
+                </button>
+                <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
+                  <li><strong>— Prix Early Adopter : 20€ au lieu de 30€ — 33% de réduction</strong></li>
+                  <li>— Validé par un laboratoire, testé par l&apos;entourage</li>
+                  <li>— Expédition estimée : dans 6 mois maximum</li>
+                  <li>— Aucun frais caché — paiement sécurisé</li>
+                </ul>
+              </div>
+            )}
           </div>
         </FadeUp>
       </div>
