@@ -11,34 +11,33 @@ export default function WhyYouSuffer() {
       style={{ padding: "clamp(56px, 9vw, 80px) 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-10 lg:gap-16 items-center">
+        <FadeUp>
+          <h2
+            style={{
+              fontFamily: FONTS.display,
+              fontWeight: 800,
+              fontSize: "clamp(28px, 7vw, 72px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Pourquoi tu souffres
+            <br />
+            <span className="text-[#C8963E]">le lendemain.</span>
+          </h2>
+        </FadeUp>
+
+        <div className="grid grid-cols-[1.4fr_1fr] lg:grid-cols-[55fr_45fr] gap-5 sm:gap-10 lg:gap-16 items-center mt-6 lg:mt-10">
           {/* Left column — text */}
           <div>
-            <FadeUp>
-              <h2
-                style={{
-                  fontFamily: FONTS.display,
-                  fontWeight: 800,
-                  fontSize: "clamp(30px, 7vw, 72px)",
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                Pourquoi tu souffres
-                <br />
-                <span className="text-[#C8963E]">le lendemain.</span>
-              </h2>
-            </FadeUp>
-
             <FadeUp delay={0.1}>
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: "clamp(15px, 3.6vw, 17px)",
+                  fontSize: "clamp(13px, 3.2vw, 17px)",
                   fontWeight: 400,
-                  lineHeight: 1.65,
+                  lineHeight: 1.55,
                   color: "#666666",
-                  marginTop: 28,
                   maxWidth: 540,
                 }}
               >
@@ -55,10 +54,10 @@ export default function WhyYouSuffer() {
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: "clamp(18px, 4.5vw, 22px)",
+                  fontSize: "clamp(15px, 3.8vw, 22px)",
                   fontWeight: 700,
-                  lineHeight: 1.4,
-                  marginTop: 32,
+                  lineHeight: 1.35,
+                  marginTop: "clamp(16px, 4vw, 32px)",
                   maxWidth: 540,
                 }}
               >
@@ -71,9 +70,9 @@ export default function WhyYouSuffer() {
 
           {/* Right column — infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center self-center mt-4 lg:mt-0">
+            <div className="flex justify-center self-center">
               <div
-                className="w-full max-w-[320px] lg:max-w-[360px] mx-auto overflow-hidden"
+                className="w-full max-w-[360px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
               >
                 <Image

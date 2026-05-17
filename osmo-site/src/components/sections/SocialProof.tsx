@@ -80,19 +80,19 @@ export default function SocialProof() {
 
         <FadeUp delay={0.2}>
           <div
-            className="pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center"
+            className="pt-8 sm:pt-10 grid grid-cols-3 gap-3 sm:gap-6 text-center"
             style={{ borderTop: "1px solid #333333" }}
           >
             {STATS.map((stat) => (
-              <div key={stat.value}>
+              <div key={stat.value} className="min-w-0">
                 <div
                   style={{
                     fontFamily: FONTS.display,
                     fontWeight: 900,
-                    fontSize: "clamp(26px, 6vw, 44px)",
-                    lineHeight: 1,
+                    fontSize: "clamp(18px, 5.2vw, 44px)",
+                    lineHeight: 1.05,
                     letterSpacing: "-0.02em",
-                    marginBottom: 8,
+                    marginBottom: 6,
                     color: "#FFFFFF",
                   }}
                 >
@@ -101,7 +101,8 @@ export default function SocialProof() {
                 <div
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 13,
+                    fontSize: "clamp(11px, 2.8vw, 13px)",
+                    lineHeight: 1.35,
                     color: "#AAAAAA",
                   }}
                 >

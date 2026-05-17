@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 import IngredientCard from "@/components/IngredientCard";
-import MolecularAnimation from "@/components/MolecularAnimation";
 import { useInView } from "@/hooks/useInView";
 import { FONTS, STAMPS } from "@/lib/constants";
 import type { Ingredient } from "@/types";
@@ -67,73 +66,67 @@ export default function Formula() {
       style={{ background: "#111111", padding: "clamp(40px, 7vw, 48px) 0 clamp(56px, 9vw, 80px)" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-6 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div>
-            <div
-              className="mb-2"
-              style={{
-                fontFamily: FONTS.mono,
-                fontSize: 11,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "#AAAAAA",
-              }}
-            >
-              La formule
-            </div>
-            <h2
-              style={{
-                fontFamily: FONTS.display,
-                fontWeight: 800,
-                fontSize: "clamp(28px, 7vw, 72px)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.02em",
-                color: "#FFFFFF",
-              }}
-            >
-              {["Cinq", "actifs."].map((word, i) => (
-                <motion.span
-                  key={i}
-                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-              <br />
-              {["Une", "équation."].map((word, i) => (
-                <motion.span
-                  key={i + 2}
-                  style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h2>
-            <motion.p
-              className="mt-5"
-              style={{ fontSize: "clamp(14px, 3.4vw, 15px)", lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              Chaque ingr&eacute;dient a &eacute;t&eacute; s&eacute;lectionn&eacute; pour un r&ocirc;le pr&eacute;cis.
-              <br />
-              Rien de superflu. Tout est dos&eacute;.
-            </motion.p>
+        <div>
+          <div
+            className="mb-2"
+            style={{
+              fontFamily: FONTS.mono,
+              fontSize: 11,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "#AAAAAA",
+            }}
+          >
+            La formule
           </div>
-
-          <div className="flex justify-center">
-            <MolecularAnimation />
-          </div>
+          <h2
+            style={{
+              fontFamily: FONTS.display,
+              fontWeight: 800,
+              fontSize: "clamp(28px, 7vw, 72px)",
+              lineHeight: 0.95,
+              letterSpacing: "-0.02em",
+              color: "#FFFFFF",
+            }}
+          >
+            {["Cinq", "actifs."].map((word, i) => (
+              <motion.span
+                key={i}
+                style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.1, ease: "easeOut" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+            <br />
+            {["Une", "équation."].map((word, i) => (
+              <motion.span
+                key={i + 2}
+                style={{ display: "inline-block", marginRight: i === 0 ? "0.3em" : 0 }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: "easeOut" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h2>
+          <motion.p
+            className="mt-5"
+            style={{ fontSize: "clamp(14px, 3.4vw, 15px)", lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Chaque ingr&eacute;dient a &eacute;t&eacute; s&eacute;lectionn&eacute; pour un r&ocirc;le pr&eacute;cis.
+            <br />
+            Rien de superflu. Tout est dos&eacute;.
+          </motion.p>
         </div>
 
-        <div className="-mt-8">
+        <div className="mt-10 sm:mt-14 lg:mt-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {actifs.map((a, i) => (
               <IngredientCard key={i} a={a} index={i} />

@@ -140,7 +140,7 @@ export default function PourquoiOsmo() {
         </div>
 
         <div
-          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10 sm:gap-y-14"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-14"
           style={{ marginTop: "clamp(40px, 7vw, 72px)" }}
         >
           {ITEMS.map((item, i) => (
