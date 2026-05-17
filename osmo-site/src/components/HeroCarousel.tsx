@@ -5,9 +5,9 @@ import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import Image from "next/image";
 
 const SLIDES = [
-  { src: "/osmo-hero.png", alt: "OSMO Recovery — pot et composition des cinq actifs" },
-  { src: "/osmo-product.jpeg", alt: "OSMO Recovery — pot 150g, complexe d'électrolytes goût citron" },
-  { src: "/osmo-pot.png", alt: "OSMO Recovery — pot vu de face, réhydratation rapide, anti-fatigue, anti-crampes" },
+  { src: "/osmo-slide-actifs.png", alt: "OSMO Recovery — pot et les cinq actifs cliniques" },
+  { src: "/osmo-slide-laboratoire.png", alt: "Formule optimisée, validée en laboratoire — dosages et composition nocturne" },
+  { src: "/osmo-slide-bienfaits.png", alt: "Les bienfaits des électrolytes OSMO — soutien hépatique, sommeil, anti-fatigue, réhydratation" },
 ];
 
 const INTERVAL = 5000;
