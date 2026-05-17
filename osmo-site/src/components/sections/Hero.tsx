@@ -139,7 +139,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 {
                   label: "Goût citron",
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <ellipse cx="12" cy="13" rx="7" ry="8" />
                       <path d="M12 5c-1.5-1.5-3-2-4-2" />
                       <path d="M9.5 10.5 12 13l2.5-2.5M9.5 15.5 12 13l2.5 2.5" />
@@ -149,7 +149,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 {
                   label: "Sans sucre ajouté",
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <rect x="5" y="5" width="14" height="14" rx="2" />
                       <line x1="4" y1="4" x2="20" y2="20" />
                     </svg>
@@ -158,7 +158,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 {
                   label: "Made in France",
                   icon: (
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z" />
                       <circle cx="12" cy="9" r="2.5" />
                     </svg>
@@ -167,11 +167,11 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               ].map((f) => (
                 <div
                   key={f.label}
-                  className="flex flex-col items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-3"
                   style={{
                     border: "1px solid var(--rule)",
-                    borderRadius: 12,
-                    padding: "14px 8px",
+                    borderRadius: 14,
+                    padding: "22px 12px",
                     background: "var(--paper)",
                   }}
                 >
@@ -179,11 +179,12 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   <div
                     style={{
                       fontFamily: FONTS.mono,
-                      fontSize: 10,
-                      letterSpacing: "0.14em",
+                      fontSize: 12,
+                      fontWeight: 500,
+                      letterSpacing: "0.12em",
                       textTransform: "uppercase",
                       color: "var(--ink)",
-                      lineHeight: 1.3,
+                      lineHeight: 1.35,
                     }}
                   >
                     {f.label}

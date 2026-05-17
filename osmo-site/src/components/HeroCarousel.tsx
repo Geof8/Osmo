@@ -100,15 +100,18 @@ export default function HeroCarousel() {
         </button>
       </div>
 
-      {/* Thumbnail strip */}
-      <div className="grid grid-cols-3 gap-2">
+      {/* Thumbnail strip — small fixed-size, left-aligned, room for more */}
+      <div className="flex flex-wrap gap-2">
         {SLIDES.map((s, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
             aria-label={`Voir slide ${i + 1}`}
-            className="relative aspect-square overflow-hidden rounded-lg transition-all duration-200"
+            className="relative overflow-hidden rounded-md transition-all duration-200"
             style={{
+              width: 64,
+              height: 64,
+              flexShrink: 0,
               border: i === current ? "2px solid #C8963E" : "1px solid var(--rule)",
               opacity: i === current ? 1 : 0.55,
             }}
@@ -119,13 +122,7 @@ export default function HeroCarousel() {
               if (i !== current) e.currentTarget.style.opacity = "0.55";
             }}
           >
-            <Image
-              src={s.src}
-              alt=""
-              fill
-              sizes="(max-width: 1024px) 33vw, 16vw"
-              className="object-cover"
-            />
+            <Image src={s.src} alt="" fill sizes="64px" className="object-cover" />
           </button>
         ))}
       </div>
