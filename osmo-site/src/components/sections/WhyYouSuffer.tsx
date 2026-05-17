@@ -58,14 +58,13 @@ export default function WhyYouSuffer() {
                   fontSize: 22,
                   fontWeight: 700,
                   lineHeight: 1.4,
-                  color: "#C8963E",
                   marginTop: 40,
                   maxWidth: 540,
                 }}
               >
                 Ce n&apos;est pas un remède miracle.
                 <br />
-                C&apos;est de la biochimie.
+                <span style={{ color: "#C8963E" }}>C&apos;est de la biochimie.</span>
               </p>
             </FadeUp>
           </div>
