@@ -5,6 +5,7 @@ import { FONTS } from "@/lib/constants";
 
 const STATS = [
   { value: "1 an et demi", label: "de développement" },
+  { value: "50+", label: "testeurs" },
   { value: "1 retour", label: "unanime" },
 ];
 
@@ -40,7 +41,7 @@ export default function SocialProof() {
               fontSize: "clamp(16px, 1.3vw, 20px)",
               lineHeight: 1.65,
               maxWidth: 640,
-              marginBottom: "clamp(40px, 5vw, 64px)",
+              marginBottom: 0,
             }}
           >
             La formule OSMO a été développée avec un laboratoire français
@@ -64,7 +65,7 @@ export default function SocialProof() {
               color: "#C8963E",
               margin: "0 auto",
               maxWidth: 700,
-              padding: "clamp(32px, 4vw, 56px) 0",
+              padding: "clamp(12px, 1.5vw, 20px) 0 clamp(32px, 4vw, 56px) 0",
             }}
           >
             &ldquo;Dès que c&apos;est dispo, tu m&apos;en mets de côté.&rdquo;
@@ -72,7 +73,7 @@ export default function SocialProof() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <div className="border-t border-[var(--rule)] pt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-6 text-center">
+          <div className="border-t border-[var(--rule)] pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 text-center">
             {STATS.map((stat) => (
               <div key={stat.value}>
                 <div
