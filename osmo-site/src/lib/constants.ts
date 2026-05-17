@@ -22,10 +22,14 @@ export const COLORS = {
 } as const;
 
 export const FONTS = {
-  display: "var(--font-barlow), var(--display)",
+  display: "var(--font-fraunces), var(--display)",
+  body: "var(--font-dm-sans), var(--body)",
   mono: "var(--font-mono), var(--mono)",
   playfair: "var(--font-playfair), 'Playfair Display', serif",
 } as const;
+
+export const GUARANTEE_LINE =
+  "✓ À réception du produit — 60 jours satisfait ou remboursé";
 
 export const ANIMATION_CONFIG = {
   fadeUp: {

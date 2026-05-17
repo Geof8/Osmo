@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import CountUp from "@/components/CountUp";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useCart } from "@/context/CartContext";
-import { FONTS, HERO_STATS } from "@/lib/constants";
+import { FONTS, GUARANTEE_LINE, HERO_STATS } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
 const headlineWords = ["Le", "lendemain", "matin,"];
@@ -68,8 +68,8 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               Un complexe d&apos;électrolytes formulé pour la récupération{" "}
               <em
                 style={{
-                  fontFamily: FONTS.display,
-                  fontStyle: "normal",
+                  fontFamily: FONTS.body,
+                  fontStyle: "italic",
                   fontWeight: 600,
                   fontSize: "inherit",
                 }}
@@ -85,10 +85,10 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-col gap-4"
             >
-              <div className="flex gap-3 flex-wrap items-center">
+              <div className="flex flex-col gap-2 items-start">
                 <button
                   onClick={addToCartAndNavigate}
-                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-all duration-200 active:scale-[0.97]"
+                  className="cta-pill inline-flex items-center gap-3 px-7 min-h-[48px] active:scale-[0.97]"
                   style={{
                     fontFamily: FONTS.mono,
                     fontSize: 11,
@@ -102,6 +102,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                     : "Rejoindre les Early Adopters — 20 €"}{" "}
                   <span aria-hidden="true">→</span>
                 </button>
+                <div className="cta-guarantee w-full">{GUARANTEE_LINE}</div>
               </div>
               <div
                 className="text-[var(--ink-2)] mb-2"

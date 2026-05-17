@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Lock, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { GUARANTEE_LINE } from "@/lib/constants";
 import { getSupabase } from "@/lib/supabase";
 
 type FormState = { firstName: string; lastName: string; email: string };
@@ -23,7 +24,7 @@ function validate(form: FormState): Errors {
 const inputBase: React.CSSProperties = {
   width: "100%",
   border: "1px solid #E0E0E0",
-  borderRadius: 4,
+  borderRadius: 8,
   padding: "12px 16px",
   fontSize: 15,
   fontFamily: "var(--body)",
@@ -295,7 +296,7 @@ export default function SideCart() {
                 <div
                   style={{
                     border: "1px solid #E0E0E0",
-                    borderRadius: 4,
+                    borderRadius: 8,
                     padding: "12px 16px",
                     height: 48,
                     background: "#F9F9F9",
@@ -329,14 +330,10 @@ export default function SideCart() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="active:scale-[0.98] transition-colors duration-200 hover:bg-[#111111]"
+                className="cta-pill active:scale-[0.98]"
                 style={{
                   width: "100%",
                   height: 56,
-                  background: "#C8963E",
-                  color: "#FFFFFF",
-                  border: "none",
-                  borderRadius: 4,
                   fontWeight: 700,
                   fontSize: 16,
                   fontFamily: "var(--body)",
@@ -347,6 +344,8 @@ export default function SideCart() {
               >
                 {submitting ? "Traitement…" : "Confirmer ma commande — 20€"}
               </button>
+
+              <div className="cta-guarantee">{GUARANTEE_LINE}</div>
 
               <div
                 className="flex items-center justify-center gap-4 flex-wrap"

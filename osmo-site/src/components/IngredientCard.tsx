@@ -26,6 +26,7 @@ export default function IngredientCard({
         background: "#1A1A1A",
         borderRight: "1px solid #333333",
         borderBottom: "1px solid #333333",
+        borderRadius: 12,
         position: "relative",
       }}
     >

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 import { useCart } from "@/context/CartContext";
 import WaitlistForm from "@/components/WaitlistForm";
-import { FONTS } from "@/lib/constants";
+import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
 export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
@@ -103,23 +103,28 @@ export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
               <WaitlistForm />
             ) : (
               <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-                <button
-                  onClick={addToCartAndNavigate}
-                  className="inline-flex items-center gap-3 px-5 min-h-[48px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-white hover:text-[var(--ink)] hover:border-white transition-all duration-200 active:scale-[0.97]"
-                  style={{
-                    fontFamily: FONTS.mono,
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "0.18em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Devenir Early Adopter — 20 €{" "}
-                  <span aria-hidden="true">→</span>
-                </button>
+                <div className="flex flex-col gap-2 items-start">
+                  <button
+                    onClick={addToCartAndNavigate}
+                    className="cta-pill inline-flex items-center gap-3 px-7 min-h-[48px] active:scale-[0.97]"
+                    style={{
+                      fontFamily: FONTS.mono,
+                      fontSize: 11,
+                      fontWeight: 500,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Devenir Early Adopter — 20 €{" "}
+                    <span aria-hidden="true">→</span>
+                  </button>
+                  <div className="cta-guarantee cta-guarantee-dark w-full">
+                    {GUARANTEE_LINE}
+                  </div>
+                </div>
                 <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
                   <li><strong>— Prix Early Adopter : 20€ au lieu de 30€ — 33% de réduction</strong></li>
-                  <li>— Validé par un laboratoire, testé par l&apos;entourage</li>
+                  <li>— Validé par un laboratoire</li>
                   <li>— Expédition estimée : dans 6 mois maximum</li>
                   <li>— Aucun frais caché — paiement sécurisé</li>
                 </ul>

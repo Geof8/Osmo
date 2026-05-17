@@ -14,8 +14,8 @@
     --soft: #DDDDDD;
     --amber: #C8963E;
     --amber-hover: #A8762E;
-    --display: 'Barlow Condensed', 'Helvetica Neue', sans-serif;
-    --body: 'Inter', sans-serif;
+    --display: 'Fraunces', 'Times New Roman', serif;
+    --body: 'DM Sans', 'Helvetica Neue', sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, monospace;
 
     --background: #FFFFFF;
@@ -24,6 +24,10 @@
     --input: #DDDDDD;
     --ring: #C8963E;
     --radius: 0px;
+    --radius-button: 50px;
+    --radius-card: 12px;
+    --radius-input: 8px;
+    --radius-faq: 8px;
     --focus-ring: 0 0 0 2px var(--paper), 0 0 0 4px var(--amber);
   }
 
@@ -109,4 +113,37 @@ body::before {
   body::before {
     display: none;
   }
+}
+
+/* CTA pill button — primary amber */
+.cta-pill {
+  border-radius: var(--radius-button);
+  background: var(--amber);
+  color: #FFFFFF;
+  border: 1px solid var(--amber);
+  box-shadow: 0 4px 16px rgba(200, 150, 62, 0.25);
+  transition: all 0.2s ease;
+}
+
+.cta-pill:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.cta-pill:active {
+  transform: translateY(0);
+}
+
+/* Inline guarantee line shown beneath CTAs */
+.cta-guarantee {
+  font-size: 13px;
+  color: #666666;
+  text-align: center;
+  font-style: italic;
+  margin-top: 8px;
+  font-family: var(--body);
+}
+
+.cta-guarantee-dark {
+  color: rgba(255, 248, 232, 0.65);
 }

@@ -5,7 +5,7 @@ import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 import type { OpenModalProps } from "@/types";
 
-export default function Navbar({ remaining = 50, soldOut = false }: OpenModalProps) {
+export default function Navbar({ soldOut = false }: OpenModalProps) {
   const { addToCartAndNavigate } = useCart();
   return (
     <motion.nav
@@ -79,20 +79,9 @@ export default function Navbar({ remaining = 50, soldOut = false }: OpenModalPro
 
         {/* Right — CTA */}
         <div className="flex items-center justify-end gap-4">
-          <span
-            className="hidden sm:inline text-[var(--ink-2)]"
-            style={{
-              fontFamily: FONTS.mono,
-              fontSize: 10,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-            }}
-          >
-            {remaining} / 50 · LOT N°001
-          </span>
           <button
             onClick={addToCartAndNavigate}
-            className="inline-flex items-center gap-3 px-5 min-h-[44px] bg-[var(--amber)] text-white border border-[var(--amber)] hover:bg-[var(--ink)] hover:border-[var(--ink)] transition-colors duration-200 active:scale-[0.97]"
+            className="cta-pill inline-flex items-center gap-3 px-6 min-h-[44px] active:scale-[0.97]"
             style={{
               fontFamily: FONTS.mono,
               fontSize: 11,
