@@ -67,6 +67,7 @@ export const COPY = {
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
+  { k: 50, label: "50", v: "Places Early Adopters", count: true },
 ];
 
 export const CTA_STATS: CtaStat[] = [

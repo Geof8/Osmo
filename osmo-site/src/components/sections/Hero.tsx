@@ -104,6 +104,22 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 </button>
                 <div className="cta-guarantee w-full">{GUARANTEE_LINE}</div>
               </div>
+              <ul
+                className="flex flex-col sm:flex-row sm:flex-wrap gap-y-1 sm:gap-x-5 sm:gap-y-1"
+                style={{
+                  fontFamily: FONTS.mono,
+                  fontSize: 11,
+                  letterSpacing: "0.04em",
+                  color: "#666666",
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  lineHeight: 1.6,
+                }}
+              >
+                <li>✓ Paiement sécurisé · Stripe</li>
+                <li>✓ Expédition estimée sous 6 mois</li>
+              </ul>
             </motion.div>
 
           </div>
@@ -183,7 +199,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 gap-y-6 gap-x-4 sm:gap-8"
+          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-3 gap-y-6 gap-x-4 sm:gap-8"
         >
           {HERO_STATS.map((item, i) => (
             <div key={i} className="min-w-0">

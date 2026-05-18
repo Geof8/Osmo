@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import FadeUp from "@/components/FadeUp";
 import IngredientCard from "@/components/IngredientCard";
+import MolecularAnimation from "@/components/MolecularAnimation";
 import { useInView } from "@/hooks/useInView";
 import { FONTS, STAMPS } from "@/lib/constants";
 import type { Ingredient } from "@/types";
@@ -66,7 +67,8 @@ export default function Formula() {
       style={{ background: "#111111", padding: "clamp(40px, 7vw, 48px) 0 clamp(56px, 9vw, 80px)" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-6 sm:px-10">
-        <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
           <div
             className="mb-2"
             style={{
@@ -124,9 +126,14 @@ export default function Formula() {
             <br />
             Rien de superflu. Tout est dos&eacute;.
           </motion.p>
+          </div>
+
+          <div className="hidden lg:flex justify-center">
+            <MolecularAnimation />
+          </div>
         </div>
 
-        <div className="mt-10 sm:mt-14 lg:mt-20">
+        <div className="mt-10 sm:mt-14 lg:mt-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {actifs.map((a, i) => (
               <IngredientCard key={i} a={a} index={i} />
