@@ -176,3 +176,159 @@ body::before {
 .cta-guarantee-dark {
   color: rgba(255, 248, 232, 0.65);
 }
+
+/* ============================================================================
+ * Admin back-office utilities
+ * ============================================================================ */
+
+.admin-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid #ECECEC;
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.04);
+}
+
+.admin-card-padded {
+  padding: 20px 24px;
+}
+
+.admin-kpi-value {
+  font-family: var(--body);
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.admin-kpi-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--body);
+  font-size: 14px;
+}
+
+.admin-table thead th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888888;
+  font-weight: 500;
+  padding: 12px 16px;
+  border-bottom: 1px solid #ECECEC;
+}
+
+.admin-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #F4F4F4;
+  color: var(--ink);
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:hover {
+  background: #FAFAFA;
+}
+
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.admin-badge-paid {
+  background: #E6F4EA;
+  color: #1E7A3A;
+}
+
+.admin-badge-refunded {
+  background: #FBEAEA;
+  color: #B23131;
+}
+
+.admin-badge-pending {
+  background: #FFF4DB;
+  color: #8A6310;
+}
+
+.admin-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--ink);
+  color: #FFFFFF;
+  border: 1px solid var(--ink);
+  transition: all 0.18s ease;
+}
+
+.admin-pill-btn:hover {
+  background: #000000;
+  transform: translateY(-1px);
+}
+
+.admin-pill-btn-amber {
+  background: var(--amber);
+  border-color: var(--amber);
+}
+
+.admin-pill-btn-amber:hover {
+  background: var(--amber-hover);
+  border-color: var(--amber-hover);
+}
+
+.admin-pill-btn-ghost {
+  background: #FFFFFF;
+  color: var(--ink);
+  border-color: #DDDDDD;
+}
+
+.admin-pill-btn-ghost:hover {
+  background: #FAFAFA;
+}
+
+.admin-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #DDDDDD;
+  background: #FFFFFF;
+  font-family: var(--body);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.18s ease;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: var(--amber);
+}
+
+.admin-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 6px;
+}
