@@ -97,8 +97,7 @@ export default function SideCart() {
         return;
       }
       window.location.href = data.url;
-    } catch (err) {
-      console.error("Checkout error:", err);
+    } catch {
       setSubmitError("Connexion impossible. Vérifie ta connexion et réessaie.");
       setSubmitting(false);
     }

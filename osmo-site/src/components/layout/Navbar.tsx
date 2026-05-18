@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
-import type { OpenModalProps } from "@/types";
+import type { SoldOutProps } from "@/types";
 
-export default function Navbar({ soldOut = false }: OpenModalProps) {
+export default function Navbar({ soldOut = false }: SoldOutProps) {
   const { addToCartAndNavigate } = useCart();
   return (
     <motion.nav

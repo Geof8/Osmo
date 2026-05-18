@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import FadeUp from "@/components/FadeUp";
+import FadeUp from "@/components/ui/FadeUp";
+import WaitlistForm from "@/components/ui/WaitlistForm";
 import { useCart } from "@/context/CartContext";
-import WaitlistForm from "@/components/WaitlistForm";
 import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
-import type { OpenModalProps } from "@/types";
+import type { SoldOutProps } from "@/types";
 
-export default function ClosingCTA({ soldOut = false }: OpenModalProps) {
+export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
   const { addToCartAndNavigate } = useCart();
   return (
     <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>

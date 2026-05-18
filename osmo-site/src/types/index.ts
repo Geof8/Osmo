@@ -46,28 +46,12 @@ export interface HeroStat {
   amber?: boolean;
 }
 
-export interface CtaStat {
-  k: string;
-  v: string;
-  em: boolean;
-}
-
-export interface CaptureModalProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  source?: string;
-}
-
-export interface OpenModalProps {
-  onOpenModal?: () => void;
-  remaining?: number;
+export interface SoldOutProps {
   soldOut?: boolean;
 }
 
-export interface HeroProps {
+export interface HeroProps extends SoldOutProps {
   revealed: boolean;
-  remaining?: number;
-  soldOut?: boolean;
 }
 
 export interface SplitOverlayProps {

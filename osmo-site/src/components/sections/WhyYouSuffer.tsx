@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import FadeUp from "@/components/FadeUp";
+import FadeUp from "@/components/ui/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 export default function WhyYouSuffer() {

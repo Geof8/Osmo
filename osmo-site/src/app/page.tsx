@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Strip from "@/components/Strip";
-import Navbar from "@/components/Navbar";
-import SplitOverlay from "@/components/SplitOverlay";
+import AnnouncementBar from "@/components/layout/AnnouncementBar";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import SplitOverlay from "@/components/ui/SplitOverlay";
+import Marquee from "@/components/ui/Marquee";
 import Hero from "@/components/sections/Hero";
-import Marquee from "@/components/Marquee";
 import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
 import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -13,12 +14,11 @@ import Formula from "@/components/sections/Formula";
 import SocialProof from "@/components/sections/SocialProof";
 import FAQ from "@/components/sections/FAQ";
 import ClosingCTA from "@/components/sections/ClosingCTA";
-import Footer from "@/components/Footer";
 import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
 export default function Home() {
   const [heroRevealed, setHeroRevealed] = useState(false);
-  const { remaining, soldOut } = useWaitlistCount();
+  const { soldOut } = useWaitlistCount();
 
   const handleOverlayComplete = useCallback(() => {
     setHeroRevealed(true);
@@ -27,17 +27,17 @@ export default function Home() {
   return (
     <>
       <SplitOverlay onComplete={handleOverlayComplete} />
-      <Strip />
-      <Navbar remaining={remaining} soldOut={soldOut} />
+      <AnnouncementBar />
+      <Navbar soldOut={soldOut} />
       <main>
-        <Hero revealed={heroRevealed} remaining={remaining} soldOut={soldOut} />
+        <Hero revealed={heroRevealed} soldOut={soldOut} />
         <Marquee />
         <WhyYouSuffer />
         <Formula />
         <HowItWorks />
         <SocialProof />
         <PourquoiOsmo />
-        <ClosingCTA remaining={remaining} soldOut={soldOut} />
+        <ClosingCTA soldOut={soldOut} />
         <FAQ />
       </main>
       <Footer />

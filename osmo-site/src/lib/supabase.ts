@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { PRODUCT } from "@/lib/constants";
 
 let _supabase: SupabaseClient | null = null;
 
@@ -17,16 +18,20 @@ export function getSupabase(): SupabaseClient {
 }
 
 export async function getSupabaseCount(): Promise<number> {
-  const { count, error } = await getSupabase()
-    .from("waitlist")
-    .select("*", { count: "exact", head: true });
+  try {
+    const { count, error } = await getSupabase()
+      .from("waitlist")
+      .select("*", { count: "exact", head: true });
 
-  if (error || count === null) return 0;
-  return count;
+    if (error || count === null) return 0;
+    return count;
+  } catch {
+    return 0;
+  }
 }
 
 export function computeRemaining(actualCount: number) {
   const displayedSold = Math.floor(actualCount / 5);
-  const remaining = 50 - displayedSold;
+  const remaining = PRODUCT.maxEarlyAdopters - displayedSold;
   return { displayedSold, remaining: Math.max(0, remaining) };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import FadeUp from "@/components/FadeUp";
+import FadeUp from "@/components/ui/FadeUp";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [

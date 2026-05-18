@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import Strip from "@/components/Strip";
-import FadeUp from "@/components/FadeUp";
-import CountUp from "@/components/CountUp";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import AnnouncementBar from "@/components/layout/AnnouncementBar";
+import FadeUp from "@/components/ui/FadeUp";
+import CountUp from "@/components/ui/CountUp";
 import { useCart } from "@/context/CartContext";
 import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
 import { useInView } from "@/hooks/useInView";
@@ -48,13 +48,13 @@ function WordByWord({ text }: { text: string }) {
 }
 
 export default function NotreHistoire() {
-  const { remaining, soldOut } = useWaitlistCount();
+  const { soldOut } = useWaitlistCount();
   const { addToCartAndNavigate } = useCart();
 
   return (
     <>
-      <Strip />
-      <Navbar remaining={remaining} soldOut={soldOut} />
+      <AnnouncementBar />
+      <Navbar soldOut={soldOut} />
       <main>
         {/* Hero */}
         <section

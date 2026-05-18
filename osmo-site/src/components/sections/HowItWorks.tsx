@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import FadeUp from "@/components/FadeUp";
+import FadeUp from "@/components/ui/FadeUp";
 import { useInView } from "@/hooks/useInView";
 import { ANIMATION_CONFIG, FONTS } from "@/lib/constants";
 import type { Step } from "@/types";

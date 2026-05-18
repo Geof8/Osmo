@@ -1,61 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import FadeUp from "@/components/FadeUp";
-import IngredientCard from "@/components/IngredientCard";
-import MolecularAnimation from "@/components/MolecularAnimation";
+import FadeUp from "@/components/ui/FadeUp";
+import IngredientCard from "@/components/ui/IngredientCard";
+import MolecularAnimation from "@/components/ui/MolecularAnimation";
 import { useInView } from "@/hooks/useInView";
-import { FONTS, STAMPS } from "@/lib/constants";
-import type { Ingredient } from "@/types";
-
-const actifs: Ingredient[] = [
-  {
-    tag: "Soutien hépatique",
-    name: "N-Acétyl-Cystéine",
-    bullets: [
-      "Précurseur du glutathion, principal antioxydant du foie",
-      "Utilisé en milieu hospitalier pour les crises hépatiques",
-    ],
-    detail: "Actif méconnu du grand public. Redoutablement efficace.",
-    highlight: true,
-  },
-  {
-    tag: "Sommeil & récupération",
-    name: "Bisglycinate de Magnésium",
-    bullets: [
-      "Favorise un sommeil profond et réparateur",
-      "Réduit les crampes musculaires nocturnes",
-    ],
-    detail: "Forme hautement biodisponible du magnésium.",
-  },
-  {
-    tag: "Fonction musculaire",
-    name: "Citrate de Potassium",
-    bullets: [
-      "Soutient la contraction musculaire et cardiaque",
-      "Prévient les crampes liées à la déshydratation",
-    ],
-    detail: "Sel minéral essentiel éliminé en priorité par l'alcool.",
-  },
-  {
-    tag: "Réhydratation rapide",
-    name: "Bicarbonate de Sodium",
-    bullets: [
-      "Restaure l'équilibre acido-basique post-alcool",
-      "Accélère la réhydratation au niveau cellulaire",
-    ],
-    detail: "Tampon naturel des fluides corporels.",
-  },
-  {
-    tag: "Hydratation cellulaire",
-    name: "Chlorure de Sodium",
-    bullets: [
-      "Régule l'équilibre hydrique intracellulaire",
-      "Active la transmission nerveuse et musculaire",
-    ],
-    detail: "Le sel essentiel — ni trop, ni pas assez.",
-  },
-];
+import { FONTS, INGREDIENTS, STAMPS } from "@/lib/constants";
 
 export default function Formula() {
   const [ref, isInView] = useInView<HTMLDivElement>();
@@ -135,8 +85,8 @@ export default function Formula() {
 
         <div className="mt-10 sm:mt-14 lg:mt-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {actifs.map((a, i) => (
-              <IngredientCard key={i} a={a} index={i} />
+            {INGREDIENTS.map((a, i) => (
+              <IngredientCard key={a.name} a={a} index={i} />
             ))}
           </div>
 

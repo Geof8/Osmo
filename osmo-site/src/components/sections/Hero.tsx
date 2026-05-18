@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import CountUp from "@/components/CountUp";
-import HeroCarousel from "@/components/HeroCarousel";
+import CountUp from "@/components/ui/CountUp";
+import HeroCarousel from "@/components/ui/HeroCarousel";
 import { useCart } from "@/context/CartContext";
 import { FONTS, GUARANTEE_LINE, HERO_STATS } from "@/lib/constants";
 import type { HeroProps } from "@/types";

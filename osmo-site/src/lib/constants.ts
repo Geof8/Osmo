@@ -1,8 +1,8 @@
 import type {
-  CtaStat,
   FaqItem,
   FooterColumn,
   HeroStat,
+  Ingredient,
 } from "@/types";
 
 export const COLORS = {
@@ -56,26 +56,11 @@ export const ANIMATION_CONFIG = {
   },
 } as const;
 
-export const COPY = {
-  brand: "OSMO",
-  tagline: "Recovery — Lot N°001",
-  capacity: "50 / 50 · LOT N°001",
-  cta: "Devenir Early Adopter",
-  ctaArrow: "→",
-} as const;
-
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
   { k: 20, label: "20 €", v: "Tarif Early Adopter (-33%)", amber: true, count: false },
   { k: 50, label: "50", v: "Places Early Adopters", count: true },
-];
-
-export const CTA_STATS: CtaStat[] = [
-  { k: "50", v: "Places Early Adopters", em: true },
-  { k: "20 €", v: "Early Adopter", em: false },
-  { k: "30 €", v: "Public", em: false },
-  { k: "6 mois", v: "Expédition max.", em: false },
 ];
 
 export const STAMPS = [
@@ -136,6 +121,55 @@ export const PRODUCT = {
   currency: "EUR",
   maxEarlyAdopters: 50,
 } as const;
+
+export const INGREDIENTS: Ingredient[] = [
+  {
+    tag: "Soutien hépatique",
+    name: "N-Acétyl-Cystéine",
+    bullets: [
+      "Précurseur du glutathion, principal antioxydant du foie",
+      "Utilisé en milieu hospitalier pour les crises hépatiques",
+    ],
+    detail: "Actif méconnu du grand public. Redoutablement efficace.",
+    highlight: true,
+  },
+  {
+    tag: "Sommeil & récupération",
+    name: "Bisglycinate de Magnésium",
+    bullets: [
+      "Favorise un sommeil profond et réparateur",
+      "Réduit les crampes musculaires nocturnes",
+    ],
+    detail: "Forme hautement biodisponible du magnésium.",
+  },
+  {
+    tag: "Fonction musculaire",
+    name: "Citrate de Potassium",
+    bullets: [
+      "Soutient la contraction musculaire et cardiaque",
+      "Prévient les crampes liées à la déshydratation",
+    ],
+    detail: "Sel minéral essentiel éliminé en priorité par l'alcool.",
+  },
+  {
+    tag: "Réhydratation rapide",
+    name: "Bicarbonate de Sodium",
+    bullets: [
+      "Restaure l'équilibre acido-basique post-alcool",
+      "Accélère la réhydratation au niveau cellulaire",
+    ],
+    detail: "Tampon naturel des fluides corporels.",
+  },
+  {
+    tag: "Hydratation cellulaire",
+    name: "Chlorure de Sodium",
+    bullets: [
+      "Régule l'équilibre hydrique intracellulaire",
+      "Active la transmission nerveuse et musculaire",
+    ],
+    detail: "Le sel essentiel — ni trop, ni pas assez.",
+  },
+];
 
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
