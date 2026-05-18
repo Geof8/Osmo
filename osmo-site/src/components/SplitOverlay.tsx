@@ -48,29 +48,47 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
   useEffect(() => {
     if (doneRef.current) return;
 
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    const prevScrollBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
     window.scrollTo(0, 0);
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion) {
       doneRef.current = true;
-      document.body.style.overflow = "";
+      html.style.overflow = "";
+      body.style.overflow = "";
+      html.style.scrollBehavior = prevScrollBehavior;
       onComplete();
       containerRef.current?.remove();
       return;
+    }
+
+    function unlock() {
+      html.style.overflow = "";
+      body.style.overflow = "";
+      html.style.scrollBehavior = prevScrollBehavior;
     }
 
     function dismiss() {
       if (doneRef.current) return;
       doneRef.current = true;
 
-      window.removeEventListener("wheel", dismiss);
-      window.removeEventListener("touchstart", dismiss);
+      window.removeEventListener("wheel", wheelHandler);
+      window.removeEventListener("touchstart", touchHandler);
 
       const tl = gsap.timeline({
         onComplete: () => {
-          document.body.style.overflow = "";
           window.scrollTo(0, 0);
+          unlock();
           onComplete();
           if (containerRef.current) {
             gsap.to(containerRef.current, {
@@ -87,16 +105,24 @@ export default function SplitOverlay({ onComplete }: SplitOverlayProps) {
         .to(rightRef.current, { x: "100%", duration: 1.4, ease: "power2.inOut" }, 0);
     }
 
-    window.addEventListener("wheel", dismiss, { passive: true, once: true });
-    window.addEventListener("touchstart", dismiss, { passive: true, once: true });
+    function wheelHandler(e: WheelEvent) {
+      e.preventDefault();
+      dismiss();
+    }
+    function touchHandler() {
+      dismiss();
+    }
+
+    window.addEventListener("wheel", wheelHandler, { passive: false, once: true });
+    window.addEventListener("touchstart", touchHandler, { passive: true, once: true });
 
     const fallback = setTimeout(dismiss, 6000);
 
     return () => {
       clearTimeout(fallback);
-      document.body.style.overflow = "";
-      window.removeEventListener("wheel", dismiss);
-      window.removeEventListener("touchstart", dismiss);
+      unlock();
+      window.removeEventListener("wheel", wheelHandler);
+      window.removeEventListener("touchstart", touchHandler);
     };
   }, [onComplete]);
 

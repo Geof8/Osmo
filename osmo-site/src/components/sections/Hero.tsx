@@ -199,7 +199,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-3 gap-y-6 gap-x-4 sm:gap-8"
+          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-8"
         >
           {HERO_STATS.map((item, i) => (
             <div key={i} className="min-w-0">
