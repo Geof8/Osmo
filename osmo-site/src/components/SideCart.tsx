@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Lock, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { GUARANTEE_LINE } from "@/lib/constants";
-import { getSupabase } from "@/lib/supabase";
 
 type FormState = { firstName: string; lastName: string; email: string };
 type Errors = Partial<Record<keyof FormState, string>>;
@@ -47,6 +46,7 @@ export default function SideCart() {
   const [form, setForm] = useState<FormState>({ firstName: "", lastName: "", email: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -79,20 +79,27 @@ export default function SideCart() {
       return;
     }
     setSubmitting(true);
+    setSubmitError(null);
     try {
-      const supabase = getSupabase();
-      const { error } = await supabase.from("waitlist").insert({
-        first_name: form.firstName.trim(),
-        last_name: form.lastName.trim(),
-        email: form.email.trim().toLowerCase(),
-        phone: null,
-        source: "early_adopter_purchase",
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.firstName.trim(),
+          lastName: form.lastName.trim(),
+          email: form.email.trim().toLowerCase(),
+        }),
       });
-      if (error && error.code !== "23505") {
-        console.error("Supabase insert error:", error);
+      const data: { url?: string; error?: string } = await res.json();
+      if (!res.ok || !data.url) {
+        setSubmitError(data.error || "Une erreur est survenue. Réessaie.");
+        setSubmitting(false);
+        return;
       }
-      console.log("STRIPE PAYMENT TRIGGERED", form);
-    } finally {
+      window.location.href = data.url;
+    } catch (err) {
+      console.error("Checkout error:", err);
+      setSubmitError("Connexion impossible. Vérifie ta connexion et réessaie.");
       setSubmitting(false);
     }
   }
@@ -299,7 +306,6 @@ export default function SideCart() {
                     border: "1px solid #E0E0E0",
                     borderRadius: 8,
                     padding: "12px 16px",
-                    height: 48,
                     background: "#F9F9F9",
                     display: "flex",
                     alignItems: "center",
@@ -309,12 +315,13 @@ export default function SideCart() {
                   <Lock size={16} strokeWidth={1.5} color="#999999" />
                   <span
                     style={{
-                      color: "#999999",
-                      fontStyle: "italic",
-                      fontSize: 14,
+                      color: "#555555",
+                      fontSize: 13,
+                      lineHeight: 1.4,
                     }}
                   >
-                    Coordonnées bancaires — Stripe
+                    Redirection vers Stripe pour finaliser le paiement
+                    (CB, Apple Pay, Google Pay).
                   </span>
                 </div>
                 <div
@@ -327,6 +334,20 @@ export default function SideCart() {
                   🔒 Paiement 100% sécurisé · Données chiffrées SSL
                 </div>
               </div>
+
+              {submitError && (
+                <p
+                  role="alert"
+                  style={{
+                    color: "#C8963E",
+                    fontSize: 13,
+                    marginTop: 12,
+                    textAlign: "center",
+                  }}
+                >
+                  {submitError}
+                </p>
+              )}
 
               <button
                 type="submit"
