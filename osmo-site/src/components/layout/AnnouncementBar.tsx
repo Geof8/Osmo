@@ -24,7 +24,7 @@ export default function Strip() {
           <span className="sm:hidden">LOT N°001 · 50 PLACES · 20€</span>
           <span className="hidden sm:inline">LOT N°001 · 50 PLACES · EARLY ADOPTERS · 20€ · EXPÉDITION SOUS 6 MOIS</span>
         </div>
-        <div className="hidden md:block">OSMO Lab — Paris, France</div>
+        <div className="hidden md:block">OSMO Lab · Paris, France</div>
       </div>
     </motion.div>
   );

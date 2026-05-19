@@ -254,7 +254,7 @@ export default function SideCart() {
                   letterSpacing: "0.01em",
                 }}
               >
-                OSMO Recovery — Lot N°001
+                OSMO Recovery · Lot N°001
               </div>
               <div
                 style={{

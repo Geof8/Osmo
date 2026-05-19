@@ -29,7 +29,7 @@ export const FONTS = {
 } as const;
 
 export const GUARANTEE_LINE =
-  "✓ À réception du produit — 30 jours satisfait ou remboursé";
+  "✓ À réception du produit, 30 jours satisfait ou remboursé";
 
 export const ANIMATION_CONFIG = {
   fadeUp: {
@@ -87,11 +87,11 @@ export const MARQUEE_ITEMS = [
 export const FAQ_ITEMS: FaqItem[] = [
   {
     q: "Qu'est-ce qu'OSMO Recovery exactement ?",
-    a: "Un complexe d'électrolytes en poudre, goût citron, conçu pour être pris le soir après une consommation d'alcool. Bicarbonate de sodium, citrate de potassium, bisglycinate de magnésium, NAC et chlorure de sodium — dosés pour restaurer l'hydratation et soutenir la fonction hépatique.",
+    a: "Un complexe d'électrolytes en poudre, goût citron, conçu pour être pris le soir après une consommation d'alcool. Bicarbonate de sodium, citrate de potassium, bisglycinate de magnésium, NAC et chlorure de sodium, dosés pour restaurer l'hydratation et soutenir la fonction hépatique.",
   },
   {
     q: "Quelle différence avec un isotonique classique ?",
-    a: "Les boissons isotoniques sont conçues pour l'effort sportif. OSMO Recovery est formulé pour la récupération post-alcool, avec de la NAC qui soutient la fonction hépatique — un actif absent des boissons sportives.",
+    a: "Les boissons isotoniques sont conçues pour l'effort sportif. OSMO Recovery est formulé pour la récupération post-alcool, avec de la NAC qui soutient la fonction hépatique, un actif absent des boissons sportives.",
   },
   {
     q: "Pourquoi le soir et pas le matin ?",
@@ -103,7 +103,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Qu'est-ce que l'accès prioritaire ?",
-    a: "En devenant Early Adopter à 20€ (au lieu de 30€), tu fais partie du Lot N°001 — les 50 premières personnes à recevoir OSMO Recovery. Expédition estimée sous 6 mois.",
+    a: "En devenant Early Adopter à 20€ (au lieu de 30€), tu fais partie du Lot N°001, les 50 premières personnes à recevoir OSMO Recovery. Expédition estimée sous 6 mois.",
   },
   {
     q: "Est-ce que je serai débité maintenant ?",
@@ -167,7 +167,7 @@ export const INGREDIENTS: Ingredient[] = [
       "Régule l'équilibre hydrique intracellulaire",
       "Active la transmission nerveuse et musculaire",
     ],
-    detail: "Le sel essentiel — ni trop, ni pas assez.",
+    detail: "Le sel essentiel, ni trop, ni pas assez.",
   },
 ];
 

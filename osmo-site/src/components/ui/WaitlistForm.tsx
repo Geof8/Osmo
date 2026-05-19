@@ -130,7 +130,7 @@ export default function WaitlistForm() {
             color: "white",
           }}
         >
-          Lot N°001 épuisé — rejoins la liste pour le Lot N°002
+          Lot N°001 épuisé, rejoins la liste pour le Lot N°002
         </p>
         <p
           className="mt-2"

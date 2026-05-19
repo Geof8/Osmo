@@ -76,7 +76,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               >
                 pendant le sommeil
               </em>{" "}
-              — après une soirée alcoolisée, une semaine chargée, ou les deux. À prendre le soir. Pas le matin.
+              après une soirée alcoolisée, une semaine chargée, ou les deux. À prendre le soir. Pas le matin.
             </motion.p>
 
             <motion.div
@@ -98,8 +98,8 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   }}
                 >
                   {soldOut
-                    ? "Lot N°001 complet — liste d'attente"
-                    : "Rejoindre les Early Adopters — 20 €"}{" "}
+                    ? "Lot N°001 complet · liste d'attente"
+                    : "Rejoindre les Early Adopters · 20 €"}{" "}
                   <span aria-hidden="true">→</span>
                 </button>
                 <div className="cta-guarantee w-full">{GUARANTEE_LINE}</div>

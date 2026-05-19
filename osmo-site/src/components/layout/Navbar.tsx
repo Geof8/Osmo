@@ -56,7 +56,7 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
               letterSpacing: "-0.01em",
             }}
           >
-            Recovery — Lot N°001
+            Recovery · Lot N°001
           </span>
         </div>
 
@@ -90,7 +90,7 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
             }}
           >
             <span className="sm:hidden" style={{ fontSize: 11 }}>
-              {soldOut ? "Liste d’attente" : "Réserver — 20€"}
+              {soldOut ? "Liste d’attente" : "Réserver · 20€"}
             </span>
             <span className="hidden sm:inline" style={{ fontSize: 11, letterSpacing: "0.18em" }}>
               {soldOut ? "Liste d’attente · Lot N°002" : "Devenir Early Adopter"}

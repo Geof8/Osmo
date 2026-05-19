@@ -115,7 +115,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                       textTransform: "uppercase",
                     }}
                   >
-                    Devenir Early Adopter — 20 €{" "}
+                    Devenir Early Adopter · 20 €{" "}
                     <span aria-hidden="true">→</span>
                   </button>
                   <div className="cta-guarantee cta-guarantee-dark w-full">
@@ -123,10 +123,10 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                   </div>
                 </div>
                 <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
-                  <li><strong>— Prix Early Adopter : 20€ au lieu de 30€ — 33% de réduction</strong></li>
-                  <li>— Validé par un laboratoire</li>
-                  <li>— Expédition estimée : dans 6 mois maximum</li>
-                  <li>— Aucun frais caché — paiement sécurisé</li>
+                  <li><strong>Prix Early Adopter : 20€ au lieu de 30€, 33% de réduction</strong></li>
+                  <li>Validé par un laboratoire</li>
+                  <li>Expédition estimée : dans 6 mois maximum</li>
+                  <li>Aucun frais caché, paiement sécurisé</li>
                 </ul>
               </div>
             )}

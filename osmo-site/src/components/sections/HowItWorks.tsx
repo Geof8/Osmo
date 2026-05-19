@@ -44,7 +44,7 @@ const steps: Step[] = [
     sub: "Administration",
     label: "Buvez le soir",
     labelEm: true,
-    desc: "Avant le coucher — pas le matin. C'est ici que tout se joue.",
+    desc: "Avant le coucher, pas le matin. C'est ici que tout se joue.",
     timing: "⌁ avant 23h",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2} aria-hidden="true">
@@ -161,7 +161,7 @@ export default function HowItWorks() {
               <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
                 là
               </em>{" "}
-              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que tu dors — pas pendant que tu attends qu&apos;ils agissent.
+              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que tu dors, pas pendant que tu attends qu&apos;ils agissent.
             </p>
           </div>
         </FadeUp>

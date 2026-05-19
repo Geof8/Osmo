@@ -53,7 +53,7 @@ export default function SocialProof() {
             La formule OSMO a été développée avec un laboratoire français
             spécialisé en compléments alimentaires, puis testée sur moi
             d&apos;abord, sur mes amis et ma famille ensuite. Le retour
-            est unanime — la quasi-totalité a demandé à être prévenue
+            est unanime : la quasi-totalité a demandé à être prévenue
             au lancement. Certains ont déjà leur place réservée.
           </p>
         </FadeUp>
