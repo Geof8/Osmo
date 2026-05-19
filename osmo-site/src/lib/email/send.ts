@@ -72,11 +72,11 @@ export async function sendEmail({
     return { status: "skipped_no_provider" };
   }
 
-  const html = await renderEmailHtml(react);
   const from = getFromEmail();
   const replyTo = getReplyTo();
 
   try {
+    const html = await renderEmailHtml(react);
     const { data, error } = await resend.emails.send({
       from,
       to,
