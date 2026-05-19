@@ -109,7 +109,7 @@ export default function NotreHistoire() {
                   textTransform: "uppercase",
                 }}
               >
-                01 — Le problème
+                01. Le problème
               </span>
               <p
                 style={{
@@ -145,7 +145,7 @@ export default function NotreHistoire() {
                   textTransform: "uppercase",
                 }}
               >
-                02 — La recherche
+                02. La recherche
               </span>
               <p
                 style={{
@@ -157,14 +157,14 @@ export default function NotreHistoire() {
                 }}
               >
                 Un an et demi d&apos;études scientifiques, d&apos;avis médicaux,
-                de tests. J&apos;ai compris le rôle de chaque sel minéral —
-                sodium, potassium, magnésium — ces composants de base
+                de tests. J&apos;ai compris le rôle de chaque sel minéral,
+                sodium, potassium, magnésium, ces composants de base
                 du corps humain qu&apos;on néglige et qui sont pourtant
                 à la base de tout.
                 <br /><br />
                 La formule a été développée en collaboration avec
                 un laboratoire français spécialisé en compléments
-                alimentaires — certifié, équipé pour les analyses
+                alimentaires, certifié, équipé pour les analyses
                 de stabilité, de solubilité et de tolérance.
                 Chaque actif a été sélectionné sur la base d&apos;études
                 cliniques publiées. Les dosages ont été ajustés
@@ -193,7 +193,7 @@ export default function NotreHistoire() {
                   textTransform: "uppercase",
                 }}
               >
-                03 — 29 versions
+                03. 29 versions
               </span>
             </FadeUp>
             <FadeUp delay={0.1}>
@@ -259,7 +259,7 @@ export default function NotreHistoire() {
                   textTransform: "uppercase",
                 }}
               >
-                04 — Aujourd&apos;hui
+                04. Aujourd&apos;hui
               </span>
               <p
                 style={{
@@ -271,7 +271,7 @@ export default function NotreHistoire() {
                 }}
               >
                 50 Early Adopters · Lot N°001. Le stock sera commandé
-                quand la demande sera confirmée — pas avant.
+                quand la demande sera confirmée, pas avant.
               </p>
             </FadeUp>
           </div>
@@ -299,8 +299,8 @@ export default function NotreHistoire() {
                   }}
                 >
                   {soldOut
-                    ? "Lot N°001 complet — rejoindre la liste d'attente"
-                    : "Rejoindre les Early Adopters — 20€"}
+                    ? "Lot N°001 complet, rejoindre la liste d'attente"
+                    : "Rejoindre les Early Adopters · 20€"}
                   <span aria-hidden="true">→</span>
                 </button>
                 <div className="cta-guarantee">{GUARANTEE_LINE}</div>

@@ -27,8 +27,8 @@ export default function WhyYouSuffer() {
           </h2>
         </FadeUp>
 
-        <div className="grid grid-cols-[1.4fr_1fr] lg:grid-cols-[55fr_45fr] gap-5 sm:gap-10 lg:gap-16 items-center mt-6 lg:mt-10">
-          {/* Left column — text */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center mt-6 lg:mt-10">
+          {/* Left column, text */}
           <div>
             <FadeUp delay={0.1}>
               <p
@@ -42,7 +42,7 @@ export default function WhyYouSuffer() {
                 }}
               >
                 L&apos;alcool est un diurétique. En quelques heures,
-                il élimine sodium, potassium et magnésium —
+                il élimine sodium, potassium et magnésium,
                 les minéraux dont ton corps a besoin pour fonctionner.
                 Sans eux, ton cerveau tourne au ralenti,
                 tes muscles sont lourds. OSMO reconstitue
@@ -68,18 +68,18 @@ export default function WhyYouSuffer() {
             </FadeUp>
           </div>
 
-          {/* Right column — infographic */}
+          {/* Right column, infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center self-center">
+            <div className="flex justify-center items-center self-center h-full">
               <div
-                className="w-full max-w-[360px] mx-auto overflow-hidden"
+                className="w-full max-w-[360px] lg:max-w-[560px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
               >
                 <Image
                   src="/images/infographic.png"
-                  alt="Schéma explicatif — problème et solution OSMO"
-                  width={360}
-                  height={360}
+                  alt="Schéma explicatif, problème et solution OSMO"
+                  width={560}
+                  height={560}
                   className="w-full h-auto mx-auto"
                   style={{ objectFit: "contain" }}
                 />

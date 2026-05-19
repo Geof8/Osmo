@@ -177,6 +177,33 @@ body::before {
   color: rgba(255, 248, 232, 0.65);
 }
 
+/* Pourquoi OSMO argument cards — hover lift */
+.pourquoi-card {
+  transition: all 0.25s ease;
+  padding: 20px 8px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.pourquoi-card svg {
+  transition: stroke 0.25s ease;
+}
+
+.pourquoi-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #C8963E;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.pourquoi-card:hover svg {
+  stroke: #C8963E;
+}
+
+.pourquoi-card:hover h3 {
+  color: #C8963E;
+}
+
 /* ============================================================================
  * Admin back-office utilities
  * ============================================================================ */

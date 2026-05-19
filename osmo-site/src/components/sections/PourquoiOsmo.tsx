@@ -145,7 +145,7 @@ export default function PourquoiOsmo() {
         >
           {ITEMS.map((item, i) => (
             <FadeUp key={item.id} delay={0.2 + i * 0.08}>
-              <div className="flex flex-col items-center text-center px-2">
+              <div className="pourquoi-card flex flex-col items-center text-center">
                 <Icon name={item.id} />
                 <h3
                   style={{
@@ -156,6 +156,7 @@ export default function PourquoiOsmo() {
                     color: "#111111",
                     marginTop: 20,
                     letterSpacing: "-0.005em",
+                    transition: "color 0.25s ease",
                   }}
                 >
                   {item.title}
