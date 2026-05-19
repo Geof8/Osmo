@@ -1,4 +1,5 @@
-import { FONTS, FOOTER_COLUMNS } from "@/lib/constants";
+import Link from "next/link";
+import { FONTS, FOOTER_COLUMNS, LEGAL_LINKS } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -69,6 +70,29 @@ export default function Footer() {
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
           <div>Made in France · 50 ex.</div>
         </div>
+
+        <nav
+          aria-label="Pages légales"
+          className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1"
+          style={{
+            fontFamily: FONTS.body,
+            fontSize: 12,
+            color: "#666666",
+          }}
+        >
+          {LEGAL_LINKS.map((link, i) => (
+            <span key={link.href} className="inline-flex items-center gap-2">
+              {i > 0 ? <span aria-hidden="true">·</span> : null}
+              <Link
+                href={link.href}
+                className="transition-colors hover:text-[var(--ink)]"
+                style={{ color: "#666666" }}
+              >
+                {link.label}
+              </Link>
+            </span>
+          ))}
+        </nav>
       </div>
     </footer>
   );

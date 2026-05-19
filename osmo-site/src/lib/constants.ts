@@ -191,9 +191,17 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Légal",
     links: [
-      { label: "Mentions légales", href: "#" },
-      { label: "CGV", href: "#" },
-      { label: "Contact", href: "#" },
+      { label: "Mentions légales", href: "/mentions-legales" },
+      { label: "CGV", href: "/cgv" },
+      { label: "Confidentialité", href: "/confidentialite" },
+      { label: "Cookies", href: "/cookies" },
     ],
   },
 ];
+
+export const LEGAL_LINKS = [
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "CGV", href: "/cgv" },
+  { label: "Confidentialité", href: "/confidentialite" },
+  { label: "Cookies", href: "/cookies" },
+] as const;
