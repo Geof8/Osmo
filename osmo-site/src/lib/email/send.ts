@@ -48,14 +48,17 @@ async function logAttempt(
 ) {
   try {
     const supabase = getSupabaseAdmin();
-    await supabase.from("email_logs").insert({
+    const { error } = await supabase.from("email_logs").insert({
       recipient,
       type,
       status,
       meta: meta ?? null,
     });
+    if (error) {
+      console.error("email_logs insert returned error:", error);
+    }
   } catch (err) {
-    console.error("email_logs insert failed:", err);
+    console.error("email_logs insert threw:", err);
   }
 }
 
