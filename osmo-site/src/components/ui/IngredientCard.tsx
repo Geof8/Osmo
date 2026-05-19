@@ -19,6 +19,7 @@ export default function IngredientCard({
       ref={ref}
       initial={ANIMATION_CONFIG.cardReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.cardReveal.initial}
+      whileHover={{ y: -6, scale: 1.02 }}
       transition={{ ...ANIMATION_CONFIG.cardReveal.transition, delay: index * 0.1 }}
       className="formula-card group flex flex-col"
       style={{
