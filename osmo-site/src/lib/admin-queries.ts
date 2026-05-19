@@ -24,6 +24,17 @@ export type KPIs = {
   earlyAdoptersTotal: number;
   earlyAdoptersClaimed: number;
   abandonedThisWeek: number;
+  // period-over-period deltas as a fraction (e.g. 0.12 = +12 %)
+  revenueDelta: number;
+  ordersDelta: number;
+  abandonedDelta: number;
+  rangeDays: number;
+};
+
+export type RevenueSeriesPoint = {
+  date: string;
+  revenueCents: number;
+  orders: number;
 };
 
 export type CustomerRow = {
@@ -44,25 +55,65 @@ function isMissingTableError(error: { code?: string; message?: string } | null) 
   return /relation .* does not exist/i.test(error.message ?? "");
 }
 
-export async function fetchKPIs(): Promise<KPIs> {
-  const supabase = getSupabaseAdmin();
+function pctDelta(current: number, previous: number): number {
+  if (previous <= 0) return current > 0 ? 1 : 0;
+  return (current - previous) / previous;
+}
 
-  const [revenueRes, ordersCountRes, paidOrdersCountRes, abandonedRes] =
-    await Promise.all([
-      supabase.from("orders").select("amount_cents").eq("status", "paid"),
-      supabase.from("orders").select("*", { count: "exact", head: true }),
-      supabase
-        .from("orders")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "paid"),
-      supabase
-        .from("abandoned_carts")
-        .select("*", { count: "exact", head: true })
-        .gte(
-          "timestamp",
-          new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-        ),
-    ]);
+export async function fetchKPIs(rangeDays = 30): Promise<KPIs> {
+  const supabase = getSupabaseAdmin();
+  const now = Date.now();
+  const ms = rangeDays * 24 * 60 * 60 * 1000;
+  const periodStart = new Date(now - ms).toISOString();
+  const prevPeriodStart = new Date(now - 2 * ms).toISOString();
+
+  const [
+    revenueRes,
+    ordersCountRes,
+    paidOrdersCountRes,
+    abandonedCurrentRes,
+    abandonedPreviousRes,
+    revenuePeriodRes,
+    revenuePrevPeriodRes,
+    ordersPeriodRes,
+    ordersPrevPeriodRes,
+  ] = await Promise.all([
+    supabase.from("orders").select("amount_cents").eq("status", "paid"),
+    supabase.from("orders").select("*", { count: "exact", head: true }),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "paid"),
+    supabase
+      .from("abandoned_carts")
+      .select("*", { count: "exact", head: true })
+      .gte("timestamp", periodStart),
+    supabase
+      .from("abandoned_carts")
+      .select("*", { count: "exact", head: true })
+      .gte("timestamp", prevPeriodStart)
+      .lt("timestamp", periodStart),
+    supabase
+      .from("orders")
+      .select("amount_cents")
+      .eq("status", "paid")
+      .gte("created_at", periodStart),
+    supabase
+      .from("orders")
+      .select("amount_cents")
+      .eq("status", "paid")
+      .gte("created_at", prevPeriodStart)
+      .lt("created_at", periodStart),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .gte("created_at", periodStart),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .gte("created_at", prevPeriodStart)
+      .lt("created_at", periodStart),
+  ]);
 
   // Tolerate missing tables before the migration is applied — return zeros
   // instead of throwing, so the dashboard still renders.
@@ -83,9 +134,29 @@ export async function fetchKPIs(): Promise<KPIs> {
     : paidOrdersCountRes.count ?? 0;
   const { remaining, displayedSold } = computeRemaining(paidOrdersCount);
 
-  const abandonedThisWeek = isMissingTableError(abandonedRes.error)
+  const abandonedThisWeek = isMissingTableError(abandonedCurrentRes.error)
     ? 0
-    : abandonedRes.count ?? 0;
+    : abandonedCurrentRes.count ?? 0;
+  const abandonedPrev = isMissingTableError(abandonedPreviousRes.error)
+    ? 0
+    : abandonedPreviousRes.count ?? 0;
+
+  const periodRevenue = isMissingTableError(revenuePeriodRes.error)
+    ? 0
+    : ((revenuePeriodRes.data ?? []) as Array<{ amount_cents: number | null }>)
+        .reduce((s, r) => s + (r.amount_cents ?? 0), 0);
+  const prevPeriodRevenue = isMissingTableError(revenuePrevPeriodRes.error)
+    ? 0
+    : ((revenuePrevPeriodRes.data ?? []) as Array<{
+        amount_cents: number | null;
+      }>).reduce((s, r) => s + (r.amount_cents ?? 0), 0);
+
+  const periodOrders = isMissingTableError(ordersPeriodRes.error)
+    ? 0
+    : ordersPeriodRes.count ?? 0;
+  const prevPeriodOrders = isMissingTableError(ordersPrevPeriodRes.error)
+    ? 0
+    : ordersPrevPeriodRes.count ?? 0;
 
   return {
     revenueCents,
@@ -94,7 +165,228 @@ export async function fetchKPIs(): Promise<KPIs> {
     earlyAdoptersTotal: PRODUCT.maxEarlyAdopters,
     earlyAdoptersClaimed: displayedSold,
     abandonedThisWeek,
+    revenueDelta: pctDelta(periodRevenue, prevPeriodRevenue),
+    ordersDelta: pctDelta(periodOrders, prevPeriodOrders),
+    abandonedDelta: pctDelta(abandonedThisWeek, abandonedPrev),
+    rangeDays,
   };
+}
+
+export async function fetchRevenueSeries(
+  rangeDays = 30,
+): Promise<RevenueSeriesPoint[]> {
+  const supabase = getSupabaseAdmin();
+  const now = new Date();
+  const start = new Date(now.getTime() - rangeDays * 24 * 60 * 60 * 1000);
+
+  const { data, error } = await supabase
+    .from("orders")
+    .select("amount_cents, created_at, status")
+    .gte("created_at", start.toISOString())
+    .order("created_at", { ascending: true });
+
+  const buckets = new Map<string, { revenueCents: number; orders: number }>();
+  for (let i = 0; i < rangeDays; i++) {
+    const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
+    const key = d.toISOString().slice(0, 10);
+    buckets.set(key, { revenueCents: 0, orders: 0 });
+  }
+
+  if (error) {
+    if (!isMissingTableError(error)) console.error("fetchRevenueSeries:", error);
+  } else {
+    type Row = {
+      amount_cents: number | null;
+      created_at: string;
+      status: OrderRow["status"];
+    };
+    for (const row of (data ?? []) as Row[]) {
+      const key = row.created_at.slice(0, 10);
+      const b = buckets.get(key);
+      if (!b) continue;
+      b.orders += 1;
+      if (row.status === "paid") b.revenueCents += row.amount_cents ?? 0;
+    }
+  }
+
+  return Array.from(buckets.entries()).map(([date, v]) => ({
+    date,
+    revenueCents: v.revenueCents,
+    orders: v.orders,
+  }));
+}
+
+export type AdminNotification = {
+  id: string;
+  kind: "order" | "abandoned" | "promo" | "newsletter" | "info";
+  title: string;
+  body: string;
+  href: string;
+  created_at: string;
+  unread: boolean;
+};
+
+export async function fetchAdminNotifications(): Promise<AdminNotification[]> {
+  const supabase = getSupabaseAdmin();
+  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+  const [recentOrdersRes, recentAbandonsRes] = await Promise.all([
+    supabase
+      .from("orders")
+      .select("id, email, first_name, last_name, amount_cents, status, created_at")
+      .gte("created_at", since)
+      .order("created_at", { ascending: false })
+      .limit(8),
+    supabase
+      .from("abandoned_carts")
+      .select("id, email, timestamp")
+      .gte("timestamp", since)
+      .order("timestamp", { ascending: false })
+      .limit(5),
+  ]);
+
+  const items: AdminNotification[] = [];
+  const dayAgo = Date.now() - 24 * 60 * 60 * 1000;
+
+  if (!isMissingTableError(recentOrdersRes.error)) {
+    type OrderNotificationRow = {
+      id: string;
+      email: string;
+      first_name: string | null;
+      last_name: string | null;
+      amount_cents: number;
+      status: OrderRow["status"];
+      created_at: string;
+    };
+    for (const o of (recentOrdersRes.data ?? []) as OrderNotificationRow[]) {
+      const name =
+        [o.first_name, o.last_name].filter(Boolean).join(" ") || o.email;
+      const amount = (o.amount_cents / 100).toFixed(2).replace(".", ",");
+      items.push({
+        id: `order-${o.id}`,
+        kind: "order",
+        title:
+          o.status === "paid"
+            ? `Nouvelle commande · ${amount} €`
+            : `Commande ${o.status} · ${amount} €`,
+        body: `de ${name}`,
+        href: `/admin/commandes/${o.id}`,
+        created_at: o.created_at,
+        unread: new Date(o.created_at).getTime() > dayAgo,
+      });
+    }
+  }
+
+  if (!isMissingTableError(recentAbandonsRes.error)) {
+    type AbandonedRow = { id: string; email: string; timestamp: string };
+    for (const a of (recentAbandonsRes.data ?? []) as AbandonedRow[]) {
+      items.push({
+        id: `abandon-${a.id}`,
+        kind: "abandoned",
+        title: "Panier abandonné",
+        body: a.email,
+        href: "/admin/abandons",
+        created_at: a.timestamp,
+        unread: new Date(a.timestamp).getTime() > dayAgo,
+      });
+    }
+  }
+
+  return items
+    .sort((a, b) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    )
+    .slice(0, 12);
+}
+
+export async function searchEverything(term: string): Promise<
+  Array<{
+    type: "order" | "customer" | "promo";
+    label: string;
+    hint: string;
+    href: string;
+  }>
+> {
+  const supabase = getSupabaseAdmin();
+  const clean = term.trim().replace(/[%,]/g, "");
+  if (clean.length < 2) return [];
+
+  const [ordersRes, promosRes] = await Promise.all([
+    supabase
+      .from("orders")
+      .select("id, email, first_name, last_name, amount_cents, status")
+      .or(
+        `email.ilike.%${clean}%,first_name.ilike.%${clean}%,last_name.ilike.%${clean}%`,
+      )
+      .limit(8),
+    supabase
+      .from("promo_codes")
+      .select("id, code, discount_type, discount_value, active")
+      .ilike("code", `%${clean}%`)
+      .limit(5),
+  ]);
+
+  const results: Array<{
+    type: "order" | "customer" | "promo";
+    label: string;
+    hint: string;
+    href: string;
+  }> = [];
+
+  const seenCustomers = new Set<string>();
+  if (!isMissingTableError(ordersRes.error)) {
+    type OrderSearchRow = {
+      id: string;
+      email: string;
+      first_name: string | null;
+      last_name: string | null;
+      amount_cents: number;
+      status: OrderRow["status"];
+    };
+    for (const o of (ordersRes.data ?? []) as OrderSearchRow[]) {
+      const name =
+        [o.first_name, o.last_name].filter(Boolean).join(" ") || o.email;
+      const amount = (o.amount_cents / 100).toFixed(2).replace(".", ",");
+      results.push({
+        type: "order",
+        label: `${name} · ${amount} €`,
+        hint: o.status === "paid" ? "Payé" : o.status,
+        href: `/admin/commandes/${o.id}`,
+      });
+      if (!seenCustomers.has(o.email.toLowerCase())) {
+        seenCustomers.add(o.email.toLowerCase());
+        results.push({
+          type: "customer",
+          label: name,
+          hint: o.email,
+          href: `/admin/clients?q=${encodeURIComponent(o.email)}`,
+        });
+      }
+    }
+  }
+
+  if (!isMissingTableError(promosRes.error)) {
+    type PromoSearchRow = {
+      id: string;
+      code: string;
+      discount_type: "percent" | "amount";
+      discount_value: number;
+      active: boolean;
+    };
+    for (const p of (promosRes.data ?? []) as PromoSearchRow[]) {
+      results.push({
+        type: "promo",
+        label: p.code,
+        hint:
+          p.discount_type === "percent"
+            ? `${p.discount_value} %`
+            : `${(p.discount_value / 100).toFixed(2)} €`,
+        href: "/admin/codes-promo",
+      });
+    }
+  }
+
+  return results.slice(0, 16);
 }
 
 export async function fetchRecentOrders(limit = 10): Promise<OrderRow[]> {
@@ -156,6 +448,38 @@ export async function fetchOrders({
     total: count ?? 0,
     page: currentPage,
     pageSize: PAGE_SIZE,
+  };
+}
+
+export async function fetchOrderStatusCounts(): Promise<{
+  all: number;
+  paid: number;
+  pending: number;
+  refunded: number;
+}> {
+  const supabase = getSupabaseAdmin();
+  const [allRes, paidRes, pendingRes, refundedRes] = await Promise.all([
+    supabase.from("orders").select("*", { count: "exact", head: true }),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "paid"),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "pending"),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "refunded"),
+  ]);
+  return {
+    all: isMissingTableError(allRes.error) ? 0 : allRes.count ?? 0,
+    paid: isMissingTableError(paidRes.error) ? 0 : paidRes.count ?? 0,
+    pending: isMissingTableError(pendingRes.error) ? 0 : pendingRes.count ?? 0,
+    refunded: isMissingTableError(refundedRes.error)
+      ? 0
+      : refundedRes.count ?? 0,
   };
 }
 

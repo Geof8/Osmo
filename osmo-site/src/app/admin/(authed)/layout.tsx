@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import AdminTopbar from "@/components/admin/AdminTopbar";
 
 export const metadata: Metadata = {
   title: "Admin · OSMO",
@@ -17,12 +18,14 @@ export default function AdminAuthedLayout({ children }: { children: ReactNode })
         zIndex: 2,
       }}
     >
+      <AdminTopbar />
       <AdminSidebar />
       <main
         style={{
           marginLeft: 240,
-          padding: "32px 40px 64px",
-          minHeight: "100dvh",
+          marginTop: 56,
+          padding: "28px 32px 64px",
+          minHeight: "calc(100dvh - 56px)",
         }}
       >
         {children}

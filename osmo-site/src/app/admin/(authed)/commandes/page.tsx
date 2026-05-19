@@ -3,8 +3,12 @@ import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import Pagination from "@/components/admin/Pagination";
 import SearchInput from "@/components/admin/SearchInput";
 import StatusBadge from "@/components/admin/StatusBadge";
-import StatusFilter from "@/components/admin/StatusFilter";
-import { fetchOrders, type OrderRow } from "@/lib/admin-queries";
+import StatusTabs from "@/components/admin/StatusTabs";
+import {
+  fetchOrders,
+  fetchOrderStatusCounts,
+  type OrderRow,
+} from "@/lib/admin-queries";
 import { customerName, formatDate, formatEuros } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -29,11 +33,10 @@ export default async function AdminCommandesPage({
   const status = normaliseStatus(searchParams.status);
   const page = Math.max(1, Number.parseInt(searchParams.page ?? "1", 10) || 1);
 
-  const { orders, total, pageSize } = await fetchOrders({
-    search,
-    status,
-    page,
-  });
+  const [{ orders, total, pageSize }, counts] = await Promise.all([
+    fetchOrders({ search, status, page }),
+    fetchOrderStatusCounts(),
+  ]);
 
   const exportHref = `/api/admin/orders/export${
     new URLSearchParams({
@@ -64,16 +67,36 @@ export default async function AdminCommandesPage({
         }
       />
 
+      <StatusTabs
+        tabs={[
+          { value: "all", label: "Tous", count: counts.all },
+          { value: "paid", label: "Payées", count: counts.paid },
+          { value: "pending", label: "En attente", count: counts.pending },
+          { value: "refunded", label: "Remboursées", count: counts.refunded },
+        ]}
+      />
+
       <div
         style={{
           display: "flex",
           gap: 12,
-          marginBottom: 18,
+          marginBottom: 16,
           flexWrap: "wrap",
+          alignItems: "center",
         }}
       >
         <SearchInput placeholder="Rechercher par nom ou email" paramName="q" />
-        <StatusFilter />
+        <div
+          style={{
+            marginLeft: "auto",
+            fontFamily: "var(--mono)",
+            fontSize: 11,
+            color: "#888888",
+            letterSpacing: "0.06em",
+          }}
+        >
+          {orders.length} sur {total} affiché{orders.length > 1 ? "s" : ""}
+        </div>
       </div>
 
       {orders.length === 0 ? (
@@ -100,6 +123,7 @@ export default async function AdminCommandesPage({
                 <th style={{ textAlign: "right" }}>Montant</th>
                 <th>Code promo</th>
                 <th>Statut</th>
+                <th>Expédition</th>
                 <th style={{ textAlign: "right" }}>Action</th>
               </tr>
             </thead>
@@ -143,6 +167,9 @@ export default async function AdminCommandesPage({
                   <td>
                     <StatusBadge status={o.status} />
                   </td>
+                  <td>
+                    <FulfillmentBadge order={o} />
+                  </td>
                   <td style={{ textAlign: "right" }}>
                     <Link
                       href={`/admin/commandes/${o.id}`}
@@ -170,5 +197,51 @@ export default async function AdminCommandesPage({
         searchString={queryString}
       />
     </>
+  );
+}
+
+function FulfillmentBadge({ order }: { order: OrderRow }) {
+  if (order.delivered_at) {
+    return (
+      <span
+        style={{
+          fontFamily: "var(--mono)",
+          fontSize: 10,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "#1E7A3A",
+        }}
+      >
+        ● Livrée
+      </span>
+    );
+  }
+  if (order.shipped_at) {
+    return (
+      <span
+        style={{
+          fontFamily: "var(--mono)",
+          fontSize: 10,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: "#4A5BD8",
+        }}
+      >
+        ● Expédiée
+      </span>
+    );
+  }
+  return (
+    <span
+      style={{
+        fontFamily: "var(--mono)",
+        fontSize: 10,
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        color: "#999999",
+      }}
+    >
+      ○ À préparer
+    </span>
   );
 }

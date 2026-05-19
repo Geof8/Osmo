@@ -1,138 +1,232 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-type NavItem = {
+type NavLeaf = {
   href: string;
   label: string;
   icon: string;
 };
 
-const NAV: NavItem[] = [
-  { href: "/admin", label: "Vue d'ensemble", icon: "📊" },
-  { href: "/admin/commandes", label: "Commandes", icon: "📦" },
-  { href: "/admin/clients", label: "Clients", icon: "👥" },
-  { href: "/admin/codes-promo", label: "Codes promo", icon: "🎟️" },
-  { href: "/admin/emails", label: "Emails", icon: "📧" },
-  { href: "/admin/newsletter", label: "Newsletter", icon: "📰" },
-  { href: "/admin/abandons", label: "Paniers abandonnés", icon: "📈" },
-  { href: "/admin/parametres", label: "Paramètres", icon: "⚙️" },
+type NavSection = {
+  id: string;
+  label: string;
+  icon: string;
+  href?: string;
+  children?: NavLeaf[];
+};
+
+const NAV: NavSection[] = [
+  { id: "home", label: "Accueil", icon: "🏠", href: "/admin" },
+  {
+    id: "orders",
+    label: "Commandes",
+    icon: "📦",
+    children: [
+      { href: "/admin/commandes", label: "Toutes les commandes", icon: "•" },
+      { href: "/admin/abandons", label: "Paniers abandonnés", icon: "•" },
+    ],
+  },
+  { id: "customers", label: "Clients", icon: "👥", href: "/admin/clients" },
+  {
+    id: "marketing",
+    label: "Marketing",
+    icon: "🎯",
+    children: [
+      { href: "/admin/codes-promo", label: "Codes promo", icon: "•" },
+      { href: "/admin/newsletter", label: "Newsletter", icon: "•" },
+      { href: "/admin/emails", label: "Emails transactionnels", icon: "•" },
+    ],
+  },
+  {
+    id: "settings",
+    label: "Paramètres",
+    icon: "⚙️",
+    href: "/admin/parametres",
+  },
 ];
+
+function isLeafActive(pathname: string, href: string) {
+  if (href === "/admin") return pathname === "/admin";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function isSectionActive(pathname: string, section: NavSection): boolean {
+  if (section.href && isLeafActive(pathname, section.href)) return true;
+  if (section.children?.some((c) => isLeafActive(pathname, c.href))) return true;
+  return false;
+}
 
 export default function AdminSidebar() {
   const pathname = usePathname() ?? "";
-  const router = useRouter();
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
 
-  function isActive(href: string) {
-    if (href === "/admin") return pathname === "/admin";
-    return pathname.startsWith(href);
-  }
+  useEffect(() => {
+    const next: Record<string, boolean> = {};
+    for (const s of NAV) {
+      if (s.children && isSectionActive(pathname, s)) next[s.id] = true;
+    }
+    setOpenSections((prev) => ({ ...prev, ...next }));
+  }, [pathname]);
 
-  async function handleLogout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    router.replace("/admin/login");
-    router.refresh();
+  function toggle(id: string) {
+    setOpenSections((prev) => ({ ...prev, [id]: !prev[id] }));
   }
 
   return (
     <aside
       style={{
         position: "fixed",
-        top: 0,
+        top: 56,
         left: 0,
         bottom: 0,
         width: 240,
-        background: "#111111",
-        color: "#FFFFFF",
+        background: "#FAFAFA",
+        borderRight: "1px solid #ECECEC",
         display: "flex",
         flexDirection: "column",
         zIndex: 10,
       }}
     >
-      <div style={{ padding: "28px 24px 16px" }}>
-        <Link
-          href="/admin"
-          style={{
-            fontFamily: "var(--display)",
-            fontWeight: 700,
-            fontSize: 22,
-            letterSpacing: "0.04em",
-            color: "#FFFFFF",
-            textDecoration: "none",
-          }}
-        >
-          OSMO
-        </Link>
-        <div
-          style={{
-            marginTop: 4,
-            fontFamily: "var(--mono)",
-            fontSize: 10,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "#888888",
-          }}
-        >
-          Back-office
-        </div>
-      </div>
+      <nav style={{ flex: 1, padding: "16px 8px", overflowY: "auto" }}>
+        {NAV.map((section) => {
+          const active = isSectionActive(pathname, section);
+          if (!section.children) {
+            return (
+              <Link
+                key={section.id}
+                href={section.href!}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "9px 12px",
+                  marginBottom: 2,
+                  borderRadius: 8,
+                  color: active ? "#111111" : "#444444",
+                  background: active ? "#EFE9DC" : "transparent",
+                  fontFamily: "var(--body)",
+                  fontSize: 14,
+                  fontWeight: active ? 600 : 500,
+                  textDecoration: "none",
+                  transition: "background 0.15s ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (!active) e.currentTarget.style.background = "#F0F0F0";
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) e.currentTarget.style.background = "transparent";
+                }}
+              >
+                <span style={{ fontSize: 15, lineHeight: 1, width: 18 }}>
+                  {section.icon}
+                </span>
+                <span>{section.label}</span>
+              </Link>
+            );
+          }
 
-      <nav style={{ flex: 1, padding: "12px 0", overflowY: "auto" }}>
-        {NAV.map((item) => {
-          const active = isActive(item.href);
+          const isOpen = openSections[section.id] ?? active;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "12px 24px",
-                color: active ? "#FFFFFF" : "#BBBBBB",
-                background: active ? "#1A1A1A" : "transparent",
-                borderLeft: `3px solid ${active ? "#C8963E" : "transparent"}`,
-                fontFamily: "var(--body)",
-                fontSize: 14,
-                textDecoration: "none",
-                transition: "background 0.15s ease, color 0.15s ease",
-              }}
-            >
-              <span style={{ fontSize: 16, lineHeight: 1 }}>{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
+            <div key={section.id} style={{ marginBottom: 2 }}>
+              <button
+                type="button"
+                onClick={() => toggle(section.id)}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                  padding: "9px 12px",
+                  borderRadius: 8,
+                  background: active ? "#EFE9DC" : "transparent",
+                  border: "none",
+                  color: active ? "#111111" : "#444444",
+                  fontFamily: "var(--body)",
+                  fontSize: 14,
+                  fontWeight: active ? 600 : 500,
+                  cursor: "pointer",
+                  textAlign: "left",
+                }}
+                onMouseEnter={(e) => {
+                  if (!active) e.currentTarget.style.background = "#F0F0F0";
+                }}
+                onMouseLeave={(e) => {
+                  if (!active) e.currentTarget.style.background = "transparent";
+                }}
+              >
+                <span style={{ fontSize: 15, lineHeight: 1, width: 18 }}>
+                  {section.icon}
+                </span>
+                <span style={{ flex: 1 }}>{section.label}</span>
+                <span
+                  style={{
+                    color: "#888888",
+                    fontSize: 11,
+                    transform: isOpen ? "rotate(90deg)" : "rotate(0deg)",
+                    transition: "transform 0.15s ease",
+                  }}
+                >
+                  ▶
+                </span>
+              </button>
+
+              {isOpen && (
+                <div style={{ marginTop: 2, marginBottom: 4 }}>
+                  {section.children.map((child) => {
+                    const childActive = isLeafActive(pathname, child.href);
+                    return (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 10,
+                          padding: "7px 12px 7px 40px",
+                          borderRadius: 8,
+                          color: childActive ? "#111111" : "#666666",
+                          background: childActive ? "#EFE9DC" : "transparent",
+                          fontFamily: "var(--body)",
+                          fontSize: 13,
+                          fontWeight: childActive ? 600 : 400,
+                          textDecoration: "none",
+                          transition: "background 0.15s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!childActive)
+                            e.currentTarget.style.background = "#F0F0F0";
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!childActive)
+                            e.currentTarget.style.background = "transparent";
+                        }}
+                      >
+                        {child.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           );
         })}
       </nav>
 
-      <div style={{ padding: "16px 24px 24px", borderTop: "1px solid #1F1F1F" }}>
-        <button
-          type="button"
-          onClick={handleLogout}
-          style={{
-            width: "100%",
-            padding: "10px 14px",
-            borderRadius: 8,
-            background: "transparent",
-            border: "1px solid #2A2A2A",
-            color: "#BBBBBB",
-            fontFamily: "var(--body)",
-            fontSize: 13,
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#1A1A1A";
-            e.currentTarget.style.color = "#FFFFFF";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "#BBBBBB";
-          }}
-        >
-          ← Déconnexion
-        </button>
+      <div
+        style={{
+          padding: "14px 16px",
+          borderTop: "1px solid #ECECEC",
+          fontFamily: "var(--mono)",
+          fontSize: 10,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
+          color: "#999999",
+        }}
+      >
+        OSMO Recovery · v1
       </div>
     </aside>
   );
