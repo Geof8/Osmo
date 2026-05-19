@@ -14,6 +14,7 @@ import Formula from "@/components/sections/Formula";
 import SocialProof from "@/components/sections/SocialProof";
 import FAQ from "@/components/sections/FAQ";
 import ClosingCTA from "@/components/sections/ClosingCTA";
+import NewsletterSignup from "@/components/sections/NewsletterSignup";
 import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
         <PourquoiOsmo />
         <ClosingCTA soldOut={soldOut} />
         <FAQ />
+        <NewsletterSignup />
       </main>
       <Footer />
     </>

@@ -66,7 +66,7 @@ const labelBase: React.CSSProperties = {
 };
 
 export default function SideCart() {
-  const { open, closeCart } = useCart();
+  const { open, closeCart, openCart } = useCart();
   const [form, setForm] = useState<FormState>({ firstName: "", lastName: "", email: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
@@ -75,6 +75,60 @@ export default function SideCart() {
   const [appliedPromo, setAppliedPromo] = useState<AppliedPromo | null>(null);
   const [validatingPromo, setValidatingPromo] = useState(false);
   const [promoError, setPromoError] = useState<string | null>(null);
+
+  // Auto-apply promo from `?promo=CODE` (used by the newsletter welcome email).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const promo = params.get("promo");
+    if (!promo) return;
+    const code = promo.trim().toUpperCase();
+    if (!code) return;
+    params.delete("promo");
+    const qs = params.toString();
+    const cleanUrl =
+      window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash;
+    window.history.replaceState({}, "", cleanUrl);
+    openCart();
+    (async () => {
+      setValidatingPromo(true);
+      try {
+        const res = await fetch("/api/promo/validate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        });
+        const data: {
+          valid?: boolean;
+          code?: string;
+          discount_type?: "percent" | "amount";
+          discount_value?: number;
+        } = await res.json();
+        if (
+          res.ok &&
+          data.valid &&
+          data.code &&
+          data.discount_type &&
+          typeof data.discount_value === "number"
+        ) {
+          setAppliedPromo({
+            code: data.code,
+            discount_type: data.discount_type,
+            discount_value: data.discount_value,
+          });
+          setPromoInput(data.code);
+        } else {
+          setPromoInput(code);
+        }
+      } catch {
+        setPromoInput(code);
+      } finally {
+        setValidatingPromo(false);
+      }
+    })();
+    // openCart is stable; we only want to run once on mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const finalPrice = useMemo(
     () => computeFinalPrice(PRODUCT.earlyPrice, appliedPromo),

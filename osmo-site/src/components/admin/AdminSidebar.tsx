@@ -15,6 +15,7 @@ const NAV: NavItem[] = [
   { href: "/admin/clients", label: "Clients", icon: "👥" },
   { href: "/admin/codes-promo", label: "Codes promo", icon: "🎟️" },
   { href: "/admin/emails", label: "Emails", icon: "📧" },
+  { href: "/admin/newsletter", label: "Newsletter", icon: "📰" },
   { href: "/admin/abandons", label: "Paniers abandonnés", icon: "📈" },
   { href: "/admin/parametres", label: "Paramètres", icon: "⚙️" },
 ];

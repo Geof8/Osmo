@@ -21,7 +21,10 @@ export type EmailType =
   | "milestone_reached"
   | "order_shipped"
   | "inventory_alert"
-  | "waitlist_welcome";
+  | "waitlist_welcome"
+  | "newsletter_welcome"
+  | "newsletter_preview"
+  | "newsletter_send";
 
 export type EmailStatus = "sent" | "failed" | "skipped_no_provider";
 
