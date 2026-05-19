@@ -27,16 +27,16 @@ export default function WhyYouSuffer() {
           </h2>
         </FadeUp>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center mt-6 lg:mt-10">
-          {/* Left column, text */}
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 mt-6 lg:mt-10">
+          {/* Left column, text — centered vertically against the infographic */}
+          <div className="flex flex-col justify-center">
             <FadeUp delay={0.1}>
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: "clamp(13px, 3.2vw, 17px)",
+                  fontSize: "clamp(14px, 3.4vw, 18px)",
                   fontWeight: 400,
-                  lineHeight: 1.55,
+                  lineHeight: 1.6,
                   color: "#666666",
                   maxWidth: 540,
                 }}
@@ -53,11 +53,12 @@ export default function WhyYouSuffer() {
             <FadeUp delay={0.15}>
               <p
                 style={{
-                  fontFamily: FONTS.body,
-                  fontSize: "clamp(15px, 3.8vw, 22px)",
-                  fontWeight: 700,
-                  lineHeight: 1.35,
-                  marginTop: "clamp(16px, 4vw, 32px)",
+                  fontFamily: FONTS.display,
+                  fontSize: "clamp(20px, 5vw, 32px)",
+                  fontWeight: 800,
+                  lineHeight: 1.2,
+                  letterSpacing: "-0.02em",
+                  marginTop: "clamp(20px, 4vw, 36px)",
                   maxWidth: 540,
                 }}
               >
@@ -70,7 +71,7 @@ export default function WhyYouSuffer() {
 
           {/* Right column, infographic */}
           <FadeUp delay={0.2}>
-            <div className="flex justify-center items-center self-center h-full">
+            <div className="flex justify-center">
               <div
                 className="w-full max-w-[360px] lg:max-w-[560px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
