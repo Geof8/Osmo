@@ -14,15 +14,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Email invalide" }, { status: 400 });
     }
 
-    if (!firstName || !lastName) {
+    // firstName/lastName required for the regular waitlist signup,
+    // optional for the maintenance-mode email-only capture.
+    const isMaintenanceCapture = source === "maintenance";
+    if (!isMaintenanceCapture && (!firstName || !lastName)) {
       return NextResponse.json({ error: "Nom et prénom requis" }, { status: 400 });
     }
 
     const { error } = await supabase.from("waitlist").insert({
       email,
       phone: phone || null,
-      first_name: firstName,
-      last_name: lastName,
+      first_name: firstName || null,
+      last_name: lastName || null,
       source: source || "website",
     });
 
