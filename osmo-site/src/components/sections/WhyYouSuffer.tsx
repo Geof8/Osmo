@@ -11,25 +11,25 @@ export default function WhyYouSuffer() {
       style={{ padding: "clamp(56px, 9vw, 80px) 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
-        <FadeUp>
-          <h2
-            style={{
-              fontFamily: FONTS.display,
-              fontWeight: 800,
-              fontSize: "clamp(28px, 7vw, 72px)",
-              lineHeight: 0.95,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Pourquoi tu souffres
-            <br />
-            <span className="text-[#C8963E]">le lendemain.</span>
-          </h2>
-        </FadeUp>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          {/* Left column: title + text + tagline */}
+          <div>
+            <FadeUp>
+              <h2
+                style={{
+                  fontFamily: FONTS.display,
+                  fontWeight: 800,
+                  fontSize: "clamp(28px, 7vw, 72px)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Pourquoi tu souffres
+                <br />
+                <span className="text-[#C8963E]">le lendemain.</span>
+              </h2>
+            </FadeUp>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 mt-6 lg:mt-10">
-          {/* Left column, text — centered vertically against the infographic */}
-          <div className="flex flex-col justify-center">
             <FadeUp delay={0.1}>
               <p
                 style={{
@@ -39,6 +39,7 @@ export default function WhyYouSuffer() {
                   lineHeight: 1.6,
                   color: "#666666",
                   maxWidth: 540,
+                  marginTop: "clamp(20px, 4vw, 32px)",
                 }}
               >
                 L&apos;alcool est un diurétique. En quelques heures,
@@ -69,7 +70,7 @@ export default function WhyYouSuffer() {
             </FadeUp>
           </div>
 
-          {/* Right column, infographic */}
+          {/* Right column: infographic, aligned to top */}
           <FadeUp delay={0.2}>
             <div className="flex justify-center">
               <div
