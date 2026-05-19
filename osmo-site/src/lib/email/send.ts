@@ -3,14 +3,12 @@ import type { ReactElement } from "react";
 import { getResend, getFromEmail, getReplyTo } from "./resend-client";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
-// Next.js's SWC loader rejects a static `import` of react-dom/server because
-// it could end up in a client bundle. This file is server-only (see the
-// `server-only` import above), so resolve react-dom/server through a dynamic
-// require that the static analyzer ignores.
-function renderEmailHtml(react: ReactElement): string {
-  const mod = eval("require")("react-dom/server") as {
-    renderToStaticMarkup: (el: ReactElement) => string;
-  };
+// SWC rejects a static `import` of react-dom/server in any file that could
+// be reached from a client boundary. This file is server-only, so we resolve
+// via async `import()` — Vercel's @vercel/nft can trace this form (unlike
+// `eval("require")`), which keeps react-dom in the lambda bundle.
+async function renderEmailHtml(react: ReactElement): Promise<string> {
+  const mod = await import("react-dom/server");
   return mod.renderToStaticMarkup(react);
 }
 
@@ -74,7 +72,7 @@ export async function sendEmail({
     return { status: "skipped_no_provider" };
   }
 
-  const html = renderEmailHtml(react);
+  const html = await renderEmailHtml(react);
   const from = getFromEmail();
   const replyTo = getReplyTo();
 
