@@ -99,7 +99,7 @@
   }
 
   /* Reduce body font on small screens */
-  @media (max-width: 480px) {
+  @media (max-width: 767px) {
     body {
       font-size: 15px;
     }
@@ -161,6 +161,13 @@ body::before {
 
 .cta-pill:active {
   transform: translateY(0);
+}
+
+/* Primary CTA pills get a taller touch target on mobile */
+@media (max-width: 767px) {
+  .cta-pill {
+    min-height: 52px;
+  }
 }
 
 /* Inline guarantee line shown beneath CTAs */

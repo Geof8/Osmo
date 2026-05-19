@@ -41,8 +41,8 @@ const ITEMS: Item[] = [
 ];
 
 const ICON_PROPS = {
-  width: 44,
-  height: 44,
+  width: "100%",
+  height: "100%",
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "#111111",
@@ -146,15 +146,17 @@ export default function PourquoiOsmo() {
           {ITEMS.map((item, i) => (
             <FadeUp key={item.id} delay={0.2 + i * 0.08}>
               <div className="pourquoi-card flex flex-col items-center text-center">
-                <Icon name={item.id} />
+                <div className="w-6 h-6 md:w-11 md:h-11">
+                  <Icon name={item.id} />
+                </div>
                 <h3
+                  className="mt-4 md:mt-5"
                   style={{
                     fontFamily: FONTS.body,
                     fontWeight: 700,
                     fontSize: 14,
                     lineHeight: 1.3,
                     color: "#111111",
-                    marginTop: 20,
                     letterSpacing: "-0.005em",
                     transition: "color 0.25s ease",
                   }}
@@ -164,7 +166,7 @@ export default function PourquoiOsmo() {
                 <p
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 13,
+                    fontSize: "clamp(12px, 3vw, 13px)",
                     lineHeight: 1.5,
                     color: "#666666",
                     marginTop: 8,

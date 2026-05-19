@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import FadeUp from "@/components/ui/FadeUp";
 import IngredientCard from "@/components/ui/IngredientCard";
+import MobileCardCarousel from "@/components/ui/MobileCardCarousel";
 import MolecularAnimation from "@/components/ui/MolecularAnimation";
 import { useInView } from "@/hooks/useInView";
 import { FONTS, INGREDIENTS, STAMPS } from "@/lib/constants";
@@ -84,7 +85,18 @@ export default function Formula() {
         </div>
 
         <div className="mt-10 sm:mt-14 lg:mt-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {/* Mobile: Framer Motion swipe carousel */}
+          <MobileCardCarousel
+            items={INGREDIENTS}
+            renderItem={(a, i) => <IngredientCard a={a} index={i} />}
+            getKey={(a) => a.name}
+            ariaLabel="Cinq actifs — fiches ingrédients"
+            dotColor="#C8963E"
+            dotInactiveColor="#333333"
+          />
+
+          {/* Tablet / Desktop: grid (unchanged at md and lg) */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-4">
             {INGREDIENTS.map((a, i) => (
               <IngredientCard key={a.name} a={a} index={i} />
             ))}

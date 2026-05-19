@@ -74,7 +74,7 @@ export default function WhyYouSuffer() {
           <FadeUp delay={0.2}>
             <div className="flex justify-center">
               <div
-                className="w-full max-w-[360px] lg:max-w-[560px] mx-auto overflow-hidden"
+                className="w-full max-w-[340px] lg:max-w-[560px] mx-auto overflow-hidden"
                 style={{ borderRadius: 12 }}
               >
                 <Image

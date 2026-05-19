@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import FadeUp from "@/components/ui/FadeUp";
+import MobileCardCarousel from "@/components/ui/MobileCardCarousel";
 import { useInView } from "@/hooks/useInView";
 import { ANIMATION_CONFIG, FONTS } from "@/lib/constants";
 import type { Step } from "@/types";
@@ -144,7 +145,7 @@ export default function HowItWorks() {
                 style={{
                   fontFamily: FONTS.display,
                   fontWeight: 800,
-                  fontSize: "clamp(30px, 7vw, 72px)",
+                  fontSize: "clamp(28px, 7vw, 72px)",
                   lineHeight: 0.95,
                   letterSpacing: "-0.02em",
                 }}
@@ -166,44 +167,15 @@ export default function HowItWorks() {
           </div>
         </FadeUp>
 
-        {/* Mobile: horizontal scroll-snap carousel with next card peeking */}
-        <div
-          className="howitworks-track md:hidden flex gap-4 -mx-6 px-6 pb-2"
-          style={{
-            overflowX: "auto",
-            scrollSnapType: "x mandatory",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            WebkitOverflowScrolling: "touch",
-          }}
-          role="region"
-          aria-label="Protocole d'utilisation — étapes 1, 2, 3"
-          tabIndex={0}
-        >
-          <style>{`.howitworks-track::-webkit-scrollbar { display: none; }`}</style>
-          {steps.map((step, i) => (
-            <div
-              key={step.num}
-              className="flex-shrink-0"
-              style={{ width: "82%", maxWidth: 340, scrollSnapAlign: "start" }}
-            >
-              <StepCard step={step} index={i} />
-            </div>
-          ))}
-        </div>
-        <div
-          className="md:hidden mt-3 flex items-center justify-end gap-2 text-[var(--ink-2)]"
-          aria-hidden="true"
-          style={{
-            fontFamily: FONTS.mono,
-            fontSize: 10,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-          }}
-        >
-          <span>Swipe</span>
-          <span style={{ fontSize: 14 }}>→</span>
-        </div>
+        {/* Mobile: Framer Motion swipe carousel */}
+        <MobileCardCarousel
+          items={steps}
+          renderItem={(step, i) => <StepCard step={step} index={i} />}
+          getKey={(step) => step.num}
+          ariaLabel="Protocole d'utilisation — étapes 1, 2, 3"
+          dotColor="#C8963E"
+          dotInactiveColor="#DDDDDD"
+        />
 
         {/* Desktop / tablet: 3-column grid */}
         <div className="hidden md:grid md:grid-cols-3 gap-5 sm:gap-7">
