@@ -20,7 +20,8 @@ export type EmailType =
   | "abandoned_cart_24h"
   | "milestone_reached"
   | "order_shipped"
-  | "inventory_alert";
+  | "inventory_alert"
+  | "waitlist_welcome";
 
 export type EmailStatus = "sent" | "failed" | "skipped_no_provider";
 

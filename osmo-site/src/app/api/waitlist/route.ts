@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { sendEmail } from "@/lib/email/send";
+import { WaitlistWelcome } from "@/lib/email/templates/WaitlistWelcome";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -35,6 +37,19 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Cet email est déjà inscrit" }, { status: 409 });
       }
       return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    }
+
+    // Best-effort welcome email. Never block the response on email failure —
+    // signup is the contract, the email is a nice-to-have.
+    const mail = await sendEmail({
+      to: email,
+      type: "waitlist_welcome",
+      subject: "Bienvenue chez OSMO 👋",
+      react: WaitlistWelcome(),
+      meta: { source: source || "website" },
+    });
+    if (mail.status !== "sent") {
+      console.warn("Waitlist welcome email:", mail.status, mail.error);
     }
 
     return NextResponse.json({ success: true });
