@@ -25,7 +25,7 @@ export function AbandonedCart24h({
       </Highlight>
       <CTAButton href={`${baseUrl}/#reserve`}>Finaliser ma réservation</CTAButton>
       <p style={{ color: "#666666", fontSize: 13, margin: "24px 0 0" }}>
-        Si tu n'es plus intéressé, tu peux ignorer cet email — c'est la
+        Si tu n&apos;es plus intéressé, tu peux ignorer cet email — c&apos;est la
         dernière relance.
       </p>
     </EmailLayout>

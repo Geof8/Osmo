@@ -29,7 +29,7 @@ export function OrderConfirmation({
         estimée sous 6 mois. Tu seras notifié à chaque étape (production,
         expédition, livraison).
       </Highlight>
-      <P>Tu peux suivre l'avancée de ta commande à tout moment :</P>
+      <P>Tu peux suivre l&apos;avancée de ta commande à tout moment :</P>
       <CTAButton href={`${baseUrl}/suivi?order=${orderId}`}>
         Suivre ma commande
       </CTAButton>

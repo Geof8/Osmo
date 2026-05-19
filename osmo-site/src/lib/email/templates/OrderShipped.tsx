@@ -19,7 +19,7 @@ export function OrderShipped({
       <H1>Ta commande est en route 📦</H1>
       <P>{greeting}</P>
       <P>
-        Bonne nouvelle — ta commande OSMO Recovery vient d'être expédiée.
+        Bonne nouvelle — ta commande OSMO Recovery vient d&apos;être expédiée.
       </P>
       <Highlight>
         <strong>Numéro de suivi</strong>

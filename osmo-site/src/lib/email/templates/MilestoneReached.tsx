@@ -18,7 +18,7 @@ export function MilestoneReached({
       <Highlight>
         <strong>{totalAdopters}</strong> places réservées
         <br />
-        <strong>{revenueLabel}</strong> de chiffre d'affaires
+        <strong>{revenueLabel}</strong> de chiffre d&apos;affaires
       </Highlight>
       <P>
         Prochaine étape : lancement de la production. Les clients reçoivent

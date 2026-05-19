@@ -9,11 +9,11 @@ export function AbandonedCart1h({ firstName, baseUrl }: AbandonedCart1hProps) {
   const greeting = firstName ? `Bonjour ${firstName},` : "Bonjour,";
   return (
     <EmailLayout preheader="Ta place Early Adopter t'attend encore.">
-      <H1>Ta place Early Adopter t'attend encore</H1>
+      <H1>Ta place Early Adopter t&apos;attend encore</H1>
       <P>{greeting}</P>
       <P>
         Tu as commencé à réserver ta place dans le Lot N°001 — mais le paiement
-        n'a pas été finalisé.
+        n&apos;a pas été finalisé.
       </P>
       <Highlight>
         Le Lot N°001 est limité à <strong>50 personnes</strong>. Le tarif Early
