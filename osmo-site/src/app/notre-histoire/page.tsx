@@ -100,17 +100,6 @@ export default function NotreHistoire() {
         <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
-              <span
-                className="block mb-4 text-[var(--ink-2)]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                01. Le problème
-              </span>
               <p
                 style={{
                   fontFamily: FONTS.display,
@@ -136,17 +125,6 @@ export default function NotreHistoire() {
         >
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
-              <span
-                className="block mb-4 text-[var(--ink-2)]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                02. La recherche
-              </span>
               <p
                 style={{
                   fontFamily: FONTS.display,
@@ -183,19 +161,6 @@ export default function NotreHistoire() {
         {/* Section 3 — 29 versions */}
         <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
-            <FadeUp>
-              <span
-                className="block mb-4 text-[var(--ink-2)]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                03. 29 versions
-              </span>
-            </FadeUp>
             <FadeUp delay={0.1}>
               <div
                 style={{
@@ -250,17 +215,6 @@ export default function NotreHistoire() {
         >
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
-              <span
-                className="block mb-4 text-[var(--ink-2)]"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                }}
-              >
-                04. Aujourd&apos;hui
-              </span>
               <p
                 style={{
                   fontFamily: FONTS.display,
