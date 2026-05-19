@@ -54,3 +54,12 @@ on conflict (key) do nothing;
 insert into public.promo_codes (code, discount_type, discount_value, active)
 values ('NEWSLETTER15', 'percent', 15, true)
 on conflict (code) do nothing;
+
+-- ============================================================================
+-- Grants — Supabase doesn't auto-grant on new tables, so service_role used by
+-- /api/newsletter/* routes can't insert/select/update without this block.
+-- ============================================================================
+grant all on public.newsletter_subscribers to service_role;
+grant all on public.newsletter_queue to service_role;
+grant all on public.newsletter_subscribers to anon, authenticated;
+grant all on public.newsletter_queue to anon, authenticated;
