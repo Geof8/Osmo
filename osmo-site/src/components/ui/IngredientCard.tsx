@@ -20,7 +20,7 @@ export default function IngredientCard({
       initial={ANIMATION_CONFIG.cardReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.cardReveal.initial}
       transition={{ ...ANIMATION_CONFIG.cardReveal.transition, delay: index * 0.1 }}
-      className="group flex flex-col"
+      className="formula-card group flex flex-col"
       style={{
         background: "#1A1A1A",
         border: "1px solid #2A2A2A",
@@ -28,14 +28,6 @@ export default function IngredientCard({
         borderRadius: 12,
         padding: "clamp(18px, 4vw, 24px)",
         position: "relative",
-        transition: "border-color 0.2s ease",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "#C8963E";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "#2A2A2A";
-        if (a.highlight) e.currentTarget.style.borderTopColor = "#C8963E";
       }}
     >
       {a.highlight && (
