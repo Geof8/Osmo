@@ -6,6 +6,11 @@ import { sendEmail } from "@/lib/email/send";
 import { OrderConfirmation } from "@/lib/email/templates/OrderConfirmation";
 import { checkInventoryAndAlert } from "@/lib/inventory";
 import { formatEuros } from "@/lib/format";
+import {
+  ensureAutomationsSeeded,
+  triggerAutomations,
+} from "@/lib/automations/runner";
+import type { OrderRow } from "@/lib/admin-queries";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -151,6 +156,28 @@ async function handleCheckoutCompleted(
 
   // 6) Inventory alert (idempotent — internally checks 24h cooldown)
   await checkInventoryAndAlert();
+
+  // 7) Trigger automatisations branchées sur "order.paid"
+  if (orderRow) {
+    await ensureAutomationsSeeded();
+    const { data: fullOrder } = await supabase
+      .from("orders")
+      .select("*")
+      .eq("id", (orderRow as { id: string }).id)
+      .maybeSingle();
+    if (fullOrder) {
+      const riskLevel =
+        typeof session.payment_intent === "object" &&
+        session.payment_intent &&
+        "charges" in session.payment_intent
+          ? null
+          : null; // risk_score lookup nécessite un appel Stripe séparé, à brancher plus tard
+      await triggerAutomations({
+        event: "order.paid",
+        order: { ...(fullOrder as OrderRow), risk_level: riskLevel },
+      });
+    }
+  }
 }
 
 async function handleChargeRefunded(charge: Stripe.Charge) {
@@ -186,12 +213,21 @@ async function handleChargeRefunded(charge: Stripe.Charge) {
     return;
   }
 
-  const { error } = await supabase
+  const { data: refundedOrder, error } = await supabase
     .from("orders")
     .update({ status: "refunded" })
-    .eq("stripe_session_id", sessionId);
+    .eq("stripe_session_id", sessionId)
+    .select("*")
+    .maybeSingle();
   if (error) {
     console.error("charge.refunded: orders update failed", error);
+  }
+  if (refundedOrder) {
+    await ensureAutomationsSeeded();
+    await triggerAutomations({
+      event: "order.refunded",
+      order: refundedOrder as OrderRow,
+    });
   }
 }
 

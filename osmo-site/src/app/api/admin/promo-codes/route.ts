@@ -12,10 +12,16 @@ const CODE_RE = /^[A-Z0-9_-]{3,40}$/;
 
 type CreateBody = {
   code?: string;
+  description?: string | null;
   discount_type?: "percent" | "amount";
   discount_value?: number;
   usage_limit?: number | null;
+  limit_per_customer?: number | null;
+  min_order_amount_cents?: number | null;
+  first_time_only?: boolean;
+  starts_at?: string | null;
   expires_at?: string | null;
+  tags?: string[];
 };
 
 export async function GET(req: NextRequest) {
@@ -75,6 +81,24 @@ export async function POST(req: NextRequest) {
     body.usage_limit === undefined || body.usage_limit === null
       ? null
       : Math.max(1, Math.floor(Number(body.usage_limit)));
+  const limitPerCustomer =
+    body.limit_per_customer === undefined || body.limit_per_customer === null
+      ? null
+      : Math.max(1, Math.floor(Number(body.limit_per_customer)));
+  const minOrderAmountCents =
+    body.min_order_amount_cents === undefined ||
+    body.min_order_amount_cents === null
+      ? null
+      : Math.max(0, Math.floor(Number(body.min_order_amount_cents)));
+  const firstTimeOnly = Boolean(body.first_time_only);
+  const startsAt =
+    body.starts_at && body.starts_at.length > 0 ? body.starts_at : null;
+  if (startsAt && Number.isNaN(new Date(startsAt).getTime())) {
+    return NextResponse.json(
+      { error: "Date de démarrage invalide" },
+      { status: 400 },
+    );
+  }
   const expiresAt =
     body.expires_at && body.expires_at.length > 0 ? body.expires_at : null;
   if (expiresAt && Number.isNaN(new Date(expiresAt).getTime())) {
@@ -83,6 +107,16 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     );
   }
+  const description =
+    body.description && body.description.trim().length > 0
+      ? body.description.trim().slice(0, 240)
+      : null;
+  const tags = Array.isArray(body.tags)
+    ? body.tags
+        .map((t) => String(t).trim())
+        .filter((t) => t.length > 0 && t.length <= 30)
+        .slice(0, 10)
+    : [];
 
   const supabase = getSupabaseAdmin();
 
@@ -131,6 +165,17 @@ export async function POST(req: NextRequest) {
     if (expiresAt) {
       params.expires_at = Math.floor(new Date(expiresAt).getTime() / 1000);
     }
+    const restrictions: Stripe.PromotionCodeCreateParams.Restrictions = {};
+    if (minOrderAmountCents != null && minOrderAmountCents > 0) {
+      restrictions.minimum_amount = minOrderAmountCents;
+      restrictions.minimum_amount_currency = "eur";
+    }
+    if (firstTimeOnly) {
+      restrictions.first_time_transaction = true;
+    }
+    if (Object.keys(restrictions).length > 0) {
+      params.restrictions = restrictions;
+    }
     promotionCode = await stripe.promotionCodes.create(params);
   } catch (err) {
     const message =
@@ -149,12 +194,18 @@ export async function POST(req: NextRequest) {
     .from("promo_codes")
     .insert({
       code,
+      description,
       stripe_promotion_code_id: promotionCode.id,
       stripe_coupon_id: coupon.id,
       discount_type: body.discount_type,
       discount_value: Math.round(value),
       usage_limit: usageLimit,
+      limit_per_customer: limitPerCustomer,
+      min_order_amount_cents: minOrderAmountCents,
+      first_time_only: firstTimeOnly,
+      starts_at: startsAt,
       expires_at: expiresAt,
+      tags,
       active: true,
     })
     .select("*")

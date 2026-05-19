@@ -35,7 +35,8 @@ const NAV: NavSection[] = [
     label: "Marketing",
     icon: "🎯",
     children: [
-      { href: "/admin/codes-promo", label: "Codes promo", icon: "•" },
+      { href: "/admin/codes-promo", label: "Réductions", icon: "•" },
+      { href: "/admin/automatisations", label: "Automatisations", icon: "•" },
       { href: "/admin/newsletter", label: "Newsletter", icon: "•" },
       { href: "/admin/emails", label: "Emails transactionnels", icon: "•" },
     ],

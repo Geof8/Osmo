@@ -15,6 +15,8 @@ export type OrderRow = {
   shipped_at: string | null;
   delivered_at: string | null;
   created_at: string;
+  customer_tags: string[];
+  risk_level?: string | null;
 };
 
 export type KPIs = {
@@ -45,7 +47,15 @@ export type CustomerRow = {
   total_cents: number;
   orders_count: number;
   status: "paid" | "refunded" | "pending";
+  tags: string[];
 };
+
+export type CustomerSegment =
+  | "all"
+  | "founders"
+  | "vip"
+  | "abandoned"
+  | "no-purchase";
 
 const PAGE_SIZE = 20;
 
@@ -500,13 +510,21 @@ export async function fetchOrderById(id: string): Promise<OrderRow | null> {
 
 export async function fetchCustomers({
   search,
+  segment = "all",
 }: {
   search?: string;
-}): Promise<{ customers: CustomerRow[]; total: number }> {
+  segment?: CustomerSegment;
+}): Promise<{
+  customers: CustomerRow[];
+  total: number;
+  counts: Record<CustomerSegment, number>;
+}> {
   const supabase = getSupabaseAdmin();
   let query = supabase
     .from("orders")
-    .select("email, first_name, last_name, amount_cents, status, created_at")
+    .select(
+      "email, first_name, last_name, amount_cents, status, created_at, customer_tags",
+    )
     .order("created_at", { ascending: false });
 
   if (search && search.trim().length > 0) {
@@ -518,9 +536,18 @@ export async function fetchCustomers({
 
   const { data, error } = await query;
   if (error) {
-    if (isMissingTableError(error)) return { customers: [], total: 0 };
+    if (isMissingTableError(error))
+      return {
+        customers: [],
+        total: 0,
+        counts: { all: 0, founders: 0, vip: 0, abandoned: 0, "no-purchase": 0 },
+      };
     console.error("fetchCustomers:", error);
-    return { customers: [], total: 0 };
+    return {
+      customers: [],
+      total: 0,
+      counts: { all: 0, founders: 0, vip: 0, abandoned: 0, "no-purchase": 0 },
+    };
   }
 
   type Row = {
@@ -530,15 +557,18 @@ export async function fetchCustomers({
     amount_cents: number;
     status: OrderRow["status"];
     created_at: string;
+    customer_tags: string[] | null;
   };
 
   const grouped = new Map<string, CustomerRow>();
   for (const row of (data ?? []) as Row[]) {
     const key = row.email.toLowerCase();
     const existing = grouped.get(key);
+    const rowTags = row.customer_tags ?? [];
     if (existing) {
       existing.orders_count += 1;
       existing.total_cents += row.amount_cents;
+      existing.tags = Array.from(new Set([...existing.tags, ...rowTags]));
       if (row.created_at > existing.last_order_at) {
         existing.last_order_at = row.created_at;
         existing.status = row.status;
@@ -552,29 +582,167 @@ export async function fetchCustomers({
         total_cents: row.amount_cents,
         orders_count: 1,
         status: row.status,
+        tags: rowTags,
       });
     }
+  }
+
+  // Charge la liste des emails abandonnés (non convertis)
+  let abandonedEmails = new Set<string>();
+  try {
+    const { data: abData } = await supabase
+      .from("abandoned_carts")
+      .select("email")
+      .eq("converted", false);
+    abandonedEmails = new Set(
+      ((abData ?? []) as Array<{ email: string }>).map((r) =>
+        r.email.toLowerCase(),
+      ),
+    );
+  } catch {
+    // ignore
   }
 
   const customers = Array.from(grouped.values()).sort((a, b) =>
     a.last_order_at < b.last_order_at ? 1 : -1,
   );
-  return { customers, total: customers.length };
+
+  const founders = customers; // toute personne qui a une order
+  const vips = customers.filter((c) => c.orders_count >= 2);
+  // Abandoned segment: emails dans abandoned_carts non présents dans orders
+  const purchaserEmails = new Set(customers.map((c) => c.email.toLowerCase()));
+  const abandonedOnly = Array.from(abandonedEmails)
+    .filter((e) => !purchaserEmails.has(e))
+    .map(
+      (email): CustomerRow => ({
+        email,
+        first_name: null,
+        last_name: null,
+        last_order_at: "",
+        total_cents: 0,
+        orders_count: 0,
+        status: "pending",
+        tags: [],
+      }),
+    );
+
+  const counts: Record<CustomerSegment, number> = {
+    all: customers.length + abandonedOnly.length,
+    founders: founders.length,
+    vip: vips.length,
+    abandoned: abandonedOnly.length,
+    "no-purchase": abandonedOnly.length,
+  };
+
+  let filtered: CustomerRow[];
+  switch (segment) {
+    case "founders":
+      filtered = founders;
+      break;
+    case "vip":
+      filtered = vips;
+      break;
+    case "abandoned":
+    case "no-purchase":
+      filtered = abandonedOnly;
+      break;
+    default:
+      filtered = [...customers, ...abandonedOnly];
+  }
+
+  return { customers: filtered, total: filtered.length, counts };
 }
 
 export type PromoCodeRow = {
   id: string;
   code: string;
+  description: string | null;
   stripe_promotion_code_id: string | null;
   stripe_coupon_id: string | null;
   discount_type: "percent" | "amount";
   discount_value: number;
   usage_count: number;
   usage_limit: number | null;
+  limit_per_customer: number | null;
+  min_order_amount_cents: number | null;
+  first_time_only: boolean;
+  starts_at: string | null;
   expires_at: string | null;
+  tags: string[];
   active: boolean;
   created_at: string;
 };
+
+export type PromoStats = {
+  activeCount: number;
+  totalCount: number;
+  redemptions30d: number;
+  revenue30dCents: number;
+};
+
+export async function fetchPromoStats(): Promise<PromoStats> {
+  const supabase = getSupabaseAdmin();
+  const since = new Date(Date.now() - 30 * 24 * 3600 * 1000).toISOString();
+
+  const [activeRes, totalRes, ordersRes] = await Promise.all([
+    supabase
+      .from("promo_codes")
+      .select("*", { count: "exact", head: true })
+      .eq("active", true),
+    supabase.from("promo_codes").select("*", { count: "exact", head: true }),
+    supabase
+      .from("orders")
+      .select("amount_cents, promo_code")
+      .eq("status", "paid")
+      .gte("created_at", since)
+      .not("promo_code", "is", null),
+  ]);
+
+  const activeCount = isMissingTableError(activeRes.error)
+    ? 0
+    : activeRes.count ?? 0;
+  const totalCount = isMissingTableError(totalRes.error)
+    ? 0
+    : totalRes.count ?? 0;
+
+  let redemptions = 0;
+  let revenueCents = 0;
+  if (!isMissingTableError(ordersRes.error)) {
+    const rows = (ordersRes.data ?? []) as Array<{
+      amount_cents: number | null;
+      promo_code: string | null;
+    }>;
+    redemptions = rows.length;
+    revenueCents = rows.reduce((sum, r) => sum + (r.amount_cents ?? 0), 0);
+  }
+
+  return {
+    activeCount,
+    totalCount,
+    redemptions30d: redemptions,
+    revenue30dCents: revenueCents,
+  };
+}
+
+export async function fetchPromoRevenueByCode(): Promise<Map<string, number>> {
+  const supabase = getSupabaseAdmin();
+  const map = new Map<string, number>();
+  const { data, error } = await supabase
+    .from("orders")
+    .select("amount_cents, promo_code")
+    .eq("status", "paid")
+    .not("promo_code", "is", null);
+  if (error || !data) return map;
+  for (const row of data as Array<{
+    amount_cents: number | null;
+    promo_code: string | null;
+  }>) {
+    if (!row.promo_code) continue;
+    const code = row.promo_code.toUpperCase();
+    map.set(code, (map.get(code) ?? 0) + (row.amount_cents ?? 0));
+  }
+  return map;
+}
 
 export async function fetchPromoCodes(): Promise<PromoCodeRow[]> {
   const supabase = getSupabaseAdmin();
