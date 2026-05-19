@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import type Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
+import { VALIDATION_REASON_LABELS, validatePromoCode } from "@/lib/promo";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -14,6 +16,7 @@ export async function POST(req: NextRequest) {
     const firstName: string = (body.firstName ?? "").toString().trim();
     const lastName: string = (body.lastName ?? "").toString().trim();
     const email: string = (body.email ?? "").toString().trim().toLowerCase();
+    const promoCodeInput: string = (body.promoCode ?? "").toString().trim();
 
     if (!firstName || !lastName) {
       return NextResponse.json(
@@ -32,6 +35,27 @@ export async function POST(req: NextRequest) {
         { error: "Configuration paiement manquante" },
         { status: 500 },
       );
+    }
+
+    let appliedPromo: {
+      code: string;
+      stripe_promotion_code_id: string;
+    } | null = null;
+    if (promoCodeInput.length > 0) {
+      const result = await validatePromoCode(promoCodeInput);
+      if (!result.valid) {
+        return NextResponse.json(
+          {
+            error: VALIDATION_REASON_LABELS[result.reason],
+            reason: result.reason,
+          },
+          { status: 400 },
+        );
+      }
+      appliedPromo = {
+        code: result.promo.code,
+        stripe_promotion_code_id: result.promo.stripe_promotion_code_id,
+      };
     }
 
     const baseUrl =
@@ -72,7 +96,7 @@ export async function POST(req: NextRequest) {
     }
 
     const stripe = getStripe();
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: "payment",
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email,
@@ -86,14 +110,23 @@ export async function POST(req: NextRequest) {
         first_name: firstName,
         last_name: lastName,
         source: "early_adopter_lot_001",
+        ...(appliedPromo ? { promo_code: appliedPromo.code } : {}),
       },
       payment_intent_data: {
         metadata: {
           waitlist_id: waitlistId ?? "",
           source: "early_adopter_lot_001",
+          ...(appliedPromo ? { promo_code: appliedPromo.code } : {}),
         },
       },
-    });
+    };
+    if (appliedPromo) {
+      sessionParams.discounts = [
+        { promotion_code: appliedPromo.stripe_promotion_code_id },
+      ];
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     if (waitlistId) {
       await supabase

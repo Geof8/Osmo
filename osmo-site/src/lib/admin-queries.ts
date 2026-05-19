@@ -235,6 +235,34 @@ export async function fetchCustomers({
   return { customers, total: customers.length };
 }
 
+export type PromoCodeRow = {
+  id: string;
+  code: string;
+  stripe_promotion_code_id: string | null;
+  stripe_coupon_id: string | null;
+  discount_type: "percent" | "amount";
+  discount_value: number;
+  usage_count: number;
+  usage_limit: number | null;
+  expires_at: string | null;
+  active: boolean;
+  created_at: string;
+};
+
+export async function fetchPromoCodes(): Promise<PromoCodeRow[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("promo_codes")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) {
+    if (isMissingTableError(error)) return [];
+    console.error("fetchPromoCodes:", error);
+    return [];
+  }
+  return (data ?? []) as PromoCodeRow[];
+}
+
 export type EmailLogRow = {
   id: string;
   recipient: string;

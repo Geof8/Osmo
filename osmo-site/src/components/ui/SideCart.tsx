@@ -1,15 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Lock, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { GUARANTEE_LINE } from "@/lib/constants";
+import { GUARANTEE_LINE, PRODUCT } from "@/lib/constants";
 
 type FormState = { firstName: string; lastName: string; email: string };
 type Errors = Partial<Record<keyof FormState, string>>;
+type AppliedPromo = {
+  code: string;
+  discount_type: "percent" | "amount";
+  discount_value: number;
+};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function computeFinalPrice(
+  basePriceEuros: number,
+  applied: AppliedPromo | null,
+): number {
+  if (!applied) return basePriceEuros;
+  if (applied.discount_type === "percent") {
+    return Math.max(
+      0,
+      Math.round((basePriceEuros - (basePriceEuros * applied.discount_value) / 100) * 100) /
+        100,
+    );
+  }
+  return Math.max(0, basePriceEuros - applied.discount_value);
+}
+
+function formatPriceEuros(price: number): string {
+  return Number.isInteger(price) ? `${price}€` : `${price.toFixed(2)}€`;
+}
 
 function validate(form: FormState): Errors {
   const errs: Errors = {};
@@ -47,6 +71,15 @@ export default function SideCart() {
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [promoInput, setPromoInput] = useState("");
+  const [appliedPromo, setAppliedPromo] = useState<AppliedPromo | null>(null);
+  const [validatingPromo, setValidatingPromo] = useState(false);
+  const [promoError, setPromoError] = useState<string | null>(null);
+
+  const finalPrice = useMemo(
+    () => computeFinalPrice(PRODUCT.earlyPrice, appliedPromo),
+    [appliedPromo],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -71,6 +104,58 @@ export default function SideCart() {
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
   }
 
+  async function applyPromo() {
+    const code = promoInput.trim().toUpperCase();
+    if (!code) {
+      setPromoError("Saisis un code");
+      return;
+    }
+    setValidatingPromo(true);
+    setPromoError(null);
+    try {
+      const res = await fetch("/api/promo/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code }),
+      });
+      const data: {
+        valid?: boolean;
+        code?: string;
+        discount_type?: "percent" | "amount";
+        discount_value?: number;
+        message?: string;
+      } = await res.json();
+      if (
+        !res.ok ||
+        !data.valid ||
+        !data.code ||
+        !data.discount_type ||
+        typeof data.discount_value !== "number"
+      ) {
+        setAppliedPromo(null);
+        setPromoError(data.message || "Code invalide");
+        setValidatingPromo(false);
+        return;
+      }
+      setAppliedPromo({
+        code: data.code,
+        discount_type: data.discount_type,
+        discount_value: data.discount_value,
+      });
+      setPromoInput(data.code);
+      setValidatingPromo(false);
+    } catch {
+      setPromoError("Validation impossible");
+      setValidatingPromo(false);
+    }
+  }
+
+  function removePromo() {
+    setAppliedPromo(null);
+    setPromoInput("");
+    setPromoError(null);
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const errs = validate(form);
@@ -88,6 +173,7 @@ export default function SideCart() {
           firstName: form.firstName.trim(),
           lastName: form.lastName.trim(),
           email: form.email.trim().toLowerCase(),
+          ...(appliedPromo ? { promoCode: appliedPromo.code } : {}),
         }),
       });
       const data: { url?: string; error?: string } = await res.json();
@@ -192,7 +278,7 @@ export default function SideCart() {
                     lineHeight: 1,
                   }}
                 >
-                  20€
+                  {formatPriceEuros(finalPrice)}
                 </span>
                 <span
                   style={{
@@ -202,7 +288,9 @@ export default function SideCart() {
                     lineHeight: 1,
                   }}
                 >
-                  30€
+                  {appliedPromo
+                    ? formatPriceEuros(PRODUCT.earlyPrice)
+                    : formatPriceEuros(PRODUCT.publicPrice)}
                 </span>
               </div>
               <div
@@ -287,6 +375,123 @@ export default function SideCart() {
 
               <hr style={{ border: "none", borderTop: "1px solid #E0E0E0", margin: "24px 0" }} />
 
+              <div style={{ marginBottom: 20 }}>
+                <label htmlFor="sc-promo" style={labelBase}>
+                  Code promo
+                </label>
+                {appliedPromo ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 12,
+                      padding: "10px 14px",
+                      borderRadius: 8,
+                      background: "#EAF6EE",
+                      border: "1px solid #C7E5D3",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 13,
+                        color: "#1F7A4D",
+                        fontFamily: "var(--body)",
+                      }}
+                    >
+                      ✓{" "}
+                      {appliedPromo.discount_type === "percent"
+                        ? `-${appliedPromo.discount_value}%`
+                        : `-${appliedPromo.discount_value}€`}{" "}
+                      appliqué
+                      <span
+                        style={{
+                          marginLeft: 8,
+                          fontFamily: "var(--mono)",
+                          fontSize: 11,
+                          letterSpacing: "0.08em",
+                          color: "#1F7A4D",
+                        }}
+                      >
+                        ({appliedPromo.code})
+                      </span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={removePromo}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "#1F7A4D",
+                        cursor: "pointer",
+                        fontSize: 12,
+                        fontFamily: "var(--mono)",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Retirer
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <input
+                      id="sc-promo"
+                      type="text"
+                      placeholder="BIENVENUE10"
+                      value={promoInput}
+                      onChange={(e) => {
+                        setPromoInput(e.target.value.toUpperCase());
+                        if (promoError) setPromoError(null);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          applyPromo();
+                        }
+                      }}
+                      disabled={validatingPromo}
+                      style={{
+                        ...inputBase,
+                        fontFamily: "var(--mono)",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        borderColor: promoError ? "#C8963E" : "#E0E0E0",
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={applyPromo}
+                      disabled={validatingPromo || !promoInput.trim()}
+                      style={{
+                        padding: "0 18px",
+                        borderRadius: 999,
+                        border: "1px solid #111111",
+                        background: "#111111",
+                        color: "#FFFFFF",
+                        fontFamily: "var(--body)",
+                        fontSize: 13,
+                        fontWeight: 600,
+                        cursor:
+                          validatingPromo || !promoInput.trim()
+                            ? "not-allowed"
+                            : "pointer",
+                        opacity:
+                          validatingPromo || !promoInput.trim() ? 0.6 : 1,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {validatingPromo ? "…" : "Appliquer"}
+                    </button>
+                  </div>
+                )}
+                {promoError && (
+                  <p style={{ color: "#C8963E", fontSize: 12, marginTop: 6 }}>
+                    {promoError}
+                  </p>
+                )}
+              </div>
+
               <div>
                 <div
                   style={{
@@ -363,7 +568,9 @@ export default function SideCart() {
                   opacity: submitting ? 0.7 : 1,
                 }}
               >
-                {submitting ? "Traitement…" : "Confirmer ma commande — 20€"}
+                {submitting
+                  ? "Traitement…"
+                  : `Confirmer ma commande — ${formatPriceEuros(finalPrice)}`}
               </button>
 
               <div className="cta-guarantee">{GUARANTEE_LINE}</div>
