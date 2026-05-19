@@ -5,6 +5,7 @@ import StatusBadge from "@/components/admin/StatusBadge";
 import { fetchOrderById } from "@/lib/admin-queries";
 import { customerName, formatDateTime, formatEuros } from "@/lib/format";
 import RefundButton from "./RefundButton";
+import ShipForm from "./ShipForm";
 
 export const dynamic = "force-dynamic";
 
@@ -151,6 +152,21 @@ export default async function OrderDetailPage({
             }
           />
         </div>
+        {order.status !== "refunded" && (
+          <div
+            style={{
+              marginTop: 24,
+              paddingTop: 20,
+              borderTop: "1px solid #EEEEEE",
+            }}
+          >
+            <ShipForm
+              orderId={order.id}
+              initialTrackingNumber={order.tracking_number}
+              alreadyShipped={order.tracking_number !== null}
+            />
+          </div>
+        )}
       </div>
 
       <div className="admin-card admin-card-padded">

@@ -235,6 +235,71 @@ export async function fetchCustomers({
   return { customers, total: customers.length };
 }
 
+export type EmailLogRow = {
+  id: string;
+  recipient: string;
+  type: string;
+  sent_at: string;
+  status: "sent" | "failed" | "skipped_no_provider" | string;
+  meta: Record<string, unknown> | null;
+};
+
+const EMAIL_LOGS_PAGE_SIZE = 30;
+
+export async function fetchEmailLogs({
+  type,
+  status,
+  page,
+}: {
+  type?: string;
+  status?: string;
+  page?: number;
+}): Promise<{
+  logs: EmailLogRow[];
+  total: number;
+  page: number;
+  pageSize: number;
+}> {
+  const supabase = getSupabaseAdmin();
+  const currentPage = Math.max(1, page ?? 1);
+  const from = (currentPage - 1) * EMAIL_LOGS_PAGE_SIZE;
+  const to = from + EMAIL_LOGS_PAGE_SIZE - 1;
+
+  let query = supabase
+    .from("email_logs")
+    .select("*", { count: "exact" })
+    .order("sent_at", { ascending: false })
+    .range(from, to);
+
+  if (type && type !== "all") query = query.eq("type", type);
+  if (status && status !== "all") query = query.eq("status", status);
+
+  const { data, error, count } = await query;
+  if (error) {
+    if (isMissingTableError(error)) {
+      return {
+        logs: [],
+        total: 0,
+        page: currentPage,
+        pageSize: EMAIL_LOGS_PAGE_SIZE,
+      };
+    }
+    console.error("fetchEmailLogs:", error);
+    return {
+      logs: [],
+      total: 0,
+      page: currentPage,
+      pageSize: EMAIL_LOGS_PAGE_SIZE,
+    };
+  }
+  return {
+    logs: (data ?? []) as EmailLogRow[],
+    total: count ?? 0,
+    page: currentPage,
+    pageSize: EMAIL_LOGS_PAGE_SIZE,
+  };
+}
+
 export function toCSV(rows: Array<Record<string, string | number | null>>): string {
   if (rows.length === 0) return "";
   const headers = Object.keys(rows[0]);
