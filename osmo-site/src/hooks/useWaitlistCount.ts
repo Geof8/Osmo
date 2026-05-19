@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getSupabaseCount, computeRemaining } from "@/lib/supabase";
 import { PRODUCT } from "@/lib/constants";
 
 export function useWaitlistCount() {
@@ -9,9 +8,21 @@ export function useWaitlistCount() {
   const soldOut = remaining <= 0;
 
   useEffect(() => {
-    getSupabaseCount()
-      .then((count) => setRemaining(computeRemaining(count).remaining))
-      .catch(() => setRemaining(PRODUCT.maxEarlyAdopters));
+    let cancelled = false;
+    fetch("/api/early-adopters/count")
+      .then((r) => r.json())
+      .then((data: { remaining?: number }) => {
+        if (cancelled) return;
+        if (typeof data.remaining === "number") {
+          setRemaining(data.remaining);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setRemaining(PRODUCT.maxEarlyAdopters);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return { remaining, soldOut };

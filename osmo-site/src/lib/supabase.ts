@@ -30,8 +30,10 @@ export async function getSupabaseCount(): Promise<number> {
   }
 }
 
-export function computeRemaining(actualCount: number) {
-  const displayedSold = Math.floor(actualCount / 5);
-  const remaining = PRODUCT.maxEarlyAdopters - displayedSold;
-  return { displayedSold, remaining: Math.max(0, remaining) };
+// `claimed` is the number of paid Early Adopter spots (1:1 with rows in `orders`
+// where status='paid'). The hero/dashboard show that number as-is — no inflation.
+export function computeRemaining(claimed: number) {
+  const safe = Math.max(0, Math.floor(claimed));
+  const remaining = PRODUCT.maxEarlyAdopters - safe;
+  return { displayedSold: safe, remaining: Math.max(0, remaining) };
 }

@@ -16,11 +16,12 @@ async function getSetting(key: string): Promise<string | null> {
   return (data as { value: string } | null)?.value ?? null;
 }
 
-async function getWaitlistCount(): Promise<number> {
+async function getPaidOrdersCount(): Promise<number> {
   const supabase = getSupabaseAdmin();
   const { count } = await supabase
-    .from("waitlist")
-    .select("*", { count: "exact", head: true });
+    .from("orders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "paid");
   return count ?? 0;
 }
 
@@ -43,7 +44,7 @@ export async function checkInventoryAndAlert(): Promise<void> {
     const [thresholdRaw, contactEmail, count] = await Promise.all([
       getSetting("stock_alert_threshold"),
       getSetting("email_contact"),
-      getWaitlistCount(),
+      getPaidOrdersCount(),
     ]);
 
     const threshold = thresholdRaw ? parseInt(thresholdRaw, 10) : NaN;

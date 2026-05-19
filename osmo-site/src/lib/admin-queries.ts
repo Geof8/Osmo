@@ -47,13 +47,14 @@ function isMissingTableError(error: { code?: string; message?: string } | null) 
 export async function fetchKPIs(): Promise<KPIs> {
   const supabase = getSupabaseAdmin();
 
-  // Use the existing waitlist count for the Early Adopter math — preserves
-  // the 5× display multiplier baked into computeRemaining().
-  const [revenueRes, ordersCountRes, waitlistCountRes, abandonedRes] =
+  const [revenueRes, ordersCountRes, paidOrdersCountRes, abandonedRes] =
     await Promise.all([
       supabase.from("orders").select("amount_cents").eq("status", "paid"),
       supabase.from("orders").select("*", { count: "exact", head: true }),
-      supabase.from("waitlist").select("*", { count: "exact", head: true }),
+      supabase
+        .from("orders")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "paid"),
       supabase
         .from("abandoned_carts")
         .select("*", { count: "exact", head: true })
@@ -77,8 +78,10 @@ export async function fetchKPIs(): Promise<KPIs> {
     ? 0
     : ordersCountRes.count ?? 0;
 
-  const waitlistCount = waitlistCountRes.count ?? 0;
-  const { remaining, displayedSold } = computeRemaining(waitlistCount);
+  const paidOrdersCount = isMissingTableError(paidOrdersCountRes.error)
+    ? 0
+    : paidOrdersCountRes.count ?? 0;
+  const { remaining, displayedSold } = computeRemaining(paidOrdersCount);
 
   const abandonedThisWeek = isMissingTableError(abandonedRes.error)
     ? 0
