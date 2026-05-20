@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { FONTS, FOOTER_COLUMNS, LEGAL_LINKS } from "@/lib/constants";
 
