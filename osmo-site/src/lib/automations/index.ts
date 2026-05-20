@@ -10,6 +10,7 @@ import { lowStockAlert } from "./workflows/low-stock-alert";
 import { promoExhaustedDisable } from "./workflows/promo-exhausted-disable";
 import { postDeliveryD7 } from "./workflows/post-delivery-d7";
 import { npsD30 } from "./workflows/nps-d30";
+import { ugcRequestD30 } from "./workflows/ugc-request-d30";
 
 export const AUTOMATIONS: AutomationDef[] = [
   abandonedCart1h,
@@ -22,6 +23,7 @@ export const AUTOMATIONS: AutomationDef[] = [
   promoExhaustedDisable,
   postDeliveryD7,
   npsD30,
+  ugcRequestD30,
 ];
 
 export function getAutomationDef(id: string): AutomationDef | undefined {

@@ -4,8 +4,14 @@ import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import StatusBadge from "@/components/admin/StatusBadge";
 import { fetchOrderById } from "@/lib/admin-queries";
 import { customerName, formatDateTime, formatEuros } from "@/lib/format";
+import {
+  CARRIER_LABELS,
+  getFulfillmentStage,
+  getTrackingUrl,
+  isCarrier,
+} from "@/lib/fulfillment";
 import RefundButton from "./RefundButton";
-import ShipForm from "./ShipForm";
+import StatusChanger from "./StatusChanger";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +48,12 @@ export default async function OrderDetailPage({
 }) {
   const order = await fetchOrderById(params.id);
   if (!order) notFound();
+
+  const stage = getFulfillmentStage(order);
+  const carrier = isCarrier(order.tracking_carrier) ? order.tracking_carrier : null;
+  const trackingUrl = order.tracking_number
+    ? getTrackingUrl(carrier, order.tracking_number)
+    : null;
 
   return (
     <>
@@ -84,7 +96,11 @@ export default async function OrderDetailPage({
             gap: 20,
           }}
         >
-          <Field label="Statut" value={<StatusBadge status={order.status} />} />
+          <Field label="Étape" value={<StatusBadge stage={stage} />} />
+          <Field
+            label="Paiement"
+            value={<StatusBadge status={order.status} />}
+          />
           <Field
             label="Montant"
             value={
@@ -114,20 +130,23 @@ export default async function OrderDetailPage({
             color: "#111111",
           }}
         >
-          Expédition
+          Suivi de la commande
         </h2>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
             gap: 20,
+            marginBottom: 24,
           }}
         >
           <Field
-            label="Numéro de suivi"
+            label="Mise en production"
             value={
-              order.tracking_number ?? (
-                <span style={{ color: "#999999" }}>Pas encore expédiée</span>
+              order.production_started_at ? (
+                formatDateTime(order.production_started_at)
+              ) : (
+                <span style={{ color: "#999999" }}>—</span>
               )
             }
           />
@@ -151,22 +170,56 @@ export default async function OrderDetailPage({
               )
             }
           />
+          <Field
+            label="Transporteur"
+            value={
+              carrier ? (
+                CARRIER_LABELS[carrier]
+              ) : (
+                <span style={{ color: "#999999" }}>—</span>
+              )
+            }
+          />
+          <Field
+            label="Numéro de suivi"
+            value={
+              order.tracking_number ? (
+                trackingUrl ? (
+                  <a
+                    href={trackingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#111111",
+                      textDecoration: "underline",
+                      textUnderlineOffset: 3,
+                    }}
+                  >
+                    {order.tracking_number}
+                  </a>
+                ) : (
+                  order.tracking_number
+                )
+              ) : (
+                <span style={{ color: "#999999" }}>Pas encore expédiée</span>
+              )
+            }
+          />
         </div>
-        {order.status !== "refunded" && (
-          <div
-            style={{
-              marginTop: 24,
-              paddingTop: 20,
-              borderTop: "1px solid #EEEEEE",
-            }}
-          >
-            <ShipForm
-              orderId={order.id}
-              initialTrackingNumber={order.tracking_number}
-              alreadyShipped={order.tracking_number !== null}
-            />
-          </div>
-        )}
+
+        <div
+          style={{
+            paddingTop: 20,
+            borderTop: "1px solid #EEEEEE",
+          }}
+        >
+          <StatusChanger
+            orderId={order.id}
+            email={order.email}
+            currentStage={stage}
+            disabled={order.status === "refunded"}
+          />
+        </div>
       </div>
 
       <div className="admin-card admin-card-padded">

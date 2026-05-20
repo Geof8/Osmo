@@ -1,6 +1,7 @@
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import { computeRemaining } from "@/lib/supabase";
 import { PRODUCT } from "@/lib/constants";
+import type { FulfillmentStage } from "@/lib/fulfillment";
 
 export type OrderRow = {
   id: string;
@@ -12,8 +13,12 @@ export type OrderRow = {
   promo_code: string | null;
   status: "paid" | "refunded" | "pending";
   tracking_number: string | null;
+  tracking_carrier: string | null;
   shipped_at: string | null;
   delivered_at: string | null;
+  production_started_at: string | null;
+  late_alert_sent_at: string | null;
+  ugc_request_sent_at: string | null;
   created_at: string;
   customer_tags: string[];
   risk_level?: string | null;
@@ -417,10 +422,12 @@ export async function fetchRecentOrders(limit = 10): Promise<OrderRow[]> {
 export async function fetchOrders({
   search,
   status,
+  stage,
   page,
 }: {
   search?: string;
   status?: OrderRow["status"] | "all";
+  stage?: FulfillmentStage | "all";
   page?: number;
 }): Promise<{ orders: OrderRow[]; total: number; page: number; pageSize: number }> {
   const supabase = getSupabaseAdmin();
@@ -436,6 +443,31 @@ export async function fetchOrders({
 
   if (status && status !== "all") {
     query = query.eq("status", status);
+  }
+  if (stage && stage !== "all") {
+    switch (stage) {
+      case "paid":
+        query = query
+          .is("production_started_at", null)
+          .is("shipped_at", null)
+          .is("delivered_at", null)
+          .neq("status", "refunded");
+        break;
+      case "in_production":
+        query = query
+          .not("production_started_at", "is", null)
+          .is("shipped_at", null)
+          .is("delivered_at", null);
+        break;
+      case "shipped":
+        query = query
+          .not("shipped_at", "is", null)
+          .is("delivered_at", null);
+        break;
+      case "delivered":
+        query = query.not("delivered_at", "is", null);
+        break;
+    }
   }
   if (search && search.trim().length > 0) {
     const term = search.trim();
@@ -458,6 +490,50 @@ export async function fetchOrders({
     total: count ?? 0,
     page: currentPage,
     pageSize: PAGE_SIZE,
+  };
+}
+
+export async function fetchOrderFulfillmentCounts(): Promise<{
+  all: number;
+  paid: number;
+  in_production: number;
+  shipped: number;
+  delivered: number;
+}> {
+  const supabase = getSupabaseAdmin();
+  const [allRes, paidRes, prodRes, shippedRes, deliveredRes] = await Promise.all([
+    supabase.from("orders").select("*", { count: "exact", head: true }),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .is("production_started_at", null)
+      .is("shipped_at", null)
+      .is("delivered_at", null)
+      .neq("status", "refunded"),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .not("production_started_at", "is", null)
+      .is("shipped_at", null)
+      .is("delivered_at", null),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .not("shipped_at", "is", null)
+      .is("delivered_at", null),
+    supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .not("delivered_at", "is", null),
+  ]);
+  return {
+    all: isMissingTableError(allRes.error) ? 0 : allRes.count ?? 0,
+    paid: isMissingTableError(paidRes.error) ? 0 : paidRes.count ?? 0,
+    in_production: isMissingTableError(prodRes.error) ? 0 : prodRes.count ?? 0,
+    shipped: isMissingTableError(shippedRes.error) ? 0 : shippedRes.count ?? 0,
+    delivered: isMissingTableError(deliveredRes.error)
+      ? 0
+      : deliveredRes.count ?? 0,
   };
 }
 

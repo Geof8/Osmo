@@ -16,6 +16,90 @@
 
 ## Historique
 
+### Session du 2026-05-20 — Workflow commande end-to-end
+**Fait :**
+- Migration `0008_order_fulfillment.sql` :
+  ajout `production_started_at`, `tracking_carrier`,
+  `late_alert_sent_at`, `ugc_request_sent_at` sur `orders`.
+- Lib partagée `lib/fulfillment.ts` : stage dérivé
+  (`paid` → `in_production` → `shipped` → `delivered`)
+  + helpers carrier/URL/ugc token.
+- Admin `/commandes` : tabs filtrés par étape
+  (Toutes / Payées / En production / Expédiées / Livrées)
+  + badge couleur dédié pour chaque étape.
+- Admin `/commandes/[id]` : nouveau `StatusChanger`
+  remplace l'ancien `ShipForm`. Boutons « Passer à »
+  + modal de confirmation. Pour « Expédié » : dropdown
+  transporteur (Colissimo · Chronopost · DHL · Autre)
+  + champ tracking. Lien tracking cliquable dans la fiche.
+- API unifiée `POST /api/admin/orders/[id]/fulfillment` :
+  valide la transition (forward-only), écrit les
+  timestamps, déclenche l'email matching l'étape,
+  loggue dans `email_logs`.
+- 3 nouveaux templates Resend :
+  - `OrderInProduction` (🔬 En production)
+  - `OrderShipped` (📦 réécrit selon spec : carrier,
+    tracking URL, rappel protocole, CTA suivi)
+  - `OrderDelivered` (✅ + lien UGC + promo -20 %)
+- Cron `GET /api/cron/check-delivery` toutes les 6h
+  (`vercel.json`) :
+  - polling Colissimo/Chronopost via api.laposte.fr
+    (clé `LAPOSTE_API_KEY`) et DHL via api-eu.dhl.com
+    (`DHL_API_KEY`),
+  - auto-promotion en « Livré » + email + meta
+    `ugc_followup_scheduled_for`,
+  - alerte `contact@osmo-lab.fr` (override
+    `ADMIN_ALERT_EMAIL`) si > 15 jours sans livraison
+    confirmée — flag `late_alert_sent_at` pour éviter
+    les doublons.
+- Automation `ugc-request-d30` (daily) : envoie le
+  rappel d'avis + promo 30 jours après livraison
+  (flag `ugc_request_sent_at`).
+- Page publique `/suivi` :
+  - formulaire de lookup (commande + email),
+  - composant `TrackingTimeline` : 4 étapes horizontal
+    desktop / vertical mobile, pulse amber sur l'étape
+    courante, ligne pleine quand complétée,
+  - CTAs « Suivre mon colis » + « Donner mon avis ».
+- `EmailType` étendu (`order_in_production`,
+  `order_delivered`, `delivery_late_alert`) + page
+  admin `/emails` mise à jour avec les nouveaux types.
+- Suppression code mort : `ShipForm.tsx` et
+  `/api/admin/orders/[id]/ship` (remplacés par
+  `StatusChanger` + `/fulfillment`).
+- Vérifié : `tsc --noEmit` propre, `/suivi` rendu
+  testé dans le browser preview (lookup form +
+  état not-found).
+
+**En cours :**
+- Page `/ugc/[token]` à créer (les emails et la
+  timeline pointent déjà vers ce path, le token
+  est `base64url(orderId)`).
+
+**Bugs ouverts :**
+- Les env vars `LAPOSTE_API_KEY` et `DHL_API_KEY`
+  pas encore sur Vercel — le cron tournera mais
+  retournera `not_configured` jusqu'à ce qu'elles
+  soient ajoutées.
+- L'alerte « livraison en retard » utilise
+  `ADMIN_ALERT_EMAIL` ou par défaut
+  `contact@osmo-lab.fr` — vérifier que cet email
+  est routé.
+- Pas de page `/ugc/[token]` encore : les liens
+  dans les emails 404 jusqu'à sa création.
+
+**À faire :**
+- Créer `/ugc/[token]` : page de soumission
+  témoignage + génération automatique du code promo
+  -20 % à la validation.
+- Ajouter `LAPOSTE_API_KEY` (Colissimo + Chronopost
+  partagent l'API La Poste) et `DHL_API_KEY` sur
+  Vercel quand on aura les comptes.
+- Vérifier l'affichage de la timeline `/suivi` sur
+  iPhone réel après expédition de la 1re commande.
+
+---
+
 ### Session du 2026-05-20 — Restructuration CLAUDE.md
 **Fait :**
 - CLAUDE.md réduit à l'essentiel (≤80 lignes) pour

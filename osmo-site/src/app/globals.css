@@ -326,6 +326,21 @@ body::before {
   color: #8A6310;
 }
 
+.admin-badge-production {
+  background: #F3E9D2;
+  color: #8A6310;
+}
+
+.admin-badge-shipped {
+  background: #E0E7FA;
+  color: #2B3CB5;
+}
+
+.admin-badge-delivered {
+  background: #DDF3E6;
+  color: #1E7A3A;
+}
+
 .admin-pill-btn {
   display: inline-flex;
   align-items: center;

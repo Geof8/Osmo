@@ -9,7 +9,10 @@ export const dynamic = "force-dynamic";
 const TYPE_OPTIONS = [
   { value: "all", label: "Tous types" },
   { value: "order_confirmation", label: "Confirmation commande" },
+  { value: "order_in_production", label: "En production" },
   { value: "order_shipped", label: "Expédition" },
+  { value: "order_delivered", label: "Livraison" },
+  { value: "delivery_late_alert", label: "Alerte livraison en retard" },
   { value: "abandoned_cart_1h", label: "Relance 1h" },
   { value: "abandoned_cart_24h", label: "Relance 24h" },
   { value: "milestone_reached", label: "Lot complet" },

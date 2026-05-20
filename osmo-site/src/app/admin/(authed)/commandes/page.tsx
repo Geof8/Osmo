@@ -6,23 +6,18 @@ import StatusBadge from "@/components/admin/StatusBadge";
 import StatusTabs from "@/components/admin/StatusTabs";
 import {
   fetchOrders,
-  fetchOrderStatusCounts,
-  type OrderRow,
+  fetchOrderFulfillmentCounts,
 } from "@/lib/admin-queries";
 import { customerName, formatDate, formatEuros } from "@/lib/format";
+import { getFulfillmentStage, isFulfillmentStage } from "@/lib/fulfillment";
 
 export const dynamic = "force-dynamic";
 
 type SearchParams = {
   q?: string;
-  status?: string;
+  stage?: string;
   page?: string;
 };
-
-function normaliseStatus(s: string | undefined): OrderRow["status"] | "all" {
-  if (s === "paid" || s === "refunded" || s === "pending") return s;
-  return "all";
-}
 
 export default async function AdminCommandesPage({
   searchParams,
@@ -30,29 +25,31 @@ export default async function AdminCommandesPage({
   searchParams: SearchParams;
 }) {
   const search = searchParams.q ?? "";
-  const status = normaliseStatus(searchParams.status);
+  const stage = isFulfillmentStage(searchParams.stage)
+    ? searchParams.stage
+    : "all";
   const page = Math.max(1, Number.parseInt(searchParams.page ?? "1", 10) || 1);
 
   const [{ orders, total, pageSize }, counts] = await Promise.all([
-    fetchOrders({ search, status, page }),
-    fetchOrderStatusCounts(),
+    fetchOrders({ search, stage, page }),
+    fetchOrderFulfillmentCounts(),
   ]);
 
   const exportHref = `/api/admin/orders/export${
     new URLSearchParams({
       ...(search ? { q: search } : {}),
-      ...(status !== "all" ? { status } : {}),
+      ...(stage !== "all" ? { stage } : {}),
     }).toString()
       ? `?${new URLSearchParams({
           ...(search ? { q: search } : {}),
-          ...(status !== "all" ? { status } : {}),
+          ...(stage !== "all" ? { stage } : {}),
         }).toString()}`
       : ""
   }`;
 
   const queryString = new URLSearchParams({
     ...(search ? { q: search } : {}),
-    ...(status !== "all" ? { status } : {}),
+    ...(stage !== "all" ? { stage } : {}),
   }).toString();
 
   return (
@@ -68,11 +65,17 @@ export default async function AdminCommandesPage({
       />
 
       <StatusTabs
+        paramName="stage"
         tabs={[
-          { value: "all", label: "Tous", count: counts.all },
+          { value: "all", label: "Toutes", count: counts.all },
           { value: "paid", label: "Payées", count: counts.paid },
-          { value: "pending", label: "En attente", count: counts.pending },
-          { value: "refunded", label: "Remboursées", count: counts.refunded },
+          {
+            value: "in_production",
+            label: "En production",
+            count: counts.in_production,
+          },
+          { value: "shipped", label: "Expédiées", count: counts.shipped },
+          { value: "delivered", label: "Livrées", count: counts.delivered },
         ]}
       />
 
@@ -122,8 +125,8 @@ export default async function AdminCommandesPage({
                 <th>Email</th>
                 <th style={{ textAlign: "right" }}>Montant</th>
                 <th>Code promo</th>
-                <th>Statut</th>
-                <th>Expédition</th>
+                <th>Étape</th>
+                <th>Paiement</th>
                 <th style={{ textAlign: "right" }}>Action</th>
               </tr>
             </thead>
@@ -165,10 +168,14 @@ export default async function AdminCommandesPage({
                     )}
                   </td>
                   <td>
-                    <StatusBadge status={o.status} />
+                    <StatusBadge stage={getFulfillmentStage(o)} />
                   </td>
                   <td>
-                    <FulfillmentBadge order={o} />
+                    {o.status === "refunded" ? (
+                      <StatusBadge status="refunded" />
+                    ) : (
+                      <span style={{ color: "#999999", fontSize: 12 }}>—</span>
+                    )}
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <Link
@@ -200,48 +207,3 @@ export default async function AdminCommandesPage({
   );
 }
 
-function FulfillmentBadge({ order }: { order: OrderRow }) {
-  if (order.delivered_at) {
-    return (
-      <span
-        style={{
-          fontFamily: "var(--mono)",
-          fontSize: 10,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#1E7A3A",
-        }}
-      >
-        ● Livrée
-      </span>
-    );
-  }
-  if (order.shipped_at) {
-    return (
-      <span
-        style={{
-          fontFamily: "var(--mono)",
-          fontSize: 10,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#4A5BD8",
-        }}
-      >
-        ● Expédiée
-      </span>
-    );
-  }
-  return (
-    <span
-      style={{
-        fontFamily: "var(--mono)",
-        fontSize: 10,
-        letterSpacing: "0.1em",
-        textTransform: "uppercase",
-        color: "#999999",
-      }}
-    >
-      ○ À préparer
-    </span>
-  );
-}

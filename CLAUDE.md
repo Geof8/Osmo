@@ -32,6 +32,6 @@ Pour plus de détails lire uniquement si nécessaire:
 - /docs/JOURNAL.md → journal de bord des sessions
 
 ## Journal rapide
-Dernière session: 2026-05-20 — Restructuration CLAUDE.md en fichiers focalisés (FRONT/BACK/PRODUCT/JOURNAL)
-Statut courant: Protocole pivoté en 2 étapes (soir + matin)
-Bugs ouverts: hero "Lelendemainmatin" · stats à 0 · footer osmolab.fr · carousel hero sans images · HowItWorks reveal animations à vérifier prod
+Dernière session: 2026-05-20 — Workflow commande end-to-end (status admin · 3 emails · cron livraison · page /suivi)
+Statut courant: API `/fulfillment` en place · cron `check-delivery` programmé toutes les 6h
+Bugs ouverts: `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer · timeline /suivi à vérifier sur iPhone
