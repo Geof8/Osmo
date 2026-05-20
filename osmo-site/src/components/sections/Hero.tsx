@@ -76,7 +76,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               >
                 pendant le sommeil et au réveil
               </em>{" "}
-              après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole de récupération en 2 étapes · Soir + Matin.
+              après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole quotidien · Soir + Matin.
             </motion.p>
 
             <motion.div

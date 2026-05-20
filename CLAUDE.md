@@ -32,6 +32,6 @@ Pour plus de détails lire uniquement si nécessaire:
 - /docs/JOURNAL.md → journal de bord des sessions
 
 ## Journal rapide
-Dernière session: 2026-05-20 — Workflow commande end-to-end (status admin · 3 emails · cron livraison · page /suivi)
-Statut courant: API `/fulfillment` en place · cron `check-delivery` programmé toutes les 6h
-Bugs ouverts: `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer · timeline /suivi à vérifier sur iPhone
+Dernière session: 2026-05-20 — Adoucissement protocole en 3 gestes simples (Verser / Diluer / Déguster) · ton suggestif "lire entre les lignes" · bandeau et hero passés à "Protocole quotidien"
+Statut courant: protocole copy révisé partout (Hero, HowItWorks, AnnouncementBar, Marquee, FAQ, docs/PRODUCT.md)
+Bugs ouverts: pot 15 doses vs 2 prises/jour (à arbitrer) · `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer

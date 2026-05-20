@@ -16,6 +16,35 @@
 
 ## Historique
 
+### Session du 2026-05-20 — Adoucissement protocole (3 gestes)
+**Fait :**
+- Section protocole repensée en 3 gestes de
+  préparation : 01 PRÉPARATION (Versez la dose) /
+  02 DILUTION (Ajoutez 250ml d'eau) /
+  03 DÉGUSTATION (Mélangez et dégustez).
+  Plus de "Dose 1 / Dose 2", plus de "à jeun",
+  plus de "lendemain matin" dans les cartes.
+- Sous-titre section : "Trois gestes simples.
+  À prendre deux fois par jour, dont une prise
+  le soir avant de dormir."
+- Hero subline : "Protocole de récupération en
+  2 étapes" → "Protocole quotidien".
+- Bandeau + Marquee : "PROTOCOLE 2 ÉTAPES" →
+  "PROTOCOLE QUOTIDIEN".
+- FAQ "Comment utiliser OSMO Recovery ?" réécrite
+  sans "à jeun", sans "dernière boisson",
+  avec "idéalement accompagné d'un repas".
+- docs/PRODUCT.md mis à jour pour refléter le
+  nouveau ton suggestif (lire entre les lignes).
+- Les 3 cartes sont minimalistes pour permettre
+  l'ajout futur de 3 GIFs animés (versement dose,
+  versement eau, mélange).
+
+**À arbitrer :**
+- Le pot 15 doses ne tient que 7,5 jours à 2 prises/jour.
+  Soit augmenter à 30 doses, soit repositionner comme
+  cure ponctuelle.
+
 ### Session du 2026-05-20 — Workflow commande end-to-end
 **Fait :**
 - Migration `0008_order_fulfillment.sql` :

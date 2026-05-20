@@ -78,7 +78,7 @@ export const MARQUEE_ITEMS = [
   "NAC",
   "Lot N°001 · 50 ex.",
   "Early Adopters · 20 €",
-  "PROTOCOLE 2 ÉTAPES · SOIR + MATIN",
+  "PROTOCOLE QUOTIDIEN · SOIR + MATIN",
   "LOT N°001",
   "EARLY ADOPTERS",
   "EXPÉDITION SOUS 6 MOIS",
@@ -96,7 +96,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Comment utiliser OSMO Recovery ?",
-    a: "Le protocole OSMO se déroule en 2 étapes : Dose 1 — Le soir après votre dernière boisson, avant de dormir. Dissoudre 1 dose dans 250ml d'eau froide. Dose 2 — Le matin au réveil, à jeun. Dissoudre 1 dose dans 250ml d'eau froide. Ce protocole en 2 étapes maximise la récupération en agissant à la fois pendant le sommeil et au réveil.",
+    a: "Une dose d'OSMO Recovery dans 250ml d'eau, à boire deux fois par jour — une fois le soir avant de dormir et une fois au réveil, idéalement accompagné d'un repas. Goût citron franc, dissolution immédiate.",
   },
   {
     q: "Est-ce un médicament ?",

@@ -10,51 +10,54 @@ import type { Step } from "@/types";
 const steps: Step[] = [
   {
     num: "01",
-    sub: "Le soir",
-    label: "Dose 1 — Après la dernière boisson",
-    labelEm: true,
-    desc: "Dissoudre 1 dose dans 250ml d'eau froide. Les actifs travaillent pendant votre sommeil — foie, minéraux, hydratation cellulaire.",
-    timing: "⌁ avant de dormir",
+    sub: "Préparation",
+    label: "Versez la dose",
+    labelEm: false,
+    desc: "Une dose rase d'OSMO Recovery dans un grand verre vide.",
+    timing: "⌁ 10 sec",
     svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2} aria-hidden="true">
-        <path d="M40 8 A22 22 0 1 0 48 38 A18 18 0 0 1 40 8 Z" />
-        <circle cx="46" cy="16" r="0.9" fill="currentColor" />
-        <circle cx="50" cy="26" r="0.7" fill="currentColor" />
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {/* Spoon/scoop tipping powder into a glass */}
+        <path d="M10 12 Q18 8 22 14 L18 22 Q12 20 10 12 Z" />
+        <line x1="22" y1="14" x2="34" y2="26" />
+        <path d="M28 32 L44 32 L41 50 L31 50 Z" />
+        <circle cx="33" cy="29" r="0.7" fill="currentColor" />
+        <circle cx="37" cy="30" r="0.6" fill="currentColor" />
+        <circle cx="36" cy="33" r="0.5" fill="currentColor" />
       </svg>
     ),
   },
   {
     num: "02",
-    sub: "Le matin",
-    label: "Dose 2 — Au réveil",
-    labelEm: true,
-    desc: "Dissoudre 1 dose dans 250ml d'eau froide. Finalise la récupération, réhydrate, relance le métabolisme.",
-    timing: "⌁ à jeun",
+    sub: "Dilution",
+    label: "Ajoutez 250ml d'eau",
+    labelEm: false,
+    desc: "Eau froide, tempérée, ou tiède — comme tu préfères.",
+    timing: "⌁ 10 sec",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <circle cx="28" cy="28" r="8" />
-        <line x1="28" y1="6" x2="28" y2="12" />
-        <line x1="28" y1="44" x2="28" y2="50" />
-        <line x1="6" y1="28" x2="12" y2="28" />
-        <line x1="44" y1="28" x2="50" y2="28" />
-        <line x1="12" y1="12" x2="16" y2="16" />
-        <line x1="40" y1="40" x2="44" y2="44" />
-        <line x1="12" y1="44" x2="16" y2="40" />
-        <line x1="40" y1="16" x2="44" y2="12" />
+        {/* Water droplet above a glass */}
+        <path d="M28 6 Q22 16 22 20 A6 6 0 0 0 34 20 Q34 16 28 6 Z" />
+        <path d="M18 28 L38 28 L35 50 L21 50 Z" />
+        <path d="M19 36 Q28 34 37 36" />
       </svg>
     ),
   },
   {
     num: "03",
-    sub: "Le résultat",
-    label: "Le lendemain matin, tu assures.",
-    labelEm: true,
-    desc: "Le protocole OSMO agit en continu pendant 8 heures. Pas de compromis sur ta journée du lendemain.",
-    timing: "⌁ garanti",
+    sub: "Dégustation",
+    label: "Mélangez et dégustez",
+    labelEm: false,
+    desc: "Goût citron franc, légèrement salin. Dissolution complète en quelques secondes.",
+    timing: "⌁ savourez",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <circle cx="28" cy="28" r="20" />
-        <path d="M18 28 L26 36 L40 20" />
+        {/* Glass with stirring swirl + citrus slice on rim */}
+        <path d="M14 14 L42 14 L38 50 L18 50 Z" />
+        <path d="M18 26 Q28 22 38 26" />
+        <path d="M22 36 Q28 30 34 36 Q30 42 26 36" />
+        <ellipse cx="40" cy="13" rx="5" ry="2.5" />
+        <line x1="35" y1="13" x2="45" y2="13" />
       </svg>
     ),
   },
@@ -160,9 +163,9 @@ export default function HowItWorks() {
               </h2>
             </div>
             <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.65, maxWidth: 460 }}>
-              Pas juste un électrolyte.{" "}
+              Trois gestes simples.{" "}
               <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-                Un protocole de récupération en 2 étapes.
+                À prendre deux fois par jour, dont une prise le soir avant de dormir.
               </em>
             </p>
           </div>

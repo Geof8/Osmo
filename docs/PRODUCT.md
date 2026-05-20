@@ -29,23 +29,26 @@ OSMO Recovery — poudre électrolytes goût citron
 5. Chlorure de sodium — 150mg
 6. Aromatisant citron
 
-## Protocole — Récupération en 2 étapes
-"Pas juste un électrolyte. Un protocole de récupération en 2 étapes."
+## Protocole — Trois gestes simples
+"Trois gestes simples. À prendre deux fois par jour, dont une prise le soir avant de dormir."
 
-### 01 — LE SOIR
-- 1 dose avant le coucher
-- Action : pendant le sommeil
+### 01 — Préparation
+- Verser la dose rase dans un grand verre vide
 
-### 02 — LE MATIN
-- 1 dose au réveil
-- Action : au réveil
+### 02 — Dilution
+- Ajouter 250ml d'eau (froide, tempérée ou tiède)
 
-### 03 — LE RÉSULTAT
-- Récupération complète soir + matin
+### 03 — Dégustation
+- Mélanger jusqu'à dissolution complète, déguster
 
-> Référence copy : Hero subline = "Protocole de récupération en 2 étapes · Soir + Matin"
-> AnnouncementBar + Marquee : "PROTOCOLE 2 ÉTAPES · SOIR + MATIN"
-> FAQ : "Comment utiliser OSMO Recovery ?" détaille le protocole en 2 doses.
+### Fréquence
+- 2 doses par jour : une le soir avant de dormir, une au réveil
+- Idéalement accompagné d'un repas (pas à jeun)
+
+> Référence copy : Hero subline = "Protocole quotidien · Soir + Matin"
+> AnnouncementBar + Marquee : "PROTOCOLE QUOTIDIEN · SOIR + MATIN"
+> FAQ : "Comment utiliser OSMO Recovery ?" → 250ml d'eau, 2x/jour, avec un repas.
+> Ton : suggestif, pas explicite. Ne pas dire "à jeun" ni "après la dernière boisson".
 
 ## Stats clés (affichées sur le site)
 - 90% (efficacité ressentie)
