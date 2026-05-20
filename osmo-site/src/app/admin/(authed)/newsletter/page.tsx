@@ -9,6 +9,7 @@ import { formatDate, formatDateTime } from "@/lib/format";
 import CancelButton from "./CancelButton";
 import ManualSendForm from "./ManualSendForm";
 import NewsletterCountsLive from "./NewsletterCountsLive";
+import UnsubscribeRowButton from "./UnsubscribeRowButton";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -314,6 +315,7 @@ export default async function AdminNewsletterPage() {
                   <th>Email</th>
                   <th>Date d&apos;inscription</th>
                   <th>Statut</th>
+                  <th style={{ textAlign: "right" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -345,6 +347,23 @@ export default async function AdminNewsletterPage() {
                       >
                         {s.active ? "Actif" : "Désabonné"}
                       </span>
+                    </td>
+                    <td style={{ textAlign: "right" }}>
+                      {s.active ? (
+                        <UnsubscribeRowButton id={s.id} email={s.email} />
+                      ) : (
+                        <span
+                          style={{
+                            color: "#BBBBBB",
+                            fontFamily: "var(--mono)",
+                            fontSize: 10,
+                            letterSpacing: "0.08em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          —
+                        </span>
+                      )}
                     </td>
                   </tr>
                 ))}
