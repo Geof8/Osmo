@@ -1,12 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { SESSION_COOKIE, verifySessionToken } from "@/lib/admin-auth";
 
 const PREVIEW_COOKIE = "preview_access";
 const PREVIEW_COOKIE_MAX_AGE = 60 * 60 * 24; // 24h
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
 
-  // Preview password handshake — set cookie and strip query param
+  // -------------------------------------------------------------------------
+  // Preview password handshake — set cookie and strip query param.
+  // Runs first so a ?preview=… link works even under maintenance mode.
+  // -------------------------------------------------------------------------
   const previewParam = searchParams.get("preview");
   const previewPassword = process.env.PREVIEW_PASSWORD;
   if (previewParam && previewPassword && previewParam === previewPassword) {
@@ -23,17 +27,36 @@ export function middleware(req: NextRequest) {
     return res;
   }
 
+  // -------------------------------------------------------------------------
+  // Admin gate — every /admin/* page is gated by the admin_session cookie.
+  // Only /admin/login is public so the user can actually sign in.
+  // Without this, /admin pages render for anyone (subscriber emails leak).
+  // -------------------------------------------------------------------------
+  if (pathname.startsWith("/admin")) {
+    if (pathname === "/admin/login") {
+      return NextResponse.next();
+    }
+    const token = req.cookies.get(SESSION_COOKIE)?.value;
+    const ok = await verifySessionToken(token);
+    if (ok) return NextResponse.next();
+    const url = req.nextUrl.clone();
+    url.pathname = "/admin/login";
+    url.searchParams.set("from", pathname);
+    return NextResponse.redirect(url);
+  }
+
+  // -------------------------------------------------------------------------
+  // Maintenance mode — only kicks in when MAINTENANCE_MODE=true.
+  // -------------------------------------------------------------------------
   const maintenance = process.env.MAINTENANCE_MODE === "true";
   if (!maintenance) return NextResponse.next();
 
-  // Always allow:
+  // Always allowed even in maintenance:
   // - the maintenance page itself
-  // - admin routes
-  // - API routes
-  // - Next.js internals and static assets (handled by matcher, but double-safe)
+  // - API routes (so /api/admin/* still works for logged-in admins)
+  // - Next internals (matcher excludes most, double-safe here)
   if (
     pathname.startsWith("/maintenance") ||
-    pathname.startsWith("/admin") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
     pathname === "/favicon.ico"
