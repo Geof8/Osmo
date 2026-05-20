@@ -104,7 +104,7 @@ export default function Formula() {
           />
 
           {/* Tablet / Desktop: grid (unchanged at md and lg) */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {INGREDIENTS.map((a, i) => (
               <IngredientCard key={a.name} a={a} index={i} />
             ))}
