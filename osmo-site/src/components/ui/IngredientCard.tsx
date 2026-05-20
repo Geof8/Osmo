@@ -37,7 +37,7 @@ export default function IngredientCard({
               position: "absolute",
               top: 16,
               right: 16,
-              background: "#FFFFFF",
+              background: "#C8963E",
               color: "#111111",
               fontFamily: FONTS.mono,
               fontSize: 10,
