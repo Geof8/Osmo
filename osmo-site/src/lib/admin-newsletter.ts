@@ -1,4 +1,5 @@
 import "server-only";
+import { unstable_noStore as noStore } from "next/cache";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 import type {
   NewsletterQueueRow,
@@ -17,7 +18,29 @@ export type NewsletterStats = {
   sentCount: number;
 };
 
+export async function fetchSubscriberCounts(): Promise<{
+  active: number;
+  total: number;
+}> {
+  noStore();
+  const supabase = getSupabaseAdmin();
+  const [activeRes, totalRes] = await Promise.all([
+    supabase
+      .from("newsletter_subscribers")
+      .select("*", { count: "exact", head: true })
+      .eq("active", true),
+    supabase
+      .from("newsletter_subscribers")
+      .select("*", { count: "exact", head: true }),
+  ]);
+  return {
+    active: isMissingTableError(activeRes.error) ? 0 : activeRes.count ?? 0,
+    total: isMissingTableError(totalRes.error) ? 0 : totalRes.count ?? 0,
+  };
+}
+
 export async function fetchNewsletterStats(): Promise<NewsletterStats> {
+  noStore();
   const supabase = getSupabaseAdmin();
 
   const [activeRes, totalRes, sentRes] = await Promise.all([

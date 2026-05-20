@@ -2,13 +2,20 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useLiveActiveSubscribers } from "./useLiveActiveSubscribers";
 
 export default function ManualSendForm({
-  subscriberCount,
+  initialActive,
+  initialTotal,
 }: {
-  subscriberCount: number;
+  initialActive: number;
+  initialTotal: number;
 }) {
   const router = useRouter();
+  const { active: subscriberCount } = useLiveActiveSubscribers(
+    initialActive,
+    initialTotal,
+  );
   const [subject, setSubject] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

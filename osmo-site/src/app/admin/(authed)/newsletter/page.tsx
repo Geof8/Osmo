@@ -1,6 +1,4 @@
 import Link from "next/link";
-import AdminPageHeader from "@/components/admin/AdminPageHeader";
-import KpiCard from "@/components/admin/KpiCard";
 import {
   fetchNewsletterHistory,
   fetchNewsletterStats,
@@ -10,8 +8,10 @@ import {
 import { formatDate, formatDateTime } from "@/lib/format";
 import CancelButton from "./CancelButton";
 import ManualSendForm from "./ManualSendForm";
+import NewsletterCountsLive from "./NewsletterCountsLive";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function StatusBadge({
   cancelled,
@@ -55,34 +55,11 @@ export default async function AdminNewsletterPage() {
 
   return (
     <>
-      <AdminPageHeader
-        title="Newsletter"
-        subtitle={`${stats.activeSubscribers} abonné${stats.activeSubscribers === 1 ? "" : "s"} actif${stats.activeSubscribers === 1 ? "" : "s"}`}
+      <NewsletterCountsLive
+        initialActive={stats.activeSubscribers}
+        initialTotal={stats.totalSubscribers}
+        sentCount={stats.sentCount}
       />
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: 16,
-          marginBottom: 28,
-        }}
-      >
-        <KpiCard
-          label="Abonnés actifs"
-          value={stats.activeSubscribers.toString()}
-          accent
-          hint={`${stats.totalSubscribers} inscriptions total`}
-        />
-        <KpiCard
-          label="Newsletters envoyées"
-          value={stats.sentCount.toString()}
-        />
-        <KpiCard
-          label="Désabonnés"
-          value={(stats.totalSubscribers - stats.activeSubscribers).toString()}
-        />
-      </div>
 
       {pending && (
         <section style={{ marginBottom: 28 }}>
@@ -198,7 +175,10 @@ export default async function AdminNewsletterPage() {
       )}
 
       <section style={{ marginBottom: 28 }}>
-        <ManualSendForm subscriberCount={stats.activeSubscribers} />
+        <ManualSendForm
+          initialActive={stats.activeSubscribers}
+          initialTotal={stats.totalSubscribers}
+        />
       </section>
 
       <section style={{ marginBottom: 28 }}>
