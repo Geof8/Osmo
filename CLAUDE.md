@@ -158,6 +158,40 @@ Variables existantes :
 
 ## Journal de bord
 
+### Session du 20/05/2026 — Pivot protocole 2 étapes
+**Fait :**
+- Section protocole (HowItWorks) refondue : cartes
+  01 LE SOIR / 02 LE MATIN / 03 LE RÉSULTAT.
+  Titre "Le protocole OSMO." + sous-titre
+  "Pas juste un électrolyte. Un protocole de
+  récupération en 2 étapes."
+- Hero subline — "À prendre le soir. Pas le matin."
+  remplacé par "Protocole de récupération en 2 étapes
+  · Soir + Matin", emphase changée à
+  "pendant le sommeil et au réveil".
+- AnnouncementBar — ajout
+  "PROTOCOLE 2 ÉTAPES · SOIR + MATIN"
+  (mobile + desktop).
+- Marquee (MARQUEE_ITEMS) — ajout du même item.
+- FAQ — remplacement de "Pourquoi le soir et pas
+  le matin ?" par "Comment utiliser OSMO Recovery ?"
+  avec le protocole détaillé en 2 doses. Item 1 mis
+  à jour pour retirer "conçu pour être pris le soir".
+- /notre-histoire — pas de copie "soir uniquement"
+  présente, aucun changement nécessaire.
+
+**Non touché (volontairement) :** dosages, quantité
+par pot (15 doses), prix, autres sections.
+
+**Bugs identifiés pendant la session :**
+- HowItWorks section : reveal animations gated par
+  IntersectionObserver — vérifier en réel sur prod
+  que les cartes apparaissent bien au scroll après
+  le splash GSAP.
+- Formula : warnings d'hydratation float sur les
+  SVG lines (MolecularAnimation.tsx) — préexistant,
+  non bloquant.
+
 ### Session du 19/05/2026
 **Fait :**
 - Site déployé sur osmo-lab.fr

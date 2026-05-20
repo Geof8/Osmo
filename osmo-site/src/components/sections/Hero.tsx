@@ -74,9 +74,9 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   fontSize: "inherit",
                 }}
               >
-                pendant le sommeil
+                pendant le sommeil et au réveil
               </em>{" "}
-              après une soirée alcoolisée, une semaine chargée, ou les deux. À prendre le soir. Pas le matin.
+              après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole de récupération en 2 étapes · Soir + Matin.
             </motion.p>
 
             <motion.div

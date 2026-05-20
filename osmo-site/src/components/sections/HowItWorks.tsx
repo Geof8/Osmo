@@ -10,48 +10,51 @@ import type { Step } from "@/types";
 const steps: Step[] = [
   {
     num: "01",
-    sub: "Préparation",
-    label: "Versez une dose",
+    sub: "Le soir",
+    label: "Dose 1 — Après la dernière boisson",
     labelEm: true,
-    desc: "8g rasés dans 400ml d'eau froide. Pas chaude.",
-    timing: "⌁ 30 sec",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <ellipse cx="16" cy="16" rx="9" ry="6.5" transform="rotate(-30 16 16)" />
-        <line x1="22" y1="22" x2="44" y2="44" />
-        <path d="M34 8 Q42 14 38 24 L30 20 Q26 14 34 8 Z" />
-      </svg>
-    ),
-  },
-  {
-    num: "02",
-    sub: "Dissolution",
-    label: "Mélangez",
-    labelEm: false,
-    desc: "Jusqu'à dissolution complète. Goût citron franc, légèrement salin.",
-    timing: "⌁ 20 sec",
-    svg: (
-      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M14 10 L42 10 L38 50 L18 50 Z" />
-        <path d="M16 24 Q28 20 40 24" />
-        <circle cx="22" cy="32" r="1.4" fill="currentColor" />
-        <circle cx="32" cy="38" r="1.1" fill="currentColor" />
-        <circle cx="28" cy="42" r="0.9" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    num: "03",
-    sub: "Administration",
-    label: "Buvez le soir",
-    labelEm: true,
-    desc: "Avant le coucher, pas le matin. C'est ici que tout se joue.",
-    timing: "⌁ avant 23h",
+    desc: "Dissoudre 1 dose dans 250ml d'eau froide. Les actifs travaillent pendant votre sommeil — foie, minéraux, hydratation cellulaire.",
+    timing: "⌁ avant de dormir",
     svg: (
       <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth={1.2} aria-hidden="true">
         <path d="M40 8 A22 22 0 1 0 48 38 A18 18 0 0 1 40 8 Z" />
         <circle cx="46" cy="16" r="0.9" fill="currentColor" />
         <circle cx="50" cy="26" r="0.7" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    num: "02",
+    sub: "Le matin",
+    label: "Dose 2 — Au réveil",
+    labelEm: true,
+    desc: "Dissoudre 1 dose dans 250ml d'eau froide. Finalise la récupération, réhydrate, relance le métabolisme.",
+    timing: "⌁ à jeun",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="28" cy="28" r="8" />
+        <line x1="28" y1="6" x2="28" y2="12" />
+        <line x1="28" y1="44" x2="28" y2="50" />
+        <line x1="6" y1="28" x2="12" y2="28" />
+        <line x1="44" y1="28" x2="50" y2="28" />
+        <line x1="12" y1="12" x2="16" y2="16" />
+        <line x1="40" y1="40" x2="44" y2="44" />
+        <line x1="12" y1="44" x2="16" y2="40" />
+        <line x1="40" y1="16" x2="44" y2="12" />
+      </svg>
+    ),
+  },
+  {
+    num: "03",
+    sub: "Le résultat",
+    label: "Le lendemain matin, tu assures.",
+    labelEm: true,
+    desc: "Le protocole OSMO agit en continu pendant 8 heures. Pas de compromis sur ta journée du lendemain.",
+    timing: "⌁ garanti",
+    svg: (
+      <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="28" cy="28" r="20" />
+        <path d="M18 28 L26 36 L40 20" />
       </svg>
     ),
   },
@@ -82,13 +85,13 @@ function StepCard({ step, index }: { step: Step; index: number }) {
           {step.num}
         </div>
         <div
-          className="text-[var(--ink-2)] mt-2"
+          className="mt-3"
           style={{
-            fontFamily: FONTS.display,
-            fontWeight: 500,
-            fontStyle: "normal",
-            fontSize: 20,
-            letterSpacing: 0,
+            fontFamily: FONTS.mono,
+            fontSize: 10,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#C8963E",
           }}
         >
           {step.sub}
@@ -115,7 +118,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
           step.label
         )}
       </h3>
-      <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 260 }}>
+      <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 280 }}>
         {step.desc}
       </p>
       <div
@@ -150,19 +153,17 @@ export default function HowItWorks() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Simple. Le soir.
-                <br />
+                Le protocole{" "}
                 <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontWeight: 800, fontStyle: "normal" }}>
-                  Pas le matin.
+                  OSMO.
                 </span>
               </h2>
             </div>
             <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.65, maxWidth: 460 }}>
-              C&apos;est{" "}
+              Pas juste un électrolyte.{" "}
               <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-                là
-              </em>{" "}
-              toute la différence. Les électrolytes, la NAC et le magnésium agissent pendant que tu dors, pas pendant que tu attends qu&apos;ils agissent.
+                Un protocole de récupération en 2 étapes.
+              </em>
             </p>
           </div>
         </FadeUp>

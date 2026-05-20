@@ -78,6 +78,7 @@ export const MARQUEE_ITEMS = [
   "NAC",
   "Lot N°001 · 50 ex.",
   "Early Adopters · 20 €",
+  "PROTOCOLE 2 ÉTAPES · SOIR + MATIN",
   "LOT N°001",
   "EARLY ADOPTERS",
   "EXPÉDITION SOUS 6 MOIS",
@@ -87,15 +88,15 @@ export const MARQUEE_ITEMS = [
 export const FAQ_ITEMS: FaqItem[] = [
   {
     q: "Qu'est-ce qu'OSMO Recovery exactement ?",
-    a: "Un complexe d'électrolytes en poudre, goût citron, conçu pour être pris le soir après une consommation d'alcool. Bicarbonate de sodium, citrate de potassium, bisglycinate de magnésium, NAC et chlorure de sodium, dosés pour restaurer l'hydratation et soutenir la fonction hépatique.",
+    a: "Un complexe d'électrolytes en poudre, goût citron, conçu pour la récupération après une consommation d'alcool. Bicarbonate de sodium, citrate de potassium, bisglycinate de magnésium, NAC et chlorure de sodium, dosés pour restaurer l'hydratation et soutenir la fonction hépatique.",
   },
   {
     q: "Quelle différence avec un isotonique classique ?",
     a: "Les boissons isotoniques sont conçues pour l'effort sportif. OSMO Recovery est formulé pour la récupération post-alcool, avec de la NAC qui soutient la fonction hépatique, un actif absent des boissons sportives.",
   },
   {
-    q: "Pourquoi le soir et pas le matin ?",
-    a: "La déshydratation commence pendant la nuit. En agissant avant le sommeil, les électrolytes ont le temps de restaurer l'équilibre hydrique. Le matin, il est souvent trop tard.",
+    q: "Comment utiliser OSMO Recovery ?",
+    a: "Le protocole OSMO se déroule en 2 étapes : Dose 1 — Le soir après votre dernière boisson, avant de dormir. Dissoudre 1 dose dans 250ml d'eau froide. Dose 2 — Le matin au réveil, à jeun. Dissoudre 1 dose dans 250ml d'eau froide. Ce protocole en 2 étapes maximise la récupération en agissant à la fois pendant le sommeil et au réveil.",
   },
   {
     q: "Est-ce un médicament ?",
