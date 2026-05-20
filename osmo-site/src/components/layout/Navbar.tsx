@@ -21,30 +21,17 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
           <a
             href="/"
             aria-label="OSMO — retour en haut"
-            className="relative"
+            className="relative pr-[10px] inline-block"
             style={{
-              fontFamily: FONTS.playfair,
-              fontWeight: 600,
-              fontSize: "clamp(24px, 6vw, 30px)",
+              fontFamily: FONTS.display,
+              fontWeight: 900,
+              fontSize: "clamp(26px, 6vw, 32px)",
               lineHeight: 1,
-              letterSpacing: "-0.02em",
+              letterSpacing: "-0.04em",
             }}
           >
-            <span className="relative inline-block">
-              <span
-                className="absolute left-1/2 -translate-x-1/2"
-                aria-hidden="true"
-                style={{
-                  top: -10,
-                  width: 6,
-                  height: 8,
-                  background: "var(--ink)",
-                  borderRadius: "50% 50% 50% 50% / 30% 30% 70% 70%",
-                }}
-              />
-              O
-            </span>
-            smo
+            Osmo
+            <span className="absolute bottom-[4px] right-0 w-[5px] h-[5px] bg-[var(--ink)] rounded-full" aria-hidden="true" />
           </a>
           <span
             className="hidden lg:inline text-[var(--ink-2)]"
