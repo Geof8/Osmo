@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { sendEmail } from "@/lib/email/send";
 import { WaitlistWelcome } from "@/lib/email/templates/WaitlistWelcome";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+let cached: SupabaseClient | null = null;
+function getSupabase(): SupabaseClient {
+  if (cached) return cached;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) {
+    throw new Error("NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY must be set");
+  }
+  cached = createClient(url, key);
+  return cached;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,7 +30,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Nom et prénom requis" }, { status: 400 });
     }
 
-    const { error } = await supabase.from("waitlist").insert({
+    const { error } = await getSupabase().from("waitlist").insert({
       email,
       phone: phone || null,
       first_name: firstName || null,
