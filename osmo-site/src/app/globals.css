@@ -217,11 +217,13 @@ body::before {
   }
 }
 
-/* Pourquoi OSMO argument cards — minimal, no amber on hover */
+/* Pourquoi OSMO argument cards — subtle amber accent on hover */
 .pourquoi-card {
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   padding: 20px 8px;
   background: transparent;
+  border: 1px solid transparent;
+  border-radius: 14px;
 }
 
 .pourquoi-card svg {
@@ -230,11 +232,17 @@ body::before {
 
 @media (hover: hover) and (pointer: fine) {
   .pourquoi-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) scale(1.03);
+    border-color: var(--amber);
+    background-color: rgba(200, 150, 62, 0.04);
+    box-shadow: 0 10px 28px rgba(200, 150, 62, 0.1);
+  }
+  .pourquoi-card:hover svg {
+    stroke: var(--amber);
   }
 }
 
-/* Formula ingredient cards — dark variant; no amber on hover */
+/* Formula ingredient cards — dark variant with amber accent on hover */
 .formula-card {
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -242,8 +250,8 @@ body::before {
 @media (hover: hover) and (pointer: fine) {
   .formula-card:hover {
     transform: translateY(-4px);
-    border-color: #3A3A3A !important;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+    border-color: var(--amber) !important;
+    box-shadow: 0 12px 32px rgba(200, 150, 62, 0.18);
   }
 }
 
