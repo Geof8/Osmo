@@ -56,11 +56,11 @@ export default function IngredientCard({
           style={{
             display: "inline-block",
             alignSelf: "flex-start",
-            background: "#FFFFFF",
+            background: "#C8963E",
             color: "#111111",
             fontFamily: FONTS.mono,
             fontSize: 11,
-            fontWeight: 400,
+            fontWeight: 500,
             padding: "4px 10px",
             borderRadius: 50,
             letterSpacing: "0.08em",
