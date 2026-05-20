@@ -24,9 +24,10 @@ export default function MerciPage() {
           style={{
             fontFamily: FONTS.mono,
             fontSize: 12,
-            letterSpacing: "0.16em",
+            fontWeight: 400,
+            letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "#C8963E",
+            color: "#999999",
             marginBottom: 24,
           }}
         >

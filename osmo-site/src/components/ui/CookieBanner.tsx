@@ -103,23 +103,21 @@ export default function CookieBanner() {
             style={{
               fontFamily: "var(--font-mono), var(--mono)",
               fontSize: 11,
-              letterSpacing: "0.18em",
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
               color: "#111111",
-              background: "var(--amber)",
-              border: "1px solid var(--amber)",
+              background: "#FFFFFF",
+              border: "1px solid #FFFFFF",
               borderRadius: 999,
               padding: "10px 20px",
               cursor: "pointer",
-              transition: "background 0.18s ease, border-color 0.18s ease",
+              transition: "opacity 0.18s ease",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--amber-hover)";
-              e.currentTarget.style.borderColor = "var(--amber-hover)";
+              e.currentTarget.style.opacity = "0.85";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--amber)";
-              e.currentTarget.style.borderColor = "var(--amber)";
+              e.currentTarget.style.opacity = "1";
             }}
           >
             Accepter

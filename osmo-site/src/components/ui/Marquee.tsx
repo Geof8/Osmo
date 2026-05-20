@@ -2,14 +2,14 @@
 
 import { FONTS, MARQUEE_ITEMS } from "@/lib/constants";
 
-const SEP = " ◆ ";
+const SEP = " · ";
 const text = MARQUEE_ITEMS.join(SEP) + SEP;
 
 export default function Marquee() {
   return (
     <div
-      className="relative z-[5] overflow-hidden border-b border-[var(--rule)]"
-      style={{ background: "var(--ink)", padding: "14px 0" }}
+      className="relative z-[5] overflow-hidden"
+      style={{ background: "#111111", padding: "14px 0", borderBottom: "1px solid #2A2A2A" }}
       role="marquee"
       aria-label="Composition et informations produit"
     >
@@ -22,7 +22,8 @@ export default function Marquee() {
             style={{
               fontFamily: FONTS.mono,
               fontSize: 11,
-              letterSpacing: "0.18em",
+              fontWeight: 400,
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
             }}
           >

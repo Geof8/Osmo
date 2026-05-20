@@ -72,7 +72,8 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       initial={ANIMATION_CONFIG.stepReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.stepReveal.initial}
       transition={{ ...ANIMATION_CONFIG.stepReveal.transition, delay: index * 0.15 }}
-      className="howitworks-card p-5 sm:p-8 min-h-[340px] sm:min-h-[420px] bg-white border border-[var(--rule)] rounded-[16px] flex flex-col gap-5 sm:gap-7 relative"
+      className="howitworks-card osmo-card flex flex-col gap-6 sm:gap-7 relative"
+      style={{ padding: "clamp(24px, 4vw, 32px)", minHeight: 420 }}
     >
       <div>
         <div
@@ -82,7 +83,7 @@ function StepCard({ step, index }: { step: Step; index: number }) {
             fontSize: "clamp(56px, 14vw, 96px)",
             lineHeight: 0.85,
             letterSpacing: "-0.02em",
-            color: "var(--ink)",
+            color: "#111111",
           }}
         >
           {step.num}
@@ -91,29 +92,31 @@ function StepCard({ step, index }: { step: Step; index: number }) {
           className="mt-3"
           style={{
             fontFamily: FONTS.mono,
-            fontSize: 10,
-            letterSpacing: "0.18em",
+            fontSize: 12,
+            fontWeight: 400,
+            letterSpacing: "0.15em",
             textTransform: "uppercase",
-            color: "#C8963E",
+            color: "#999999",
           }}
         >
           {step.sub}
         </div>
       </div>
-      <div className="w-14 h-14 text-[var(--ink)]">{step.svg}</div>
+      <div className="w-14 h-14" style={{ color: "#111111" }}>{step.svg}</div>
       <h3
         style={{
           fontFamily: FONTS.display,
-          fontWeight: 700,
+          fontWeight: 500,
           fontSize: "clamp(24px, 2vw, 30px)",
-          lineHeight: 1.1,
+          lineHeight: 1.2,
           letterSpacing: "-0.02em",
+          color: "#111111",
         }}
       >
         {step.labelEm ? (
           <>
             {step.label.split(" ")[0]}{" "}
-            <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, letterSpacing: "-0.02em" }}>
+            <span style={{ fontFamily: FONTS.display, fontStyle: "italic", fontWeight: 700, letterSpacing: "-0.02em", color: "#111111" }}>
               {step.label.split(" ").slice(1).join(" ")}
             </span>
           </>
@@ -121,12 +124,20 @@ function StepCard({ step, index }: { step: Step; index: number }) {
           step.label
         )}
       </h3>
-      <p className="text-[var(--ink-2)]" style={{ fontSize: 14, lineHeight: 1.6, maxWidth: 280 }}>
+      <p style={{ fontSize: 16, lineHeight: 1.6, maxWidth: 280, color: "#444444", fontFamily: FONTS.body }}>
         {step.desc}
       </p>
       <div
-        className="mt-auto pt-4 border-t border-[var(--soft)] text-[var(--ink)]"
-        style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase" }}
+        className="mt-auto pt-5"
+        style={{
+          borderTop: "1px solid #E8E8E8",
+          fontFamily: FONTS.mono,
+          fontSize: 11,
+          fontWeight: 400,
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+          color: "#999999",
+        }}
       >
         {step.timing}
       </div>
@@ -136,14 +147,21 @@ function StepCard({ step, index }: { step: Step; index: number }) {
 
 export default function HowItWorks() {
   return (
-    <section id="protocole" className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
+    <section id="protocole" className="scroll-mt-20 relative z-[5]" style={{ padding: "clamp(72px, 10vw, 100px) 0", borderBottom: "1px solid #E8E8E8" }}>
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <FadeUp>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">
             <div>
               <div
-                className="text-[var(--ink-2)] mb-5 lg:mb-7"
-                style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+                className="mb-6 lg:mb-8"
+                style={{
+                  fontFamily: FONTS.mono,
+                  fontSize: 12,
+                  fontWeight: 400,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "#999999",
+                }}
               >
                 Le protocole
               </div>
@@ -154,35 +172,36 @@ export default function HowItWorks() {
                   fontSize: "clamp(28px, 7vw, 72px)",
                   lineHeight: 0.95,
                   letterSpacing: "-0.02em",
+                  color: "#111111",
                 }}
               >
                 Le protocole{" "}
-                <span className="text-[#C8963E]" style={{ fontFamily: FONTS.display, fontWeight: 800, fontStyle: "normal" }}>
+                <span style={{ fontFamily: FONTS.display, fontWeight: 800, fontStyle: "italic", color: "#111111" }}>
                   OSMO.
                 </span>
               </h2>
             </div>
-            <p className="text-[var(--ink-2)]" style={{ fontSize: "clamp(16px, 1.3vw, 20px)", lineHeight: 1.65, maxWidth: 460 }}>
+            <p style={{ fontSize: "clamp(15px, 1.3vw, 16px)", lineHeight: 1.65, maxWidth: 460, color: "#444444", fontFamily: FONTS.body }}>
               Trois gestes simples.{" "}
-              <em style={{ fontFamily: FONTS.display, fontStyle: "normal", fontWeight: 700, color: "var(--ink)", letterSpacing: "-0.02em" }}>
+              <em style={{ fontFamily: FONTS.display, fontStyle: "italic", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em" }}>
                 À prendre deux fois par jour, dont une prise le soir avant de dormir.
               </em>
             </p>
           </div>
         </FadeUp>
 
-        {/* Mobile: Framer Motion swipe carousel */}
+        {/* Mobile: Framer Motion swipe carousel — amber kept on active dot (per spec) */}
         <MobileCardCarousel
           items={steps}
           renderItem={(step, i) => <StepCard step={step} index={i} />}
           getKey={(step) => step.num}
           ariaLabel="Protocole d'utilisation — étapes 1, 2, 3"
           dotColor="#C8963E"
-          dotInactiveColor="#DDDDDD"
+          dotInactiveColor="#E8E8E8"
         />
 
         {/* Desktop / tablet: 3-column grid */}
-        <div className="hidden md:grid md:grid-cols-3 gap-5 sm:gap-7">
+        <div className="hidden md:grid md:grid-cols-3 gap-6">
           {steps.map((step, i) => (
             <StepCard key={step.num} step={step} index={i} />
           ))}

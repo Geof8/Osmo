@@ -9,12 +9,13 @@ export default function Strip() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="bg-[var(--ink)] text-white relative z-10"
+      className="bg-[#111111] text-white relative z-10"
       role="status"
       style={{
-        padding: "9px 0",
+        padding: "10px 0",
         fontFamily: FONTS.mono,
-        letterSpacing: "0.18em",
+        fontWeight: 400,
+        letterSpacing: "0.15em",
         textTransform: "uppercase",
       }}
     >

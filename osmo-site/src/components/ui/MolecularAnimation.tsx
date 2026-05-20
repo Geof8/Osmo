@@ -15,7 +15,7 @@ const PICTO_SVG_PROPS = {
   height: 28,
   viewBox: "0 0 36 36",
   fill: "none",
-  stroke: "#C8963E",
+  stroke: "#FFFFFF",
   strokeWidth: 1.5,
   "aria-hidden": true,
 } as const;
@@ -313,9 +313,9 @@ export default function MolecularAnimation() {
               y1={DESKTOP_SIZE / 2}
               x2={x2}
               y2={y2}
-              stroke="#C8963E"
+              stroke="#FFFFFF"
               strokeWidth={0.8}
-              opacity={0.3}
+              opacity={0.18}
             />
           );
         })}

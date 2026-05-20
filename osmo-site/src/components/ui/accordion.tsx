@@ -13,7 +13,7 @@ const AccordionItem = React.forwardRef<
   <AccordionPrimitive.Item
     ref={ref}
     className={cn(
-      "border border-[var(--rule)] rounded-[8px] mb-3 overflow-hidden bg-white px-3 sm:px-4 py-1",
+      "border border-[#E8E8E8] rounded-[8px] mb-3 overflow-hidden bg-white px-3 sm:px-4 py-1 data-[state=open]:border-[#111111] transition-colors",
       className
     )}
     {...props}
@@ -41,10 +41,10 @@ const AccordionTrigger = React.forwardRef<
         aria-hidden="true"
       >
         <span
-          className="absolute w-[18px] h-[1.5px] bg-[var(--ink)] transition-colors duration-200 group-data-[state=open]:bg-[#C8963E]"
+          className="absolute w-[18px] h-[1.5px] bg-[#111111] transition-colors duration-200"
         />
         <span
-          className="absolute w-[18px] h-[1.5px] bg-[var(--ink)] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] rotate-90 group-data-[state=open]:rotate-0 group-data-[state=open]:bg-[#C8963E]"
+          className="absolute w-[18px] h-[1.5px] bg-[#111111] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] rotate-90 group-data-[state=open]:rotate-0"
         />
       </span>
     </AccordionPrimitive.Trigger>

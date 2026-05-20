@@ -15,19 +15,20 @@ export default function Formula() {
     <section
       id="formule"
       className="scroll-mt-20 relative z-[5]"
-      style={{ background: "#111111", padding: "clamp(40px, 7vw, 48px) 0 clamp(56px, 9vw, 80px)" }}
+      style={{ background: "#111111", padding: "clamp(56px, 9vw, 100px) 0" }}
     >
       <div ref={ref} className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
           <div
-            className="mb-2"
+            className="mb-3"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
-              letterSpacing: "0.18em",
+              fontSize: 12,
+              fontWeight: 400,
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "#AAAAAA",
+              color: "#999999",
             }}
           >
             La formule
@@ -67,8 +68,15 @@ export default function Formula() {
             ))}
           </h2>
           <motion.p
-            className="mt-5"
-            style={{ fontSize: "clamp(14px, 3.4vw, 15px)", lineHeight: 1.65, color: "#AAAAAA", maxWidth: 380 }}
+            className="mt-8"
+            style={{
+              fontFamily: FONTS.body,
+              fontSize: "clamp(14px, 3.4vw, 16px)",
+              lineHeight: 1.65,
+              color: "#AAAAAA",
+              maxWidth: 380,
+              fontWeight: 400,
+            }}
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -84,19 +92,19 @@ export default function Formula() {
           </div>
         </div>
 
-        <div className="mt-10 sm:mt-14 lg:mt-12">
-          {/* Mobile: Framer Motion swipe carousel */}
+        <div className="mt-12 sm:mt-16 lg:mt-14">
+          {/* Mobile: Framer Motion swipe carousel — amber kept on active dot (per spec) */}
           <MobileCardCarousel
             items={INGREDIENTS}
             renderItem={(a, i) => <IngredientCard a={a} index={i} />}
             getKey={(a) => a.name}
             ariaLabel="Cinq actifs — fiches ingrédients"
             dotColor="#C8963E"
-            dotInactiveColor="#333333"
+            dotInactiveColor="#2A2A2A"
           />
 
           {/* Tablet / Desktop: grid (unchanged at md and lg) */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-6">
             {INGREDIENTS.map((a, i) => (
               <IngredientCard key={a.name} a={a} index={i} />
             ))}
@@ -104,22 +112,23 @@ export default function Formula() {
 
           <FadeUp delay={0.3}>
             <div
-              className="mt-5 lg:mt-6 pt-4 flex justify-between gap-8 flex-wrap items-center"
-              style={{ borderTop: "1px solid #333333" }}
+              className="mt-8 lg:mt-10 pt-6 flex justify-between gap-8 flex-wrap items-center"
+              style={{ borderTop: "1px solid #2A2A2A" }}
             >
               <div
                 className="flex gap-5 sm:gap-7 flex-wrap"
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 11,
-                  letterSpacing: "0.18em",
+                  fontWeight: 400,
+                  letterSpacing: "0.15em",
                   textTransform: "uppercase",
                   color: "#FFFFFF",
                 }}
               >
                 {STAMPS.map((s) => (
                   <span key={s} className="inline-flex items-center gap-2">
-                    <span className="w-[6px] h-[6px] bg-[#C8963E] rounded-full" aria-hidden="true" />
+                    <span className="w-[5px] h-[5px] bg-white rounded-full" aria-hidden="true" />
                     {s}
                   </span>
                 ))}

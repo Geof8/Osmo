@@ -103,7 +103,7 @@ export default function PourquoiOsmo() {
   return (
     <section
       className="relative z-[5]"
-      style={{ padding: "clamp(64px, 10vw, 96px) 0", background: "#F4F4F4", borderBottom: "1px solid #E0E0E0" }}
+      style={{ padding: "clamp(72px, 10vw, 100px) 0", background: "#F4F4F4", borderBottom: "1px solid #E8E8E8" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="text-center max-w-[720px] mx-auto">
@@ -127,9 +127,10 @@ export default function PourquoiOsmo() {
               style={{
                 fontFamily: FONTS.body,
                 fontSize: 16,
-                lineHeight: 1.55,
-                color: "#666666",
-                marginTop: 16,
+                lineHeight: 1.65,
+                color: "#444444",
+                marginTop: 24,
+                fontWeight: 400,
               }}
             >
               La formule qui travaille pendant que tu dors.
@@ -140,8 +141,8 @@ export default function PourquoiOsmo() {
         </div>
 
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-14"
-          style={{ marginTop: "clamp(40px, 7vw, 72px)" }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 sm:gap-x-8 gap-y-12 sm:gap-y-14"
+          style={{ marginTop: "clamp(48px, 8vw, 80px)" }}
         >
           {ITEMS.map((item, i) => (
             <FadeUp key={item.id} delay={0.2 + i * 0.08}>
@@ -150,15 +151,14 @@ export default function PourquoiOsmo() {
                   <Icon name={item.id} />
                 </div>
                 <h3
-                  className="mt-4 md:mt-5"
+                  className="mt-5 md:mt-6"
                   style={{
                     fontFamily: FONTS.body,
-                    fontWeight: 700,
+                    fontWeight: 500,
                     fontSize: 14,
-                    lineHeight: 1.3,
+                    lineHeight: 1.4,
                     color: "#111111",
                     letterSpacing: "-0.005em",
-                    transition: "color 0.25s ease",
                   }}
                 >
                   {item.title}
@@ -167,9 +167,10 @@ export default function PourquoiOsmo() {
                   style={{
                     fontFamily: FONTS.body,
                     fontSize: "clamp(12px, 3vw, 13px)",
-                    lineHeight: 1.5,
-                    color: "#666666",
-                    marginTop: 8,
+                    lineHeight: 1.55,
+                    color: "#444444",
+                    marginTop: 10,
+                    fontWeight: 400,
                   }}
                 >
                   {item.desc}

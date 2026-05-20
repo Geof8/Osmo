@@ -32,6 +32,6 @@ Pour plus de détails lire uniquement si nécessaire:
 - /docs/JOURNAL.md → journal de bord des sessions
 
 ## Journal rapide
-Dernière session: 2026-05-20 — Adoucissement protocole en 3 gestes simples (Verser / Diluer / Déguster) · ton suggestif "lire entre les lignes" · bandeau et hero passés à "Protocole quotidien"
-Statut courant: protocole copy révisé partout (Hero, HowItWorks, AnnouncementBar, Marquee, FAQ, docs/PRODUCT.md)
-Bugs ouverts: pot 15 doses vs 2 prises/jour (à arbitrer) · `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer
+Dernière session: 2026-05-20 — Refonte design system premium (amber restreint aux CTAs + key numbers + dots, typo + spacing affinés, water-drop logo retiré), appliquée par-dessus l'adoucissement protocole "3 gestes simples"
+Statut courant: design tokens + sections publiques migrés ; HowItWorks (01 Préparation / 02 Dilution / 03 Dégustation) sous le nouveau design system
+Bugs ouverts: hydration warning React préexistant sur MolecularAnimation · carousel hero images à uploader · pot 15 doses vs 2 prises/jour (à arbitrer) · `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer

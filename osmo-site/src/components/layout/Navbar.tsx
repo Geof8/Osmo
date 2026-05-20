@@ -12,35 +12,36 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
       initial={{ y: -10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--rule)]"
+      className="sticky top-0 z-50 bg-white border-b border-[#E8E8E8]"
       aria-label="Navigation principale"
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-3 h-[60px] sm:h-[78px]">
-        {/* Left — Logo */}
+        {/* Left — Logo (wordmark only) */}
         <div className="flex items-baseline gap-4 min-w-0">
           <a
             href="/"
             aria-label="OSMO — retour en haut"
-            className="relative pr-[10px] inline-block"
+            className="inline-block"
             style={{
               fontFamily: FONTS.display,
               fontWeight: 900,
               fontSize: "clamp(26px, 6vw, 32px)",
               lineHeight: 1,
               letterSpacing: "-0.04em",
+              color: "#111111",
             }}
           >
             Osmo
-            <span className="absolute bottom-[4px] right-0 w-[5px] h-[5px] bg-[var(--ink)] rounded-full" aria-hidden="true" />
           </a>
           <span
-            className="hidden lg:inline text-[var(--ink-2)]"
+            className="hidden lg:inline"
             style={{
               fontFamily: FONTS.display,
               fontWeight: 500,
               fontStyle: "normal",
               fontSize: 15,
               letterSpacing: "-0.01em",
+              color: "#666666",
             }}
           >
             Recovery · Lot N°001
@@ -51,20 +52,23 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
         <div className="hidden sm:flex justify-center">
           <a
             href="/notre-histoire"
-            className="inline-flex items-center justify-center min-h-[44px] text-[var(--ink-2)] hover:text-[var(--ink)] transition-colors duration-200"
+            className="inline-flex items-center justify-center min-h-[44px] transition-colors duration-200"
             style={{
               fontFamily: FONTS.mono,
               fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: "0.16em",
+              fontWeight: 400,
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
+              color: "#444444",
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#111111")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#444444")}
           >
             Notre Histoire
           </a>
         </div>
 
-        {/* Right — CTA */}
+        {/* Right — CTA (amber preserved) */}
         <div className="flex items-center justify-end gap-4">
           <button
             onClick={addToCartAndNavigate}

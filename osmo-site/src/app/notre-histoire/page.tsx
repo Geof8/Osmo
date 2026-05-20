@@ -25,7 +25,7 @@ function WordByWord({ text }: { text: string }) {
         fontSize: "clamp(22px, 6vw, 48px)",
         letterSpacing: "-0.03em",
         lineHeight: 1.1,
-        color: "var(--amber)",
+        color: "#111111",
       }}
     >
       {words.map((word, i) => (
@@ -77,15 +77,15 @@ export default function NotreHistoire() {
             </FadeUp>
             <FadeUp delay={0.15}>
               <p
-                className="mt-8"
+                className="mt-10"
                 style={{
                   fontFamily: FONTS.display,
-                  fontWeight: 600,
+                  fontWeight: 500,
                   fontStyle: "italic",
                   fontSize: "clamp(16px, 4vw, 24px)",
-                  lineHeight: 1.45,
+                  lineHeight: 1.5,
                   letterSpacing: "-0.01em",
-                  color: "var(--amber)",
+                  color: "#444444",
                 }}
               >
                 Janvier 2025. La marque d&apos;électrolytes que j&apos;utilisais
@@ -97,7 +97,7 @@ export default function NotreHistoire() {
         </section>
 
         {/* Section 1 — Le problème */}
-        <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
+        <section className="bg-[var(--paper)]" style={{ padding: "clamp(72px, 10vw, 100px) 0" }}>
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
               <p
@@ -121,7 +121,7 @@ export default function NotreHistoire() {
         {/* Section 2 — La recherche */}
         <section
           className="bg-[var(--paper-2)]"
-          style={{ padding: "clamp(60px, 8vw, 100px) 0" }}
+          style={{ padding: "clamp(72px, 10vw, 100px) 0" }}
         >
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>
@@ -159,7 +159,7 @@ export default function NotreHistoire() {
         </section>
 
         {/* Section 3 — 29 versions */}
-        <section className="bg-[var(--paper)]" style={{ padding: "clamp(60px, 8vw, 100px) 0" }}>
+        <section className="bg-[var(--paper)]" style={{ padding: "clamp(72px, 10vw, 100px) 0" }}>
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp delay={0.1}>
               <div
@@ -169,19 +169,20 @@ export default function NotreHistoire() {
                   fontSize: "clamp(80px, 20vw, 160px)",
                   lineHeight: 1,
                   letterSpacing: "-0.04em",
-                  color: "var(--amber)",
+                  color: "#111111",
                 }}
               >
                 <CountUp target={29} duration={1.5} />
               </div>
               <div
-                className="text-[var(--ink-2)]"
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 12,
-                  letterSpacing: "0.18em",
+                  fontWeight: 400,
+                  letterSpacing: "0.15em",
                   textTransform: "uppercase",
-                  marginTop: 12,
+                  marginTop: 16,
+                  color: "#999999",
                 }}
               >
                 versions de la formule
@@ -211,7 +212,7 @@ export default function NotreHistoire() {
         {/* Section 4 — Aujourd'hui */}
         <section
           className="bg-[var(--paper-2)]"
-          style={{ padding: "clamp(60px, 8vw, 100px) 0" }}
+          style={{ padding: "clamp(72px, 10vw, 100px) 0" }}
         >
           <div className="max-w-[760px] mx-auto px-6 sm:px-10">
             <FadeUp>

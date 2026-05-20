@@ -67,8 +67,9 @@ export default function UnsubscribePage({
             fontSize: 11,
             letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: "#C8963E",
+            color: "#999999",
             marginBottom: 24,
+            fontWeight: 400,
           }}
         >
           OSMO · Newsletter

@@ -75,8 +75,8 @@ export default function WaitlistForm() {
       <div
         className="p-8 text-center"
         style={{
-          borderLeft: "3px solid #C8963E",
-          backgroundColor: "rgba(255,255,255,0.06)",
+          borderLeft: "2px solid #FFFFFF",
+          backgroundColor: "rgba(255,255,255,0.04)",
           maxWidth: 560,
         }}
       >
@@ -85,7 +85,7 @@ export default function WaitlistForm() {
             fontFamily: FONTS.display,
             fontWeight: 700,
             fontSize: "clamp(20px, 2.5vw, 28px)",
-            color: "var(--amber)",
+            color: "#FFFFFF",
           }}
         >
           Tu es sur la liste !
@@ -155,7 +155,7 @@ export default function WaitlistForm() {
             value={form.firstName}
             onChange={handleChange}
             placeholder="Prénom"
-            className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-[var(--amber)] transition-colors placeholder:text-white/30"
+            className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-white transition-colors placeholder:text-white/30"
             style={inputStyle}
           />
           {errors.firstName && <p className="mt-1 text-red-400" style={{ fontFamily: FONTS.mono, fontSize: 11 }}>{errors.firstName}</p>}
@@ -168,7 +168,7 @@ export default function WaitlistForm() {
             value={form.lastName}
             onChange={handleChange}
             placeholder="Nom"
-            className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-[var(--amber)] transition-colors placeholder:text-white/30"
+            className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-white transition-colors placeholder:text-white/30"
             style={inputStyle}
           />
           {errors.lastName && <p className="mt-1 text-red-400" style={{ fontFamily: FONTS.mono, fontSize: 11 }}>{errors.lastName}</p>}
@@ -183,7 +183,7 @@ export default function WaitlistForm() {
           value={form.email}
           onChange={handleChange}
           placeholder="votre@email.com"
-          className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-[var(--amber)] transition-colors placeholder:text-white/30"
+          className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-white transition-colors placeholder:text-white/30"
           style={inputStyle}
         />
         {errors.email && <p className="mt-1 text-red-400" style={{ fontFamily: FONTS.mono, fontSize: 11 }}>{errors.email}</p>}
@@ -199,7 +199,7 @@ export default function WaitlistForm() {
           value={form.phone}
           onChange={handleChange}
           placeholder="06 12 34 56 78"
-          className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-[var(--amber)] transition-colors placeholder:text-white/30"
+          className="w-full h-12 px-4 border border-white/20 bg-white/5 text-white outline-none focus:border-white transition-colors placeholder:text-white/30"
           style={inputStyle}
         />
       </div>
@@ -210,7 +210,7 @@ export default function WaitlistForm() {
         </p>
       )}
       {status === "duplicate" && (
-        <p className="text-[var(--amber)]" style={{ fontFamily: FONTS.mono, fontSize: 11 }}>
+        <p style={{ fontFamily: FONTS.mono, fontSize: 11, color: "#FFFFFF" }}>
           Cet email est déjà inscrit sur la liste d&apos;attente.
         </p>
       )}

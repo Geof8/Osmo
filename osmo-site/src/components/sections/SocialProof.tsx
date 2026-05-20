@@ -16,8 +16,8 @@ export default function SocialProof() {
       style={{
         background: "#111111",
         color: "#FFFFFF",
-        padding: "clamp(56px, 9vw, 80px) 0",
-        borderBottom: "1px solid #222222",
+        padding: "clamp(72px, 10vw, 100px) 0",
+        borderBottom: "1px solid #2A2A2A",
       }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
@@ -29,13 +29,13 @@ export default function SocialProof() {
               fontSize: "clamp(28px, 7vw, 72px)",
               lineHeight: 0.95,
               letterSpacing: "-0.02em",
-              marginBottom: "clamp(28px, 4vw, 56px)",
+              marginBottom: "clamp(32px, 4vw, 56px)",
               color: "#FFFFFF",
             }}
           >
             Développé en laboratoire.
             <br />
-            <span className="text-[#C8963E]">Validé par l&apos;entourage.</span>
+            <span style={{ fontStyle: "italic", color: "#FFFFFF" }}>Validé par l&apos;entourage.</span>
           </h2>
         </FadeUp>
 
@@ -43,11 +43,12 @@ export default function SocialProof() {
           <p
             style={{
               fontFamily: FONTS.body,
-              fontSize: "clamp(15px, 3.6vw, 20px)",
-              lineHeight: 1.65,
+              fontSize: "clamp(15px, 3.6vw, 16px)",
+              lineHeight: 1.7,
               maxWidth: 640,
               marginBottom: 0,
               color: "#AAAAAA",
+              fontWeight: 400,
             }}
           >
             La formule OSMO a été développée avec un laboratoire français
@@ -68,10 +69,10 @@ export default function SocialProof() {
               fontSize: "clamp(20px, 5vw, 42px)",
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
-              color: "#C8963E",
+              color: "#FFFFFF",
               margin: "0 auto",
               maxWidth: 700,
-              padding: "clamp(20px, 2.5vw, 32px) 0 clamp(32px, 4vw, 56px) 0",
+              padding: "clamp(32px, 4vw, 48px) 0 clamp(40px, 5vw, 64px) 0",
             }}
           >
             &ldquo;Dès que c&apos;est dispo, tu m&apos;en mets de côté.&rdquo;
@@ -80,8 +81,8 @@ export default function SocialProof() {
 
         <FadeUp delay={0.2}>
           <div
-            className="pt-8 sm:pt-10 grid grid-cols-3 gap-3 sm:gap-6 text-center"
-            style={{ borderTop: "1px solid #333333" }}
+            className="pt-10 grid grid-cols-3 gap-3 sm:gap-6 text-center"
+            style={{ borderTop: "1px solid #2A2A2A" }}
           >
             {STATS.map((stat) => (
               <div key={stat.value} className="min-w-0">
@@ -92,7 +93,7 @@ export default function SocialProof() {
                     fontSize: "clamp(18px, 5.2vw, 44px)",
                     lineHeight: 1.05,
                     letterSpacing: "-0.02em",
-                    marginBottom: 6,
+                    marginBottom: 8,
                     color: "#FFFFFF",
                   }}
                 >
@@ -100,10 +101,13 @@ export default function SocialProof() {
                 </div>
                 <div
                   style={{
-                    fontFamily: FONTS.body,
-                    fontSize: "clamp(11px, 2.8vw, 13px)",
+                    fontFamily: FONTS.mono,
+                    fontSize: 12,
+                    fontWeight: 400,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
                     lineHeight: 1.35,
-                    color: "#AAAAAA",
+                    color: "#999999",
                   }}
                 >
                   {stat.label}

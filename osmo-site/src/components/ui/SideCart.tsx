@@ -46,7 +46,7 @@ function validate(form: FormState): Errors {
 
 const inputBase: React.CSSProperties = {
   width: "100%",
-  border: "1px solid #E0E0E0",
+  border: "1px solid #E8E8E8",
   borderRadius: 8,
   padding: "12px 16px",
   fontSize: 15,
@@ -296,7 +296,7 @@ export default function SideCart() {
               </button>
             </div>
 
-            <hr style={{ border: "none", borderTop: "1px solid #E0E0E0", margin: "24px 0" }} />
+            <hr style={{ border: "none", borderTop: "1px solid #E8E8E8", margin: "24px 0" }} />
 
             <div>
               <div
@@ -358,7 +358,7 @@ export default function SideCart() {
               </div>
             </div>
 
-            <hr style={{ border: "none", borderTop: "1px solid #E0E0E0", margin: "24px 0" }} />
+            <hr style={{ border: "none", borderTop: "1px solid #E8E8E8", margin: "24px 0" }} />
 
             <form onSubmit={handleSubmit} noValidate>
               <div style={{ marginBottom: 16 }}>
@@ -374,12 +374,12 @@ export default function SideCart() {
                   onChange={(e) => updateField("firstName", e.target.value)}
                   style={{
                     ...inputBase,
-                    borderColor: errors.firstName ? "#C8963E" : "#E0E0E0",
+                    borderColor: errors.firstName ? "#D14D4D" : "#E8E8E8",
                   }}
                   className="focus:border-[#111111]"
                 />
                 {errors.firstName && (
-                  <p style={{ color: "#C8963E", fontSize: 12, marginTop: 4 }}>{errors.firstName}</p>
+                  <p style={{ color: "#D14D4D", fontSize: 12, marginTop: 4 }}>{errors.firstName}</p>
                 )}
               </div>
 
@@ -396,12 +396,12 @@ export default function SideCart() {
                   onChange={(e) => updateField("lastName", e.target.value)}
                   style={{
                     ...inputBase,
-                    borderColor: errors.lastName ? "#C8963E" : "#E0E0E0",
+                    borderColor: errors.lastName ? "#D14D4D" : "#E8E8E8",
                   }}
                   className="focus:border-[#111111]"
                 />
                 {errors.lastName && (
-                  <p style={{ color: "#C8963E", fontSize: 12, marginTop: 4 }}>{errors.lastName}</p>
+                  <p style={{ color: "#D14D4D", fontSize: 12, marginTop: 4 }}>{errors.lastName}</p>
                 )}
               </div>
 
@@ -418,16 +418,16 @@ export default function SideCart() {
                   onChange={(e) => updateField("email", e.target.value)}
                   style={{
                     ...inputBase,
-                    borderColor: errors.email ? "#C8963E" : "#E0E0E0",
+                    borderColor: errors.email ? "#D14D4D" : "#E8E8E8",
                   }}
                   className="focus:border-[#111111]"
                 />
                 {errors.email && (
-                  <p style={{ color: "#C8963E", fontSize: 12, marginTop: 4 }}>{errors.email}</p>
+                  <p style={{ color: "#D14D4D", fontSize: 12, marginTop: 4 }}>{errors.email}</p>
                 )}
               </div>
 
-              <hr style={{ border: "none", borderTop: "1px solid #E0E0E0", margin: "24px 0" }} />
+              <hr style={{ border: "none", borderTop: "1px solid #E8E8E8", margin: "24px 0" }} />
 
               <div style={{ marginBottom: 20 }}>
                 <label htmlFor="sc-promo" style={labelBase}>
@@ -510,7 +510,7 @@ export default function SideCart() {
                         fontFamily: "var(--mono)",
                         letterSpacing: "0.08em",
                         textTransform: "uppercase",
-                        borderColor: promoError ? "#C8963E" : "#E0E0E0",
+                        borderColor: promoError ? "#D14D4D" : "#E8E8E8",
                       }}
                     />
                     <button
@@ -540,7 +540,7 @@ export default function SideCart() {
                   </div>
                 )}
                 {promoError && (
-                  <p style={{ color: "#C8963E", fontSize: 12, marginTop: 6 }}>
+                  <p style={{ color: "#D14D4D", fontSize: 12, marginTop: 6 }}>
                     {promoError}
                   </p>
                 )}
@@ -561,7 +561,7 @@ export default function SideCart() {
                 </div>
                 <div
                   style={{
-                    border: "1px solid #E0E0E0",
+                    border: "1px solid #E8E8E8",
                     borderRadius: 8,
                     padding: "12px 16px",
                     background: "#F9F9F9",
@@ -597,7 +597,7 @@ export default function SideCart() {
                 <p
                   role="alert"
                   style={{
-                    color: "#C8963E",
+                    color: "#D14D4D",
                     fontSize: 13,
                     marginTop: 12,
                     textAlign: "center",

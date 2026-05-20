@@ -3,25 +3,28 @@ import { FONTS, FOOTER_COLUMNS, LEGAL_LINKS } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--paper)] border-t border-[var(--rule)] relative z-[5]" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
+    <footer
+      className="relative z-[5]"
+      style={{ background: "#F4F4F4", padding: "clamp(72px, 10vw, 100px) 0" }}
+    >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 lg:gap-14">
           <div>
             <span
-              className="relative pr-[14px] inline-block"
+              className="inline-block"
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 900,
                 fontSize: 40,
                 letterSpacing: "-0.04em",
                 lineHeight: 1,
+                color: "#111111",
               }}
             >
               Osmo
-              <span className="absolute bottom-[6px] right-0 w-[7px] h-[7px] bg-[var(--ink)] rounded-full" aria-hidden="true" />
             </span>
             <div
-              className="text-[var(--ink-2)] mt-[14px]"
+              className="mt-[14px]"
               style={{
                 fontFamily: FONTS.display,
                 fontWeight: 500,
@@ -29,17 +32,25 @@ export default function Footer() {
                 fontSize: 18,
                 lineHeight: 1.4,
                 maxWidth: 280,
+                color: "#666666",
               }}
             >
               Récupérez.{" "}
-              <span style={{ fontWeight: 700 }}>Recommencez.</span>
+              <span style={{ fontWeight: 700, color: "#111111" }}>Recommencez.</span>
             </div>
           </div>
           {FOOTER_COLUMNS.map((col) => (
             <nav key={col.title} aria-label={col.title}>
               <h4
-                className="text-[var(--ink-2)] mb-[18px]"
-                style={{ fontFamily: FONTS.mono, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500 }}
+                className="mb-[18px]"
+                style={{
+                  fontFamily: FONTS.mono,
+                  fontSize: 11,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  fontWeight: 400,
+                  color: "#999999",
+                }}
               >
                 {col.title}
               </h4>
@@ -51,7 +62,10 @@ export default function Footer() {
                   >
                     <a
                       href={link.href}
-                      className="hover:text-[var(--ink)] transition-colors inline-flex items-center min-h-[44px]"
+                      className="transition-colors inline-flex items-center min-h-[44px]"
+                      style={{ color: "#666666" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "#111111")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "#666666")}
                     >
                       {link.label}
                     </a>
@@ -63,10 +77,17 @@ export default function Footer() {
         </div>
 
         <div
-          className="mt-14 pt-5 border-t border-[var(--soft)] flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-6 sm:flex-wrap text-[var(--ink-2)]"
-          style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+          className="mt-14 pt-6 flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-6 sm:flex-wrap"
+          style={{
+            borderTop: "1px solid #E8E8E8",
+            fontFamily: FONTS.mono,
+            fontSize: 11,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "#666666",
+          }}
         >
-          <div>© 2026 Osmo Lab · osmolab.fr</div>
+          <div>© 2026 Osmo Lab · osmo-lab.fr</div>
           <div className="hidden sm:block">Réf. OSMO/REC—001 · Lot 001 · 04—2026</div>
           <div>Made in France · 50 ex.</div>
         </div>
@@ -85,8 +106,10 @@ export default function Footer() {
               {i > 0 ? <span aria-hidden="true">·</span> : null}
               <Link
                 href={link.href}
-                className="transition-colors hover:text-[var(--ink)]"
+                className="transition-colors"
                 style={{ color: "#666666" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#111111")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#666666")}
               >
                 {link.label}
               </Link>

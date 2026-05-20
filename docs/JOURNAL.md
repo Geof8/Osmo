@@ -16,6 +16,58 @@
 
 ## Historique
 
+### Session du 2026-05-20 — Refonte design system premium
+**Fait :**
+- Amber #C8963E restreint à 3 usages :
+  CTA principal "Devenir Early Adopter", key numbers
+  (5 · 15 · 20€ · 50), active dots des carousels mobiles.
+- Autres usages amber remplacés :
+  borders → #E8E8E8, text accents → #111111 bold/italic,
+  badges "★ Clé" et tags ingrédients → noir/blanc,
+  FAQ active → #111111, callout ClosingCTA → bordure blanche,
+  arrows ingrédients → blanc, MolecularAnimation pictos → blanc.
+- Typographie : H3 700 → 500, body 17px → 16px / #444444,
+  eyebrows (LA FORMULE, LE PROTOCOLE) → #999999 weight 400
+  letter-spacing 0.15em, labels 12px 0.08em.
+- Spacing : section padding 80px → 100px, gap cards 16px → 24px,
+  card padding 24px → 32px.
+- Cards : nouvelle classe `.osmo-card` (white, 1px solid #E8E8E8,
+  radius 16px, shadow 0 2px 12px rgba(0,0,0,0.04), hover shadow
+  0 8px 24px rgba(0,0,0,0.08) + border #CCCCCC).
+- Boutons secondaires : nouvelle classe `.cta-pill-ghost`
+  (outline #111111, hover bg noir + texte blanc).
+- Navbar : drop dot retirée à côté du wordmark "Osmo",
+  nav link Notre Histoire → #444444 hover #111111.
+- Footer : background #F4F4F4, drop dot retirée,
+  hover links #111111, bullets/underlines amber neutralisés.
+- AnnouncementBar : weight 400, letter-spacing 0.15em.
+- Accordion FAQ : border ouvert #111111, icons toujours noires.
+- NewsletterSignup : bouton secondaire blanc plein.
+- SideCart : erreurs amber → #D14D4D, borders → #E8E8E8.
+- CookieBanner : bouton Accepter passé en blanc plein.
+- Notre Histoire : "29 versions" #111111, intro italique #444444,
+  closing line WordByWord #111111 bold.
+- Tailwind config : osmo.border #E0E0E0 → #E8E8E8,
+  osmo.muted #666 → #444, ajout osmo.subtle #999.
+- Globals.css : --ink-2 #555 → #444, --rule/--soft → #E8E8E8,
+  --ring → ink, --radius-card → 16px, focus-ring → ink.
+- Appliqué par-dessus l'adoucissement protocole de la session
+  précédente : HowItWorks conserve "01 Préparation / 02 Dilution
+  / 03 Dégustation" et le sous-titre "Trois gestes simples…",
+  réharmonisés sous le nouveau design system.
+
+**En cours :**
+- Aucun travail en cours.
+
+**Bugs ouverts (préexistants) :**
+- Hydration warning React sur MolecularAnimation
+  (différence floating-point SSR/client : 88.19660112501052 vs ...49).
+- Carousel hero — images pas encore uploadées.
+
+**À faire :**
+- Validation visuelle complète sur osmo-lab.fr après deploy
+  (preview Vercel limité par l'animation SplitOverlay).
+
 ### Session du 2026-05-20 — Adoucissement protocole (3 gestes)
 **Fait :**
 - Section protocole repensée en 3 gestes de

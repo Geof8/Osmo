@@ -14,13 +14,13 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
   const { addToCartAndNavigate } = useCart();
   return (
     <section
-      className="scroll-mt-20 border-b border-[var(--rule)] relative z-[5]"
-      style={{ padding: "clamp(48px, 8vw, 80px) 0" }}
+      className="scroll-mt-20 border-b border-[#E8E8E8] relative z-[5]"
+      style={{ padding: "clamp(64px, 9vw, 100px) 0" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start lg:min-h-[70vh]">
           {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
-          <div className="flex flex-col gap-6 sm:gap-9 order-2 lg:order-2">
+          <div className="flex flex-col gap-8 sm:gap-10 order-2 lg:order-2">
             <h1
               style={{
                 fontFamily: FONTS.display,
@@ -28,6 +28,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 fontSize: "clamp(36px, 8vw, 96px)",
                 lineHeight: 0.95,
                 letterSpacing: "-0.02em",
+                color: "#111111",
               }}
             >
               <span className="block">
@@ -43,7 +44,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   </motion.span>
                 ))}
               </span>
-              <span className="block text-[#C8963E]" style={{ fontStyle: "normal" }}>
+              <span className="block" style={{ fontStyle: "italic", fontWeight: 700, color: "#111111" }}>
                 {headlineWords2.map((word, i) => (
                   <motion.span
                     key={word}
@@ -62,8 +63,12 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[var(--ink)]"
-              style={{ fontSize: "clamp(15px, 3.5vw, 19px)", lineHeight: 1.6, maxWidth: 480 }}
+              style={{
+                fontSize: "clamp(15px, 3.5vw, 16px)",
+                lineHeight: 1.65,
+                maxWidth: 480,
+                color: "#444444",
+              }}
             >
               Un complexe d&apos;électrolytes formulé pour la récupération{" "}
               <em
@@ -72,6 +77,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   fontStyle: "italic",
                   fontWeight: 600,
                   fontSize: "inherit",
+                  color: "#111111",
                 }}
               >
                 pendant le sommeil et au réveil
@@ -115,6 +121,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   padding: 0,
                   margin: 0,
                   lineHeight: 1.6,
+                  fontWeight: 400,
                 }}
               >
                 <li>✓ Paiement sécurisé · Stripe</li>
@@ -166,23 +173,18 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               ].map((f) => (
                 <div
                   key={f.label}
-                  className="flex flex-col items-center text-center gap-2 sm:gap-3"
-                  style={{
-                    border: "1px solid var(--rule)",
-                    borderRadius: 14,
-                    padding: "14px 6px",
-                    background: "var(--paper)",
-                  }}
+                  className="osmo-card flex flex-col items-center text-center gap-2 sm:gap-3"
+                  style={{ padding: "16px 6px" }}
                 >
-                  <div style={{ color: "#C8963E" }}>{f.icon}</div>
+                  <div style={{ color: "#111111" }}>{f.icon}</div>
                   <div
                     style={{
                       fontFamily: FONTS.mono,
                       fontSize: "clamp(10px, 2.6vw, 12px)",
-                      fontWeight: 500,
+                      fontWeight: 400,
                       letterSpacing: "0.08em",
                       textTransform: "uppercase",
-                      color: "var(--ink)",
+                      color: "#111111",
                       lineHeight: 1.3,
                     }}
                   >
@@ -199,7 +201,8 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-8 lg:mt-12 pt-7 border-t border-[var(--rule)] grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-8"
+          className="mt-10 lg:mt-14 pt-8 grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4 sm:gap-8"
+          style={{ borderTop: "1px solid #E8E8E8" }}
         >
           {HERO_STATS.map((item, i) => (
             <div key={i} className="min-w-0">
@@ -210,19 +213,21 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                   fontSize: "clamp(26px, 5vw, 36px)",
                   letterSpacing: "-0.025em",
                   lineHeight: 1,
-                  color: item.amber ? "var(--amber)" : "var(--ink)",
+                  color: "#C8963E",
                 }}
               >
                 {item.count ? <CountUp target={item.k} start={revealed} /> : item.label}
               </div>
               <div
-                className="text-[var(--ink-2)] mt-2"
+                className="mt-3"
                 style={{
                   fontFamily: FONTS.mono,
-                  fontSize: 10,
-                  letterSpacing: "0.14em",
+                  fontSize: 11,
+                  letterSpacing: "0.15em",
                   textTransform: "uppercase",
                   lineHeight: 1.4,
+                  fontWeight: 400,
+                  color: "#999999",
                 }}
               >
                 {item.v}

@@ -10,7 +10,7 @@ import type { SoldOutProps } from "@/types";
 export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
   const { addToCartAndNavigate } = useCart();
   return (
-    <section id="reserve" className="scroll-mt-20 bg-[var(--ink)] text-white relative overflow-hidden" style={{ padding: "clamp(56px, 9vw, 80px) 0" }}>
+    <section id="reserve" className="scroll-mt-20 text-white relative overflow-hidden" style={{ background: "#111111", padding: "clamp(72px, 10vw, 100px) 0" }}>
       <div
         className="absolute inset-0 pointer-events-none opacity-5"
         aria-hidden="true"
@@ -22,8 +22,15 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10 relative">
         <FadeUp>
           <div
-            className="text-[var(--ink-2)] mb-8 lg:mb-12 flex items-center gap-[14px]"
-            style={{ fontFamily: FONTS.mono, fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}
+            className="mb-10 lg:mb-14 flex items-center gap-[14px]"
+            style={{
+              fontFamily: FONTS.mono,
+              fontSize: 12,
+              fontWeight: 400,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "#999999",
+            }}
           >
             <span className="w-7 h-px bg-white/40" aria-hidden="true" />
             Vol. 01 · Lot N°001 · 50 ex.
@@ -40,6 +47,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
             fontSize: "clamp(32px, 7vw, 72px)",
             lineHeight: 0.95,
             letterSpacing: "-0.02em",
+            color: "#FFFFFF",
           }}
         >
           Parce que demain matin,{" "}
@@ -48,8 +56,8 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
             style={{
               fontFamily: FONTS.display,
               fontWeight: 800,
-              fontStyle: "normal",
-              color: "var(--amber)",
+              fontStyle: "italic",
+              color: "#FFFFFF",
             }}
           >
             pas le choix.
@@ -58,13 +66,14 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
 
         <FadeUp delay={0.1}>
           <p
-            className="mt-6"
+            className="mt-8"
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
-              letterSpacing: "0.18em",
+              fontSize: 12,
+              fontWeight: 400,
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              color: "rgba(255,248,232,0.6)",
+              color: "#999999",
             }}
           >
             50 places · 20€ · Expédié sous 6 mois
@@ -73,24 +82,24 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
 
         <FadeUp delay={0.15}>
           <div
-            className="mt-10 lg:mt-16"
+            className="mt-12 lg:mt-16"
             style={{
-              borderLeft: "3px solid #C8963E",
-              backgroundColor: "rgba(255,255,255,0.06)",
-              padding: "16px",
+              borderLeft: "2px solid #FFFFFF",
+              backgroundColor: "rgba(255,255,255,0.04)",
+              padding: "20px 24px",
               maxWidth: 680,
             }}
           >
             <p
               style={{
-                fontFamily: FONTS.display,
+                fontFamily: FONTS.body,
                 fontWeight: 400,
-                fontSize: "clamp(14px, 3.4vw, 17px)",
-                lineHeight: 1.65,
-                color: "rgba(255,248,232,0.8)",
+                fontSize: "clamp(14px, 3.4vw, 16px)",
+                lineHeight: 1.7,
+                color: "rgba(255,255,255,0.78)",
               }}
             >
-              <strong style={{ color: "var(--amber)", fontWeight: 700 }}>Pourquoi 6 mois ?</strong>{" "}
+              <strong style={{ color: "#FFFFFF", fontWeight: 700 }}>Pourquoi 6 mois ?</strong>{" "}
               OSMO est en phase de pré-lancement. La commande au laboratoire
               sera passée une fois les 50 Early Adopters réunis.
             </p>

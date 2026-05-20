@@ -8,7 +8,7 @@ export default function WhyYouSuffer() {
   return (
     <section
       className="relative z-[5]"
-      style={{ padding: "clamp(56px, 9vw, 80px) 0", background: "#FFFFFF", borderBottom: "1px solid #E0E0E0" }}
+      style={{ padding: "clamp(72px, 10vw, 100px) 0", background: "#FFFFFF", borderBottom: "1px solid #E8E8E8" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
@@ -22,11 +22,12 @@ export default function WhyYouSuffer() {
                   fontSize: "clamp(28px, 7vw, 72px)",
                   lineHeight: 0.95,
                   letterSpacing: "-0.02em",
+                  color: "#111111",
                 }}
               >
                 Pourquoi tu souffres
                 <br />
-                <span className="text-[#C8963E]">le lendemain.</span>
+                <span style={{ fontStyle: "italic", color: "#111111" }}>le lendemain.</span>
               </h2>
             </FadeUp>
 
@@ -34,12 +35,12 @@ export default function WhyYouSuffer() {
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: "clamp(14px, 3.4vw, 18px)",
+                  fontSize: "clamp(14px, 3.4vw, 16px)",
                   fontWeight: 400,
-                  lineHeight: 1.6,
-                  color: "#666666",
+                  lineHeight: 1.65,
+                  color: "#444444",
                   maxWidth: 540,
-                  marginTop: "clamp(20px, 4vw, 32px)",
+                  marginTop: "clamp(24px, 4vw, 32px)",
                 }}
               >
                 L&apos;alcool est un diurétique. En quelques heures,
@@ -59,13 +60,14 @@ export default function WhyYouSuffer() {
                   fontWeight: 800,
                   lineHeight: 1.2,
                   letterSpacing: "-0.02em",
-                  marginTop: "clamp(20px, 4vw, 36px)",
+                  marginTop: "clamp(24px, 4vw, 36px)",
                   maxWidth: 540,
+                  color: "#111111",
                 }}
               >
                 Ce n&apos;est pas un remède miracle.
                 <br />
-                <span style={{ color: "#C8963E" }}>C&apos;est de la biochimie.</span>
+                <span style={{ color: "#111111", fontWeight: 900 }}>C&apos;est de la biochimie.</span>
               </p>
             </FadeUp>
           </div>

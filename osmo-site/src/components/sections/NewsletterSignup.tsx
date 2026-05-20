@@ -61,7 +61,7 @@ export default function NewsletterSignup() {
       style={{
         background: "#111111",
         color: "#FFFFFF",
-        padding: "clamp(56px, 9vw, 80px) 0",
+        padding: "clamp(72px, 10vw, 100px) 0",
       }}
     >
       <div className="max-w-[720px] mx-auto px-6 sm:px-10 text-center">
@@ -86,9 +86,10 @@ export default function NewsletterSignup() {
             style={{
               fontFamily: FONTS.body,
               fontSize: 16,
-              lineHeight: 1.6,
-              color: "#666666",
-              marginTop: 20,
+              lineHeight: 1.65,
+              color: "#999999",
+              marginTop: 24,
+              fontWeight: 400,
             }}
           >
             Électrolytes, sommeil, alcool — ce que la science dit vraiment.
@@ -120,7 +121,7 @@ export default function NewsletterSignup() {
               style={{
                 width: "100%",
                 background: "#1A1A1A",
-                border: "1px solid #333333",
+                border: "1px solid #2A2A2A",
                 color: "#FFFFFF",
                 borderRadius: 50,
                 padding: "14px 24px",
@@ -129,10 +130,10 @@ export default function NewsletterSignup() {
                 outline: "none",
               }}
               onFocus={(e) => {
-                e.currentTarget.style.borderColor = "#C8963E";
+                e.currentTarget.style.borderColor = "#FFFFFF";
               }}
               onBlur={(e) => {
-                e.currentTarget.style.borderColor = "#333333";
+                e.currentTarget.style.borderColor = "#2A2A2A";
               }}
             />
 
@@ -141,13 +142,18 @@ export default function NewsletterSignup() {
               disabled={
                 status.kind === "submitting" || status.kind === "success"
               }
-              className="cta-pill active:scale-[0.98]"
+              className="active:scale-[0.98] transition-colors"
               style={{
                 width: "100%",
                 height: 56,
-                fontWeight: 700,
-                fontSize: 15,
+                fontWeight: 500,
+                fontSize: 14,
                 fontFamily: FONTS.body,
+                letterSpacing: "0.04em",
+                background: "#FFFFFF",
+                color: "#111111",
+                border: "1.5px solid #FFFFFF",
+                borderRadius: 50,
                 opacity:
                   status.kind === "submitting" || status.kind === "success"
                     ? 0.7
@@ -167,7 +173,7 @@ export default function NewsletterSignup() {
               <p
                 role="status"
                 style={{
-                  color: "#C8963E",
+                  color: "#FFFFFF",
                   fontFamily: FONTS.body,
                   fontSize: 14,
                   marginTop: 12,
@@ -181,7 +187,7 @@ export default function NewsletterSignup() {
               <p
                 role="status"
                 style={{
-                  color: "#C8963E",
+                  color: "#FFFFFF",
                   fontFamily: FONTS.body,
                   fontSize: 14,
                   marginTop: 12,
@@ -194,7 +200,7 @@ export default function NewsletterSignup() {
               <p
                 role="alert"
                 style={{
-                  color: "#C8963E",
+                  color: "#FFFFFF",
                   fontFamily: FONTS.body,
                   fontSize: 14,
                   marginTop: 12,
@@ -211,6 +217,7 @@ export default function NewsletterSignup() {
                 fontSize: 12,
                 marginTop: 16,
                 lineHeight: 1.6,
+                fontWeight: 400,
               }}
             >
               Code promo envoyé immédiatement après inscription.

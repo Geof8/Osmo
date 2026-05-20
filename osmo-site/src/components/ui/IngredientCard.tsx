@@ -26,9 +26,8 @@ export default function IngredientCard({
         style={{
           background: "#1A1A1A",
           border: "1px solid #2A2A2A",
-          borderTop: a.highlight ? "2px solid #C8963E" : "1px solid #2A2A2A",
-          borderRadius: 12,
-          padding: "clamp(18px, 4vw, 24px)",
+          borderRadius: 16,
+          padding: "clamp(24px, 4vw, 32px)",
           position: "relative",
         }}
       >
@@ -38,13 +37,15 @@ export default function IngredientCard({
               position: "absolute",
               top: 16,
               right: 16,
-              background: "rgba(200, 150, 62, 0.15)",
-              color: "#C8963E",
+              background: "#FFFFFF",
+              color: "#111111",
               fontFamily: FONTS.mono,
-              fontSize: 11,
-              padding: "2px 8px",
+              fontSize: 10,
+              fontWeight: 500,
+              padding: "3px 10px",
               borderRadius: 50,
-              letterSpacing: "0.05em",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
             }}
           >
             ★ Clé
@@ -53,13 +54,19 @@ export default function IngredientCard({
 
         <div
           style={{
+            display: "inline-block",
+            alignSelf: "flex-start",
+            background: "#FFFFFF",
+            color: "#111111",
             fontFamily: FONTS.mono,
             fontSize: 11,
-            letterSpacing: "0.1em",
+            fontWeight: 400,
+            padding: "4px 10px",
+            borderRadius: 50,
+            letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: "#C8963E",
-            marginBottom: 8,
-            paddingRight: a.highlight ? 56 : 0,
+            marginBottom: 16,
+            maxWidth: a.highlight ? "calc(100% - 70px)" : "100%",
           }}
         >
           {a.tag}
@@ -68,33 +75,34 @@ export default function IngredientCard({
         <div
           style={{
             fontFamily: FONTS.display,
-            fontSize: 20,
+            fontSize: 22,
             fontWeight: 700,
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             color: "#FFFFFF",
-            marginBottom: 16,
+            marginBottom: 20,
           }}
         >
           {a.name}
         </div>
 
-        <div style={{ height: 1, background: "#333333", marginBottom: 16 }} />
+        <div style={{ height: 1, background: "#2A2A2A", marginBottom: 20 }} />
 
-        <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: 16, display: "flex", flexDirection: "column", gap: 6 }}>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: 20, display: "flex", flexDirection: "column", gap: 8 }}>
           {a.bullets.map((b, i) => (
             <li
               key={i}
               style={{
-                fontFamily: FONTS.display,
+                fontFamily: FONTS.body,
                 fontSize: 14,
                 lineHeight: 1.6,
                 color: "#CCCCCC",
                 display: "flex",
-                gap: 8,
+                gap: 10,
+                fontWeight: 400,
               }}
             >
-              <span aria-hidden="true" style={{ color: "#C8963E", flexShrink: 0 }}>→</span>
+              <span aria-hidden="true" style={{ color: "#FFFFFF", flexShrink: 0 }}>→</span>
               <span>{b}</span>
             </li>
           ))}
@@ -103,9 +111,9 @@ export default function IngredientCard({
         <div
           style={{
             fontFamily: FONTS.display,
-            fontSize: 12,
+            fontSize: 13,
             fontStyle: "italic",
-            color: "#888888",
+            color: "#999999",
             lineHeight: 1.5,
             marginTop: "auto",
           }}
