@@ -16,6 +16,36 @@
 
 ## Historique
 
+### Session du 2026-05-20 — Newsletter admin : compte live + sans cache
+**Fait :**
+- `/admin/newsletter` : compte d'abonnés actifs maintenant
+  toujours frais (`unstable_noStore` + `force-dynamic` +
+  `revalidate = 0` + `Cache-Control: no-store` sur l'API).
+- Nouvelle route `GET /api/admin/newsletter/subscribers/count`
+  (auth admin requise) renvoie `{ active, total }`.
+- Hook `useLiveActiveSubscribers` partagé entre le header,
+  les KpiCards et le bouton "Envoyer à tous" → un seul compte
+  source de vérité, synchronisé partout.
+- Trois mécanismes de refresh redondants :
+  - Supabase Realtime sur `newsletter_subscribers`
+    (instantané quand la publication est configurée).
+  - Polling toutes les 15 s (filet de sécurité).
+  - Refresh au focus / visibilitychange (admin revient sur l'onglet).
+- Migration `0009_newsletter_realtime.sql` : ajoute la table
+  à la publication `supabase_realtime` et passe
+  `replica identity full` (sinon `payload.old.active` est null
+  et on ne peut pas suivre les désabonnements en live).
+
+**À appliquer côté Supabase :**
+- Exécuter `0009_newsletter_realtime.sql` dans le SQL editor
+  (sinon le live update ne fonctionne pas, mais le polling
+  prend le relais).
+
+**Bugs ouverts :**
+- À vérifier sur osmo-lab.fr/admin/newsletter après déploiement
+  Vercel : ouvrir l'onglet, s'inscrire depuis une autre fenêtre,
+  le compte doit passer en live (ou max 15 s plus tard via polling).
+
 ### Session du 2026-05-20 — Refonte design system premium
 **Fait :**
 - Amber #C8963E restreint à 3 usages :
