@@ -211,15 +211,30 @@ body::before {
   color: #C8963E;
 }
 
-/* Formula ingredient cards — hover lift (dark bg variant) */
+/* Formula ingredient cards — hover lift (dark bg variant). Gated to true
+ * hover-capable pointers so the effect doesn't stick on touch after a tap. */
 .formula-card {
   transition: all 0.25s ease;
 }
 
-.formula-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  border-color: #C8963E !important;
-  box-shadow: 0 12px 32px rgba(200, 150, 62, 0.15);
+@media (hover: hover) and (pointer: fine) {
+  .formula-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: #C8963E !important;
+    box-shadow: 0 12px 32px rgba(200, 150, 62, 0.15);
+  }
+}
+
+/* HowItWorks step cards — hover lift, gated to true hover-capable pointers. */
+.howitworks-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .howitworks-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  }
 }
 
 /* ============================================================================
