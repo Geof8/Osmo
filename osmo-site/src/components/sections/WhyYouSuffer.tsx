@@ -10,7 +10,7 @@ export default function WhyYouSuffer() {
       className="relative z-[5]"
       style={{ padding: "clamp(72px, 10vw, 100px) 0", background: "#FFFFFF", borderBottom: "1px solid #E8E8E8" }}
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Left column: title + text + tagline */}
           <div>

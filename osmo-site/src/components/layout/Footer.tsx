@@ -9,7 +9,7 @@ export default function Footer() {
       className="relative z-[5]"
       style={{ background: "#F4F4F4", padding: "clamp(72px, 10vw, 100px) 0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10 lg:gap-14">
           <div>
             <span

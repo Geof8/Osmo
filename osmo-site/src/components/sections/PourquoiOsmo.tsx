@@ -105,7 +105,7 @@ export default function PourquoiOsmo() {
       className="relative z-[5]"
       style={{ padding: "clamp(72px, 10vw, 100px) 0", background: "#F4F4F4", borderBottom: "1px solid #E8E8E8" }}
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="text-center max-w-[720px] mx-auto">
           <FadeUp>
             <h2

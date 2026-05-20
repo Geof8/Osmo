@@ -15,7 +15,7 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
       className="sticky top-0 z-50 bg-white border-b border-[#E8E8E8]"
       aria-label="Navigation principale"
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-3 h-[60px] sm:h-[78px]">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-3 h-[60px] sm:h-[78px]">
         {/* Left — Logo (wordmark only) */}
         <div className="flex items-baseline gap-4 min-w-0">
           <a

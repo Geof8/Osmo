@@ -17,7 +17,7 @@ export default function Formula() {
       className="scroll-mt-20 relative z-[5]"
       style={{ background: "#111111", padding: "clamp(56px, 9vw, 100px) 0" }}
     >
-      <div ref={ref} className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div ref={ref} className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
           <div
@@ -104,7 +104,7 @@ export default function Formula() {
           />
 
           {/* Tablet / Desktop: grid (unchanged at md and lg) */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {INGREDIENTS.map((a, i) => (
               <IngredientCard key={a.name} a={a} index={i} />
             ))}

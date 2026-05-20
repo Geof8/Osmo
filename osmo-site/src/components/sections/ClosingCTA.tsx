@@ -19,7 +19,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
           backgroundSize: "56px 56px",
         }}
       />
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10 relative">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10 relative">
         <FadeUp>
           <div
             className="mb-10 lg:mb-14 flex items-center gap-[14px]"

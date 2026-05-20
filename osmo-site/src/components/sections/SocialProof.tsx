@@ -20,7 +20,7 @@ export default function SocialProof() {
         borderBottom: "1px solid #2A2A2A",
       }}
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <FadeUp>
           <h2
             style={{

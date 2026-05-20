@@ -17,7 +17,7 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
       className="scroll-mt-20 border-b border-[#E8E8E8] relative z-[5]"
       style={{ padding: "clamp(64px, 9vw, 100px) 0" }}
     >
-      <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start lg:min-h-[70vh]">
           {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
           <div className="flex flex-col gap-8 sm:gap-10 order-2 lg:order-2">
