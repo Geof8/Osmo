@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import FadeUp from "@/components/ui/FadeUp";
 import { useInView } from "@/hooks/useInView";
@@ -115,31 +116,21 @@ export default function Benefits() {
       style={{ padding: "clamp(72px, 10vw, 100px) 0", background: "#F4F4F4", borderBottom: "1px solid #E8E8E8" }}
     >
       <div className="max-w-[1380px] mx-auto px-6 sm:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-          {/* Photo placeholder — à remplir plus tard */}
+        <div className="grid grid-cols-1 lg:grid-cols-[45fr_55fr] gap-10 lg:gap-20 items-stretch">
+          {/* Photo bénéfices */}
           <FadeUp>
             <div
-              className="relative aspect-square w-full max-w-[560px] mx-auto lg:mx-0"
-              style={{
-                background: "#FFFFFF",
-                border: "1px dashed #D4D4D4",
-                borderRadius: 24,
-              }}
-              aria-hidden="true"
+              className="relative w-full h-full min-h-[320px] lg:min-h-[520px] overflow-hidden"
+              style={{ borderRadius: 16 }}
             >
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 11,
-                  fontWeight: 400,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#BBBBBB",
-                }}
-              >
-                Photo à venir
-              </div>
+              <Image
+                src="/images/benefits.png"
+                alt="Un verre d'OSMO Recovery en cours de dissolution, effervescence et lumière naturelle"
+                fill
+                sizes="(max-width: 1024px) 100vw, 45vw"
+                style={{ objectFit: "cover" }}
+                priority={false}
+              />
             </div>
           </FadeUp>
 
