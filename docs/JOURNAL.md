@@ -16,6 +16,35 @@
 
 ## Historique
 
+### Session du 2026-05-21 — Section clinique NAC plein écran (full-bleed)
+**Fait :**
+- Nouvelle section `ClinicalStudy` ([osmo-site/src/components/sections/ClinicalStudy.tsx](osmo-site/src/components/sections/ClinicalStudy.tsx)) insérée entre `SocialProof` et `PourquoiOsmo`.
+- Layout full-bleed (`width:100vw` + `margin-left:calc(50% - 50vw)`), hauteur `100vh` (min 640px), fond `#0A0A0A` + grain SVG turbulence (filtre noise data-URI), overlay `linear-gradient(135deg, rgba(0,0,0,.85), rgba(0,0,0,.6))`.
+- Carte glassmorphique (`backdrop-filter: blur(12px)`, bordure `rgba(255,255,255,0.12)`, `border-radius:20px`, padding clamp 32→48px, max 560px) ancrée bottom-center mobile / center-left desktop.
+- Contenu : eyebrow ambre "DONNÉES CLINIQUES", headline Fraunces "L'actif que les urgentistes utilisent depuis 40 ans.", body en 2 paragraphes sur la NAC (OMS, glutathion, détox hépatique pendant le sommeil).
+- Stats row 3 colonnes (OMS / +GSH / 40 ans) avec valeurs `#C8963E` et labels `#999999`.
+- CTA pilule (border-radius 50px conforme à la règle absolue) vers l'étude [Revue Médicale Suisse 2018](https://www.revmed.ch/view/423640/3672706/RMS_590_146.pdf) en `target="_blank" rel="noopener noreferrer"`, hover transparent → blanc/0.1.
+- Disclaimer source en bas de carte.
+- Animations Framer Motion : background scale 1.05→1 sur 1.5s, carte fade-up délai 0.3s, stats stagger 0.1s, `once: true`.
+- Mobile : carte pleine largeur (375 → 327px à 24px de marge), grille stats compactée (valeur 20px / label 11px), H2 clamp 24px.
+
+**Vérifié via preview MCP (1280×720 + 375×812) :**
+- `[aria-label*="Données cliniques"]` → section 1280×720, bg `rgb(10,10,10)`.
+- Carte : `border-radius:20px`, `backdrop-filter: blur(12px)`, padding 48px, max-width 560px.
+- CTA : `border-radius:50px`, border `rgba(255,255,255,0.3)`, `target=_blank`.
+- Eyebrow + stats : couleur `rgb(200,150,62)` (#C8963E) ✓
+- Mobile 375 : carte 327px à x=24, stats 20px/11px, h2 24px.
+
+**Note image de fond :**
+- Spec demandait "la photo lifestyle sombre du pot OSMO déjà dans /public/images/" — aucun fichier sombre disponible (seul `infographic.png/svg` existe). Fallback spec activé : fond solide `#0A0A0A` + grain SVG (turbulence fractalNoise teintée ambre légère 6%).
+
+**À faire / améliorations possibles :**
+- Uploader une vraie photo lifestyle sombre du pot OSMO dans `/public/images/` puis remplacer le fond solide par un `<Image>` next/image avec `objectFit:cover, objectPosition:center`.
+
+**Bugs ouverts inchangés :** hydration warning MolecularAnimation · carousel hero images · pot 15 doses vs 2 prises/jour · `/ugc/[token]` · `LAPOSTE_API_KEY` + `DHL_API_KEY`.
+
+---
+
 ### Session du 2026-05-20 — Newsletter admin : compte live + sans cache
 **Fait :**
 - `/admin/newsletter` : compte d'abonnés actifs maintenant

@@ -32,6 +32,6 @@ Pour plus de détails lire uniquement si nécessaire:
 - /docs/JOURNAL.md → journal de bord des sessions
 
 ## Journal rapide
-Dernière session: 2026-05-20 — Refonte design system premium (amber restreint aux CTAs + key numbers + dots, typo + spacing affinés, water-drop logo retiré), appliquée par-dessus l'adoucissement protocole "3 gestes simples"
-Statut courant: design tokens + sections publiques migrés ; HowItWorks (01 Préparation / 02 Dilution / 03 Dégustation) sous le nouveau design system
-Bugs ouverts: hydration warning React préexistant sur MolecularAnimation · carousel hero images à uploader · pot 15 doses vs 2 prises/jour (à arbitrer) · `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer
+Dernière session: 2026-05-21 — Nouvelle section clinique NAC plein écran (full-bleed 100vw × 100vh) entre SocialProof et PourquoiOsmo : fond `#0A0A0A` + grain SVG, overlay gradient, carte glassmorphique (backdrop-blur 12px, radius 20px, max 560px) avec eyebrow "DONNÉES CLINIQUES", headline Fraunces, body NAC/OMS, 3 stats ambre (OMS / +GSH / 40 ans), CTA pilule vers étude Revue Médicale Suisse 2018. Animations Framer Motion (bg scale 1.05→1, carte fade-up délai 0.3s, stats stagger 0.1s, once:true). Spec image lifestyle non dispo → fallback solide #0A0A0A + grain activé.
+Statut courant: page d'accueil = Hero · Marquee · WhyYouSuffer · Formula · HowItWorks · SocialProof · **ClinicalStudy** · PourquoiOsmo · ClosingCTA · FAQ · Newsletter
+Bugs ouverts: hydration warning React préexistant sur MolecularAnimation · carousel hero images à uploader · pot 15 doses vs 2 prises/jour (à arbitrer) · `/ugc/[token]` à créer · `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer · photo lifestyle sombre OSMO à uploader pour remplacer le fond solide de ClinicalStudy
