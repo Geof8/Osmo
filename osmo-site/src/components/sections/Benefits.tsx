@@ -137,19 +137,6 @@ export default function Benefits() {
           {/* Bénéfices */}
           <div>
             <FadeUp>
-              <div
-                className="mb-3"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 12,
-                  fontWeight: 400,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#999999",
-                }}
-              >
-                Les bienfaits
-              </div>
               <h2
                 style={{
                   fontFamily: FONTS.display,
@@ -161,7 +148,7 @@ export default function Benefits() {
                 }}
               >
                 Des bienfaits{" "}
-                <span style={{ fontStyle: "italic", color: "#111111" }}>à chaque verre.</span>
+                <span style={{ fontStyle: "italic", color: "#111111" }}>à chaque prise.</span>
               </h2>
             </FadeUp>
 
