@@ -16,7 +16,23 @@
 
 ## Historique
 
-### Session du 2026-05-21 (suite) — Refonte ClinicalStudy à la Kosbiotic (titre adouci)
+### Session du 2026-05-21 (3) — ClinicalStudy : retour au sombre + photo de fond cristaux NAC
+**Fait :**
+- Geoffrey a fourni une vraie photo (cristaux NAC macro sur fond blanc) → copiée dans [osmo-site/public/images/study-background.png](osmo-site/public/images/study-background.png) (1.29 MB, 1114×627).
+- Retour à la version full-bleed sombre 100vh (la variante claire à la Kosbiotic est abandonnée car incompatible avec la photo fournie qui est très claire et a besoin d'un overlay sombre pour mettre la carte en valeur).
+- Photo servie via `next/image` `fill` + `priority` + `sizes="100vw"` + `objectFit:cover` + `objectPosition:center`, wrappée dans la `motion.div` qui anime le scale 1.05→1.
+- Overlay sombre : `linear-gradient(135deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.50) 100%)` en `position:absolute inset-0 zIndex:1`.
+- Carte glassmorphique restaurée : `backdrop-filter: blur(12px)`, bg `rgba(255,255,255,0.06)`, border `rgba(255,255,255,0.12)`, radius 20px, padding clamp 32→48px, max 560px, ancrée bottom-center mobile / center-left desktop, en `zIndex:2`.
+- Contenu : eyebrow ambre "DONNÉES CLINIQUES", **titre adouci** "L'étude clinique sur la NAC détaillée" (le mot "urgentistes" reste écarté), body NAC/OMS/glutathion en 2 paragraphes, 3 stats ambre (OMS · +GSH · 40 ans), CTA pilule transparent avec border 50px, disclaimer source.
+
+**Vérifié via preview MCP :**
+- Desktop 1280×720 : section 1280×720, bg `#0A0A0A`, image chargée (`complete:true`, natW 1114), overlay `linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.5))` à z-index 1, carte glassmorphique à z-index 2 (backdrop-blur 12px, bg rgba(255,255,255,0.06), border ok, radius 20px, padding 48px, max 560px).
+- Mobile 375×812 : section 375×812, carte 327px à x=24, padding 32px.
+- Aucune requête réseau en échec.
+
+---
+
+### Session du 2026-05-21 (suite) — Refonte ClinicalStudy à la Kosbiotic (titre adouci) [remplacée]
 **Fait :**
 - Refonte complète du visuel sur photo de référence Kosbiotic envoyée par Geoffrey.
 - Fond passé de sombre `#0A0A0A` à clair `#F4F4F4` ; zone hero arrondie (radius 20px) avec gradient gris radial + grain subtil pour évoquer la photo macro (placeholder en attendant l'upload d'une vraie photo).
