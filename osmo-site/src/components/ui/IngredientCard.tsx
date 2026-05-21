@@ -27,7 +27,7 @@ export default function IngredientCard({
           background: "#1A1A1A",
           border: "1px solid #2A2A2A",
           borderRadius: 16,
-          padding: "clamp(24px, 4vw, 32px)",
+          padding: "clamp(16px, 3vw, 20px)",
           position: "relative",
         }}
       >
@@ -65,7 +65,7 @@ export default function IngredientCard({
             borderRadius: 50,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            marginBottom: 16,
+            marginBottom: 12,
             maxWidth: a.highlight ? "calc(100% - 70px)" : "100%",
           }}
         >
@@ -75,30 +75,30 @@ export default function IngredientCard({
         <div
           style={{
             fontFamily: FONTS.display,
-            fontSize: 22,
+            fontSize: 18,
             fontWeight: 700,
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
             color: "#FFFFFF",
-            marginBottom: 20,
+            marginBottom: 14,
           }}
         >
           {a.name}
         </div>
 
-        <div style={{ height: 1, background: "#2A2A2A", marginBottom: 20 }} />
+        <div style={{ height: 1, background: "#2A2A2A", marginBottom: 14 }} />
 
-        <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: 20, display: "flex", flexDirection: "column", gap: 8 }}>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0, marginBottom: 14, display: "flex", flexDirection: "column", gap: 5 }}>
           {a.bullets.map((b, i) => (
             <li
               key={i}
               style={{
                 fontFamily: FONTS.body,
-                fontSize: 14,
-                lineHeight: 1.6,
+                fontSize: 13,
+                lineHeight: 1.5,
                 color: "#CCCCCC",
                 display: "flex",
-                gap: 10,
+                gap: 8,
                 fontWeight: 400,
               }}
             >
@@ -111,10 +111,10 @@ export default function IngredientCard({
         <div
           style={{
             fontFamily: FONTS.display,
-            fontSize: 13,
+            fontSize: 12,
             fontStyle: "italic",
             color: "#999999",
-            lineHeight: 1.5,
+            lineHeight: 1.4,
             marginTop: "auto",
           }}
         >
