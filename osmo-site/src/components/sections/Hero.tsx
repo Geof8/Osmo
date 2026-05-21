@@ -7,8 +7,8 @@ import { useCart } from "@/context/CartContext";
 import { FONTS, GUARANTEE_LINE, HERO_STATS } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
-const headlineWords = ["Le", "lendemain", "matin,"];
-const headlineWords2 = ["tu", "assures."];
+const headlineWordsPlain = ["Le", "lendemain", "matin,"];
+const headlineWordsItalic = ["tu", "assures."];
 
 export default function Hero({ revealed, soldOut = false }: HeroProps) {
   const { addToCartAndNavigate } = useCart();
@@ -31,32 +31,29 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
                 color: "#111111",
               }}
             >
-              <span className="block">
-                {headlineWords.map((word, i) => (
-                  <motion.span
-                    key={word}
-                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="inline-block mr-[0.25em]"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </span>
-              <span className="block" style={{ fontStyle: "italic", fontWeight: 700, color: "#111111" }}>
-                {headlineWords2.map((word, i) => (
-                  <motion.span
-                    key={word}
-                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                    transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="inline-block mr-[0.25em]"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </span>
+              {headlineWordsPlain.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="inline-block mr-[0.25em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              {headlineWordsItalic.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="inline-block mr-[0.25em]"
+                  style={{ fontStyle: "italic", fontWeight: 700 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </h1>
 
             <motion.p
