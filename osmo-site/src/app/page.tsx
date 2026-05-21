@@ -36,10 +36,10 @@ export default function Home() {
         <Hero revealed={heroRevealed} soldOut={soldOut} />
         <Marquee />
         <WhyYouSuffer />
-        <Formula />
         <Benefits />
-        <HowItWorks />
         <SocialProof />
+        <HowItWorks />
+        <Formula />
         <ClinicalStudy />
         <PourquoiOsmo />
         <ClosingCTA soldOut={soldOut} />
