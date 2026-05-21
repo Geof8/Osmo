@@ -11,6 +11,7 @@ import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
 import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Formula from "@/components/sections/Formula";
+import Benefits from "@/components/sections/Benefits";
 import SocialProof from "@/components/sections/SocialProof";
 import FAQ from "@/components/sections/FAQ";
 import ClosingCTA from "@/components/sections/ClosingCTA";
@@ -35,6 +36,7 @@ export default function Home() {
         <Marquee />
         <WhyYouSuffer />
         <Formula />
+        <Benefits />
         <HowItWorks />
         <SocialProof />
         <PourquoiOsmo />
