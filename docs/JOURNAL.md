@@ -16,7 +16,31 @@
 
 ## Historique
 
-### Session du 2026-05-21 — Section clinique NAC plein écran (full-bleed)
+### Session du 2026-05-21 (suite) — Refonte ClinicalStudy à la Kosbiotic (titre adouci)
+**Fait :**
+- Refonte complète du visuel sur photo de référence Kosbiotic envoyée par Geoffrey.
+- Fond passé de sombre `#0A0A0A` à clair `#F4F4F4` ; zone hero arrondie (radius 20px) avec gradient gris radial + grain subtil pour évoquer la photo macro (placeholder en attendant l'upload d'une vraie photo).
+- Carte passée de glassmorphique sombre à **blanche pleine** (bg `#FFFFFF`, radius 20px, padding clamp 28→48px, max-width 560px), ancrée top-left.
+- Titre adouci : suppression du mot "urgentistes" qui évoquait l'urgence/stress. Nouveau titre Fraunces 28→44px : **"L'étude clinique sur la NAC détaillée"** (calque de la sobriété du titre Kosbiotic "L'étude clinique in vivo détaillée").
+- Body court (2 paragraphes, gris foncé `#444`) avec mise en gras des termes-clés (NAC, OSMO Recovery).
+- Stats réduites à **2 colonnes** (au lieu de 3) avec valeurs en **très gros noir** (clamp 36→56px, `#111`) et labels gris `#666`. OMS / 40 ans (suppression de +GSH).
+- CTA minimal noir : transparent + border `#111`, texte `#111`, radius 50px (règle CTA OSMO conservée), hover invert (bg noir / texte blanc). Texte raccourci : "Voir l'étude clinique".
+- Disclaimer supprimé pour épurer comme Kosbiotic.
+- Animations Framer Motion conservées (bg scale 1.05→1, carte fade-up, stats stagger).
+
+**Vérifié via preview MCP (1280×720 + 375×812) :**
+- Section bg `rgb(244,244,244)`, carte 560×blanc à x=88.
+- H2 44px desktop / 28px mobile, couleur `#111`.
+- Stats : 56px desktop / 36px mobile, couleur `#111`.
+- CTA : radius 50px, border `#111`, bg transparent.
+- Mobile : carte 279px à x=48, padding 28px.
+
+**Pourquoi ce changement :**
+- Geoffrey a signalé que "urgentistes" donnait un côté stressant. Référence Kosbiotic envoyée pour le ton serein/factuel à reproduire ("ni plus ni moins").
+
+---
+
+### Session du 2026-05-21 — Section clinique NAC plein écran (full-bleed) [remplacée]
 **Fait :**
 - Nouvelle section `ClinicalStudy` ([osmo-site/src/components/sections/ClinicalStudy.tsx](osmo-site/src/components/sections/ClinicalStudy.tsx)) insérée entre `SocialProof` et `PourquoiOsmo`.
 - Layout full-bleed (`width:100vw` + `margin-left:calc(50% - 50vw)`), hauteur `100vh` (min 640px), fond `#0A0A0A` + grain SVG turbulence (filtre noise data-URI), overlay `linear-gradient(135deg, rgba(0,0,0,.85), rgba(0,0,0,.6))`.
