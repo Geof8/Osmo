@@ -14,10 +14,10 @@ export default function SocialProof() {
     <section
       className="relative z-[5]"
       style={{
-        background: "#111111",
-        color: "#FFFFFF",
+        background: "#F4F4F4",
+        color: "#111111",
         padding: "clamp(72px, 10vw, 100px) 0",
-        borderBottom: "1px solid #2A2A2A",
+        borderBottom: "1px solid #E8E8E8",
       }}
     >
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
@@ -30,12 +30,12 @@ export default function SocialProof() {
               lineHeight: 0.95,
               letterSpacing: "-0.02em",
               marginBottom: "clamp(32px, 4vw, 56px)",
-              color: "#FFFFFF",
+              color: "#111111",
             }}
           >
             Développé en laboratoire.
             <br />
-            <span style={{ fontStyle: "italic", color: "#FFFFFF" }}>Validé par l&apos;entourage.</span>
+            <span style={{ fontStyle: "italic", color: "#111111" }}>Validé par l&apos;entourage.</span>
           </h2>
         </FadeUp>
 
@@ -47,7 +47,7 @@ export default function SocialProof() {
               lineHeight: 1.7,
               maxWidth: 640,
               marginBottom: 0,
-              color: "#AAAAAA",
+              color: "#444444",
               fontWeight: 400,
             }}
           >
@@ -69,7 +69,7 @@ export default function SocialProof() {
               fontSize: "clamp(20px, 5vw, 42px)",
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
-              color: "#C8963E",
+              color: "#111111",
               margin: "0 auto",
               maxWidth: 700,
               padding: "clamp(32px, 4vw, 48px) 0 clamp(40px, 5vw, 64px) 0",
@@ -82,7 +82,7 @@ export default function SocialProof() {
         <FadeUp delay={0.2}>
           <div
             className="pt-10 grid grid-cols-3 gap-3 sm:gap-6 text-center"
-            style={{ borderTop: "1px solid #2A2A2A" }}
+            style={{ borderTop: "1px solid #E8E8E8" }}
           >
             {STATS.map((stat) => (
               <div key={stat.value} className="min-w-0">
@@ -94,7 +94,7 @@ export default function SocialProof() {
                     lineHeight: 1.05,
                     letterSpacing: "-0.02em",
                     marginBottom: 8,
-                    color: "#FFFFFF",
+                    color: "#111111",
                   }}
                 >
                   {stat.value}
@@ -107,7 +107,7 @@ export default function SocialProof() {
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     lineHeight: 1.35,
-                    color: "#999999",
+                    color: "#666666",
                   }}
                 >
                   {stat.label}

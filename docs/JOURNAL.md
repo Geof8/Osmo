@@ -16,6 +16,32 @@
 
 ## Historique
 
+### Session du 2026-05-22 — SocialProof : passage du sombre au clair
+**Fait :**
+- Background de `SocialProof` passé de `#111111` (sombre) à `#F4F4F4` (clair) pour s'aligner sur les sections voisines Benefits (`#F4F4F4`) et PourquoiOsmo (`#F4F4F4`).
+- Tous les textes adaptés au fond clair :
+  - H2 + son `<span>` italique « Validé par l'entourage. » → `#111111`
+  - Paragraphe body → `#444444`
+  - Citation « Dès que c'est dispo… » → `#111111` italique (l'ambre `#C8963E` retiré, conforme au design system : amber restreint aux CTAs / key numbers / dots)
+  - Stats valeurs → `#111111` (font-weight 900)
+  - Stats labels → `#666666`
+- Bordures haut/bas du bloc stats : `#2A2A2A` → `#E8E8E8` (border-bottom de la section et border-top de la grille stats).
+- `color` racine de la section : `#FFFFFF` → `#111111`.
+- Aucun changement de contenu, structure HTML, FadeUp animations ou layout.
+
+**Vérifié via preview MCP (1280×720) :**
+- Section bg `rgb(244,244,244)` (#F4F4F4) ✓
+- H2 + italique : `rgb(17,17,17)` (#111) ✓
+- Body p : `rgb(68,68,68)` (#444) ✓
+- Citation : `rgb(17,17,17)` italique ✓
+- Stat valeur : `rgb(17,17,17)` · Stat label : `rgb(102,102,102)` (#666) ✓
+- Bordures `rgb(232,232,232)` (#E8E8E8) ✓
+
+**Choix `#F4F4F4` plutôt que `#FFFFFF` :**
+- Benefits (au-dessus) et PourquoiOsmo (plus bas) utilisent déjà `#F4F4F4`. HowItWorks (juste en dessous) n'a pas de background explicite (blanc par défaut). Garder `#F4F4F4` maintient la cohésion avec les autres sections « light grey » du système.
+
+---
+
 ### Session du 2026-05-21 (3) — ClinicalStudy : retour au sombre + photo de fond cristaux NAC
 **Fait :**
 - Geoffrey a fourni une vraie photo (cristaux NAC macro sur fond blanc) → copiée dans [osmo-site/public/images/study-background.png](osmo-site/public/images/study-background.png) (1.29 MB, 1114×627).
