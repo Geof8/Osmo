@@ -831,7 +831,29 @@ export async function fetchPromoCodes(): Promise<PromoCodeRow[]> {
     console.error("fetchPromoCodes:", error);
     return [];
   }
-  return (data ?? []) as PromoCodeRow[];
+  return ((data ?? []) as Partial<PromoCodeRow>[]).map(normalizePromoCodeRow);
+}
+
+function normalizePromoCodeRow(row: Partial<PromoCodeRow>): PromoCodeRow {
+  return {
+    id: row.id ?? "",
+    code: row.code ?? "",
+    description: row.description ?? null,
+    stripe_promotion_code_id: row.stripe_promotion_code_id ?? null,
+    stripe_coupon_id: row.stripe_coupon_id ?? null,
+    discount_type: row.discount_type ?? "percent",
+    discount_value: row.discount_value ?? 0,
+    usage_count: row.usage_count ?? 0,
+    usage_limit: row.usage_limit ?? null,
+    limit_per_customer: row.limit_per_customer ?? null,
+    min_order_amount_cents: row.min_order_amount_cents ?? null,
+    first_time_only: row.first_time_only ?? false,
+    starts_at: row.starts_at ?? null,
+    expires_at: row.expires_at ?? null,
+    tags: row.tags ?? [],
+    active: row.active ?? false,
+    created_at: row.created_at ?? new Date().toISOString(),
+  };
 }
 
 export type EmailLogRow = {
