@@ -69,7 +69,7 @@ export default function SocialProof() {
               fontSize: "clamp(20px, 5vw, 42px)",
               lineHeight: 1.2,
               letterSpacing: "-0.02em",
-              color: "#111111",
+              color: "#C8963E",
               margin: "0 auto",
               maxWidth: 700,
               padding: "clamp(32px, 4vw, 48px) 0 clamp(40px, 5vw, 64px) 0",
