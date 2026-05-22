@@ -52,6 +52,7 @@ export interface SoldOutProps {
 
 export interface HeroProps extends SoldOutProps {
   revealed: boolean;
+  remaining?: number;
 }
 
 export interface SplitOverlayProps {

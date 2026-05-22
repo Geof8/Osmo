@@ -4,14 +4,23 @@ import { motion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import { useCart } from "@/context/CartContext";
-import { FONTS, GUARANTEE_LINE, HERO_STATS } from "@/lib/constants";
+import { FONTS, HERO_STATS, PRODUCT } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
 const headlineWordsPlain = ["Le", "lendemain", "matin,"];
 const headlineWordsItalic = ["tu", "assures."];
 
-export default function Hero({ revealed, soldOut = false }: HeroProps) {
+export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.maxEarlyAdopters }: HeroProps) {
   const { addToCartAndNavigate } = useCart();
+  const total = PRODUCT.maxEarlyAdopters;
+  const safeRemaining = Math.max(0, Math.min(total, remaining));
+  const fillPct = Math.max(0, Math.min(100, (safeRemaining / total) * 100));
+  const lowStock = safeRemaining < 10;
+  const counterColor = lowStock ? "#C8963E" : "#666666";
+  const fillColor = lowStock ? "#C8963E" : "#111111";
+  const counterText = lowStock
+    ? `⚡ Plus que ${safeRemaining} places — offre limitée`
+    : `Il reste ${safeRemaining} places sur ${total}`;
   return (
     <section
       className="scroll-mt-20 border-b border-[#E8E8E8] relative z-[5]"
@@ -21,40 +30,63 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start lg:min-h-[70vh]">
           {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
           <div className="flex flex-col gap-8 sm:gap-10 order-2 lg:order-2">
-            <h1
-              style={{
-                fontFamily: FONTS.display,
-                fontWeight: 800,
-                fontSize: "clamp(36px, 8vw, 96px)",
-                lineHeight: 0.95,
-                letterSpacing: "-0.02em",
-                color: "#111111",
-              }}
-            >
-              {headlineWordsPlain.map((word, i) => (
-                <motion.span
-                  key={word}
-                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                  transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="inline-block mr-[0.25em]"
+            <div className="flex flex-col" style={{ gap: 24 }}>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+              >
+                <span
+                  className="inline-flex items-center"
+                  style={{
+                    background: "#111111",
+                    color: "#FFFFFF",
+                    fontFamily: FONTS.body,
+                    fontSize: 13,
+                    letterSpacing: "0.1em",
+                    borderRadius: 50,
+                    padding: "8px 20px",
+                  }}
                 >
-                  {word}
-                </motion.span>
-              ))}
-              {headlineWordsItalic.map((word, i) => (
-                <motion.span
-                  key={word}
-                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="inline-block mr-[0.25em]"
-                  style={{ fontStyle: "italic", fontWeight: 700 }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
+                  🔒 PRÉ-COMMANDE · Expédition estimée : Automne 2026
+                </span>
+              </motion.div>
+
+              <h1
+                style={{
+                  fontFamily: FONTS.display,
+                  fontWeight: 800,
+                  fontSize: "clamp(36px, 8vw, 96px)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.02em",
+                  color: "#111111",
+                }}
+              >
+                {headlineWordsPlain.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="inline-block mr-[0.25em]"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+                {headlineWordsItalic.map((word, i) => (
+                  <motion.span
+                    key={word}
+                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                    transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                    className="inline-block mr-[0.25em]"
+                    style={{ fontStyle: "italic", fontWeight: 700 }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </h1>
+            </div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -82,48 +114,136 @@ export default function Hero({ revealed, soldOut = false }: HeroProps) {
               après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole quotidien · Soir + Matin.
             </motion.p>
 
+            {/* Price block */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex items-center flex-wrap gap-x-3 gap-y-2"
+            >
+              <span
+                style={{
+                  fontFamily: FONTS.body,
+                  fontSize: 20,
+                  color: "#999999",
+                  textDecoration: "line-through",
+                }}
+              >
+                {PRODUCT.publicPrice}€
+              </span>
+              <span style={{ fontSize: 20, color: "#999999" }} aria-hidden="true">→</span>
+              <span
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: 32,
+                  fontWeight: 900,
+                  color: "#111111",
+                  lineHeight: 1,
+                }}
+              >
+                {PRODUCT.earlyPrice}€
+              </span>
+              <span
+                className="inline-flex items-center"
+                style={{
+                  background: "#111111",
+                  color: "#FFFFFF",
+                  fontFamily: FONTS.body,
+                  fontSize: 11,
+                  letterSpacing: "0.1em",
+                  borderRadius: 50,
+                  padding: "4px 12px",
+                }}
+              >
+                -33%
+              </span>
+            </motion.div>
+
+            {/* Urgency counter */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-2"
+              style={{ maxWidth: 360 }}
             >
-              <div className="flex flex-col gap-2 items-stretch sm:items-start">
-                <button
-                  onClick={addToCartAndNavigate}
-                  className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full sm:w-auto"
+              <p
+                style={{
+                  fontFamily: FONTS.body,
+                  fontSize: 14,
+                  color: counterColor,
+                  margin: 0,
+                }}
+              >
+                {counterText}
+              </p>
+              <div
+                style={{
+                  width: "100%",
+                  height: 4,
+                  background: "#E8E8E8",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                }}
+              >
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={revealed ? { width: `${fillPct}%` } : { width: 0 }}
+                  transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
                   style={{
-                    fontFamily: FONTS.mono,
-                    fontSize: 11,
-                    fontWeight: 500,
-                    letterSpacing: "0.16em",
-                    textTransform: "uppercase",
+                    height: "100%",
+                    background: fillColor,
+                    borderRadius: 2,
                   }}
-                >
-                  {soldOut
-                    ? "Lot N°001 complet · liste d'attente"
-                    : "Rejoindre les Early Adopters · 20 €"}{" "}
-                  <span aria-hidden="true">→</span>
-                </button>
-                <div className="cta-guarantee w-full">{GUARANTEE_LINE}</div>
+                />
               </div>
-              <ul
-                className="flex flex-col sm:flex-row sm:flex-wrap gap-y-1 sm:gap-x-5 sm:gap-y-1"
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="flex flex-col gap-3"
+            >
+              <button
+                onClick={addToCartAndNavigate}
+                className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full sm:w-auto"
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 11,
-                  letterSpacing: "0.04em",
-                  color: "#666666",
-                  listStyle: "none",
-                  padding: 0,
-                  margin: 0,
-                  lineHeight: 1.6,
-                  fontWeight: 400,
+                  fontWeight: 500,
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
                 }}
               >
-                <li>✓ Paiement sécurisé · Stripe</li>
-                <li>✓ Expédition estimée sous 6 mois</li>
-              </ul>
+                {soldOut
+                  ? "Lot N°001 complet · liste d'attente"
+                  : "Réserver ma place — 20€"}{" "}
+                <span aria-hidden="true">→</span>
+              </button>
+              <p
+                style={{
+                  fontFamily: FONTS.body,
+                  fontSize: 12,
+                  color: "#666666",
+                  textAlign: "center",
+                  margin: 0,
+                }}
+              >
+                ✓ Pré-commande sécurisée · 30 jours satisfait ou remboursé à réception
+              </p>
+              <p
+                style={{
+                  fontFamily: FONTS.body,
+                  fontSize: 11,
+                  color: "#999999",
+                  fontStyle: "italic",
+                  textAlign: "center",
+                  margin: 0,
+                }}
+              >
+                La production démarrera une fois les 50 places réunies.
+              </p>
             </motion.div>
 
           </div>

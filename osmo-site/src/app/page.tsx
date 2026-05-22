@@ -21,7 +21,7 @@ import { useWaitlistCount } from "@/hooks/useWaitlistCount";
 
 export default function Home() {
   const [heroRevealed, setHeroRevealed] = useState(false);
-  const { soldOut } = useWaitlistCount();
+  const { soldOut, remaining } = useWaitlistCount();
 
   const handleOverlayComplete = useCallback(() => {
     setHeroRevealed(true);
@@ -33,7 +33,7 @@ export default function Home() {
       <AnnouncementBar />
       <Navbar soldOut={soldOut} />
       <main>
-        <Hero revealed={heroRevealed} soldOut={soldOut} />
+        <Hero revealed={heroRevealed} soldOut={soldOut} remaining={remaining} />
         <Marquee />
         <WhyYouSuffer />
         <Benefits />
