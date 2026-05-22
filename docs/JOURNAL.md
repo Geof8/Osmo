@@ -16,6 +16,26 @@
 
 ## Historique
 
+### Session du 2026-05-22 — Nettoyage code (tâche planifiée autonome)
+**Fait :**
+- Audit complet du codebase (171 fichiers TS/TSX). Aucune dette majeure : `useInView` déjà centralisé (`once: true` par défaut), `FadeUp` partagé, `constants.ts` complet (COLORS, FONTS, ANIMATION_CONFIG, PRODUCT, INGREDIENTS, FAQ_ITEMS…), `types/index.ts` complet, zéro TODO/FIXME.
+- Fix bloquant build : `src/lib/email.ts` instanciait `new Resend(process.env.RESEND_API_KEY)` au chargement du module → crashait `next build` (étape "Collecting page data") quand la clé est absente. Passage en initialisation paresseuse via `getResend()` interne.
+- `next.config.mjs` : suppression de la clé `turbopack` (option Next.js 15, non reconnue par Next 14.2 — provoquait un warning à chaque build) et de l'import `path`/`fileURLToPath`/`__dirname` devenus inutiles.
+- 3 warnings ESLint résiduels (`<head>` dans templates email) : faux positifs (templates HTML email, pas pages Next), désactivés ligne par ligne via `// eslint-disable-next-line @next/next/no-head-element`.
+- `npm run lint` ✓ (No ESLint warnings or errors).
+- `npm run build` ✓ (Compiled successfully, toutes les routes générées).
+- Préservé intégralement : copy FR, animations GSAP/Framer Motion, intégration Supabase/Stripe/Resend, structure admin, automations, webhook, cron, email templates.
+
+**Choix conservateurs (vs lettre du brief) :**
+- Le brief de la tâche planifiée listait une structure cible "/components/sections" minimale qui ne reflète plus le codebase actuel (admin/, API routes, automations, email templates). Aucune suppression de fonctionnalités existantes.
+- Les `console.error` côté serveur dans API routes / cron / webhooks sont conservés : il s'agit de logging de production (Vercel logs), pas de debug.
+
+**Bugs ouverts :** identiques à la session précédente (hydration MolecularAnimation, carousel hero à uploader, `/ugc/[token]` à créer, clés `LAPOSTE_API_KEY` + `DHL_API_KEY` à configurer).
+
+**À faire :** RAS pour cette session — code propre, build vert.
+
+---
+
 ### Session du 2026-05-22 — SocialProof : passage du sombre au clair
 **Fait :**
 - Background de `SocialProof` passé de `#111111` (sombre) à `#F4F4F4` (clair) pour s'aligner sur les sections voisines Benefits (`#F4F4F4`) et PourquoiOsmo (`#F4F4F4`).
