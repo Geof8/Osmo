@@ -255,7 +255,7 @@ export default function NotreHistoire() {
                 >
                   {soldOut
                     ? "Lot N°001 complet, rejoindre la liste d'attente"
-                    : "Rejoindre les Early Adopters · 20€"}
+                    : "Réserver ma place — 20€"}
                   <span aria-hidden="true">→</span>
                 </button>
                 <div className="cta-guarantee">{GUARANTEE_LINE}</div>

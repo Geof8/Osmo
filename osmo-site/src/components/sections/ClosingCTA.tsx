@@ -124,7 +124,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                       textTransform: "uppercase",
                     }}
                   >
-                    Devenir Early Adopter · 20 €{" "}
+                    Réserver ma place — 20€{" "}
                     <span aria-hidden="true">→</span>
                   </button>
                   <div className="cta-guarantee cta-guarantee-dark w-full">
