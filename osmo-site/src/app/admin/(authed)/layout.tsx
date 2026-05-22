@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
+import { isAuthenticated } from "@/lib/admin-auth";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminTopbar from "@/components/admin/AdminTopbar";
 
@@ -8,7 +10,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function AdminAuthedLayout({ children }: { children: ReactNode }) {
+export const dynamic = "force-dynamic";
+
+export default async function AdminAuthedLayout({ children }: { children: ReactNode }) {
+  const authed = await isAuthenticated();
+  if (!authed) {
+    redirect("/admin/login");
+  }
+
   return (
     <div
       style={{
