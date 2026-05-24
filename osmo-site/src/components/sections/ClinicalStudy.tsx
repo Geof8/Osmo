@@ -188,43 +188,6 @@ export default function ClinicalStudy() {
             ))}
           </div>
 
-          {/* Scientific quote block */}
-          <div
-            style={{
-              marginTop: 16,
-              paddingTop: 16,
-              borderTop: "1px solid rgba(255,255,255,0.1)",
-            }}
-          >
-            <p
-              style={{
-                fontFamily: FONTS.body,
-                fontSize: 13,
-                lineHeight: 1.55,
-                color: "#999999",
-                fontStyle: "italic",
-                fontWeight: 400,
-              }}
-            >
-              &ldquo;NAC administration resulted in significant increase in
-              total glutathione levels and decrease in CRP levels.&rdquo;
-            </p>
-            <p
-              style={{
-                fontFamily: FONTS.body,
-                fontSize: 11,
-                lineHeight: 1.5,
-                color: "#666666",
-                marginTop: 8,
-                fontWeight: 400,
-              }}
-            >
-              — Sinaeinejad et al., Addiction &amp; Health, 2025
-              <br />
-              Essai randomisé · Double aveugle · 69 patients
-            </p>
-          </div>
-
           {/* CTA */}
           <a
             href={STUDY_URL}
@@ -247,24 +210,6 @@ export default function ClinicalStudy() {
           >
             Lire l&apos;étude clinique →
           </a>
-
-          {/* Disclaimer */}
-          <p
-            style={{
-              fontFamily: FONTS.body,
-              fontSize: 11,
-              color: "#666666",
-              fontStyle: "italic",
-              marginTop: 16,
-              lineHeight: 1.5,
-            }}
-          >
-            Source&nbsp;: Sinaeinejad et al., Addiction &amp; Health, 2025
-            <br />
-            N-acétylcystéine et fonction hépatique
-            <br />
-            Essai randomisé en double aveugle · 69 patients
-          </p>
         </motion.div>
       </div>
 
