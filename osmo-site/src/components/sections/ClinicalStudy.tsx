@@ -6,13 +6,12 @@ import { useInView } from "@/hooks/useInView";
 import { FONTS } from "@/lib/constants";
 
 const STATS = [
-  { value: "OMS", label: "Médicament essentiel" },
-  { value: "+GSH", label: "Précurseur du glutathion" },
-  { value: "40 ans", label: "D'utilisation clinique" },
+  { value: "+16%", label: "Augmentation du glutathion hépatique" },
+  { value: "−12%", label: "Réduction de l'inflammation (CRP)" },
+  { value: "8 sem.", label: "Durée de l'essai clinique" },
 ] as const;
 
-const STUDY_URL =
-  "https://www.revmed.ch/view/423640/3672706/RMS_590_146.pdf";
+const STUDY_URL = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12718416";
 
 export default function ClinicalStudy() {
   const [ref, isInView] = useInView<HTMLElement>({ margin: "-80px" });
@@ -106,7 +105,9 @@ export default function ClinicalStudy() {
               color: "#FFFFFF",
             }}
           >
-            L&apos;étude clinique sur la NAC détaillée
+            L&apos;actif que les urgentistes
+            <br />
+            utilisent depuis 40 ans.
           </h2>
 
           {/* Body */}
@@ -120,10 +121,10 @@ export default function ClinicalStudy() {
               fontWeight: 400,
             }}
           >
-            La N-Acétyl-Cystéine est inscrite sur la liste des médicaments
-            essentiels de l&apos;OMS. Utilisée en milieu hospitalier pour les
-            crises hépatiques et les intoxications au paracétamol, elle agit
-            comme précurseur du glutathion — le principal antioxydant du foie.
+            L&apos;alcool détruit le glutathion, le principal bouclier
+            antioxydant de votre foie. Dans un essai clinique randomisé en
+            double aveugle sur 69 patients, la NAC a augmenté significativement
+            les taux de glutathion et réduit les marqueurs d&apos;inflammation.
           </p>
           <p
             style={{
@@ -135,9 +136,8 @@ export default function ClinicalStudy() {
               fontWeight: 400,
             }}
           >
-            OSMO Recovery intègre la NAC pour accélérer la détoxification
-            hépatique pendant votre sommeil, au moment où votre corps en a le
-            plus besoin.
+            OSMO intègre la NAC pour reconstituer ce bouclier pendant votre
+            sommeil.
           </p>
 
           {/* Stats row */}
@@ -163,7 +163,7 @@ export default function ClinicalStudy() {
                 <div
                   style={{
                     fontFamily: FONTS.display,
-                    fontWeight: 700,
+                    fontWeight: 900,
                     fontSize: "clamp(20px, 4.5vw, 28px)",
                     lineHeight: 1,
                     color: "#C8963E",
@@ -175,7 +175,7 @@ export default function ClinicalStudy() {
                 <div
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: "clamp(11px, 2.8vw, 12px)",
+                    fontSize: 12,
                     lineHeight: 1.4,
                     color: "#999999",
                     marginTop: 8,
@@ -186,6 +186,43 @@ export default function ClinicalStudy() {
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Scientific quote block */}
+          <div
+            style={{
+              marginTop: 16,
+              paddingTop: 16,
+              borderTop: "1px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: 13,
+                lineHeight: 1.55,
+                color: "#999999",
+                fontStyle: "italic",
+                fontWeight: 400,
+              }}
+            >
+              &ldquo;NAC administration resulted in significant increase in
+              total glutathione levels and decrease in CRP levels.&rdquo;
+            </p>
+            <p
+              style={{
+                fontFamily: FONTS.body,
+                fontSize: 11,
+                lineHeight: 1.5,
+                color: "#666666",
+                marginTop: 8,
+                fontWeight: 400,
+              }}
+            >
+              — Sinaeinejad et al., Addiction &amp; Health, 2025
+              <br />
+              Essai randomisé · Double aveugle · 69 patients
+            </p>
           </div>
 
           {/* CTA */}
@@ -216,14 +253,17 @@ export default function ClinicalStudy() {
             style={{
               fontFamily: FONTS.body,
               fontSize: 11,
-              color: "#888888",
+              color: "#666666",
               fontStyle: "italic",
               marginTop: 16,
               lineHeight: 1.5,
             }}
           >
-            Source&nbsp;: Revue Médicale Suisse, 2018 · N-acétylcystéine et
-            hépatologie
+            Source&nbsp;: Sinaeinejad et al., Addiction &amp; Health, 2025
+            <br />
+            N-acétylcystéine et fonction hépatique
+            <br />
+            Essai randomisé en double aveugle · 69 patients
           </p>
         </motion.div>
       </div>
