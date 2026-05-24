@@ -15,9 +15,9 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
       className="sticky top-0 z-50 bg-white border-b border-[#E8E8E8]"
       aria-label="Navigation principale"
     >
-      <div className="relative max-w-[1180px] mx-auto px-6 sm:px-10 h-[60px] sm:h-[78px] sm:grid sm:grid-cols-3 sm:items-center sm:gap-3">
-        {/* Logo — absolute centered on mobile, left-aligned in grid on desktop */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:static sm:translate-x-0 sm:translate-y-0 sm:flex sm:items-baseline sm:gap-4 min-w-0">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10 grid grid-cols-[auto_1fr_auto] sm:grid-cols-3 items-center gap-3 h-[60px] sm:h-[78px]">
+        {/* Left — Logo (wordmark only) */}
+        <div className="flex items-baseline gap-4 min-w-0">
           <a
             href="/"
             aria-label="OSMO — retour en haut"
@@ -69,7 +69,7 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
         </div>
 
         {/* Right — CTA (amber preserved) */}
-        <div className="h-full flex items-center justify-end gap-4">
+        <div className="flex items-center justify-end gap-4">
           <button
             onClick={addToCartAndNavigate}
             className="cta-pill inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 min-h-[44px] active:scale-[0.97] whitespace-nowrap"

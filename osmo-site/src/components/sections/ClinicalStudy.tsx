@@ -241,28 +241,29 @@ export default function ClinicalStudy() {
             font-size: 11px;
           }
         }
-        /* Mobile (< 768px): natural height, compact card */
+        /* Mobile (< 768px): natural height, balanced card */
         @media (max-width: 767.98px) {
           .clinical-study-section {
             min-height: 0;
           }
           .clinical-card {
-            padding: 24px;
-            margin: 48px 0;
+            padding: 32px 24px;
+            margin: 72px 0;
           }
           .clinical-content {
             align-items: center;
-            padding-top: 24px;
-            padding-bottom: 24px;
+            padding-top: 40px;
+            padding-bottom: 40px;
           }
           .clinical-body {
-            font-size: 14px;
+            font-size: 15px;
+            line-height: 1.65;
           }
           .clinical-stat-value {
-            font-size: 20px;
+            font-size: 26px;
           }
           .clinical-stat-label {
-            font-size: 10px;
+            font-size: 11px;
           }
           .clinical-quote {
             font-size: 12px;
