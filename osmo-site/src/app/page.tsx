@@ -7,6 +7,7 @@ import Footer from "@/components/layout/Footer";
 import SplitOverlay from "@/components/ui/SplitOverlay";
 import Marquee from "@/components/ui/Marquee";
 import Hero from "@/components/sections/Hero";
+import IntroSequence from "@/components/sections/IntroSequence";
 import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
 import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -33,6 +34,7 @@ export default function Home() {
       <AnnouncementBar />
       <Navbar soldOut={soldOut} />
       <main>
+        <IntroSequence />
         <Hero revealed={heroRevealed} soldOut={soldOut} remaining={remaining} />
         <Marquee />
         <WhyYouSuffer />

@@ -23,6 +23,7 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
     : `Il reste ${safeRemaining} places sur ${total}`;
   return (
     <section
+      id="hero"
       className="scroll-mt-20 border-b border-[#E8E8E8] relative z-[5]"
       style={{ padding: "clamp(64px, 9vw, 100px) 0" }}
     >
