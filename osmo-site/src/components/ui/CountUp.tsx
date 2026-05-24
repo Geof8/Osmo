@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "@/hooks/useInView";
 import type { CountUpProps } from "@/types";
 
-export default function CountUp({ target, duration = 1.2, start = true }: CountUpProps) {
+export default function CountUp({ target, duration = 3.5, start = true }: CountUpProps) {
   const [ref, isInView] = useInView<HTMLSpanElement>();
   const [value, setValue] = useState(0);
 

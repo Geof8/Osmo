@@ -114,49 +114,55 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole quotidien · Soir + Matin.
             </motion.p>
 
-            {/* Price block */}
+            {/* Price block — dark pill container */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex items-center flex-wrap gap-x-3 gap-y-2"
             >
-              <span
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: 20,
-                  color: "#999999",
-                  textDecoration: "line-through",
-                }}
-              >
-                {PRODUCT.publicPrice}€
-              </span>
-              <span style={{ fontSize: 20, color: "#999999" }} aria-hidden="true">→</span>
-              <span
-                style={{
-                  fontFamily: FONTS.display,
-                  fontSize: 32,
-                  fontWeight: 900,
-                  color: "#111111",
-                  lineHeight: 1,
-                }}
-              >
-                {PRODUCT.earlyPrice}€
-              </span>
-              <span
+              <div
                 className="inline-flex items-center"
                 style={{
                   background: "#111111",
-                  color: "#FFFFFF",
-                  fontFamily: FONTS.body,
-                  fontSize: 11,
-                  letterSpacing: "0.1em",
                   borderRadius: 50,
-                  padding: "4px 12px",
+                  padding: "8px 16px",
+                  gap: 8,
+                  fontSize: 13,
                 }}
               >
-                -33%
-              </span>
+                <span
+                  style={{
+                    fontFamily: FONTS.body,
+                    fontSize: 13,
+                    color: "#999999",
+                    textDecoration: "line-through",
+                  }}
+                >
+                  {PRODUCT.publicPrice}€
+                </span>
+                <span
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontSize: 13,
+                    fontWeight: 900,
+                    color: "#FFFFFF",
+                    lineHeight: 1,
+                  }}
+                >
+                  {PRODUCT.earlyPrice}€
+                </span>
+                <span
+                  style={{
+                    color: "#C8963E",
+                    fontFamily: FONTS.body,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  -33%
+                </span>
+              </div>
             </motion.div>
 
             {/* Urgency counter */}

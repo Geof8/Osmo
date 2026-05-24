@@ -11,7 +11,8 @@ import {
 } from "react";
 import { motion, useMotionValue, animate, type PanInfo } from "framer-motion";
 
-const SWIPE_THRESHOLD = 50;
+const SWIPE_THRESHOLD = 30;
+const CARD_WIDTH_RATIO = 0.85;
 
 type Props<T> = {
   items: T[];
@@ -31,14 +32,16 @@ export default function MobileCardCarousel<T>({
   dotInactiveColor = "#DDDDDD",
 }: Props<T>) {
   const [index, setIndex] = useState(0);
-  const [trackWidth, setTrackWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
+
+  const slideWidth = containerWidth * CARD_WIDTH_RATIO;
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
     const el = containerRef.current;
-    const measure = () => setTrackWidth(el.offsetWidth);
+    const measure = () => setContainerWidth(el.offsetWidth);
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
@@ -46,15 +49,15 @@ export default function MobileCardCarousel<T>({
   }, []);
 
   useEffect(() => {
-    if (trackWidth === 0) return;
-    const controls = animate(x, -index * trackWidth, {
+    if (slideWidth === 0) return;
+    const controls = animate(x, -index * slideWidth, {
       type: "spring",
       stiffness: 320,
       damping: 34,
       mass: 0.9,
     });
     return () => controls.stop();
-  }, [index, trackWidth, x]);
+  }, [index, slideWidth, x]);
 
   const goTo = useCallback(
     (next: number) => {
@@ -72,14 +75,14 @@ export default function MobileCardCarousel<T>({
       } else if (offset > SWIPE_THRESHOLD) {
         goTo(index - 1);
       } else {
-        animate(x, -index * trackWidth, {
+        animate(x, -index * slideWidth, {
           type: "spring",
           stiffness: 320,
           damping: 34,
         });
       }
     },
-    [goTo, index, trackWidth, x],
+    [goTo, index, slideWidth, x],
   );
 
   const onKeyDown = useCallback(
@@ -99,19 +102,20 @@ export default function MobileCardCarousel<T>({
     <div className="md:hidden">
       <div
         ref={containerRef}
-        className="relative overflow-hidden"
+        className="relative"
         role="region"
         aria-label={ariaLabel}
         aria-roledescription="carousel"
         tabIndex={0}
         onKeyDown={onKeyDown}
+        style={{ overflow: "visible" }}
       >
         <motion.div
           className="flex"
-          style={{ x, width: trackWidth ? trackWidth * items.length : "100%" }}
+          style={{ x, width: slideWidth ? slideWidth * items.length : "100%" }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.2}
+          dragElastic={0.1}
           dragMomentum={false}
           onDragEnd={onDragEnd}
         >
@@ -119,7 +123,7 @@ export default function MobileCardCarousel<T>({
             <div
               key={getKey(item, i)}
               className="flex-shrink-0"
-              style={{ width: trackWidth || "100%" }}
+              style={{ width: slideWidth || "100%", paddingRight: 12 }}
               aria-hidden={i === index ? "false" : "true"}
               aria-roledescription="slide"
               aria-label={`${i + 1} sur ${items.length}`}

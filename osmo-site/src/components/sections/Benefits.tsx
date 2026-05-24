@@ -74,20 +74,20 @@ function BenefitItem({ benefit, index }: { benefit: Benefit; index: number }) {
       initial={ANIMATION_CONFIG.cardReveal.initial}
       animate={isInView ? { opacity: 1, y: 0 } : ANIMATION_CONFIG.cardReveal.initial}
       transition={{ ...ANIMATION_CONFIG.cardReveal.transition, delay: index * 0.08 }}
-      className="flex flex-col items-center text-center"
+      className="flex flex-col items-center text-center p-4 sm:p-0"
     >
-      <div className="w-10 h-10 mb-5" style={{ color: "#C8963E" }}>
+      <div className="w-6 h-6 sm:w-10 sm:h-10 mb-3 sm:mb-5" style={{ color: "#C8963E" }}>
         {benefit.icon}
       </div>
       <h3
         style={{
           fontFamily: FONTS.display,
-          fontWeight: 700,
-          fontSize: "clamp(18px, 1.6vw, 22px)",
+          fontWeight: 600,
+          fontSize: "clamp(13px, 1.6vw, 22px)",
           lineHeight: 1.2,
           letterSpacing: "-0.01em",
           color: "#111111",
-          marginBottom: 10,
+          marginBottom: 8,
         }}
       >
         {benefit.title}
@@ -95,11 +95,12 @@ function BenefitItem({ benefit, index }: { benefit: Benefit; index: number }) {
       <p
         style={{
           fontFamily: FONTS.body,
-          fontSize: "clamp(14px, 1.05vw, 15px)",
-          lineHeight: 1.6,
+          fontSize: "clamp(12px, 1.05vw, 15px)",
+          lineHeight: 1.5,
           color: "#444444",
           fontWeight: 400,
           maxWidth: 320,
+          overflowWrap: "break-word",
         }}
       >
         {benefit.desc}
@@ -169,7 +170,7 @@ export default function Benefits() {
               </p>
             </FadeUp>
 
-            <div className="mt-10 lg:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+            <div className="mt-10 lg:mt-12 grid grid-cols-2 gap-3 sm:gap-x-8 sm:gap-y-10">
               {benefits.map((b, i) => (
                 <BenefitItem key={b.title} benefit={b} index={i} />
               ))}

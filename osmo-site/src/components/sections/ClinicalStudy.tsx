@@ -20,13 +20,11 @@ export default function ClinicalStudy() {
     <section
       ref={ref}
       aria-label="Étude clinique sur la N-Acétyl-Cystéine"
-      className="relative z-[5] overflow-hidden"
+      className="relative z-[5] overflow-hidden clinical-study-section"
       style={{
         width: "100vw",
         marginLeft: "calc(50% - 50vw)",
         marginRight: "calc(50% - 50vw)",
-        height: "100vh",
-        minHeight: 640,
         background: "#0A0A0A",
       }}
     >
@@ -62,21 +60,20 @@ export default function ClinicalStudy() {
 
       {/* Content container */}
       <div
-        className="relative h-full max-w-[1380px] mx-auto px-6 sm:px-10 flex items-end lg:items-center justify-center lg:justify-start"
+        className="relative h-full max-w-[1380px] mx-auto px-6 sm:px-10 flex items-center justify-center lg:justify-start clinical-content"
         style={{ zIndex: 2 }}
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="w-full lg:max-w-[560px] mb-12 lg:mb-0"
+          className="clinical-card w-full lg:max-w-[560px]"
           style={{
             background: "rgba(255,255,255,0.06)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
             border: "1px solid rgba(255,255,255,0.12)",
             borderRadius: 20,
-            padding: "clamp(32px, 4.5vw, 48px)",
           }}
         >
           {/* Eyebrow */}
@@ -112,9 +109,9 @@ export default function ClinicalStudy() {
 
           {/* Body */}
           <p
+            className="clinical-body"
             style={{
               fontFamily: FONTS.body,
-              fontSize: 16,
               lineHeight: 1.7,
               color: "#CCCCCC",
               marginTop: 24,
@@ -127,9 +124,9 @@ export default function ClinicalStudy() {
             les taux de glutathion et réduit les marqueurs d&apos;inflammation.
           </p>
           <p
+            className="clinical-body"
             style={{
               fontFamily: FONTS.body,
-              fontSize: 16,
               lineHeight: 1.7,
               color: "#CCCCCC",
               marginTop: 16,
@@ -161,10 +158,10 @@ export default function ClinicalStudy() {
                 }}
               >
                 <div
+                  className="clinical-stat-value"
                   style={{
                     fontFamily: FONTS.display,
                     fontWeight: 900,
-                    fontSize: "clamp(20px, 4.5vw, 28px)",
                     lineHeight: 1,
                     color: "#C8963E",
                     letterSpacing: "-0.01em",
@@ -173,9 +170,9 @@ export default function ClinicalStudy() {
                   {stat.value}
                 </div>
                 <div
+                  className="clinical-stat-label"
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 12,
                     lineHeight: 1.4,
                     color: "#999999",
                     marginTop: 8,
@@ -217,6 +214,59 @@ export default function ClinicalStudy() {
         .clinical-cta:hover {
           background: rgba(255, 255, 255, 0.1);
           border-color: rgba(255, 255, 255, 0.6) !important;
+        }
+        /* Desktop / tablet (≥ 768px): keep the full-bleed cinematic format */
+        @media (min-width: 768px) {
+          .clinical-study-section {
+            height: 100vh;
+            min-height: 640px;
+          }
+          .clinical-card {
+            padding: clamp(32px, 4.5vw, 48px);
+            margin-bottom: 0;
+          }
+          .clinical-content {
+            align-items: center;
+          }
+          .clinical-body {
+            font-size: 16px;
+          }
+          .clinical-stat-value {
+            font-size: clamp(20px, 4.5vw, 28px);
+          }
+          .clinical-stat-label {
+            font-size: 12px;
+          }
+          .clinical-quote {
+            font-size: 11px;
+          }
+        }
+        /* Mobile (< 768px): natural height, compact card */
+        @media (max-width: 767.98px) {
+          .clinical-study-section {
+            min-height: 0;
+          }
+          .clinical-card {
+            padding: 24px;
+            margin: 48px 0;
+          }
+          .clinical-content {
+            align-items: center;
+            padding-top: 24px;
+            padding-bottom: 24px;
+          }
+          .clinical-body {
+            font-size: 14px;
+          }
+          .clinical-stat-value {
+            font-size: 20px;
+          }
+          .clinical-stat-label {
+            font-size: 10px;
+          }
+          .clinical-quote {
+            font-size: 12px;
+          }
         }
       `}</style>
     </section>

@@ -184,6 +184,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Atelier",
     links: [
+      { label: "Notre Histoire", href: "/notre-histoire" },
       { label: "Notre approche", href: "#observations" },
       { label: "Lot 001", href: "#reserve" },
       { label: "Analyses", href: "#formule" },

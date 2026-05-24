@@ -20,23 +20,6 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
         }}
       />
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10 relative">
-        <FadeUp>
-          <div
-            className="mb-10 lg:mb-14 flex items-center gap-[14px]"
-            style={{
-              fontFamily: FONTS.mono,
-              fontSize: 12,
-              fontWeight: 400,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "#999999",
-            }}
-          >
-            <span className="w-7 h-px bg-white/40" aria-hidden="true" />
-            Vol. 01 · Lot N°001 · 50 ex.
-          </div>
-        </FadeUp>
-
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
