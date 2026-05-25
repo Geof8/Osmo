@@ -9,46 +9,36 @@ export default function IntroSequence() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hidden, setHidden] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const [autoScrolled, setAutoScrolled] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // STEP 1 — "OSMO" wordmark (0% → 28%)
+  // STEP 1 — "OSMO" wordmark (0% → 33%)
   const step1Opacity = useTransform(
     scrollYProgress,
-    [0, 0.1, 0.2, 0.28],
+    [0, 0.08, 0.25, 0.33],
     [0, 1, 1, 0]
   );
-  const step1Y = useTransform(scrollYProgress, [0, 0.1], [20, 0]);
+  const step1Y = useTransform(scrollYProgress, [0, 0.12], [30, 0]);
 
-  // STEP 2 — Tagline (28% → 56%)
+  // STEP 2 — Tagline (33% → 66%)
   const step2Opacity = useTransform(
     scrollYProgress,
-    [0.28, 0.38, 0.48, 0.56],
+    [0.33, 0.41, 0.58, 0.66],
     [0, 1, 1, 0]
   );
-  const step2Y = useTransform(scrollYProgress, [0.28, 0.38], [20, 0]);
+  const step2Y = useTransform(scrollYProgress, [0.33, 0.45], [30, 0]);
 
-  // STEP 3 — Whole intro fades to reveal hero (55% → 70%)
-  const wrapperOpacity = useTransform(scrollYProgress, [0.55, 0.7], [1, 0]);
-
-  // Track active step for progress dots + auto-scroll trigger
+  // Active step → progress dots (no auto-scroll)
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (v < 0.28) setActiveStep(0);
-    else if (v < 0.55) setActiveStep(1);
+    if (v < 0.33) setActiveStep(0);
+    else if (v < 0.66) setActiveStep(1);
     else setActiveStep(2);
-
-    if (v >= 0.7 && !autoScrolled) {
-      setAutoScrolled(true);
-      const hero = document.getElementById("hero");
-      if (hero) hero.scrollIntoView({ behavior: "smooth" });
-    }
   });
 
-  // If the user lands deep in the page (refresh / hash), skip intro
+  // If user lands deep in the page (refresh / hash), skip intro
   useEffect(() => {
     if (window.scrollY > window.innerHeight * 0.5) {
       setHidden(true);
@@ -56,9 +46,11 @@ export default function IntroSequence() {
   }, []);
 
   const handleSkip = () => {
+    const containerHeight = containerRef.current?.offsetHeight ?? 0;
+    const containerTop = containerRef.current?.offsetTop ?? 0;
     setHidden(true);
-    const hero = document.getElementById("hero");
-    if (hero) hero.scrollIntoView({ behavior: "smooth" });
+    // Jump past the intro container so Hero is at viewport top
+    window.scrollTo({ top: containerTop + containerHeight, behavior: "auto" });
   };
 
   if (hidden) return null;
@@ -67,12 +59,9 @@ export default function IntroSequence() {
     <div
       ref={containerRef}
       className="hidden md:block relative"
-      style={{ height: "400vh" }}
+      style={{ height: "300vh" }}
     >
-      <motion.div
-        style={{ opacity: wrapperOpacity }}
-        className="sticky top-0 w-full h-screen overflow-hidden bg-black"
-      >
+      <div className="sticky top-0 w-full h-screen overflow-hidden bg-black">
         {/* Ken Burns background image */}
         <motion.div
           initial={{ scale: 1.12 }}
@@ -183,7 +172,7 @@ export default function IntroSequence() {
             />
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
