@@ -110,13 +110,24 @@ export default function IntroSequence() {
             />
           </motion.div>
 
-          {/* Dark gradient overlay */}
+          {/* Dark gradient overlay — renforcé pour que la tagline ressorte */}
           <div
             className="absolute inset-0"
             style={{
               zIndex: 1,
               background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%)",
+                "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.75) 100%)",
+            }}
+          />
+
+          {/* Radial vignette doux qui assombrit le centre — boost contraste tagline */}
+          <div
+            className="absolute inset-0"
+            style={{
+              zIndex: 1,
+              background:
+                "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 60%)",
+              pointerEvents: "none",
             }}
           />
 
@@ -156,6 +167,7 @@ export default function IntroSequence() {
                 color: "#FFFFFF",
                 letterSpacing: "0.05em",
                 lineHeight: 1,
+                textShadow: "0 6px 32px rgba(0, 0, 0, 0.55)",
               }}
             >
               OSMO
@@ -170,12 +182,14 @@ export default function IntroSequence() {
             <p
               style={{
                 fontFamily: FONTS.display,
-                fontWeight: 700,
-                fontSize: "clamp(28px, 4vw, 52px)",
+                fontWeight: 800,
+                fontSize: "clamp(32px, 4.4vw, 58px)",
                 color: "#FFFFFF",
                 textAlign: "center",
-                maxWidth: 700,
+                maxWidth: 740,
                 lineHeight: 1.2,
+                letterSpacing: "-0.01em",
+                textShadow: "0 4px 28px rgba(0, 0, 0, 0.7), 0 2px 12px rgba(0, 0, 0, 0.5)",
               }}
             >
               Parce que demain matin,
