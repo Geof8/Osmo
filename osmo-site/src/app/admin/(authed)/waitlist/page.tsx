@@ -2,6 +2,7 @@ import Link from "next/link";
 import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import KpiCard from "@/components/admin/KpiCard";
 import SearchInput from "@/components/admin/SearchInput";
+import DeleteWaitlistButton from "./DeleteWaitlistButton";
 import {
   fetchWaitlistCount,
   fetchWaitlistPage,
@@ -124,6 +125,7 @@ export default async function AdminWaitlistPage({
                   <th>Email</th>
                   <th>Source</th>
                   <th>Statut</th>
+                  <th style={{ textAlign: "right" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,6 +140,9 @@ export default async function AdminWaitlistPage({
                     </td>
                     <td>
                       <StatusBadge />
+                    </td>
+                    <td style={{ textAlign: "right" }}>
+                      <DeleteWaitlistButton id={row.id} email={row.email} />
                     </td>
                   </tr>
                 ))}
