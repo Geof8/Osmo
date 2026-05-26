@@ -39,6 +39,7 @@ const NAV: NavSection[] = [
       { href: "/admin/automatisations", label: "Automatisations", icon: "•" },
       { href: "/admin/newsletter", label: "Newsletter", icon: "•" },
       { href: "/admin/emails", label: "Emails transactionnels", icon: "•" },
+      { href: "/admin/waitlist", label: "📋 Liste d'attente", icon: "•" },
     ],
   },
   {
