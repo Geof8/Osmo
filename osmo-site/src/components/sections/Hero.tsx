@@ -24,7 +24,7 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
   return (
     <section
       id="hero"
-      className="scroll-mt-0 border-b border-[#E8E8E8] relative z-[5] bg-white"
+      className="scroll-mt-20 border-b border-[#E8E8E8] relative z-[5] bg-white"
       style={{ padding: "clamp(64px, 9vw, 100px) 0" }}
     >
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
