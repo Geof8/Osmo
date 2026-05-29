@@ -31,7 +31,33 @@ export default function WhyYouSuffer() {
               </h2>
             </FadeUp>
 
-            <FadeUp delay={0.1}>
+            <FadeUp delay={0.08}>
+              <p
+                style={{
+                  fontFamily: FONTS.display,
+                  fontSize: "clamp(18px, 4.2vw, 22px)",
+                  fontStyle: "italic",
+                  fontWeight: 500,
+                  lineHeight: 1.45,
+                  color: "#111111",
+                  letterSpacing: "-0.01em",
+                  maxWidth: 540,
+                  marginTop: "clamp(24px, 4vw, 32px)",
+                  paddingLeft: 16,
+                  borderLeft: "2px solid #C8963E",
+                }}
+              >
+                Il est 7h30. Tu regardes ton téléphone.
+                <br />
+                Réunion dans 2 heures. Tête qui tourne.
+                <br />
+                Bouche sèche. Tout pour être au top.
+                <br />
+                Rien pour l&apos;être vraiment.
+              </p>
+            </FadeUp>
+
+            <FadeUp delay={0.12}>
               <p
                 style={{
                   fontFamily: FONTS.body,
@@ -40,7 +66,7 @@ export default function WhyYouSuffer() {
                   lineHeight: 1.65,
                   color: "#444444",
                   maxWidth: 540,
-                  marginTop: "clamp(24px, 4vw, 32px)",
+                  marginTop: "clamp(20px, 3vw, 28px)",
                 }}
               >
                 L&apos;alcool est un diurétique. En quelques heures,

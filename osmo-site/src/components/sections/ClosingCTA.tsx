@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import FadeUp from "@/components/ui/FadeUp";
 import WaitlistForm from "@/components/ui/WaitlistForm";
 import { useCart } from "@/context/CartContext";
-import { FONTS, GUARANTEE_LINE } from "@/lib/constants";
+import { FONTS, REASSURANCE_LINE } from "@/lib/constants";
 import type { SoldOutProps } from "@/types";
 
 export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
@@ -110,9 +110,19 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                     Réserver ma place — 20€{" "}
                     <span aria-hidden="true">→</span>
                   </button>
-                  <div className="cta-guarantee cta-guarantee-dark w-full">
-                    {GUARANTEE_LINE}
-                  </div>
+                  <p
+                    className="w-full"
+                    style={{
+                      fontFamily: FONTS.body,
+                      fontSize: 11,
+                      letterSpacing: "0.05em",
+                      color: "rgba(255,248,232,0.55)",
+                      textAlign: "center",
+                      margin: "8px 0 0",
+                    }}
+                  >
+                    {REASSURANCE_LINE}
+                  </p>
                 </div>
                 <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
                   <li><strong>Prix Early Adopter : 20€ au lieu de 30€, 33% de réduction</strong></li>

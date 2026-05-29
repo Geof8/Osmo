@@ -8,6 +8,7 @@ import SplitOverlay from "@/components/ui/SplitOverlay";
 import Marquee from "@/components/ui/Marquee";
 import Hero from "@/components/sections/Hero";
 import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
+import BeforeAfter from "@/components/sections/BeforeAfter";
 import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Formula from "@/components/sections/Formula";
@@ -36,6 +37,7 @@ export default function Home() {
         <Hero revealed={heroRevealed} soldOut={soldOut} remaining={remaining} />
         <Marquee />
         <WhyYouSuffer />
+        <BeforeAfter />
         <Benefits />
         <SocialProof />
         <HowItWorks />

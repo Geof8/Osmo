@@ -31,6 +31,9 @@ export const FONTS = {
 export const GUARANTEE_LINE =
   "✓ À réception du produit, 30 jours satisfait ou remboursé";
 
+export const REASSURANCE_LINE =
+  "✓ Laboratoire français certifié · ✓ Essai clinique · ✓ 30 jours satisfait ou remboursé";
+
 export const ANIMATION_CONFIG = {
   fadeUp: {
     initial: { opacity: 0, y: 24 },
@@ -96,7 +99,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Comment utiliser OSMO Recovery ?",
-    a: "Une dose d'OSMO Recovery dans 250ml d'eau, à boire deux fois par jour — une fois le soir avant de dormir et une fois au réveil, idéalement accompagné d'un repas. Goût citron franc, dissolution immédiate.",
+    a: "Le principe est simple : ton corps récupère pendant le sommeil, pas après. Dose 1 le soir active la récupération. Dose 2 le matin la finalise.\n\nConcrètement, une dose d'OSMO Recovery dans 250ml d'eau, à boire deux fois par jour — une fois le soir avant de dormir et une fois au réveil, idéalement accompagné d'un repas. Goût citron franc, dissolution immédiate.",
   },
   {
     q: "Est-ce un médicament ?",

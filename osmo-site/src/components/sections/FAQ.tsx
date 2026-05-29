@@ -71,17 +71,24 @@ export default function FAQ() {
                     </span>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <p
+                    <div
                       style={{
                         maxWidth: 620,
                         fontSize: "clamp(14px, 3.4vw, 16px)",
                         lineHeight: 1.7,
                         color: "#444444",
                         fontFamily: FONTS.body,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 12,
                       }}
                     >
-                      {item.a}
-                    </p>
+                      {item.a.split("\n\n").map((para, j) => (
+                        <p key={j} style={{ margin: 0 }}>
+                          {para}
+                        </p>
+                      ))}
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ))}

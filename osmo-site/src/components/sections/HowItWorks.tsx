@@ -190,6 +190,32 @@ export default function HowItWorks() {
           </div>
         </FadeUp>
 
+        <FadeUp delay={0.08}>
+          <p
+            className="mb-12 lg:mb-16"
+            style={{
+              fontFamily: FONTS.display,
+              fontStyle: "italic",
+              fontWeight: 500,
+              fontSize: "clamp(18px, 3.6vw, 24px)",
+              lineHeight: 1.5,
+              letterSpacing: "-0.01em",
+              color: "#111111",
+              maxWidth: 760,
+              paddingLeft: 16,
+              borderLeft: "2px solid #C8963E",
+            }}
+          >
+            Personne ne fait ça sur le marché français.
+            <br />
+            Un complément le soir. Un complément le matin.
+            <br />
+            Parce que ton corps récupère la nuit,
+            <br />
+            pas le lendemain matin quand il est trop tard.
+          </p>
+        </FadeUp>
+
         {/* Mobile: Framer Motion swipe carousel — amber kept on active dot (per spec) */}
         <MobileCardCarousel
           items={steps}

@@ -15,8 +15,8 @@ type Benefit = {
 
 const benefits: Benefit[] = [
   {
-    title: "Foie soutenu",
-    desc: "La N-Acétyl-Cystéine recharge le glutathion, principal antioxydant du foie, pour métaboliser l'alcool plus vite.",
+    title: "Ton foie travaille pendant que tu dors",
+    desc: "NAC 300mg — précurseur du glutathion, l'antioxydant clé que ton foie utilise pour métaboliser l'alcool.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M10 16 Q10 10 18 10 Q26 10 28 16 Q34 12 38 18 Q42 26 36 32 Q30 38 22 36 Q14 38 10 30 Q6 22 10 16 Z" />
@@ -26,8 +26,8 @@ const benefits: Benefit[] = [
     ),
   },
   {
-    title: "Hydratation profonde",
-    desc: "Sodium, potassium et bicarbonate restaurent l'équilibre cellulaire que l'alcool a vidé pendant la soirée.",
+    title: "Réhydraté au niveau cellulaire",
+    desc: "Bicarbonate + Sodium — restaurent l'équilibre acido-basique que l'alcool a vidé pendant la soirée.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M24 6 Q16 18 16 26 A8 8 0 0 0 32 26 Q32 18 24 6 Z" />
@@ -36,8 +36,8 @@ const benefits: Benefit[] = [
     ),
   },
   {
-    title: "Sommeil réparateur",
-    desc: "Le magnésium bisglycinate favorise un sommeil profond malgré la soirée, et limite les réveils nocturnes.",
+    title: "Un sommeil qui répare vraiment",
+    desc: "Magnésium bisglycinate — soutient la qualité du sommeil profond et limite les réveils nocturnes.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M32 8 A16 16 0 1 0 40 26 Q32 28 28 22 Q24 16 32 8 Z" />
@@ -47,8 +47,8 @@ const benefits: Benefit[] = [
     ),
   },
   {
-    title: "Réveil clair",
-    desc: "Tu te lèves frais, l'esprit net, le corps stable. Sans coup de mou ni mal de crâne pour saboter ta journée.",
+    title: "Plus jamais de crampes à 4h du matin",
+    desc: "Potassium + Magnésium — soutiennent la fonction musculaire et préviennent les crampes nocturnes.",
     icon: (
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="24" cy="26" r="7" />

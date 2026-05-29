@@ -4,11 +4,32 @@ import { motion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
 import HeroCarousel from "@/components/ui/HeroCarousel";
 import { useCart } from "@/context/CartContext";
-import { FONTS, HERO_STATS, PRODUCT } from "@/lib/constants";
+import { FONTS, HERO_STATS, PRODUCT, REASSURANCE_LINE } from "@/lib/constants";
 import type { HeroProps } from "@/types";
 
 const headlineWordsPlain = ["Le", "lendemain", "matin,"];
 const headlineWordsItalic = ["tu", "assures."];
+
+// HERO_VARIANT — switch between A/B/C to A/B-test the emotional hook.
+// A = fear angle · B = identity angle · C = pain angle
+const HERO_VARIANT: "A" | "B" | "C" = "A";
+
+const HERO_SUBLINES: Record<"A" | "B" | "C", string[]> = {
+  A: [
+    "3 verres hier soir. Réunion à 9h ce matin.",
+    "Le lendemain, ça ne pardonne plus.",
+  ],
+  B: [
+    "Tu bois avec tes amis le soir.",
+    "Tu assures au bureau le matin.",
+    "OSMO, c'est pour ça.",
+  ],
+  C: [
+    "Ton corps se déshydrate pendant que tu dors.",
+    "Tes minéraux s'effondrent. Ton foie sature.",
+    "Et toi tu te réveilles en morceaux.",
+  ],
+};
 
 export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.maxEarlyAdopters }: HeroProps) {
   const { addToCartAndNavigate } = useCart();
@@ -94,25 +115,21 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               style={{
-                fontSize: "clamp(15px, 3.5vw, 16px)",
-                lineHeight: 1.65,
+                fontFamily: FONTS.body,
+                fontSize: "clamp(16px, 3.6vw, 18px)",
+                lineHeight: 1.55,
                 maxWidth: 480,
-                color: "#444444",
+                color: "#111111",
+                fontWeight: 500,
+                margin: 0,
               }}
             >
-              Un complexe d&apos;électrolytes formulé pour la récupération{" "}
-              <em
-                style={{
-                  fontFamily: FONTS.body,
-                  fontStyle: "italic",
-                  fontWeight: 600,
-                  fontSize: "inherit",
-                  color: "#111111",
-                }}
-              >
-                pendant le sommeil et au réveil
-              </em>{" "}
-              après une soirée alcoolisée, une semaine chargée, ou les deux. Protocole quotidien · Soir + Matin.
+              {HERO_SUBLINES[HERO_VARIANT].map((line, i, arr) => (
+                <span key={i}>
+                  {line}
+                  {i < arr.length - 1 && <br />}
+                </span>
+              ))}
             </motion.p>
 
             {/* Price block — dark pill container */}
@@ -231,13 +248,14 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               <p
                 style={{
                   fontFamily: FONTS.body,
-                  fontSize: 12,
+                  fontSize: 11,
                   color: "#666666",
+                  letterSpacing: "0.05em",
                   textAlign: "center",
                   margin: 0,
                 }}
               >
-                ✓ Pré-commande sécurisée · 30 jours satisfait ou remboursé à réception
+                {REASSURANCE_LINE}
               </p>
               <p
                 style={{
