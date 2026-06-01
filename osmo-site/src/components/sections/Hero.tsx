@@ -141,29 +141,40 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               <div
                 className="inline-flex items-center"
                 style={{
-                  background: "#111111",
-                  borderRadius: 50,
-                  padding: "8px 16px",
-                  gap: 8,
-                  fontSize: 13,
+                  background: "#F4F4F4",
+                  borderRadius: 12,
+                  padding: "16px 24px",
+                  gap: 16,
                 }}
               >
                 <span
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 13,
+                    fontSize: 22,
                     color: "#999999",
                     textDecoration: "line-through",
+                    lineHeight: 1,
                   }}
                 >
                   {PRODUCT.publicPrice}€
                 </span>
                 <span
+                  aria-hidden="true"
+                  style={{
+                    fontFamily: FONTS.body,
+                    fontSize: 18,
+                    color: "#999999",
+                    lineHeight: 1,
+                  }}
+                >
+                  →
+                </span>
+                <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 13,
+                    fontSize: 42,
                     fontWeight: 900,
-                    color: "#FFFFFF",
+                    color: "#111111",
                     lineHeight: 1,
                   }}
                 >
@@ -171,14 +182,18 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 </span>
                 <span
                   style={{
-                    color: "#C8963E",
+                    background: "#111111",
+                    color: "#FFFFFF",
                     fontFamily: FONTS.body,
                     fontSize: 13,
                     fontWeight: 700,
-                    letterSpacing: "0.04em",
+                    padding: "6px 16px",
+                    borderRadius: 50,
+                    lineHeight: 1,
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  -33%
+                  -29%
                 </span>
               </div>
             </motion.div>
@@ -242,7 +257,7 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               >
                 {soldOut
                   ? "Lot N°001 complet · liste d'attente"
-                  : "Réserver ma place — 20€"}{" "}
+                  : "Réserver ma place — 25€"}{" "}
                 <span aria-hidden="true">→</span>
               </button>
               <p

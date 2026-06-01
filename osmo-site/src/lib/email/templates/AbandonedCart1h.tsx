@@ -17,7 +17,7 @@ export function AbandonedCart1h({ firstName, baseUrl }: AbandonedCart1hProps) {
       </P>
       <Highlight>
         Le Lot N°001 est limité à <strong>50 personnes</strong>. Le tarif Early
-        Adopter (20€ au lieu de 30€) ne sera plus disponible une fois les
+        Adopter (25€ au lieu de 35€) ne sera plus disponible une fois les
         places épuisées.
       </Highlight>
       <P>Reprends ta réservation en un clic :</P>

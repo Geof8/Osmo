@@ -34,9 +34,9 @@ export default function CGV() {
       <section>
         <h2>Article 3 — Prix</h2>
         <p>
-          Prix Early Adopters (Lot N°001) : 20€ TTC
+          Prix Early Adopters (Lot N°001) : 25€ TTC
           <br />
-          Prix public : 30€ TTC
+          Prix public : 35€ TTC
           <br />
           Prix incluant TVA applicable.
         </p>

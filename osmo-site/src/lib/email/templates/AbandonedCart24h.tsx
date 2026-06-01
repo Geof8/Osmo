@@ -21,7 +21,7 @@ export function AbandonedCart24h({
         disponibles au tarif Early Adopter.
       </P>
       <Highlight>
-        <strong>20€ au lieu de 30€</strong> — uniquement pour les 50 premiers.
+        <strong>25€ au lieu de 35€</strong> — uniquement pour les 50 premiers.
         <br />
         Garantie 30 jours satisfait ou remboursé à réception.
         {promoCode && (

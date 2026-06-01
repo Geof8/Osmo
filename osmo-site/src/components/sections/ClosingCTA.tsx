@@ -59,7 +59,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
               color: "#999999",
             }}
           >
-            50 places · 20€ · Expédié sous 6 mois
+            50 places · 25€ · Expédié sous 6 mois
           </p>
         </FadeUp>
 
@@ -107,7 +107,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                       textTransform: "uppercase",
                     }}
                   >
-                    Réserver ma place — 20€{" "}
+                    Réserver ma place — 25€{" "}
                     <span aria-hidden="true">→</span>
                   </button>
                   <p
@@ -125,7 +125,7 @@ export default function ClosingCTA({ soldOut = false }: SoldOutProps) {
                   </p>
                 </div>
                 <ul style={{ fontFamily: FONTS.mono, fontSize: 11, lineHeight: 1.8, color: "rgba(255,248,232,0.5)", listStyle: "none", padding: 0 }}>
-                  <li><strong>Prix Early Adopter : 20€ au lieu de 30€, 33% de réduction</strong></li>
+                  <li><strong>Prix Early Adopter : 25€ au lieu de 35€, 29% de réduction</strong></li>
                   <li>Validé par un laboratoire</li>
                   <li>Expédition estimée : dans 6 mois maximum</li>
                   <li>Aucun frais caché, paiement sécurisé</li>

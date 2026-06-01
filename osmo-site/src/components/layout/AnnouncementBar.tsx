@@ -22,8 +22,8 @@ export default function Strip() {
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10 flex justify-between items-center gap-4 flex-wrap" style={{ fontSize: "clamp(10px, 2.6vw, 11px)" }}>
         <div className="flex items-center gap-2">
           <span className="w-[6px] h-[6px] bg-white rounded-full animate-pulse flex-shrink-0" aria-hidden="true" />
-          <span className="sm:hidden">LOT N°001 · PROTOCOLE QUOTIDIEN · 20€</span>
-          <span className="hidden sm:inline">LOT N°001 · 50 PLACES · PROTOCOLE QUOTIDIEN · SOIR + MATIN · 20€</span>
+          <span className="sm:hidden">LOT N°001 · PROTOCOLE QUOTIDIEN · 25€</span>
+          <span className="hidden sm:inline">LOT N°001 · 50 PLACES · PROTOCOLE QUOTIDIEN · SOIR + MATIN · 25€</span>
         </div>
         <div className="hidden md:block">OSMO Lab · Paris, France</div>
       </div>

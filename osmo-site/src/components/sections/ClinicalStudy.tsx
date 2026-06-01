@@ -112,7 +112,7 @@ export default function ClinicalStudy() {
             className="clinical-body"
             style={{
               fontFamily: FONTS.body,
-              lineHeight: 1.7,
+              lineHeight: 1.8,
               color: "#CCCCCC",
               marginTop: 24,
               fontWeight: 400,
@@ -127,7 +127,7 @@ export default function ClinicalStudy() {
             className="clinical-body"
             style={{
               fontFamily: FONTS.body,
-              lineHeight: 1.7,
+              lineHeight: 1.8,
               color: "#CCCCCC",
               marginTop: 16,
               fontWeight: 400,
@@ -139,8 +139,9 @@ export default function ClinicalStudy() {
 
           {/* Stats row */}
           <div
-            className="grid grid-cols-3 gap-4 sm:gap-6"
+            className="grid grid-cols-3"
             style={{
+              gap: 32,
               marginTop: 32,
               paddingTop: 32,
               borderTop: "1px solid rgba(255,255,255,0.1)",
@@ -222,7 +223,7 @@ export default function ClinicalStudy() {
             min-height: 640px;
           }
           .clinical-card {
-            padding: clamp(32px, 4.5vw, 48px);
+            padding: 48px;
             margin-bottom: 0;
           }
           .clinical-content {
@@ -230,6 +231,7 @@ export default function ClinicalStudy() {
           }
           .clinical-body {
             font-size: 16px;
+            line-height: 1.8;
           }
           .clinical-stat-value {
             font-size: clamp(20px, 4.5vw, 28px);
@@ -247,7 +249,7 @@ export default function ClinicalStudy() {
             min-height: 0;
           }
           .clinical-card {
-            padding: 40px 32px;
+            padding: 32px;
             margin: 72px 0;
           }
           .clinical-content {
@@ -257,7 +259,7 @@ export default function ClinicalStudy() {
           }
           .clinical-body {
             font-size: 15px;
-            line-height: 1.65;
+            line-height: 1.8;
           }
           .clinical-stat-value {
             font-size: 24px;

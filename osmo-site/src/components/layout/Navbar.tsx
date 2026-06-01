@@ -81,10 +81,10 @@ export default function Navbar({ soldOut = false }: SoldOutProps) {
             }}
           >
             <span className="sm:hidden" style={{ fontSize: 11 }}>
-              {soldOut ? "Liste d’attente" : "Réserver · 20€"}
+              {soldOut ? "Liste d’attente" : "Réserver · 25€"}
             </span>
             <span className="hidden sm:inline" style={{ fontSize: 11, letterSpacing: "0.18em" }}>
-              {soldOut ? "Liste d’attente · Lot N°002" : "Réserver ma place — 20€"}
+              {soldOut ? "Liste d’attente · Lot N°002" : "Réserver ma place — 25€"}
             </span>
             <span aria-hidden="true" className="inline-block">→</span>
           </button>

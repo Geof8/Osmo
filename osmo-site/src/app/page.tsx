@@ -6,7 +6,10 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SplitOverlay from "@/components/ui/SplitOverlay";
 import Marquee from "@/components/ui/Marquee";
+import PromoPopup from "@/components/ui/PromoPopup";
+import StickyBar from "@/components/ui/StickyBar";
 import Hero from "@/components/sections/Hero";
+import InlineCTA from "@/components/sections/InlineCTA";
 import WhyYouSuffer from "@/components/sections/WhyYouSuffer";
 import BeforeAfter from "@/components/sections/BeforeAfter";
 import PourquoiOsmo from "@/components/sections/PourquoiOsmo";
@@ -37,11 +40,14 @@ export default function Home() {
         <Hero revealed={heroRevealed} soldOut={soldOut} remaining={remaining} />
         <Marquee />
         <WhyYouSuffer />
+        <InlineCTA label="Je commence le rituel →" />
         <BeforeAfter />
         <Benefits />
         <SocialProof />
         <HowItWorks />
+        <InlineCTA label="Je deviens Early Adopter →" />
         <Formula />
+        <InlineCTA label="Essaie avant qu'il n'y en ait plus →" />
         <ClinicalStudy />
         <PourquoiOsmo />
         <ClosingCTA soldOut={soldOut} />
@@ -49,6 +55,10 @@ export default function Home() {
         <NewsletterSignup />
       </main>
       <Footer />
+      {/* Spacer so the fixed sticky bar never covers footer content */}
+      <div aria-hidden="true" className="h-[88px] sm:h-[64px]" />
+      <StickyBar />
+      <PromoPopup />
     </>
   );
 }

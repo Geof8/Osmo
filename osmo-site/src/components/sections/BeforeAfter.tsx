@@ -8,7 +8,7 @@ const BEFORE_BULLETS = [
   "Tête qui tourne, bouche sèche",
   "Café sur café pour tenir",
   "Concentration au sol jusqu'à midi",
-  "Tu survives. Tu n'assures pas.",
+  "Tu survis. Tu n'assures pas.",
 ];
 
 const AFTER_BULLETS = [

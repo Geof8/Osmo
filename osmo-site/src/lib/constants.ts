@@ -62,7 +62,7 @@ export const ANIMATION_CONFIG = {
 export const HERO_STATS: HeroStat[] = [
   { k: 5, label: "5", v: "Actifs cliniques", count: true },
   { k: 15, label: "15", v: "Doses · 120g", count: true },
-  { k: 20, label: "20 €", v: "Tarif Early Adopter (-33%)", amber: true, count: false },
+  { k: 25, label: "25 €", v: "Tarif Early Adopter (-29%)", amber: true, count: false },
   { k: 50, label: "50", v: "Places Early Adopters", count: true },
 ];
 
@@ -80,7 +80,7 @@ export const MARQUEE_ITEMS = [
   "NaCl",
   "NAC",
   "Lot N°001 · 50 ex.",
-  "Early Adopters · 20 €",
+  "Early Adopters · 25 €",
   "PROTOCOLE QUOTIDIEN · SOIR + MATIN",
   "LOT N°001",
   "EARLY ADOPTERS",
@@ -107,11 +107,11 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: "Qu'est-ce que l'accès prioritaire ?",
-    a: "En devenant Early Adopter à 20€ (au lieu de 30€), tu fais partie du Lot N°001, les 50 premières personnes à recevoir OSMO Recovery. Expédition estimée sous 6 mois.",
+    a: "En devenant Early Adopter à 25€ (au lieu de 35€), tu fais partie du Lot N°001, les 50 premières personnes à recevoir OSMO Recovery. Expédition estimée sous 6 mois.",
   },
   {
     q: "Est-ce que je serai débité maintenant ?",
-    a: "Le paiement de 20€ est effectué au moment de ta réservation. Il confirme ta place dans le Lot N°001 et déclenche, une fois les 50 places réunies, la commande de production. En cas d'annulation du projet, tu seras intégralement remboursé.",
+    a: "Le paiement de 25€ est effectué au moment de ta réservation. Il confirme ta place dans le Lot N°001 et déclenche, une fois les 50 places réunies, la commande de production. En cas d'annulation du projet, tu seras intégralement remboursé.",
   },
 ];
 
@@ -120,8 +120,8 @@ export const PRODUCT = {
   weight: "120g",
   doses: 15,
   image: "/osmo-hero.png",
-  earlyPrice: 20,
-  publicPrice: 30,
+  earlyPrice: 25,
+  publicPrice: 35,
   currency: "EUR",
   maxEarlyAdopters: 50,
 } as const;
