@@ -9,15 +9,18 @@ const STORAGE_KEY = "popup_shown";
 const PROMO_CODE = "BIENVENUE15";
 
 /**
- * Welcome-offer popup. Appears after 8s OR once the user has scrolled 30% of
- * the page — whichever comes first. Shown at most once per session.
+ * Welcome-offer popup. Only armed once the Lot N°001 is sold out (`soldOut`).
+ * While places remain, the early-adopter price (25€ au lieu de 35€) stands on
+ * its own and the popup never appears. Once sold out, it shows after 8s OR once
+ * the user has scrolled 30% of the page — whichever comes first, once per session.
  */
-export default function PromoPopup() {
+export default function PromoPopup({ soldOut = false }: { soldOut?: boolean }) {
   const { openCart } = useCart();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!soldOut) return;
     if (sessionStorage.getItem(STORAGE_KEY)) return;
 
     let done = false;
@@ -44,7 +47,7 @@ export default function PromoPopup() {
       window.clearTimeout(timer);
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [soldOut]);
 
   useEffect(() => {
     if (!visible) return;

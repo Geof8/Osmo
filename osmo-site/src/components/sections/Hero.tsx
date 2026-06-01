@@ -174,7 +174,7 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                     fontFamily: FONTS.display,
                     fontSize: 42,
                     fontWeight: 900,
-                    color: "#111111",
+                    color: "#C8963E",
                     lineHeight: 1,
                   }}
                 >
@@ -243,10 +243,11 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.55 }}
               className="flex flex-col gap-3"
+              style={{ maxWidth: 360 }}
             >
               <button
                 onClick={addToCartAndNavigate}
-                className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full sm:w-auto"
+                className="cta-pill inline-flex items-center justify-center gap-3 px-7 min-h-[52px] active:scale-[0.97] w-full"
                 style={{
                   fontFamily: FONTS.mono,
                   fontSize: 11,
