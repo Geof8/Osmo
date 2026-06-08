@@ -1,23 +1,40 @@
 "use client";
 
+import { Fragment } from "react";
 import FadeUp from "@/components/ui/FadeUp";
 import { FONTS } from "@/lib/constants";
 
-const BEFORE_BULLETS = [
-  "Réveil brutal à 6h du matin",
-  "Tête qui tourne, bouche sèche",
-  "Café sur café pour tenir",
-  "Concentration au sol jusqu'à midi",
-  "Tu survis. Tu n'assures pas.",
+// Comparison rows — OSMO delivers (✓), without OSMO you don't (✕).
+const ROWS = [
+  "Réveil clair, sans brouillard",
+  "Énergie stable toute la matinée",
+  "Hydratation cellulaire restaurée",
+  "Foie soutenu pendant le sommeil",
+  "Fini les crampes et la migraine",
+  "5 actifs cliniques dosés",
+  "Sans sucre · vegan · sans additifs",
+  "Made in France · prêt en 10 sec",
 ];
 
-const AFTER_BULLETS = [
-  "Tu te réveilles. Vraiment.",
-  "Tête claire dès le premier café",
-  "Énergie stable toute la matinée",
-  "Réunion à 9h — tu es là",
-  "Le lendemain matin, tu assures.",
-];
+function CheckIcon() {
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#111111"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      style={{ display: "block" }}
+    >
+      <circle cx="12" cy="12" r="9.25" />
+      <path d="M8 12.2l2.8 2.8L16.2 9" />
+    </svg>
+  );
+}
 
 export default function BeforeAfter() {
   return (
@@ -67,141 +84,160 @@ export default function BeforeAfter() {
           </h2>
         </FadeUp>
 
-        <div
-          className="grid grid-cols-1 lg:grid-cols-2"
-          style={{ borderTop: "1px solid #E8E8E8" }}
-        >
-          {/* BEFORE — dark column */}
-          <FadeUp delay={0.1}>
+        <FadeUp delay={0.1}>
+          <div className="relative mx-auto" style={{ maxWidth: 880 }}>
             <div
-              style={{
-                background: "#111111",
-                padding: "clamp(32px, 5vw, 48px)",
-                minHeight: 360,
-                borderRight: "1px solid #E8E8E8",
-              }}
+              className="comparison-grid"
+              style={{ gridTemplateRows: `repeat(${ROWS.length + 1}, auto)` }}
             >
+              {/* Card background */}
               <div
+                aria-hidden="true"
                 style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 12,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#CC3333",
-                  fontWeight: 600,
-                  marginBottom: 24,
+                  gridColumn: "1 / -1",
+                  gridRow: "1 / -1",
+                  background: "#FFFFFF",
+                  border: "1px solid #E8E8E8",
+                  borderRadius: 24,
+                  zIndex: 0,
                 }}
+              />
+
+              {/* Highlighted OSMO column (amber pill, overhangs top & bottom) */}
+              <div
+                aria-hidden="true"
+                style={{
+                  gridColumn: "2 / 3",
+                  gridRow: "1 / -1",
+                  background: "#C8963E",
+                  borderRadius: 28,
+                  margin: "-16px 0",
+                  boxShadow: "0 16px 40px rgba(200, 150, 62, 0.28)",
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Header row */}
+              <div
+                className="cmp-cell cmp-head"
+                style={{ gridColumn: 1, gridRow: 1 }}
+              />
+              <div
+                className="cmp-cell cmp-head cmp-center"
+                style={{ gridColumn: 2, gridRow: 1 }}
               >
-                Sans OSMO
+                <span
+                  style={{
+                    fontFamily: FONTS.display,
+                    fontWeight: 900,
+                    fontSize: "clamp(18px, 4.4vw, 26px)",
+                    letterSpacing: "-0.01em",
+                    color: "#111111",
+                  }}
+                >
+                  OSMO
+                </span>
+              </div>
+              <div
+                className="cmp-cell cmp-head cmp-center"
+                style={{ gridColumn: 3, gridRow: 1 }}
+              >
+                <span
+                  style={{
+                    fontFamily: FONTS.body,
+                    fontWeight: 600,
+                    fontSize: "clamp(12px, 3vw, 15px)",
+                    color: "#999999",
+                  }}
+                >
+                  Sans OSMO
+                </span>
               </div>
 
-              <ul
-                style={{
-                  listStyle: "none",
-                  padding: 0,
-                  margin: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 18,
-                }}
-              >
-                {BEFORE_BULLETS.map((line, i) => (
-                  <li
-                    key={i}
-                    style={{
-                      fontFamily: FONTS.body,
-                      fontSize: "clamp(15px, 3.6vw, 17px)",
-                      lineHeight: 1.55,
-                      color: "#999999",
-                      display: "flex",
-                      gap: 14,
-                      alignItems: "flex-start",
-                    }}
+              {/* Data rows */}
+              {ROWS.map((label, i) => (
+                <Fragment key={label}>
+                  <div
+                    className="cmp-cell cmp-divider"
+                    style={{ gridColumn: 1, gridRow: i + 2 }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: FONTS.body,
+                        fontWeight: 600,
+                        fontSize: "clamp(13px, 2.7vw, 16px)",
+                        lineHeight: 1.35,
+                        color: "#111111",
+                      }}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                  <div
+                    className="cmp-cell cmp-center cmp-divider-amber"
+                    style={{ gridColumn: 2, gridRow: i + 2 }}
+                  >
+                    <span className="cmp-icon">
+                      <CheckIcon />
+                    </span>
+                  </div>
+                  <div
+                    className="cmp-cell cmp-center cmp-divider"
+                    style={{ gridColumn: 3, gridRow: i + 2 }}
+                    aria-label="Non"
                   >
                     <span
                       aria-hidden="true"
                       style={{
-                        color: "#CC3333",
-                        fontWeight: 700,
-                        flexShrink: 0,
-                        lineHeight: 1.55,
+                        fontSize: "clamp(18px, 4.5vw, 24px)",
+                        fontWeight: 400,
+                        color: "#C9C2B2",
+                        lineHeight: 1,
                       }}
                     >
                       ✕
                     </span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                </Fragment>
+              ))}
             </div>
-          </FadeUp>
 
-          {/* AFTER — white column with amber accent */}
-          <FadeUp delay={0.15}>
-            <div
-              style={{
-                background: "#FFFFFF",
-                padding: "clamp(32px, 5vw, 48px)",
-                minHeight: 360,
-                borderLeft: "3px solid #C8963E",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 12,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#111111",
-                  fontWeight: 600,
-                  marginBottom: 24,
-                }}
-              >
-                Avec OSMO
-              </div>
-
-              <ul
-                style={{
-                  listStyle: "none",
-                  padding: 0,
-                  margin: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 18,
-                }}
-              >
-                {AFTER_BULLETS.map((line, i) => (
-                  <li
-                    key={i}
-                    style={{
-                      fontFamily: FONTS.body,
-                      fontSize: "clamp(15px, 3.6vw, 17px)",
-                      lineHeight: 1.55,
-                      color: "#111111",
-                      display: "flex",
-                      gap: 14,
-                      alignItems: "flex-start",
-                      fontWeight: i === AFTER_BULLETS.length - 1 ? 600 : 400,
-                    }}
-                  >
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        color: "#C8963E",
-                        fontWeight: 700,
-                        flexShrink: 0,
-                        lineHeight: 1.55,
-                      }}
-                    >
-                      ✓
-                    </span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeUp>
-        </div>
+            <style jsx>{`
+              .comparison-grid {
+                display: grid;
+                grid-template-columns: minmax(0, 1.7fr) 1fr 1fr;
+                position: relative;
+              }
+              .cmp-cell {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                padding: clamp(15px, 2.4vw, 22px) clamp(14px, 2.6vw, 32px);
+                min-height: 0;
+              }
+              .cmp-head {
+                padding-top: clamp(22px, 3vw, 30px);
+                padding-bottom: clamp(22px, 3vw, 30px);
+              }
+              .cmp-center {
+                justify-content: center;
+                text-align: center;
+              }
+              .cmp-divider {
+                border-top: 1px solid #EFEFEF;
+              }
+              .cmp-divider-amber {
+                border-top: 1px solid rgba(17, 17, 17, 0.08);
+              }
+              .cmp-icon {
+                width: clamp(24px, 5vw, 30px);
+                height: clamp(24px, 5vw, 30px);
+                display: inline-block;
+              }
+            `}</style>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
