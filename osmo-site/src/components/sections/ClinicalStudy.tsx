@@ -223,7 +223,7 @@ export default function ClinicalStudy() {
             min-height: 640px;
           }
           .clinical-card {
-            padding: 64px;
+            padding: 80px;
             margin-bottom: 0;
           }
           .clinical-content {
@@ -249,7 +249,7 @@ export default function ClinicalStudy() {
             min-height: 0;
           }
           .clinical-card {
-            padding: 40px;
+            padding: 52px;
             margin: 72px 0;
           }
           .clinical-content {
