@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 
-const STORAGE_KEY = "popup_shown";
+const STORAGE_KEY = "osmo_popup_v4";
 const PROMO_CODE = "BIENVENUE15";
 const PUBLIC_PRICE = 35;
 const PROMO_PRICE = 30;
