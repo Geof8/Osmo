@@ -214,7 +214,7 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
                   margin: "6px 0 0",
                 }}
               >
-                (100€ min. d&apos;achat)
+                (sans minimum d&apos;achat)
               </p>
 
               {/* Price display */}
