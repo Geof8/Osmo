@@ -26,7 +26,8 @@ export async function POST(req: NextRequest) {
     // firstName/lastName required for the regular waitlist signup,
     // optional for the maintenance-mode email-only capture.
     const isMaintenanceCapture = source === "maintenance";
-    if (!isMaintenanceCapture && (!firstName || !lastName)) {
+    const isPromoCapture = source === "popup-promo";
+    if (!isMaintenanceCapture && !isPromoCapture && (!firstName || !lastName)) {
       return NextResponse.json({ error: "Nom et prénom requis" }, { status: 400 });
     }
 

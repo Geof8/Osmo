@@ -16,10 +16,19 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
   const { openCart } = useCart();
   const [visible, setVisible] = useState(false);
   const [barVisible, setBarVisible] = useState(false);
+  const [popupSeen, setPopupSeen] = useState(false);
 
-  // Restore sticky bar if it was already triggered this session
+  // Form state
+  const [step, setStep] = useState<"form" | "success">("form");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  // Restore sticky bar if already triggered this session
   useEffect(() => {
     if (sessionStorage.getItem(BAR_KEY)) setBarVisible(true);
+    if (sessionStorage.getItem(STORAGE_KEY)) setPopupSeen(true);
   }, []);
 
   // Show popup after 5s, once per session
@@ -30,10 +39,31 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
     const timer = window.setTimeout(() => {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setVisible(true);
+      setPopupSeen(true);
     }, 5000);
 
     return () => window.clearTimeout(timer);
   }, []);
+
+  // Show sticky bar when user scrolls ≥ 55% of the page, after popup was seen
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(BAR_KEY)) return;
+
+    const onScroll = () => {
+      if (!popupSeen) return;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      if (window.scrollY / scrollable >= 0.55) {
+        setBarVisible(true);
+        sessionStorage.setItem(BAR_KEY, "1");
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [popupSeen]);
 
   useEffect(() => {
     if (!visible) return;
@@ -47,8 +77,38 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
 
   function dismiss() {
     setVisible(false);
-    setBarVisible(true);
-    sessionStorage.setItem(BAR_KEY, "1");
+    setStep("form");
+    setEmail("");
+    setPhone("");
+    setFormError("");
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setFormError("");
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFormError("Adresse email invalide.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, phone: phone || null, source: "popup-promo" }),
+      });
+      if (res.ok || res.status === 409) {
+        // 409 = already registered, still show code
+        setStep("success");
+      } else {
+        const data = await res.json();
+        setFormError(data.error || "Une erreur est survenue.");
+      }
+    } catch {
+      setFormError("Une erreur est survenue.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   function handleCta() {
@@ -146,6 +206,17 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
                 −15% sur ta première commande
               </h2>
 
+              <p
+                style={{
+                  fontFamily: FONTS.body,
+                  fontSize: 13,
+                  color: "#999999",
+                  margin: "6px 0 0",
+                }}
+              >
+                (100€ min. d&apos;achat)
+              </p>
+
               {/* Price display */}
               <div
                 style={{
@@ -153,7 +224,7 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
                   alignItems: "center",
                   justifyContent: "center",
                   gap: 10,
-                  marginTop: 16,
+                  marginTop: 12,
                 }}
               >
                 <span
@@ -178,67 +249,189 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
                 </span>
               </div>
 
-              <p
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: 15,
-                  color: "#666666",
-                  lineHeight: 1.6,
-                  margin: "12px 0 0",
-                }}
-              >
-                Utilise le code ci-dessous au moment du paiement.
-              </p>
+              <AnimatePresence mode="wait">
+                {step === "form" ? (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onSubmit={handleSubmit}
+                    style={{ marginTop: 24 }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: FONTS.body,
+                        fontSize: 14,
+                        color: "#666666",
+                        lineHeight: 1.5,
+                        margin: "0 0 16px",
+                      }}
+                    >
+                      Laisse ton adresse mail pour recevoir le code.
+                    </p>
 
-              <div
-                style={{
-                  background: "#F4F4F4",
-                  borderRadius: 8,
-                  padding: "12px 24px",
-                  fontFamily: FONTS.body,
-                  fontSize: 20,
-                  fontWeight: 900,
-                  letterSpacing: "0.2em",
-                  color: "#111111",
-                  margin: "20px auto 0",
-                  display: "inline-block",
-                }}
-              >
-                {PROMO_CODE}
-              </div>
+                    <input
+                      type="email"
+                      required
+                      placeholder="Adresse email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        padding: "13px 16px",
+                        fontFamily: FONTS.body,
+                        fontSize: 15,
+                        color: "#111111",
+                        background: "#F4F4F4",
+                        border: "1.5px solid transparent",
+                        borderRadius: 12,
+                        outline: "none",
+                        boxSizing: "border-box",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#C8963E")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
+                    />
 
-              <button
-                onClick={handleCta}
-                className="cta-pill active:scale-[0.98]"
-                style={{
-                  display: "block",
-                  width: "100%",
-                  minHeight: 52,
-                  marginTop: 24,
-                  fontFamily: FONTS.body,
-                  fontSize: 16,
-                  fontWeight: 700,
-                }}
-              >
-                Réserver ma place — {PROMO_PRICE}€
-              </button>
+                    <input
+                      type="tel"
+                      placeholder="Téléphone (facultatif)"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        marginTop: 10,
+                        padding: "13px 16px",
+                        fontFamily: FONTS.body,
+                        fontSize: 15,
+                        color: "#111111",
+                        background: "#F4F4F4",
+                        border: "1.5px solid transparent",
+                        borderRadius: 12,
+                        outline: "none",
+                        boxSizing: "border-box",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "#C8963E")}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
+                    />
 
-              <p
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: 12,
-                  color: "#999999",
-                  margin: "12px 0 0",
-                }}
-              >
-                ✓ 30 jours satisfait ou remboursé
-              </p>
+                    {formError && (
+                      <p
+                        style={{
+                          fontFamily: FONTS.body,
+                          fontSize: 13,
+                          color: "#CC3333",
+                          marginTop: 8,
+                        }}
+                      >
+                        {formError}
+                      </p>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="cta-pill active:scale-[0.98]"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        minHeight: 52,
+                        marginTop: 16,
+                        fontFamily: FONTS.body,
+                        fontSize: 16,
+                        fontWeight: 700,
+                        opacity: submitting ? 0.7 : 1,
+                      }}
+                    >
+                      {submitting ? "..." : "Obtenir mon code −15%"}
+                    </button>
+
+                    <p
+                      style={{
+                        fontFamily: FONTS.body,
+                        fontSize: 11,
+                        color: "#BBBBBB",
+                        margin: "10px 0 0",
+                      }}
+                    >
+                      Pas de spam · Désabonnement en 1 clic
+                    </p>
+                  </motion.form>
+                ) : (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ marginTop: 24 }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: FONTS.body,
+                        fontSize: 14,
+                        color: "#666666",
+                        marginBottom: 16,
+                      }}
+                    >
+                      Voici ton code — utilise-le au moment du paiement.
+                    </p>
+
+                    <div
+                      style={{
+                        background: "#F4F4F4",
+                        borderRadius: 8,
+                        padding: "14px 24px",
+                        fontFamily: FONTS.body,
+                        fontSize: 22,
+                        fontWeight: 900,
+                        letterSpacing: "0.2em",
+                        color: "#111111",
+                        display: "inline-block",
+                      }}
+                    >
+                      {PROMO_CODE}
+                    </div>
+
+                    <button
+                      onClick={handleCta}
+                      className="cta-pill active:scale-[0.98]"
+                      style={{
+                        display: "block",
+                        width: "100%",
+                        minHeight: 52,
+                        marginTop: 20,
+                        fontFamily: FONTS.body,
+                        fontSize: 16,
+                        fontWeight: 700,
+                      }}
+                    >
+                      Réserver ma place — {PROMO_PRICE}€
+                    </button>
+
+                    <p
+                      style={{
+                        fontFamily: FONTS.body,
+                        fontSize: 12,
+                        color: "#999999",
+                        margin: "10px 0 0",
+                      }}
+                    >
+                      ✓ 30 jours satisfait ou remboursé
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ── Sticky promo bar (appears after popup is dismissed) ── */}
+      {/* ── Sticky promo bar (appears after 55% scroll) ── */}
       <AnimatePresence>
         {barVisible && !visible && (
           <motion.div
@@ -272,13 +465,7 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
               }}
             >
               🎁 <strong>−15%</strong> sur ta première commande · Code&nbsp;
-              <span
-                style={{
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  color: "#C8963E",
-                }}
-              >
+              <span style={{ fontWeight: 700, letterSpacing: "0.1em", color: "#C8963E" }}>
                 {PROMO_CODE}
               </span>
               <span style={{ color: "#999999", marginLeft: 8 }}>
