@@ -40,14 +40,13 @@ export default function Home() {
         <Marquee />
         <WhyYouSuffer />
         <InlineCTA label="Je commence le rituel →" />
-        <BeforeAfter />
         <Benefits />
         <SocialProof />
         <HowItWorks />
         <InlineCTA label="Je deviens Early Adopter →" />
         <Formula />
-        <InlineCTA label="Essaie avant qu'il n'y en ait plus →" />
         <ClinicalStudy />
+        <BeforeAfter />
         <PourquoiOsmo />
         <ClosingCTA soldOut={soldOut} />
         <FAQ />
