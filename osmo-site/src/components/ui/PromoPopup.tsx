@@ -6,7 +6,6 @@ import { useCart } from "@/context/CartContext";
 import { FONTS } from "@/lib/constants";
 
 const STORAGE_KEY = "popup_shown";
-const BAR_KEY = "promo_bar_shown";
 const PROMO_CODE = "BIENVENUE15";
 const PUBLIC_PRICE = 35;
 const PROMO_PRICE = 30;
@@ -16,7 +15,8 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
   const { openCart } = useCart();
   const [visible, setVisible] = useState(false);
   const [barVisible, setBarVisible] = useState(false);
-  const [popupSeen, setPopupSeen] = useState(false);
+  // true only after user has explicitly dismissed the popup in this session
+  const [popupDismissed, setPopupDismissed] = useState(false);
 
   // Form state
   const [step, setStep] = useState<"form" | "success">("form");
@@ -24,12 +24,6 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
-
-  // Restore sticky bar if already triggered this session
-  useEffect(() => {
-    if (sessionStorage.getItem(BAR_KEY)) setBarVisible(true);
-    if (sessionStorage.getItem(STORAGE_KEY)) setPopupSeen(true);
-  }, []);
 
   // Show popup after 5s, once per session
   useEffect(() => {
@@ -39,31 +33,27 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
     const timer = window.setTimeout(() => {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setVisible(true);
-      setPopupSeen(true);
     }, 5000);
 
     return () => window.clearTimeout(timer);
   }, []);
 
-  // Show sticky bar when user scrolls ≥ 55% of the page, after popup was seen
+  // Show sticky bar after popup was dismissed + user scrolls 30% more
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (sessionStorage.getItem(BAR_KEY)) return;
+    if (!popupDismissed) return;
 
     const onScroll = () => {
-      if (!popupSeen) return;
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       if (scrollable <= 0) return;
-      if (window.scrollY / scrollable >= 0.55) {
+      if (window.scrollY / scrollable >= 0.3) {
         setBarVisible(true);
-        sessionStorage.setItem(BAR_KEY, "1");
         window.removeEventListener("scroll", onScroll);
       }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [popupSeen]);
+  }, [popupDismissed]);
 
   useEffect(() => {
     if (!visible) return;
@@ -77,6 +67,7 @@ export default function PromoPopup({ soldOut: _soldOut }: { soldOut?: boolean })
 
   function dismiss() {
     setVisible(false);
+    setPopupDismissed(true);
     setStep("form");
     setEmail("");
     setPhone("");
