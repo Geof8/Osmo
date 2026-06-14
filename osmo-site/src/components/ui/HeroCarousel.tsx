@@ -10,6 +10,40 @@ const SLIDES = [
   { src: "/osmo-slide-bienfaits.png", alt: "Les bienfaits des électrolytes OSMO — soutien hépatique, sommeil, anti-fatigue, réhydratation" },
 ];
 
+// Nombre total de slots de vignettes (compléter avec les images à venir)
+const TOTAL_SLOTS = 5;
+
+const BADGES = [
+  {
+    label: "Goût citron",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <ellipse cx="12" cy="13" rx="7" ry="8" />
+        <path d="M12 5c-1.5-1.5-3-2-4-2" />
+        <path d="M9.5 10.5 12 13l2.5-2.5M9.5 15.5 12 13l2.5 2.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Sans sucre ajouté",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="5" y="5" width="14" height="14" rx="2" />
+        <line x1="4" y1="4" x2="20" y2="20" />
+      </svg>
+    ),
+  },
+  {
+    label: "Made in France",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z" />
+        <circle cx="12" cy="9" r="2.5" />
+      </svg>
+    ),
+  },
+];
+
 const INTERVAL = 6000;
 
 export default function HeroCarousel() {
@@ -37,8 +71,8 @@ export default function HeroCarousel() {
   }, [paused, next, current]);
 
   return (
-    <div className="flex flex-col gap-2">
-      {/* Main image */}
+    <div className="flex flex-col gap-3">
+      {/* Image principale */}
       <div
         className="relative aspect-square w-full overflow-hidden rounded-2xl"
         style={{ background: "var(--paper-2)", maxHeight: "60vh" }}
@@ -102,51 +136,95 @@ export default function HeroCarousel() {
         </button>
       </div>
 
-      {/* Thumbnails */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${SLIDES.length}, 1fr)`,
-          gap: 6,
-        }}
-      >
-        {SLIDES.map((slide, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            aria-label={`Voir ${slide.alt}`}
-            aria-current={current === i}
-            style={{
-              position: "relative",
-              aspectRatio: "1 / 1",
-              borderRadius: 10,
-              overflow: "hidden",
-              border: current === i ? "2px solid #C8963E" : "2px solid transparent",
-              transition: "border-color 200ms ease",
-              cursor: "pointer",
-              padding: 0,
-              background: "var(--paper-2)",
-            }}
+      {/* Badges */}
+      <div className="grid grid-cols-3 gap-2">
+        {BADGES.map((b) => (
+          <div
+            key={b.label}
+            className="osmo-card flex flex-col items-center text-center gap-2"
+            style={{ padding: "14px 6px" }}
           >
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              sizes="20vw"
-              className="object-cover"
-            />
-            {current !== i && (
+            <div style={{ color: "#111111" }}>{b.icon}</div>
+            <div
+              style={{
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "clamp(9px, 2.4vw, 11px)",
+                fontWeight: 400,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#111111",
+                lineHeight: 1.3,
+              }}
+            >
+              {b.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Vignettes */}
+      <div style={{ display: "flex", gap: 6 }}>
+        {Array.from({ length: TOTAL_SLOTS }).map((_, i) => {
+          const slide = SLIDES[i];
+          const isActive = i === current;
+
+          if (!slide) {
+            // Slot vide — placeholder
+            return (
               <div
+                key={i}
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(255,255,255,0.45)",
-                  transition: "background 200ms ease",
+                  width: 72,
+                  height: 72,
+                  borderRadius: 8,
+                  flexShrink: 0,
+                  background: "#F0F0F0",
+                  border: "2px solid #E8E8E8",
                 }}
               />
-            )}
-          </button>
-        ))}
+            );
+          }
+
+          return (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Voir ${slide.alt}`}
+              aria-current={isActive}
+              style={{
+                position: "relative",
+                width: 72,
+                height: 72,
+                borderRadius: 8,
+                flexShrink: 0,
+                overflow: "hidden",
+                border: isActive ? "2px solid #C8963E" : "2px solid transparent",
+                transition: "border-color 200ms ease",
+                cursor: "pointer",
+                padding: 0,
+                background: "var(--paper-2)",
+              }}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                sizes="72px"
+                className="object-cover"
+              />
+              {!isActive && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "rgba(255,255,255,0.45)",
+                    transition: "background 200ms ease",
+                  }}
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

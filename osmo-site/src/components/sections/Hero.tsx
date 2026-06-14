@@ -366,60 +366,6 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
             className="order-1 lg:order-1 flex flex-col gap-4"
           >
             <HeroCarousel />
-
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {[
-                {
-                  label: "Goût citron",
-                  icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <ellipse cx="12" cy="13" rx="7" ry="8" />
-                      <path d="M12 5c-1.5-1.5-3-2-4-2" />
-                      <path d="M9.5 10.5 12 13l2.5-2.5M9.5 15.5 12 13l2.5 2.5" />
-                    </svg>
-                  ),
-                },
-                {
-                  label: "Sans sucre ajouté",
-                  icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="5" y="5" width="14" height="14" rx="2" />
-                      <line x1="4" y1="4" x2="20" y2="20" />
-                    </svg>
-                  ),
-                },
-                {
-                  label: "Made in France",
-                  icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z" />
-                      <circle cx="12" cy="9" r="2.5" />
-                    </svg>
-                  ),
-                },
-              ].map((f) => (
-                <div
-                  key={f.label}
-                  className="osmo-card flex flex-col items-center text-center gap-2 sm:gap-3"
-                  style={{ padding: "16px 6px" }}
-                >
-                  <div style={{ color: "#111111" }}>{f.icon}</div>
-                  <div
-                    style={{
-                      fontFamily: FONTS.mono,
-                      fontSize: "clamp(10px, 2.6vw, 12px)",
-                      fontWeight: 400,
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "#111111",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {f.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
 
