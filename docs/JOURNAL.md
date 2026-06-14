@@ -16,6 +16,17 @@
 
 ## Historique
 
+### Session du 2026-06-14 — Refonte Hero section (desktop)
+**Fait :**
+- H1 réduit : `clamp(36px, 8vw, 96px)` → `clamp(26px, 4.2vw, 52px)` + `lineHeight 1.05` — plus lisible, moins écrasant
+- Prix inline sans boîte grise : `35€` barré + `→` + `25€` Fraunces 900 48px ambre + badge `-29%` pill noir — aéré et éditorial
+- Bloc urgency resserré (barre 3px, intégré sous le prix dans le même flex)
+- CTA rationalisé : suppression de la ligne "La production démarrera..." — seule la REASSURANCE_LINE reste
+- Accordion 3 entrées éditoriales ajouté sous le CTA (inspiré référence concurrente) : "Ce que vous ne trouverez pas ici" / "Pourquoi la poudre est plus efficace que la gélule" / "Livraison & politique de retour" — chevron animé, max-height transition
+- tsc OK, lint OK
+
+**Bugs ouverts:** hydration warning React préexistant sur MolecularAnimation · carousel hero images à uploader · `/ugc/[token]` à créer
+
 ### Session du 2026-05-22 — Nettoyage code (tâche planifiée autonome)
 **Fait :**
 - Audit complet du codebase (171 fichiers TS/TSX). Aucune dette majeure : `useInView` déjà centralisé (`once: true` par défaut), `FadeUp` partagé, `constants.ts` complet (COLORS, FONTS, ANIMATION_CONFIG, PRODUCT, INGREDIENTS, FAQ_ITEMS…), `types/index.ts` complet, zéro TODO/FIXME.

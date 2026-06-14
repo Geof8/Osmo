@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
 import HeroCarousel from "@/components/ui/HeroCarousel";
@@ -10,8 +11,6 @@ import type { HeroProps } from "@/types";
 const headlineWordsPlain = ["Le", "lendemain", "matin,"];
 const headlineWordsItalic = ["tu", "assures."];
 
-// HERO_VARIANT — switch between A/B/C to A/B-test the emotional hook.
-// A = fear angle · B = identity angle · C = pain angle
 const HERO_VARIANT: "A" | "B" | "C" = "A";
 
 const HERO_SUBLINES: Record<"A" | "B" | "C", string[]> = {
@@ -31,8 +30,48 @@ const HERO_SUBLINES: Record<"A" | "B" | "C", string[]> = {
   ],
 };
 
+const ACCORDION_ITEMS = [
+  {
+    title: "Ce que vous ne trouverez pas ici",
+    body: "Pas de sucre ajouté, pas d'arômes artificiels, pas de gélules sous-dosées, pas de marketing sans preuves. Juste 5 actifs cliniques dosés, formulés en France.",
+  },
+  {
+    title: "Pourquoi la poudre est plus efficace que la gélule",
+    body: "Absorption 3× plus rapide : dissolution directe dans l'eau vs digestion de la coque. Nos actifs — NAC, Magnésium bisglycinate, Potassium — sont actifs en 15 minutes au lieu de 45-60 min en gélule.",
+  },
+  {
+    title: "Livraison & politique de retour",
+    body: "OSMO est en pré-commande. Expédition prévue Automne 2026. Si tu n'es pas satisfait dans les 30 jours suivant la réception, on te rembourse intégralement, sans conditions.",
+  },
+];
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{
+        transform: open ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform 220ms ease",
+        flexShrink: 0,
+      }}
+      aria-hidden="true"
+    >
+      <path d="M3 6l5 5 5-5" />
+    </svg>
+  );
+}
+
 export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.maxEarlyAdopters }: HeroProps) {
   const { addToCartAndNavigate } = useCart();
+  const [openAccordion, setOpenAccordion] = useState<number | null>(null);
+
   const total = PRODUCT.maxEarlyAdopters;
   const safeRemaining = Math.max(0, Math.min(total, remaining));
   const fillPct = Math.max(0, Math.min(100, (safeRemaining / total) * 100));
@@ -42,6 +81,7 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
   const counterText = lowStock
     ? `⚡ Plus que ${safeRemaining} places — offre limitée`
     : `Il reste ${safeRemaining} places sur ${total}`;
+
   return (
     <section
       id="hero"
@@ -50,77 +90,81 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
     >
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[72px] items-start lg:min-h-[70vh]">
-          {/* RIGHT: Editorial text (desktop) / Below carousel (mobile) */}
-          <div className="flex flex-col gap-8 sm:gap-10 order-2 lg:order-2">
-            <div className="flex flex-col" style={{ gap: 24 }}>
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-                transition={{ duration: 0.5, delay: 0.05 }}
-              >
-                <span
-                  className="inline-flex items-center"
-                  style={{
-                    background: "#111111",
-                    color: "#FFFFFF",
-                    fontFamily: FONTS.body,
-                    fontSize: 13,
-                    letterSpacing: "0.1em",
-                    borderRadius: 50,
-                    padding: "8px 20px",
-                  }}
-                >
-                  🔒 PRÉ-COMMANDE · Expédition estimée : Automne 2026
-                </span>
-              </motion.div>
 
-              <h1
+          {/* RIGHT: Editorial text */}
+          <div className="flex flex-col gap-6 sm:gap-8 order-2 lg:order-2">
+
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              <span
+                className="inline-flex items-center"
                 style={{
-                  fontFamily: FONTS.display,
-                  fontWeight: 800,
-                  fontSize: "clamp(36px, 8vw, 96px)",
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.02em",
-                  color: "#111111",
+                  background: "#111111",
+                  color: "#FFFFFF",
+                  fontFamily: FONTS.body,
+                  fontSize: 13,
+                  letterSpacing: "0.1em",
+                  borderRadius: 50,
+                  padding: "8px 20px",
                 }}
               >
-                {headlineWordsPlain.map((word, i) => (
-                  <motion.span
-                    key={word}
-                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="inline-block mr-[0.25em]"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-                {headlineWordsItalic.map((word, i) => (
-                  <motion.span
-                    key={word}
-                    initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
-                    animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
-                    transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                    className="inline-block mr-[0.25em]"
-                    style={{ fontStyle: "italic", fontWeight: 700 }}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </h1>
-            </div>
+                🔒 PRÉ-COMMANDE · Expédition estimée : Automne 2026
+              </span>
+            </motion.div>
 
+            {/* Headline */}
+            <h1
+              style={{
+                fontFamily: FONTS.display,
+                fontWeight: 800,
+                fontSize: "clamp(26px, 4.2vw, 52px)",
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                color: "#111111",
+                margin: 0,
+              }}
+            >
+              {headlineWordsPlain.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="inline-block mr-[0.25em]"
+                >
+                  {word}
+                </motion.span>
+              ))}
+              {headlineWordsItalic.map((word, i) => (
+                <motion.span
+                  key={word}
+                  initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+                  animate={revealed ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 30, filter: "blur(4px)" }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="inline-block mr-[0.25em]"
+                  style={{ fontStyle: "italic", fontWeight: 700 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </h1>
+
+            {/* Subline */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               style={{
                 fontFamily: FONTS.body,
-                fontSize: "clamp(16px, 3.6vw, 18px)",
+                fontSize: "clamp(15px, 3vw, 17px)",
                 lineHeight: 1.55,
-                maxWidth: 480,
-                color: "#111111",
-                fontWeight: 500,
+                maxWidth: 460,
+                color: "#555555",
+                fontWeight: 400,
                 margin: 0,
               }}
             >
@@ -132,26 +176,21 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               ))}
             </motion.p>
 
-            {/* Price block — dark pill container */}
+            {/* Price + Urgency block */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex flex-col gap-3"
+              style={{ maxWidth: 400 }}
             >
-              <div
-                className="inline-flex items-center"
-                style={{
-                  background: "#F4F4F4",
-                  borderRadius: 12,
-                  padding: "16px 24px",
-                  gap: 16,
-                }}
-              >
+              {/* Price inline */}
+              <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
                 <span
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 22,
-                    color: "#999999",
+                    fontSize: 20,
+                    color: "#AAAAAA",
                     textDecoration: "line-through",
                     lineHeight: 1,
                   }}
@@ -160,19 +199,14 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 </span>
                 <span
                   aria-hidden="true"
-                  style={{
-                    fontFamily: FONTS.body,
-                    fontSize: 18,
-                    color: "#999999",
-                    lineHeight: 1,
-                  }}
+                  style={{ fontFamily: FONTS.body, fontSize: 16, color: "#AAAAAA", lineHeight: 1 }}
                 >
                   →
                 </span>
                 <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 42,
+                    fontSize: 48,
                     fontWeight: 900,
                     color: "#C8963E",
                     lineHeight: 1,
@@ -185,65 +219,57 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                     background: "#111111",
                     color: "#FFFFFF",
                     fontFamily: FONTS.body,
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: 700,
-                    padding: "6px 16px",
+                    padding: "5px 14px",
                     borderRadius: 50,
                     lineHeight: 1,
                     whiteSpace: "nowrap",
+                    alignSelf: "center",
                   }}
                 >
                   -29%
                 </span>
               </div>
-            </motion.div>
 
-            {/* Urgency counter */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col gap-2"
-              style={{ maxWidth: 360 }}
-            >
-              <p
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: 14,
-                  color: counterColor,
-                  margin: 0,
-                }}
-              >
-                {counterText}
-              </p>
-              <div
-                style={{
-                  width: "100%",
-                  height: 4,
-                  background: "#E8E8E8",
-                  borderRadius: 2,
-                  overflow: "hidden",
-                }}
-              >
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={revealed ? { width: `${fillPct}%` } : { width: 0 }}
-                  transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+              {/* Urgency */}
+              <div className="flex flex-col gap-2">
+                <p
                   style={{
-                    height: "100%",
-                    background: fillColor,
-                    borderRadius: 2,
+                    fontFamily: FONTS.body,
+                    fontSize: 13,
+                    color: counterColor,
+                    margin: 0,
                   }}
-                />
+                >
+                  {counterText}
+                </p>
+                <div
+                  style={{
+                    width: "100%",
+                    height: 3,
+                    background: "#E8E8E8",
+                    borderRadius: 2,
+                    overflow: "hidden",
+                  }}
+                >
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={revealed ? { width: `${fillPct}%` } : { width: 0 }}
+                    transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+                    style={{ height: "100%", background: fillColor, borderRadius: 2 }}
+                  />
+                </div>
               </div>
             </motion.div>
 
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex flex-col gap-3"
-              style={{ maxWidth: 360 }}
+              className="flex flex-col gap-2"
+              style={{ maxWidth: 400 }}
             >
               <button
                 onClick={addToCartAndNavigate}
@@ -273,23 +299,66 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               >
                 {REASSURANCE_LINE}
               </p>
-              <p
-                style={{
-                  fontFamily: FONTS.body,
-                  fontSize: 11,
-                  color: "#999999",
-                  fontStyle: "italic",
-                  textAlign: "center",
-                  margin: 0,
-                }}
-              >
-                La production démarrera une fois les 50 places réunies.
-              </p>
+            </motion.div>
+
+            {/* Accordion */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              style={{ borderTop: "1px solid #E8E8E8", maxWidth: 400 }}
+            >
+              {ACCORDION_ITEMS.map((item, i) => {
+                const isOpen = openAccordion === i;
+                return (
+                  <div key={i} style={{ borderBottom: "1px solid #E8E8E8" }}>
+                    <button
+                      onClick={() => setOpenAccordion(isOpen ? null : i)}
+                      className="w-full flex items-center justify-between text-left"
+                      style={{ padding: "14px 0", gap: 12, background: "none", border: "none", cursor: "pointer" }}
+                      aria-expanded={isOpen}
+                    >
+                      <span
+                        style={{
+                          fontFamily: FONTS.body,
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: "#111111",
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {item.title}
+                      </span>
+                      <ChevronIcon open={isOpen} />
+                    </button>
+                    <div
+                      style={{
+                        overflow: "hidden",
+                        maxHeight: isOpen ? 200 : 0,
+                        transition: "max-height 280ms ease",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontFamily: FONTS.body,
+                          fontSize: 14,
+                          color: "#666666",
+                          lineHeight: 1.65,
+                          margin: 0,
+                          paddingBottom: 16,
+                        }}
+                      >
+                        {item.body}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </motion.div>
 
           </div>
 
-          {/* LEFT: Carousel + feature row (desktop) / Top (mobile) */}
+          {/* LEFT: Carousel + feature row */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={revealed ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
