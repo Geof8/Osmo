@@ -189,18 +189,18 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: 14,
+                  gap: 12,
                   background: "#F4F4F4",
                   borderRadius: 50,
-                  padding: "12px 24px",
-                  flexWrap: "wrap",
+                  padding: "14px 28px",
                 }}
               >
                 <span
                   style={{
-                    fontFamily: FONTS.body,
-                    fontSize: 18,
-                    color: "#AAAAAA",
+                    fontFamily: FONTS.display,
+                    fontSize: 20,
+                    fontWeight: 600,
+                    color: "#BBBBBB",
                     textDecoration: "line-through",
                     lineHeight: 1,
                   }}
@@ -208,17 +208,11 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                   {PRODUCT.publicPrice}€
                 </span>
                 <span
-                  aria-hidden="true"
-                  style={{ fontFamily: FONTS.body, fontSize: 15, color: "#AAAAAA", lineHeight: 1 }}
-                >
-                  →
-                </span>
-                <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 42,
+                    fontSize: 32,
                     fontWeight: 900,
-                    color: "#C8963E",
+                    color: "#111111",
                     lineHeight: 1,
                   }}
                 >
@@ -226,12 +220,12 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 </span>
                 <span
                   style={{
-                    background: "#111111",
+                    background: "#C8963E",
                     color: "#FFFFFF",
                     fontFamily: FONTS.body,
                     fontSize: 12,
                     fontWeight: 700,
-                    padding: "5px 14px",
+                    padding: "5px 12px",
                     borderRadius: 50,
                     lineHeight: 1,
                     whiteSpace: "nowrap",
