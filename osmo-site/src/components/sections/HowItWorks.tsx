@@ -200,7 +200,7 @@ export default function HowItWorks() {
               borderLeft: "2px solid #C8963E",
             }}
           >
-            À prendre deux fois par jour — une prise le soir avant de dormir et une le matin.
+            À prendre deux fois par jour, une prise le soir avant de dormir et une le matin.
             <br />
             Parce que ton corps récupère la nuit,
             <br />
