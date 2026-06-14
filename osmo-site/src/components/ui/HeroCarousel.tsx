@@ -20,6 +20,11 @@ export default function HeroCarousel() {
   const next = useCallback(() => setCurrent((p) => (p + 1) % SLIDES.length), []);
   const prev = useCallback(() => setCurrent((p) => (p - 1 + SLIDES.length) % SLIDES.length), []);
 
+  const goTo = useCallback((i: number) => {
+    setCurrent(i);
+    setPaused(true);
+  }, []);
+
   useEffect(() => {
     if (paused) {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -32,67 +37,117 @@ export default function HeroCarousel() {
   }, [paused, next, current]);
 
   return (
-    <div
-      className="relative aspect-square w-full overflow-hidden rounded-2xl"
-      style={{ background: "var(--paper-2)", maxHeight: "60vh" }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="absolute inset-0"
+    <div className="flex flex-col gap-2">
+      {/* Main image */}
+      <div
+        className="relative aspect-square w-full overflow-hidden rounded-2xl"
+        style={{ background: "var(--paper-2)", maxHeight: "60vh" }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={current}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={SLIDES[current].src}
+              alt={SLIDES[current].alt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+              priority={current === 0}
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <button
+          onClick={prev}
+          aria-label="Image précédente"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.85)",
+            backdropFilter: "blur(8px)",
+            color: "#111111",
+          }}
         >
-          <Image
-            src={SLIDES[current].src}
-            alt={SLIDES[current].alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-            priority={current === 0}
-          />
-        </motion.div>
-      </AnimatePresence>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="11 14 6 9 11 4" />
+          </svg>
+        </button>
 
-      <button
-        onClick={prev}
-        aria-label="Image précédente"
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+        <button
+          onClick={next}
+          aria-label="Image suivante"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            background: "rgba(255, 255, 255, 0.85)",
+            backdropFilter: "blur(8px)",
+            color: "#111111",
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <polyline points="7 4 12 9 7 14" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Thumbnails */}
+      <div
         style={{
-          width: 40,
-          height: 40,
-          borderRadius: "50%",
-          background: "rgba(255, 255, 255, 0.85)",
-          backdropFilter: "blur(8px)",
-          color: "#111111",
+          display: "grid",
+          gridTemplateColumns: `repeat(${SLIDES.length}, 1fr)`,
+          gap: 6,
         }}
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <polyline points="11 14 6 9 11 4" />
-        </svg>
-      </button>
-
-      <button
-        onClick={next}
-        aria-label="Image suivante"
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: "50%",
-          background: "rgba(255, 255, 255, 0.85)",
-          backdropFilter: "blur(8px)",
-          color: "#111111",
-        }}
-      >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <polyline points="7 4 12 9 7 14" />
-        </svg>
-      </button>
+        {SLIDES.map((slide, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            aria-label={`Voir ${slide.alt}`}
+            aria-current={current === i}
+            style={{
+              position: "relative",
+              aspectRatio: "1 / 1",
+              borderRadius: 10,
+              overflow: "hidden",
+              border: current === i ? "2px solid #C8963E" : "2px solid transparent",
+              transition: "border-color 200ms ease",
+              cursor: "pointer",
+              padding: 0,
+              background: "var(--paper-2)",
+            }}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              sizes="20vw"
+              className="object-cover"
+            />
+            {current !== i && (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "rgba(255,255,255,0.45)",
+                  transition: "background 200ms ease",
+                }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
