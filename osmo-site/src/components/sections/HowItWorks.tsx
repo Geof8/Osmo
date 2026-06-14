@@ -181,12 +181,6 @@ export default function HowItWorks() {
                 </span>
               </h2>
             </div>
-            <p style={{ fontSize: "clamp(15px, 1.3vw, 16px)", lineHeight: 1.65, maxWidth: 460, color: "#444444", fontFamily: FONTS.body }}>
-              Trois gestes simples.{" "}
-              <em style={{ fontFamily: FONTS.display, fontStyle: "italic", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em" }}>
-                À prendre deux fois par jour, dont une prise le soir avant de dormir.
-              </em>
-            </p>
           </div>
         </FadeUp>
 
@@ -206,9 +200,7 @@ export default function HowItWorks() {
               borderLeft: "2px solid #C8963E",
             }}
           >
-            Personne ne fait ça sur le marché français.
-            <br />
-            Un complément le soir. Un complément le matin.
+            À prendre deux fois par jour — une prise le soir avant de dormir et une le matin.
             <br />
             Parce que ton corps récupère la nuit,
             <br />
