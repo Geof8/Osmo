@@ -152,19 +152,6 @@ export default function HowItWorks() {
         <FadeUp>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">
             <div>
-              <div
-                className="mb-6 lg:mb-8"
-                style={{
-                  fontFamily: FONTS.mono,
-                  fontSize: 12,
-                  fontWeight: 400,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "#999999",
-                }}
-              >
-                Le protocole
-              </div>
               <h2
                 style={{
                   fontFamily: FONTS.display,
