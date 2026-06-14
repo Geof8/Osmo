@@ -48,21 +48,6 @@ export default function BeforeAfter() {
       }}
     >
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
-        <FadeUp>
-          <div
-            className="mb-10 lg:mb-14"
-            style={{
-              fontFamily: FONTS.mono,
-              fontSize: 12,
-              fontWeight: 400,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "#999999",
-            }}
-          >
-            Avant · Après
-          </div>
-        </FadeUp>
 
         <FadeUp delay={0.05}>
           <h2
