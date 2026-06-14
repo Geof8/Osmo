@@ -184,12 +184,22 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               className="flex flex-col gap-3"
               style={{ maxWidth: 400 }}
             >
-              {/* Price inline */}
-              <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
+              {/* Price block */}
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 14,
+                  background: "#F4F4F4",
+                  borderRadius: 50,
+                  padding: "12px 24px",
+                  flexWrap: "wrap",
+                }}
+              >
                 <span
                   style={{
                     fontFamily: FONTS.body,
-                    fontSize: 20,
+                    fontSize: 18,
                     color: "#AAAAAA",
                     textDecoration: "line-through",
                     lineHeight: 1,
@@ -199,14 +209,14 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 </span>
                 <span
                   aria-hidden="true"
-                  style={{ fontFamily: FONTS.body, fontSize: 16, color: "#AAAAAA", lineHeight: 1 }}
+                  style={{ fontFamily: FONTS.body, fontSize: 15, color: "#AAAAAA", lineHeight: 1 }}
                 >
                   →
                 </span>
                 <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 48,
+                    fontSize: 42,
                     fontWeight: 900,
                     color: "#C8963E",
                     lineHeight: 1,
