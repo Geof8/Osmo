@@ -150,7 +150,7 @@ export default function HowItWorks() {
     <section id="protocole" className="scroll-mt-20 relative z-[5]" style={{ padding: "clamp(72px, 10vw, 100px) 0", borderBottom: "1px solid #E8E8E8" }}>
       <div className="max-w-[1180px] mx-auto px-6 sm:px-10">
         <FadeUp>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-16 lg:mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-end mb-8 lg:mb-12">
             <div>
               <h2
                 style={{
