@@ -71,6 +71,7 @@ export default function SideCart() {
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
   const [promoInput, setPromoInput] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<AppliedPromo | null>(null);
   const [validatingPromo, setValidatingPromo] = useState(false);
@@ -130,10 +131,11 @@ export default function SideCart() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const finalPrice = useMemo(
+  const unitPrice = useMemo(
     () => computeFinalPrice(PRODUCT.earlyPrice, appliedPromo),
     [appliedPromo],
   );
+  const finalPrice = useMemo(() => unitPrice * quantity, [unitPrice, quantity]);
 
   useEffect(() => {
     if (!open) return;
@@ -227,6 +229,7 @@ export default function SideCart() {
           firstName: form.firstName.trim(),
           lastName: form.lastName.trim(),
           email: form.email.trim().toLowerCase(),
+          quantity,
           ...(appliedPromo ? { promoCode: appliedPromo.code } : {}),
         }),
       });
@@ -322,7 +325,52 @@ export default function SideCart() {
               >
                 Early Adopters · 120g · 15 doses
               </div>
-              <div className="flex items-baseline gap-3" style={{ marginTop: 14 }}>
+              {/* Quantité */}
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 16 }}>
+                <span style={{ fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "#999999" }}>
+                  Quantité
+                </span>
+                <div style={{ display: "flex", alignItems: "center", gap: 0, border: "1px solid #E8E8E8", borderRadius: 50, overflow: "hidden" }}>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                    disabled={quantity <= 1}
+                    aria-label="Diminuer la quantité"
+                    style={{
+                      width: 36, height: 36,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      background: "transparent", border: "none",
+                      cursor: quantity <= 1 ? "not-allowed" : "pointer",
+                      color: quantity <= 1 ? "#CCCCCC" : "#111111",
+                      fontSize: 18, fontWeight: 400,
+                    }}
+                  >
+                    −
+                  </button>
+                  <span style={{ minWidth: 28, textAlign: "center", fontFamily: "var(--body)", fontSize: 15, fontWeight: 600, color: "#111111" }}>
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(q => Math.min(5, q + 1))}
+                    disabled={quantity >= 5}
+                    aria-label="Augmenter la quantité"
+                    style={{
+                      width: 36, height: 36,
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      background: "transparent", border: "none",
+                      cursor: quantity >= 5 ? "not-allowed" : "pointer",
+                      color: quantity >= 5 ? "#CCCCCC" : "#111111",
+                      fontSize: 18, fontWeight: 400,
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Prix */}
+              <div className="flex items-baseline gap-3" style={{ marginTop: 12 }}>
                 <span
                   style={{
                     fontFamily: "var(--display)",
@@ -343,9 +391,14 @@ export default function SideCart() {
                   }}
                 >
                   {appliedPromo
-                    ? formatPriceEuros(PRODUCT.earlyPrice)
-                    : formatPriceEuros(PRODUCT.publicPrice)}
+                    ? formatPriceEuros(PRODUCT.earlyPrice * quantity)
+                    : formatPriceEuros(PRODUCT.publicPrice * quantity)}
                 </span>
+                {quantity > 1 && (
+                  <span style={{ fontSize: 12, color: "#999999", fontFamily: "var(--mono)" }}>
+                    ({formatPriceEuros(unitPrice)}/pot)
+                  </span>
+                )}
               </div>
               <div
                 style={{

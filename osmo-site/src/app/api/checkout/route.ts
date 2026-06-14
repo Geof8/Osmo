@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
     const lastName: string = (body.lastName ?? "").toString().trim();
     const email: string = (body.email ?? "").toString().trim().toLowerCase();
     const promoCodeInput: string = (body.promoCode ?? "").toString().trim();
+    const quantity: number = Math.min(5, Math.max(1, parseInt(body.quantity ?? "1", 10) || 1));
 
     if (!firstName || !lastName) {
       return NextResponse.json(
@@ -98,7 +99,7 @@ export async function POST(req: NextRequest) {
     const stripe = getStripe();
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: "payment",
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: [{ price: priceId, quantity }],
       customer_email: email,
       shipping_address_collection: { allowed_countries: ALLOWED_COUNTRIES },
       phone_number_collection: { enabled: true },
