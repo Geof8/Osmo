@@ -10,14 +10,14 @@ const SLIDES = [
   { src: "/osmo-slide-bienfaits.png", alt: "Les bienfaits des électrolytes OSMO — soutien hépatique, sommeil, anti-fatigue, réhydratation" },
 ];
 
-// Nombre total de slots de vignettes (compléter avec les images à venir)
+// Augmenter ce nombre quand on ajoute des images — les slots vides resteront en placeholder
 const TOTAL_SLOTS = 5;
 
 const BADGES = [
   {
     label: "Goût citron",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <ellipse cx="12" cy="13" rx="7" ry="8" />
         <path d="M12 5c-1.5-1.5-3-2-4-2" />
         <path d="M9.5 10.5 12 13l2.5-2.5M9.5 15.5 12 13l2.5 2.5" />
@@ -27,7 +27,7 @@ const BADGES = [
   {
     label: "Sans sucre ajouté",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="5" y="5" width="14" height="14" rx="2" />
         <line x1="4" y1="4" x2="20" y2="20" />
       </svg>
@@ -36,7 +36,7 @@ const BADGES = [
   {
     label: "Made in France",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 21s-7-7.5-7-12a7 7 0 1 1 14 0c0 4.5-7 12-7 12z" />
         <circle cx="12" cy="9" r="2.5" />
       </svg>
@@ -71,7 +71,7 @@ export default function HeroCarousel() {
   }, [paused, next, current]);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       {/* Image principale */}
       <div
         className="relative aspect-square w-full overflow-hidden rounded-2xl"
@@ -136,48 +136,25 @@ export default function HeroCarousel() {
         </button>
       </div>
 
-      {/* Badges */}
-      <div className="grid grid-cols-3 gap-2">
-        {BADGES.map((b) => (
-          <div
-            key={b.label}
-            className="osmo-card flex flex-col items-center text-center gap-2"
-            style={{ padding: "14px 6px" }}
-          >
-            <div style={{ color: "#111111" }}>{b.icon}</div>
-            <div
-              style={{
-                fontFamily: "var(--font-mono, monospace)",
-                fontSize: "clamp(9px, 2.4vw, 11px)",
-                fontWeight: 400,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "#111111",
-                lineHeight: 1.3,
-              }}
-            >
-              {b.label}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Vignettes */}
-      <div style={{ display: "flex", gap: 6 }}>
+      {/* Vignettes — grille qui remplit exactement la largeur de l'image */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${TOTAL_SLOTS}, 1fr)`,
+          gap: 6,
+        }}
+      >
         {Array.from({ length: TOTAL_SLOTS }).map((_, i) => {
           const slide = SLIDES[i];
           const isActive = i === current;
 
           if (!slide) {
-            // Slot vide — placeholder
             return (
               <div
                 key={i}
                 style={{
-                  width: 72,
-                  height: 72,
+                  aspectRatio: "1 / 1",
                   borderRadius: 8,
-                  flexShrink: 0,
                   background: "#F0F0F0",
                   border: "2px solid #E8E8E8",
                 }}
@@ -193,10 +170,8 @@ export default function HeroCarousel() {
               aria-current={isActive}
               style={{
                 position: "relative",
-                width: 72,
-                height: 72,
+                aspectRatio: "1 / 1",
                 borderRadius: 8,
-                flexShrink: 0,
                 overflow: "hidden",
                 border: isActive ? "2px solid #C8963E" : "2px solid transparent",
                 transition: "border-color 200ms ease",
@@ -209,7 +184,7 @@ export default function HeroCarousel() {
                 src={slide.src}
                 alt={slide.alt}
                 fill
-                sizes="72px"
+                sizes="15vw"
                 className="object-cover"
               />
               {!isActive && (
@@ -225,6 +200,32 @@ export default function HeroCarousel() {
             </button>
           );
         })}
+      </div>
+
+      {/* Badges */}
+      <div className="grid grid-cols-3 gap-2 mt-1">
+        {BADGES.map((b) => (
+          <div
+            key={b.label}
+            className="osmo-card flex flex-col items-center text-center gap-3"
+            style={{ padding: "18px 8px" }}
+          >
+            <div style={{ color: "#111111" }}>{b.icon}</div>
+            <div
+              style={{
+                fontFamily: "var(--font-mono, monospace)",
+                fontSize: "clamp(10px, 2.6vw, 12px)",
+                fontWeight: 400,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "#111111",
+                lineHeight: 1.3,
+              }}
+            >
+              {b.label}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
