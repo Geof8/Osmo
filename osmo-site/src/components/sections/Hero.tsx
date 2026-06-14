@@ -188,9 +188,9 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               <div style={{ display: "inline-flex", alignItems: "center", gap: 14 }}>
                 <span
                   style={{
-                    fontFamily: FONTS.display,
+                    fontFamily: FONTS.body,
                     fontSize: 18,
-                    fontWeight: 500,
+                    fontWeight: 400,
                     color: "#C0C0C0",
                     textDecoration: "line-through",
                     lineHeight: 1,
@@ -200,12 +200,12 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 </span>
                 <span
                   style={{
-                    fontFamily: FONTS.display,
+                    fontFamily: FONTS.body,
                     fontSize: 44,
-                    fontWeight: 900,
+                    fontWeight: 800,
                     color: "#111111",
                     lineHeight: 1,
-                    letterSpacing: "-0.02em",
+                    letterSpacing: "-0.03em",
                   }}
                 >
                   {PRODUCT.earlyPrice}€
