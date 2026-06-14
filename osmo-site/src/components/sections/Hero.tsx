@@ -185,22 +185,13 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
               style={{ maxWidth: 400 }}
             >
               {/* Price block */}
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 12,
-                  background: "#F4F4F4",
-                  borderRadius: 50,
-                  padding: "14px 28px",
-                }}
-              >
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 14 }}>
                 <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 20,
-                    fontWeight: 600,
-                    color: "#BBBBBB",
+                    fontSize: 18,
+                    fontWeight: 500,
+                    color: "#C0C0C0",
                     textDecoration: "line-through",
                     lineHeight: 1,
                   }}
@@ -210,10 +201,11 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                 <span
                   style={{
                     fontFamily: FONTS.display,
-                    fontSize: 32,
+                    fontSize: 44,
                     fontWeight: 900,
                     color: "#111111",
                     lineHeight: 1,
+                    letterSpacing: "-0.02em",
                   }}
                 >
                   {PRODUCT.earlyPrice}€
@@ -223,16 +215,17 @@ export default function Hero({ revealed, soldOut = false, remaining = PRODUCT.ma
                     background: "#C8963E",
                     color: "#FFFFFF",
                     fontFamily: FONTS.body,
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
-                    padding: "5px 12px",
+                    padding: "5px 11px",
                     borderRadius: 50,
                     lineHeight: 1,
                     whiteSpace: "nowrap",
                     alignSelf: "center",
+                    letterSpacing: "0.04em",
                   }}
                 >
-                  -29%
+                  −29%
                 </span>
               </div>
 
