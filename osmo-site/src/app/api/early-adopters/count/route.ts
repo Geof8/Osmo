@@ -19,9 +19,12 @@ export async function GET() {
     }
 
     const n = parseInt(data.value, 10);
-    return NextResponse.json({ remaining: isNaN(n) ? FALLBACK : n });
+    return NextResponse.json(
+      { remaining: isNaN(n) ? FALLBACK : n },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   } catch (err) {
     console.error("/api/early-adopters/count failed:", err);
-    return NextResponse.json({ remaining: FALLBACK });
+    return NextResponse.json({ remaining: FALLBACK }, { headers: { "Cache-Control": "no-store" } });
   }
 }
