@@ -16,6 +16,21 @@
 
 ## Historique
 
+### Session du 2026-06-15 — Compteur manuel + UX popup/navbar
+**Fait :**
+- **Compteur early adopters manuel** : remplace le compteur auto (basé sur orders) par une valeur manuelle stockée dans `settings.early_adopters_remaining`. Hook `useWaitlistCount` reécrit pour lire depuis Supabase + abonnement realtime (mise à jour homepage instantanée sans rechargement)
+- **API admin** `PUT /api/admin/settings` (protégée `requireAdmin` + `getSupabaseAdmin`) pour mettre à jour n'importe quelle clé settings
+- **Page `/admin/parametres`** : champ numérique + bouton Sauvegarder connecté au back, remplace le placeholder "Phase 7"
+- **Migration** `0011_early_adopters_remaining.sql` — clé seedée à 47, realtime activé sur `settings` (⚠️ exécutée manuellement dans Supabase SQL Editor)
+- **Navbar sticky fix** : `overflow-x: hidden` → `overflow-x: clip` sur `html, body` — corrige le bug CSS spec qui empêchait `position: sticky` de fonctionner
+- **PromoPopup refonte** : form email + téléphone (source `popup-promo` → `waitlist`), code `BIENVENUE15` révélé après submit, prix 35€→30€, clé sessionStorage `osmo_popup_v4`
+- **Sticky bar promo** : apparaît uniquement après dismiss popup + scroll 30%, plus d'apparition immédiate
+- **HowItWorks** : suppression phrases redondantes, quote ambrée reformulée sans tiret
+- **BeforeAfter** déplacé avant PourquoiOsmo · InlineCTA "Essaie avant qu'il n'y en ait plus" supprimé
+- **ClinicalStudy** : padding carte 80px desktop / 52px mobile
+
+**Bugs ouverts:** hydration warning React préexistant sur MolecularAnimation · carousel hero images à uploader · `/ugc/[token]` à créer
+
 ### Session du 2026-06-14 — Refonte Hero section (desktop)
 **Fait :**
 - H1 réduit : `clamp(36px, 8vw, 96px)` → `clamp(26px, 4.2vw, 52px)` + `lineHeight 1.05` — plus lisible, moins écrasant
