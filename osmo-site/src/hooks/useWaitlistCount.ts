@@ -3,19 +3,18 @@
 import { useState, useEffect } from "react";
 import { getSupabase } from "@/lib/supabase";
 
-const SETTING_KEY = "early_adopters_remaining";
 const FALLBACK = 47;
-const POLL_INTERVAL = 15_000; // fallback poll every 15s
+const POLL_INTERVAL = 10_000;
 
 async function fetchRemaining(): Promise<number> {
-  const { data } = await getSupabase()
-    .from("settings")
-    .select("value")
-    .eq("key", SETTING_KEY)
-    .single();
-  if (!data?.value) return FALLBACK;
-  const n = parseInt(data.value, 10);
-  return isNaN(n) ? FALLBACK : n;
+  try {
+    const res = await fetch("/api/early-adopters/count");
+    const data: { remaining?: number } = await res.json();
+    if (typeof data.remaining === "number") return data.remaining;
+  } catch {
+    // ignore
+  }
+  return FALLBACK;
 }
 
 export function useWaitlistCount() {
@@ -25,10 +24,15 @@ export function useWaitlistCount() {
   useEffect(() => {
     let cancelled = false;
 
-    // Initial fetch
+    // Initial fetch via server-side API (reliable)
     fetchRemaining().then((n) => { if (!cancelled) setRemaining(n); });
 
-    // Realtime — no filter (more reliable), filter client-side
+    // Polling every 10s — catches admin updates even without realtime
+    const timer = setInterval(() => {
+      fetchRemaining().then((n) => { if (!cancelled) setRemaining(n); });
+    }, POLL_INTERVAL);
+
+    // Realtime bonus — instant update when admin saves
     const supabase = getSupabase();
     const channel = supabase
       .channel("settings-counter")
@@ -37,18 +41,13 @@ export function useWaitlistCount() {
         { event: "*", schema: "public", table: "settings" },
         (payload) => {
           const row = (payload.new ?? payload.old) as { key?: string; value?: string } | null;
-          if (row?.key === SETTING_KEY && row?.value != null) {
+          if (row?.key === "early_adopters_remaining" && row?.value != null) {
             const n = parseInt(row.value, 10);
-            if (!isNaN(n)) setRemaining(n);
+            if (!isNaN(n) && !cancelled) setRemaining(n);
           }
         }
       )
       .subscribe();
-
-    // Polling fallback in case realtime misses an event
-    const timer = setInterval(() => {
-      fetchRemaining().then((n) => { if (!cancelled) setRemaining(n); });
-    }, POLL_INTERVAL);
 
     return () => {
       cancelled = true;

@@ -1,40 +1,27 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
-import { computeRemaining } from "@/lib/supabase";
-import { PRODUCT } from "@/lib/constants";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+const FALLBACK = 47;
+
 export async function GET() {
   try {
-    const supabase = getSupabaseAdmin();
-    const { count, error } = await supabase
-      .from("orders")
-      .select("*", { count: "exact", head: true })
-      .eq("status", "paid");
+    const { data, error } = await getSupabaseAdmin()
+      .from("settings")
+      .select("value")
+      .eq("key", "early_adopters_remaining")
+      .single();
 
-    if (error) {
-      console.error("/api/early-adopters/count:", error);
-      return NextResponse.json({
-        claimed: 0,
-        remaining: PRODUCT.maxEarlyAdopters,
-        total: PRODUCT.maxEarlyAdopters,
-      });
+    if (error || !data?.value) {
+      return NextResponse.json({ remaining: FALLBACK });
     }
 
-    const { displayedSold, remaining } = computeRemaining(count ?? 0);
-    return NextResponse.json({
-      claimed: displayedSold,
-      remaining,
-      total: PRODUCT.maxEarlyAdopters,
-    });
+    const n = parseInt(data.value, 10);
+    return NextResponse.json({ remaining: isNaN(n) ? FALLBACK : n });
   } catch (err) {
     console.error("/api/early-adopters/count failed:", err);
-    return NextResponse.json({
-      claimed: 0,
-      remaining: PRODUCT.maxEarlyAdopters,
-      total: PRODUCT.maxEarlyAdopters,
-    });
+    return NextResponse.json({ remaining: FALLBACK });
   }
 }
